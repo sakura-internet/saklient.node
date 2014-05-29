@@ -1,0 +1,24 @@
+{
+  "name": "saclient",
+  "version": "0.0.1",
+  "description": "An easy interface to control your resources on SAKURA Cloud.",
+  "main": "saclient.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {},
+  "keywords": [
+    "sakura",
+    "cloud",
+    "api",
+    "client"
+  ],
+  "author": "SAKURA Internet Inc.",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-yui-compressor": "~0.3.3",
+    "grunt-typescript": "~0.3.6",
+    "grunt-contrib-yuidoc": "~0.5.2"
+  }
+}
