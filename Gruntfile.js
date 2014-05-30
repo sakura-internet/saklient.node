@@ -9,8 +9,7 @@ module.exports = function (grunt) {
 		typescript: {
 			base: {
 				src: ['src/**/*.ts'],
-//				dest: 'lib',
-				dest: 'saclient.js',
+				dest: 'lib/',
 				options: {
 					basePath: 'src/',
 					module: 'commonjs',

@@ -1,12 +1,12 @@
-/**
- * @module saclient.cloud.model
- */
-module saclient.cloud.model {
+/// <reference path="../../../node.d.ts" />
 
-	export interface TQueryParams {
-		Begin? : number;
-		Count? : number;
-		Filter? : any;
-	}
-	
+export = TQueryParams;
+
+import Util = require('../Util');
+
+interface TQueryParams {
+	Begin? : number;
+	Count? : number;
+	Filter? : any;
 }
+

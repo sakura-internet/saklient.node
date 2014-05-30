@@ -3,4 +3,4 @@ config.sh
 .project
 .settings
 node_modules
-
+*.log

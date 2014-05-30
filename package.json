@@ -1,24 +1,39 @@
 {
   "name": "saclient",
   "version": "0.0.1",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sakura-internet/saclient.node.git"
+  },
   "description": "An easy interface to control your resources on SAKURA Cloud.",
   "main": "saclient.js",
   "directories": {
     "doc": "doc"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "grunt"
+  },
   "keywords": [
     "sakura",
     "cloud",
     "api",
     "client"
   ],
-  "author": "SAKURA Internet Inc.",
-  "license": "MIT",
+  "author": {
+    "name": "SAKURA Internet Inc."
+  },
+  "license": {
+    "type": "MIT"
+  },
+  "dependencies": {
+    "http-sync": "0.0.4"
+  },
   "devDependencies": {
     "grunt": "~0.4.5",
-    "grunt-yui-compressor": "~0.3.3",
     "grunt-typescript": "~0.3.6",
+    "grunt-yui-compressor": "~0.3.3",
     "grunt-contrib-yuidoc": "~0.5.2"
   }
 }

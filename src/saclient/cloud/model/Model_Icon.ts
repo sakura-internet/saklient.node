@@ -1,142 +1,138 @@
-/// <reference path="Model.ts" />
-/// <reference path="../resource/Icon.ts" />
+/// <reference path="../../../node.d.ts" />
+
+export = Model_Icon;
+
+import Util = require('../Util');
+import Model = require('./Model');
+import Icon = require('../resource/Icon');
 
 /**
- * @module saclient.cloud.model
+ * アイコンを検索するための機能を備えたクラス。
+ * 
+ * @class Model_Icon
+ * @constructor
+ * @extends Model
  */
-module saclient.cloud.model {
-
-	import Model = saclient.cloud.model.Model;
-	import Icon = saclient.cloud.resource.Icon;
+class Model_Icon extends Model {
 	
 	/**
-	 * アイコンを検索するための機能を備えたクラス。
-	 * 
-	 * @class Model_Icon
-	 * @constructor
-	 * @extends Model
+	 * @private
+	 * @method _apiPath
+	 * @protected
+	 * @return {string}
 	 */
-	export class Model_Icon extends saclient.cloud.model.Model {
-		
-		/**
-		 * @private
-		 * @method _apiPath
-		 * @protected
-		 * @return {string}
-		 */
-		_apiPath() : string {
-			return "/icon";
-		}
-		
-		/**
-		 * @private
-		 * @method _rootKey
-		 * @protected
-		 * @return {string}
-		 */
-		_rootKey() : string {
-			return "Icon";
-		}
-		
-		/**
-		 * @private
-		 * @method _rootKeyM
-		 * @protected
-		 * @return {string}
-		 */
-		_rootKeyM() : string {
-			return "Icons";
-		}
-		
-		/**
-		 * 次に取得するリストの開始オフセットを指定します。
-		 * 
-		 * @method offset
-		 * @chainable
-		 * @public
-		 * @param {number} offset オフセット
-		 * @return {Model_Icon} this
-		 */
-		offset(offset:number) : Model_Icon {
-			return (<Model_Icon><any>(this._offset(offset)));
-		}
-		
-		/**
-		 * 次に取得するリストの上限レコード数を指定します。
-		 * 
-		 * @method limit
-		 * @chainable
-		 * @public
-		 * @param {number} count 上限レコード数
-		 * @return {Model_Icon} this
-		 */
-		limit(count:number) : Model_Icon {
-			return (<Model_Icon><any>(this._limit(count)));
-		}
-		
-		/**
-		 * 次のリクエストのために設定されているステートをすべて破棄します。
-		 * 
-		 * @method reset
-		 * @chainable
-		 * @public
-		 * @return {Model_Icon} this
-		 */
-		reset() : Model_Icon {
-			return (<Model_Icon><any>(this._reset()));
-		}
-		
-		/**
-		 * 指定したIDを持つ唯一のリソースを取得します。
-		 * 
-		 * @method get
-		 * @public
-		 * @param {string} id
-		 * @return {Icon} リソースオブジェクト
-		 */
-		get(id:string) : Icon {
-			return (<Icon><any>(this._get(id)));
-		}
-		
-		/**
-		 * リソースの検索リクエストを実行し、結果をリストで取得します。
-		 * 
-		 * @method find
-		 * @public
-		 * @return {Icon[]} リソースオブジェクトの配列
-		 */
-		find() : Icon[] {
-			return Util.castArray(this._find(), (<Icon><any>(null)));
-		}
-		
-		/**
-		 * 指定した文字列を名前に含むアイコンに絞り込みます。
-		 * 
-		 * @method withNameLike
-		 * @chainable
-		 * @public
-		 * @param {string} name
-		 * @return {Model_Icon}
-		 */
-		withNameLike(name:string) : Model_Icon {
-			this._filterBy("Name", name);
-			return this;
-		}
-		
-		/**
-		 * 指定したタグを持つアイコンに絞り込みます。
-		 * 
-		 * @method withTag
-		 * @chainable
-		 * @public
-		 * @param {string} tag
-		 * @return {Model_Icon}
-		 */
-		withTag(tag:string) : Model_Icon {
-			this._filterBy("Tags.Name", tag, true);
-			return this;
-		}
-		
+	_apiPath() : string {
+		return "/icon";
+	}
+	
+	/**
+	 * @private
+	 * @method _rootKey
+	 * @protected
+	 * @return {string}
+	 */
+	_rootKey() : string {
+		return "Icon";
+	}
+	
+	/**
+	 * @private
+	 * @method _rootKeyM
+	 * @protected
+	 * @return {string}
+	 */
+	_rootKeyM() : string {
+		return "Icons";
+	}
+	
+	/**
+	 * 次に取得するリストの開始オフセットを指定します。
+	 * 
+	 * @method offset
+	 * @chainable
+	 * @public
+	 * @param {number} offset オフセット
+	 * @return {Model_Icon} this
+	 */
+	offset(offset:number) : Model_Icon {
+		return (<Model_Icon><any>(this._offset(offset)));
+	}
+	
+	/**
+	 * 次に取得するリストの上限レコード数を指定します。
+	 * 
+	 * @method limit
+	 * @chainable
+	 * @public
+	 * @param {number} count 上限レコード数
+	 * @return {Model_Icon} this
+	 */
+	limit(count:number) : Model_Icon {
+		return (<Model_Icon><any>(this._limit(count)));
+	}
+	
+	/**
+	 * 次のリクエストのために設定されているステートをすべて破棄します。
+	 * 
+	 * @method reset
+	 * @chainable
+	 * @public
+	 * @return {Model_Icon} this
+	 */
+	reset() : Model_Icon {
+		return (<Model_Icon><any>(this._reset()));
+	}
+	
+	/**
+	 * 指定したIDを持つ唯一のリソースを取得します。
+	 * 
+	 * @method get
+	 * @public
+	 * @param {string} id
+	 * @return {Icon} リソースオブジェクト
+	 */
+	get(id:string) : Icon {
+		return (<Icon><any>(this._get(id)));
+	}
+	
+	/**
+	 * リソースの検索リクエストを実行し、結果をリストで取得します。
+	 * 
+	 * @method find
+	 * @public
+	 * @return {Icon[]} リソースオブジェクトの配列
+	 */
+	find() : Icon[] {
+		return Util.castArray(this._find(), (<Icon><any>(null)));
+	}
+	
+	/**
+	 * 指定した文字列を名前に含むアイコンに絞り込みます。
+	 * 
+	 * @method withNameLike
+	 * @chainable
+	 * @public
+	 * @param {string} name
+	 * @return {Model_Icon}
+	 */
+	withNameLike(name:string) : Model_Icon {
+		this._filterBy("Name", name);
+		return this;
+	}
+	
+	/**
+	 * 指定したタグを持つアイコンに絞り込みます。
+	 * 
+	 * @method withTag
+	 * @chainable
+	 * @public
+	 * @param {string} tag
+	 * @return {Model_Icon}
+	 */
+	withTag(tag:string) : Model_Icon {
+		this._filterBy("Tags.Name", tag, true);
+		return this;
 	}
 	
 }
+

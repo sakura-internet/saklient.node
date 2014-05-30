@@ -1,8 +1,6 @@
-/// <reference path="src/node.d.ts" />
-var saclient = require('./saclient.js');
-console.log(process.argv);
+var API = require('./lib/saclient/cloud/API.js');
 
-var api = saclient.cloud.API.authorize(process.argv[2], process.argv[3]);
+var api = API.authorize(process.argv[2], process.argv[3]);
 
 // // 停止中のサーバに接続されているディスクを一覧
 // servers = api.server.with_instance_status("down").find
@@ -43,15 +41,40 @@ var api = saclient.cloud.API.authorize(process.argv[2], process.argv[3]);
 //    server.save
 //    printf "  changed icon to: [%s] %s\n\n", server.icon.id, server.icon.name
 //end
-var planFrom = api.product.server.getBySpec(2, 4);
-console.log("plan from: [" + planFrom.id + "] " + planFrom.cpu + "core " + planFrom.memoryGib + "GB");
-var planTo = api.product.server.getBySpec(4, 8);
-console.log("plan to:   [" + planTo.id + "] " + planTo.cpu + "core " + planTo.memoryGib + "GB");
+
+
+
+//var planFrom = api.product.server.getBySpec(2, 4);
+//console.log("plan from: [" + planFrom.id + "] " + planFrom.cpu + "core " + planFrom.memoryGib + "GB");
+//var planTo = api.product.server.getBySpec(4, 8);
+//console.log("plan to:   [" + planTo.id + "] " + planTo.cpu + "core " + planTo.memoryGib + "GB");
+//console.log("");
+//
+//var servers = api.server.withPlan(planFrom).find();
+//servers.forEach(function (server) {
+//	console.log("server [" + server.id + "] " + server.plan.cpu + "core " + server.plan.memoryGib + "GB '" + server.name + "'");
+//	server.changePlan(planTo);
+//	console.log("    -> [" + server.id + "] " + server.plan.cpu + "core " + server.plan.memoryGib + "GB");
+//});
+//
+
+
+
+var icons = api.icon.withNameLike("ubuntu").limit(1).find();
+if (icons.length==0) throw "icon not found";
+var icon = icons[0];
+console.log("icon [" + icon.id + "] " + icon.name);
 console.log("");
 
-var servers = api.server.withPlan(planFrom).find();
-servers.forEach(function (server) {
-    console.log("server [" + server.id + "] " + server.plan.cpu + "core " + server.plan.memoryGib + "GB '" + server.name + "'");
-    server.changePlan(planTo);
-    console.log("    -> [" + server.id + "] " + server.plan.cpu + "core " + server.plan.memoryGib + "GB");
+var servers = api.server.withNameLike("cent").find();
+servers.forEach(function(server){
+	console.log("server [" + server.id + "] " + server.name);
+	server.icon = null;
+	server.save();
+	console.log("  changed icon to nothing: " + (server.icon ? "NG" : "OK"));
+	server.icon = icon;
+	server.save();
+	console.log("  changed icon to: [" + server.icon.id + "] " + server.icon.name);
+	console.log("");
 });
+
