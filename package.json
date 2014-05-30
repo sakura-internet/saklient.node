@@ -7,7 +7,7 @@
     "url": "git://github.com/sakura-internet/saclient.node.git"
   },
   "description": "An easy interface to control your resources on SAKURA Cloud.",
-  "main": "saclient.js",
+  "main": "index.js",
   "directories": {
     "doc": "doc"
   },
