@@ -1,6 +1,6 @@
-var API = require('./lib/saclient/cloud/API.js');
+var saclient = require('saclient');
 
-var api = API.authorize(process.argv[2], process.argv[3]);
+var api = saclient.cloud.API.authorize(process.argv[2], process.argv[3]);
 
 // // 停止中のサーバに接続されているディスクを一覧
 // servers = api.server.with_instance_status("down").find

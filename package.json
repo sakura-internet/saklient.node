@@ -12,8 +12,7 @@
     "doc": "doc"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "grunt"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "sakura",
