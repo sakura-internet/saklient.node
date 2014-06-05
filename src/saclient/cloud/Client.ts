@@ -79,7 +79,6 @@ class Client {
 				'X-Sakura-Response-Format': 'json',
 				'X-Sakura-Error-Level': 'warning'
 			},
-			body: json,
 			protocol: pathSegs[1],
 			port: pathSegs[1]=='https' ? 443 : 80,
 			host: pathSegs[2],

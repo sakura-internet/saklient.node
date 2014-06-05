@@ -1,3 +1,4 @@
+module.paths.push('./lib');
 var saclient = require('saclient');
 
 var api = saclient.cloud.API.authorize(process.argv[2], process.argv[3]);
