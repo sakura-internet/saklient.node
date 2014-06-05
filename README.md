@@ -25,7 +25,7 @@ var saclient = require('saclient');
 var api = saclient.cloud.API.authorize(YOUR_API_TOKEN, YOUR_API_SECRET)
 
 // To access resources in the specified zone
-var api_is1b = api.in_zone("is1b")
+var api_is1b = api.inZone("is1b");
 
 // ...
 ```
