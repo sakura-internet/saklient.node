@@ -10,6 +10,7 @@ import Disk = require('./Disk');
 import Iface = require('./Iface');
 import ServerPlan = require('./ServerPlan');
 import ServerInstance = require('./ServerInstance');
+import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
 
 /**
  * サーバのリソース情報へのアクセス機能や操作機能を備えたクラス。
@@ -178,6 +179,17 @@ class Server extends Resource {
 	constructor(client:Client, r:any) {
 		super(client);
 		this.apiDeserialize(r);
+	}
+	
+	/**
+	 * サーバが起動しているときtrueを返します。
+	 * 
+	 * @method isUp
+	 * @public
+	 * @return {boolean}
+	 */
+	isUp() : boolean {
+		return this.instance.status != null && EServerInstanceStatus.compare(this.instance.status, EServerInstanceStatus.up) == 0;
 	}
 	
 	/**

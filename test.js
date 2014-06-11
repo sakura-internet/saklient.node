@@ -60,22 +60,33 @@ var api = saclient.cloud.API.authorize(process.argv[2], process.argv[3]);
 //
 
 
-
-var icons = api.icon.withNameLike("ubuntu").limit(1).find();
-if (icons.length==0) throw "icon not found";
-var icon = icons[0];
-console.log("icon [" + icon.id + "] " + icon.name);
-console.log("");
-
-var servers = api.server.withNameLike("cent").find();
-servers.forEach(function(server){
-	console.log("server [" + server.id + "] " + server.name);
-	server.icon = null;
-	server.save();
-	console.log("  changed icon to nothing: " + (server.icon ? "NG" : "OK"));
-	server.icon = icon;
-	server.save();
-	console.log("  changed icon to: [" + server.icon.id + "] " + server.icon.name);
+if (0) {
+	
+	var icons = api.icon.withNameLike("ubuntu").limit(1).find();
+	if (icons.length==0) throw "icon not found";
+	var icon = icons[0];
+	console.log("icon [" + icon.id + "] " + icon.name);
 	console.log("");
-});
+	
+	var servers = api.server.withNameLike("cent").find();
+	servers.forEach(function(server){
+		console.log("server [" + server.id + "] " + server.name);
+		server.icon = null;
+		server.save();
+		console.log("  changed icon to nothing: " + (server.icon ? "NG" : "OK"));
+		server.icon = icon;
+		server.save();
+		console.log("  changed icon to: [" + server.icon.id + "] " + server.icon.name);
+		console.log("");
+	});
+	
+}
+
+
+var enums = saclient.cloud.enums;
+console.log(enums.EServerInstanceStatus.up);
+console.log(enums.EServerInstanceStatus.compare("up", "down"));
+console.log(enums.EServerInstanceStatus.compare("up", "up"));
+console.log(enums.EServerInstanceStatus.compare("up", "aaa"));
+
 
