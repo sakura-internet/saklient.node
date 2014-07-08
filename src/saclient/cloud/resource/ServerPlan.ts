@@ -233,42 +233,51 @@ class ServerPlan extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserialize(r:any) {
-		this.isIncomplete = true;
+		this.isNew = r == null;
+		if (this.isNew) {
+			r = {  };
+		};
+		this.isIncomplete = false;
 		if (("ID" in r)) {
 			this.m_id = r["ID"] == null ? null : "" + r["ID"];
-			this.n_id = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_id = null;
+			this.isIncomplete = true;
 		};
+		this.n_id = false;
 		if (("Name" in r)) {
 			this.m_name = r["Name"] == null ? null : "" + r["Name"];
-			this.n_name = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_name = null;
+			this.isIncomplete = true;
 		};
+		this.n_name = false;
 		if (("CPU" in r)) {
 			this.m_cpu = r["CPU"] == null ? null : parseInt("" + r["CPU"], 10);
-			this.n_cpu = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_cpu = null;
+			this.isIncomplete = true;
 		};
+		this.n_cpu = false;
 		if (("MemoryMB" in r)) {
 			this.m_memoryMib = r["MemoryMB"] == null ? null : parseInt("" + r["MemoryMB"], 10);
-			this.n_memoryMib = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_memoryMib = null;
+			this.isIncomplete = true;
 		};
+		this.n_memoryMib = false;
 		if (("ServiceClass" in r)) {
 			this.m_serviceClass = r["ServiceClass"] == null ? null : "" + r["ServiceClass"];
-			this.n_serviceClass = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_serviceClass = null;
+			this.isIncomplete = true;
 		};
+		this.n_serviceClass = false;
 	}
 	
 	/**

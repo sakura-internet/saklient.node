@@ -147,28 +147,35 @@ class DiskPlan extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserialize(r:any) {
-		this.isIncomplete = true;
+		this.isNew = r == null;
+		if (this.isNew) {
+			r = {  };
+		};
+		this.isIncomplete = false;
 		if (("ID" in r)) {
 			this.m_id = r["ID"] == null ? null : "" + r["ID"];
-			this.n_id = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_id = null;
+			this.isIncomplete = true;
 		};
+		this.n_id = false;
 		if (("Name" in r)) {
 			this.m_name = r["Name"] == null ? null : "" + r["Name"];
-			this.n_name = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_name = null;
+			this.isIncomplete = true;
 		};
+		this.n_name = false;
 		if (("StorageClass" in r)) {
 			this.m_storageClass = r["StorageClass"] == null ? null : "" + r["StorageClass"];
-			this.n_storageClass = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_storageClass = null;
+			this.isIncomplete = true;
 		};
+		this.n_storageClass = false;
 	}
 	
 	/**

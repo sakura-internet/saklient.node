@@ -3,6 +3,19 @@ var saclient = require('saclient');
 
 var api = saclient.cloud.API.authorize(process.argv[2], process.argv[3]);
 
+if (1) {
+	
+	var server = api.server.create();
+	server.name = 'saclient.node';
+	server.plan = api.product.server.getBySpec(1, 1);
+	server.save();
+	var servers = api.server.withNameLike('saclient.node').find();
+	console.log(servers[0].name + "\n");
+	server.destroy();
+	
+}
+
+
 // // 停止中のサーバに接続されているディスクを一覧
 // servers = api.server.with_instance_status("down").find
 // for server in servers
@@ -82,11 +95,11 @@ if (0) {
 	
 }
 
-
-var enums = saclient.cloud.enums;
-console.log(enums.EServerInstanceStatus.up);
-console.log(enums.EServerInstanceStatus.compare("up", "down"));
-console.log(enums.EServerInstanceStatus.compare("up", "up"));
-console.log(enums.EServerInstanceStatus.compare("up", "aaa"));
-
+if (0) {
+	var enums = saclient.cloud.enums;
+	console.log(enums.EServerInstanceStatus.up);
+	console.log(enums.EServerInstanceStatus.compare("up", "down"));
+	console.log(enums.EServerInstanceStatus.compare("up", "up"));
+	console.log(enums.EServerInstanceStatus.compare("up", "aaa"));
+}
 

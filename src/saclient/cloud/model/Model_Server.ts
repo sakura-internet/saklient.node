@@ -85,6 +85,17 @@ class Model_Server extends Model {
 	}
 	
 	/**
+	 * *
+	 * 
+	 * @method create
+	 * @public
+	 * @return {Server}
+	 */
+	create() : Server {
+		return (<Server><any>(this._create()));
+	}
+	
+	/**
 	 * 指定したIDを持つ唯一のリソースを取得します。
 	 * 
 	 * @method get

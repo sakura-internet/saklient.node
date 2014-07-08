@@ -89,6 +89,13 @@ class Resource {
 	}
 	
 	/**
+	 * @member saclient.cloud.resource.Resource#isNew
+	 * @type boolean
+	 * @protected
+	 */
+	isNew : boolean;
+	
+	/**
 	 * @member saclient.cloud.resource.Resource#isIncomplete
 	 * @type boolean
 	 * @protected
@@ -128,19 +135,6 @@ class Resource {
 	}
 	
 	/**
-	 * このローカルオブジェクトに現在設定されているリソース情報をAPIに送信し、新しいインスタンスを作成します。
-	 * 
-	 * @private
-	 * @method _create
-	 * @chainable
-	 * @protected
-	 * @return {Resource} this
-	 */
-	_create() : Resource {
-		return this;
-	}
-	
-	/**
 	 * このローカルオブジェクトに現在設定されているリソース情報をAPIに送信し、上書き保存します。
 	 * 
 	 * @private
@@ -152,9 +146,26 @@ class Resource {
 	_save() : Resource {
 		var r:any = {};
 		r[this._rootKey()] = this.apiSerialize();
-		var result:any = this._client.request("PUT", this._apiPath() + "/" + Util.urlEncode(this._id()), r);
+		var method = this.isNew ? "POST" : "PUT";
+		var path = this._apiPath();
+		if (!this.isNew) path += "/" + Util.urlEncode(this._id());
+		var result:any = this._client.request(method, path, r);
 		this.apiDeserialize(result[this._rootKey()]);
 		return this;
+	}
+	
+	/**
+	 * このローカルオブジェクトのIDと対応するリソースの削除リクエストをAPIに送信します。
+	 * 
+	 * @method destroy
+	 * @public
+	 * @return {void}
+	 */
+	destroy() : void {
+		if (this.isNew) return;
+		;
+		var path = this._apiPath() + "/" + Util.urlEncode(this._id());
+		this._client.request("DELETE", path);
 	}
 	
 	/**

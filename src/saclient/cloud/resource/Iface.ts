@@ -84,18 +84,6 @@ class Iface extends Resource {
 	}
 	
 	/**
-	 * このローカルオブジェクトに現在設定されているリソース情報をAPIに送信し、新しいインスタンスを作成します。
-	 * 
-	 * @method create
-	 * @chainable
-	 * @public
-	 * @return {Iface} this
-	 */
-	create() : Iface {
-		return (<Iface><any>(this._create()));
-	}
-	
-	/**
 	 * このローカルオブジェクトに現在設定されているリソース情報をAPIに送信し、上書き保存します。
 	 * 
 	 * @method save
@@ -261,35 +249,43 @@ class Iface extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserialize(r:any) {
-		this.isIncomplete = true;
+		this.isNew = r == null;
+		if (this.isNew) {
+			r = {  };
+		};
+		this.isIncomplete = false;
 		if (("ID" in r)) {
 			this.m_id = r["ID"] == null ? null : "" + r["ID"];
-			this.n_id = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_id = null;
+			this.isIncomplete = true;
 		};
+		this.n_id = false;
 		if (("MACAddress" in r)) {
 			this.m_macAddress = r["MACAddress"] == null ? null : "" + r["MACAddress"];
-			this.n_macAddress = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_macAddress = null;
+			this.isIncomplete = true;
 		};
+		this.n_macAddress = false;
 		if (("IPAddress" in r)) {
 			this.m_ipAddress = r["IPAddress"] == null ? null : "" + r["IPAddress"];
-			this.n_ipAddress = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_ipAddress = null;
+			this.isIncomplete = true;
 		};
+		this.n_ipAddress = false;
 		if (("UserIPAddress" in r)) {
 			this.m_userIpAddress = r["UserIPAddress"] == null ? null : "" + r["UserIPAddress"];
-			this.n_userIpAddress = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_userIpAddress = null;
+			this.isIncomplete = true;
 		};
+		this.n_userIpAddress = false;
 	}
 	
 	/**

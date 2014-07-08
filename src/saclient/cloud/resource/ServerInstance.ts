@@ -137,28 +137,35 @@ class ServerInstance extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserialize(r:any) {
-		this.isIncomplete = true;
+		this.isNew = r == null;
+		if (this.isNew) {
+			r = {  };
+		};
+		this.isIncomplete = false;
 		if (("Status" in r)) {
 			this.m_status = r["Status"] == null ? null : "" + r["Status"];
-			this.n_status = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_status = null;
+			this.isIncomplete = true;
 		};
+		this.n_status = false;
 		if (("BeforeStatus" in r)) {
 			this.m_beforeStatus = r["BeforeStatus"] == null ? null : "" + r["BeforeStatus"];
-			this.n_beforeStatus = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_beforeStatus = null;
+			this.isIncomplete = true;
 		};
+		this.n_beforeStatus = false;
 		if (("StatusChangedAt" in r)) {
 			this.m_statusChangedAt = r["StatusChangedAt"] == null ? null : Util.str2date("" + r["StatusChangedAt"]);
-			this.n_statusChangedAt = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_statusChangedAt = null;
+			this.isIncomplete = true;
 		};
+		this.n_statusChangedAt = false;
 	}
 	
 	/**

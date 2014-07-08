@@ -207,6 +207,18 @@ class Model {
 	}
 	
 	/**
+	 *  *
+	 * 
+	 * @private
+	 * @method _create
+	 * @protected
+	 * @return {Resource}
+	 */
+	_create() : Resource {
+		return Util.createClassInstance("saclient.cloud.resource." + this._rootKey(), [this._client, null]);
+	}
+	
+	/**
 	 * 指定したIDを持つ唯一のリソースを取得します。
 	 * 
 	 * @private

@@ -181,35 +181,43 @@ class InternetPlan extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserialize(r:any) {
-		this.isIncomplete = true;
+		this.isNew = r == null;
+		if (this.isNew) {
+			r = {  };
+		};
+		this.isIncomplete = false;
 		if (("ID" in r)) {
 			this.m_id = r["ID"] == null ? null : "" + r["ID"];
-			this.n_id = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_id = null;
+			this.isIncomplete = true;
 		};
+		this.n_id = false;
 		if (("Name" in r)) {
 			this.m_name = r["Name"] == null ? null : "" + r["Name"];
-			this.n_name = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_name = null;
+			this.isIncomplete = true;
 		};
+		this.n_name = false;
 		if (("BandWidthMbps" in r)) {
 			this.m_bandWidthMbps = r["BandWidthMbps"] == null ? null : parseInt("" + r["BandWidthMbps"], 10);
-			this.n_bandWidthMbps = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_bandWidthMbps = null;
+			this.isIncomplete = true;
 		};
+		this.n_bandWidthMbps = false;
 		if (("ServiceClass" in r)) {
 			this.m_serviceClass = r["ServiceClass"] == null ? null : "" + r["ServiceClass"];
-			this.n_serviceClass = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_serviceClass = null;
+			this.isIncomplete = true;
 		};
+		this.n_serviceClass = false;
 	}
 	
 	/**

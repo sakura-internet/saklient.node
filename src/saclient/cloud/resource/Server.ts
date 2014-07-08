@@ -134,18 +134,6 @@ class Server extends Resource {
 	}
 	
 	/**
-	 * このローカルオブジェクトに現在設定されているリソース情報をAPIに送信し、新しいインスタンスを作成します。
-	 * 
-	 * @method create
-	 * @chainable
-	 * @public
-	 * @return {Server} this
-	 */
-	create() : Server {
-		return (<Server><any>(this._create()));
-	}
-	
-	/**
 	 * このローカルオブジェクトに現在設定されているリソース情報をAPIに送信し、上書き保存します。
 	 * 
 	 * @method save
@@ -492,14 +480,28 @@ class Server extends Resource {
 	}
 	
 	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method set_plan
+	 * @private
+	 * @param {ServerPlan} v
+	 * @return {ServerPlan}
+	 */
+	private set_plan(v:ServerPlan) : ServerPlan {
+		this.m_plan = v;
+		this.n_plan = true;
+		return this.m_plan;
+	}
+	
+	/**
 	 * プラン
 	 * 
 	 * @property plan
 	 * @type ServerPlan
-	 * @readOnly
 	 * @public
 	 */
 	get plan() : ServerPlan { return this.get_plan(); }
+	set plan(v:ServerPlan) { this.set_plan(v); }
 	
 	
 	/**
@@ -568,28 +570,35 @@ class Server extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserialize(r:any) {
-		this.isIncomplete = true;
+		this.isNew = r == null;
+		if (this.isNew) {
+			r = {  };
+		};
+		this.isIncomplete = false;
 		if (("ID" in r)) {
 			this.m_id = r["ID"] == null ? null : "" + r["ID"];
-			this.n_id = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_id = null;
+			this.isIncomplete = true;
 		};
+		this.n_id = false;
 		if (("Name" in r)) {
 			this.m_name = r["Name"] == null ? null : "" + r["Name"];
-			this.n_name = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_name = null;
+			this.isIncomplete = true;
 		};
+		this.n_name = false;
 		if (("Description" in r)) {
 			this.m_description = r["Description"] == null ? null : "" + r["Description"];
-			this.n_description = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_description = null;
+			this.isIncomplete = true;
 		};
+		this.n_description = false;
 		if (("Tags" in r)) {
 			if (r["Tags"] == null) {
 				this.m_tags = [];
@@ -604,25 +613,28 @@ class Server extends Resource {
 					}
 				});
 			};
-			this.n_tags = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_tags = null;
+			this.isIncomplete = true;
 		};
+		this.n_tags = false;
 		if (("Icon" in r)) {
 			this.m_icon = r["Icon"] == null ? null : new Icon(this._client, r["Icon"]);
-			this.n_icon = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_icon = null;
+			this.isIncomplete = true;
 		};
+		this.n_icon = false;
 		if (("ServerPlan" in r)) {
 			this.m_plan = r["ServerPlan"] == null ? null : new ServerPlan(this._client, r["ServerPlan"]);
-			this.n_plan = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_plan = null;
+			this.isIncomplete = true;
 		};
+		this.n_plan = false;
 		if (("Interfaces" in r)) {
 			if (r["Interfaces"] == null) {
 				this.m_ifaces = [];
@@ -637,18 +649,20 @@ class Server extends Resource {
 					}
 				});
 			};
-			this.n_ifaces = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_ifaces = null;
+			this.isIncomplete = true;
 		};
+		this.n_ifaces = false;
 		if (("Instance" in r)) {
 			this.m_instance = r["Instance"] == null ? null : new ServerInstance(this._client, r["Instance"]);
-			this.n_instance = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_instance = null;
+			this.isIncomplete = true;
 		};
+		this.n_instance = false;
 	}
 	
 	/**

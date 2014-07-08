@@ -77,18 +77,6 @@ class Icon extends Resource {
 	}
 	
 	/**
-	 * このローカルオブジェクトに現在設定されているリソース情報をAPIに送信し、新しいインスタンスを作成します。
-	 * 
-	 * @method create
-	 * @chainable
-	 * @public
-	 * @return {Icon} this
-	 */
-	create() : Icon {
-		return (<Icon><any>(this._create()));
-	}
-	
-	/**
 	 * このローカルオブジェクトに現在設定されているリソース情報をAPIに送信し、上書き保存します。
 	 * 
 	 * @method save
@@ -213,28 +201,35 @@ class Icon extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserialize(r:any) {
-		this.isIncomplete = true;
+		this.isNew = r == null;
+		if (this.isNew) {
+			r = {  };
+		};
+		this.isIncomplete = false;
 		if (("ID" in r)) {
 			this.m_id = r["ID"] == null ? null : "" + r["ID"];
-			this.n_id = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_id = null;
+			this.isIncomplete = true;
 		};
+		this.n_id = false;
 		if (("Name" in r)) {
 			this.m_name = r["Name"] == null ? null : "" + r["Name"];
-			this.n_name = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_name = null;
+			this.isIncomplete = true;
 		};
+		this.n_name = false;
 		if (("URL" in r)) {
 			this.m_url = r["URL"] == null ? null : "" + r["URL"];
-			this.n_url = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_url = null;
+			this.isIncomplete = true;
 		};
+		this.n_url = false;
 	}
 	
 	/**

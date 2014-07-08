@@ -130,18 +130,6 @@ class Appliance extends Resource {
 	}
 	
 	/**
-	 * このローカルオブジェクトに現在設定されているリソース情報をAPIに送信し、新しいインスタンスを作成します。
-	 * 
-	 * @method create
-	 * @chainable
-	 * @public
-	 * @return {Appliance} this
-	 */
-	create() : Appliance {
-		return (<Appliance><any>(this._create()));
-	}
-	
-	/**
 	 * このローカルオブジェクトに現在設定されているリソース情報をAPIに送信し、上書き保存します。
 	 * 
 	 * @method save
@@ -539,35 +527,43 @@ class Appliance extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserialize(r:any) {
-		this.isIncomplete = true;
+		this.isNew = r == null;
+		if (this.isNew) {
+			r = {  };
+		};
+		this.isIncomplete = false;
 		if (("ID" in r)) {
 			this.m_id = r["ID"] == null ? null : "" + r["ID"];
-			this.n_id = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_id = null;
+			this.isIncomplete = true;
 		};
+		this.n_id = false;
 		if (("Class" in r)) {
 			this.m_clazz = r["Class"] == null ? null : "" + r["Class"];
-			this.n_clazz = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_clazz = null;
+			this.isIncomplete = true;
 		};
+		this.n_clazz = false;
 		if (("Name" in r)) {
 			this.m_name = r["Name"] == null ? null : "" + r["Name"];
-			this.n_name = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_name = null;
+			this.isIncomplete = true;
 		};
+		this.n_name = false;
 		if (("Description" in r)) {
 			this.m_description = r["Description"] == null ? null : "" + r["Description"];
-			this.n_description = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_description = null;
+			this.isIncomplete = true;
 		};
+		this.n_description = false;
 		if (("Tags" in r)) {
 			if (r["Tags"] == null) {
 				this.m_tags = [];
@@ -582,18 +578,20 @@ class Appliance extends Resource {
 					}
 				});
 			};
-			this.n_tags = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_tags = null;
+			this.isIncomplete = true;
 		};
+		this.n_tags = false;
 		if (("Icon" in r)) {
 			this.m_icon = r["Icon"] == null ? null : new Icon(this._client, r["Icon"]);
-			this.n_icon = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_icon = null;
+			this.isIncomplete = true;
 		};
+		this.n_icon = false;
 		if (("Interfaces" in r)) {
 			if (r["Interfaces"] == null) {
 				this.m_ifaces = [];
@@ -608,18 +606,20 @@ class Appliance extends Resource {
 					}
 				});
 			};
-			this.n_ifaces = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_ifaces = null;
+			this.isIncomplete = true;
 		};
+		this.n_ifaces = false;
 		if (("ServiceClass" in r)) {
 			this.m_serviceClass = r["ServiceClass"] == null ? null : "" + r["ServiceClass"];
-			this.n_serviceClass = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_serviceClass = null;
+			this.isIncomplete = true;
 		};
+		this.n_serviceClass = false;
 	}
 	
 	/**

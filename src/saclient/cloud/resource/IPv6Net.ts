@@ -181,35 +181,43 @@ class IPv6Net extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserialize(r:any) {
-		this.isIncomplete = true;
+		this.isNew = r == null;
+		if (this.isNew) {
+			r = {  };
+		};
+		this.isIncomplete = false;
 		if (("ID" in r)) {
 			this.m_id = r["ID"] == null ? null : "" + r["ID"];
-			this.n_id = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_id = null;
+			this.isIncomplete = true;
 		};
+		this.n_id = false;
 		if (("IPv6Prefix" in r)) {
 			this.m_ipv6Prefix = r["IPv6Prefix"] == null ? null : "" + r["IPv6Prefix"];
-			this.n_ipv6Prefix = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_ipv6Prefix = null;
+			this.isIncomplete = true;
 		};
+		this.n_ipv6Prefix = false;
 		if (("IPv6PrefixLen" in r)) {
 			this.m_ipv6PrefixLen = r["IPv6PrefixLen"] == null ? null : parseInt("" + r["IPv6PrefixLen"], 10);
-			this.n_ipv6PrefixLen = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_ipv6PrefixLen = null;
+			this.isIncomplete = true;
 		};
+		this.n_ipv6PrefixLen = false;
 		if (("IPv6PrefixTail" in r)) {
 			this.m_ipv6PrefixTail = r["IPv6PrefixTail"] == null ? null : "" + r["IPv6PrefixTail"];
-			this.n_ipv6PrefixTail = false;
 		}
 		else {
-			this.isIncomplete = false;
+			this.m_ipv6PrefixTail = null;
+			this.isIncomplete = true;
 		};
+		this.n_ipv6PrefixTail = false;
 	}
 	
 	/**
