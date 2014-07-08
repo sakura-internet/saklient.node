@@ -5,12 +5,19 @@ var api = saclient.cloud.API.authorize(process.argv[2], process.argv[3]);
 
 if (1) {
 	
+	console.log('creating temporary instance');
 	var server = api.server.create();
 	server.name = 'saclient.node';
+	server.description = 'This instance was created by saclient.rb example';
+	server.tags = ['saclient-test'];
 	server.plan = api.product.server.getBySpec(1, 1);
+	console.log('parameter is set');
 	server.save();
+	console.log('saved');
 	var servers = api.server.withNameLike('saclient.node').find();
-	console.log(servers[0].name + "\n");
+	console.log(servers[0].name);
+	console.log(servers[0].description);
+	console.log(servers[0].tags.join(', '));
 	server.destroy();
 	
 }
