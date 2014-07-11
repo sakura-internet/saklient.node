@@ -7,6 +7,7 @@ import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');
 import Iface = require('./Iface');
+import EApplianceClass = require('../enums/EApplianceClass');
 
 /**
  * アプライアンスのリソース情報へのアクセス機能や操作機能を備えたクラス。

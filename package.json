@@ -12,7 +12,7 @@
     "doc": "doc"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha"
   },
   "keywords": [
     "sakura",
@@ -33,6 +33,10 @@
     "grunt": "~0.4.5",
     "grunt-typescript": "~0.3.6",
     "grunt-yui-compressor": "~0.3.3",
-    "grunt-contrib-yuidoc": "~0.5.2"
+    "grunt-contrib-yuidoc": "~0.5.2",
+    "grunt-shell": "~0.7.0",
+    "mocha": "~1.20.1",
+    "should": "~4.0.4",
+    "dateformat": "~1.0.8-1.2.3"
   }
 }

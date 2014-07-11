@@ -2,6 +2,8 @@
 
 export = Client;
 
+import ExceptionFactory = require('./errors/ExceptionFactory');
+
 // https://github.com/dhruvbird/http-sync
 var httpSync:any = require('http-sync');
 
@@ -88,10 +90,11 @@ class Client {
 			req.write(json);
 		}
 		var data:any = req.end();
+		var ret:any = data && data.body ? JSON.parse(data.body) : null;
 		if (!(data && 200<=data.statusCode && data.statusCode<300)) {
-			throw new Error(data ? data.headers.Status : 'No response');
+			throw ExceptionFactory.create(data.statusCode, ret && ret.error_code, ret && ret.error_msg);
 		}
-		return JSON.parse(data.body);
+		return ret;
 	}
 
 }

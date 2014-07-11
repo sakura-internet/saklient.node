@@ -8,6 +8,7 @@ import Resource = require('./Resource');
 import Icon = require('./Icon');
 import DiskPlan = require('./DiskPlan');
 import Server = require('./Server');
+import EDiskConnection = require('../enums/EDiskConnection');
 
 /**
  * ディスクのリソース情報へのアクセス機能や操作機能を備えたクラス。

@@ -189,7 +189,7 @@ class Resource {
 	 * @return {any}
 	 */
 	dump() : any {
-		return this.apiSerialize();
+		return this.apiSerialize(true);
 	}
 	
 }

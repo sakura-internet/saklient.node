@@ -35,6 +35,12 @@ module.exports = function (grunt) {
 					outdir: "./doc"
 				}
 			}
+		},
+		
+		shell: {
+			createIndex: {
+				command: "./createindex.sh"
+			}
 		}
 		
 	});
@@ -43,7 +49,7 @@ module.exports = function (grunt) {
 		name.match(/^grunt-/) && grunt.loadNpmTasks(name);
 	}
 	
-	grunt.registerTask('default', ['typescript','yuidoc']);
+	grunt.registerTask('default', ['typescript','shell','yuidoc']);
 
 };
 

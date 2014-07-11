@@ -9,8 +9,6 @@ var _map = {
 	"cleaning": 5,
 	"starting": 10,
 	"alive": 49,
-	"suspended": 70,
-	"running": 80,
 	"active": 89,
 	"migrating": 90,
 	"up": 100
@@ -28,10 +26,6 @@ class EServerInstanceStatus {
 	static starting : string = "starting";
 	
 	static alive : string = "alive";
-	
-	static suspended : string = "suspended";
-	
-	static running : string = "running";
 	
 	static active : string = "active";
 	
