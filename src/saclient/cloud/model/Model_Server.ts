@@ -98,13 +98,13 @@ class Model_Server extends Model {
 	/**
 	 * 指定したIDを持つ唯一のリソースを取得します。
 	 * 
-	 * @method get
+	 * @method getById
 	 * @public
 	 * @param {string} id
 	 * @return {Server} リソースオブジェクト
 	 */
-	get(id:string) : Server {
-		return (<Server><any>(this._get(id)));
+	getById(id:string) : Server {
+		return (<Server><any>(this._getById(id)));
 	}
 	
 	/**

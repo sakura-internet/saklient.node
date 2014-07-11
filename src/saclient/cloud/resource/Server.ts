@@ -177,7 +177,18 @@ class Server extends Resource {
 	 * @return {boolean}
 	 */
 	isUp() : boolean {
-		return this.instance.status != null && EServerInstanceStatus.compare(this.instance.status, EServerInstanceStatus.up) == 0;
+		return this.get_instance().isUp();
+	}
+	
+	/**
+	 * サーバが停止しているときtrueを返します。
+	 * 
+	 * @method isDown
+	 * @public
+	 * @return {boolean}
+	 */
+	isDown() : boolean {
+		return this.get_instance().isDown();
 	}
 	
 	/**
@@ -190,7 +201,7 @@ class Server extends Resource {
 	 */
 	boot() : Server {
 		this._client.request("PUT", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/power");
-		return this;
+		return this.reload();
 	}
 	
 	/**
@@ -203,7 +214,7 @@ class Server extends Resource {
 	 */
 	shutdown() : Server {
 		this._client.request("DELETE", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/power");
-		return this;
+		return this.reload();
 	}
 	
 	/**
@@ -216,7 +227,7 @@ class Server extends Resource {
 	 */
 	stop() : Server {
 		this._client.request("DELETE", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/power", { Force: true });
-		return this;
+		return this.reload();
 	}
 	
 	/**
@@ -229,7 +240,7 @@ class Server extends Resource {
 	 */
 	reboot() : Server {
 		this._client.request("PUT", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/reset");
-		return this;
+		return this.reload();
 	}
 	
 	/**

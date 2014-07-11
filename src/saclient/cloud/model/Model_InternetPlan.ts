@@ -86,13 +86,13 @@ class Model_InternetPlan extends Model {
 	/**
 	 * 指定したIDを持つ唯一のリソースを取得します。
 	 * 
-	 * @method get
+	 * @method getById
 	 * @public
 	 * @param {string} id
 	 * @return {InternetPlan} リソースオブジェクト
 	 */
-	get(id:string) : InternetPlan {
-		return (<InternetPlan><any>(this._get(id)));
+	getById(id:string) : InternetPlan {
+		return (<InternetPlan><any>(this._getById(id)));
 	}
 	
 	/**

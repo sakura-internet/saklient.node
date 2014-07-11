@@ -86,13 +86,13 @@ class Model_ServerPlan extends Model {
 	/**
 	 * 指定したIDを持つ唯一のリソースを取得します。
 	 * 
-	 * @method get
+	 * @method getById
 	 * @public
 	 * @param {string} id
 	 * @return {ServerPlan} リソースオブジェクト
 	 */
-	get(id:string) : ServerPlan {
-		return (<ServerPlan><any>(this._get(id)));
+	getById(id:string) : ServerPlan {
+		return (<ServerPlan><any>(this._getById(id)));
 	}
 	
 	/**

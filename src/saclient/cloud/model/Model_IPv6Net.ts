@@ -86,13 +86,13 @@ class Model_IPv6Net extends Model {
 	/**
 	 * 指定したIDを持つ唯一のリソースを取得します。
 	 * 
-	 * @method get
+	 * @method getById
 	 * @public
 	 * @param {string} id
 	 * @return {IPv6Net} リソースオブジェクト
 	 */
-	get(id:string) : IPv6Net {
-		return (<IPv6Net><any>(this._get(id)));
+	getById(id:string) : IPv6Net {
+		return (<IPv6Net><any>(this._getById(id)));
 	}
 	
 	/**

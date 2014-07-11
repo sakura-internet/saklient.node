@@ -5,6 +5,7 @@ export = ServerInstance;
 import Util = require('../Util');
 import Client = require('../Client');
 import Resource = require('./Resource');
+import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
 
 /**
  * サーバインスタンスのリソース情報へのアクセス機能や操作機能を備えたクラス。
@@ -46,6 +47,28 @@ class ServerInstance extends Resource {
 	constructor(client:Client, r:any) {
 		super(client);
 		this.apiDeserialize(r);
+	}
+	
+	/**
+	 * サーバが起動しているときtrueを返します。
+	 * 
+	 * @method isUp
+	 * @public
+	 * @return {boolean}
+	 */
+	isUp() : boolean {
+		return this.get_status() != null && EServerInstanceStatus.compare(this.get_status(), EServerInstanceStatus.up) == 0;
+	}
+	
+	/**
+	 * サーバが停止しているときtrueを返します。
+	 * 
+	 * @method isDown
+	 * @public
+	 * @return {boolean}
+	 */
+	isDown() : boolean {
+		return this.get_status() == null || EServerInstanceStatus.compare(this.get_status(), EServerInstanceStatus.down) == 0;
 	}
 	
 	/**

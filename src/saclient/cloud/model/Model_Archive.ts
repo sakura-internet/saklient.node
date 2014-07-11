@@ -86,13 +86,13 @@ class Model_Archive extends Model {
 	/**
 	 * 指定したIDを持つ唯一のリソースを取得します。
 	 * 
-	 * @method get
+	 * @method getById
 	 * @public
 	 * @param {string} id
 	 * @return {Archive} リソースオブジェクト
 	 */
-	get(id:string) : Archive {
-		return (<Archive><any>(this._get(id)));
+	getById(id:string) : Archive {
+		return (<Archive><any>(this._getById(id)));
 	}
 	
 	/**

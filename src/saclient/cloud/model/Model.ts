@@ -222,12 +222,12 @@ class Model {
 	 * 指定したIDを持つ唯一のリソースを取得します。
 	 * 
 	 * @private
-	 * @method _get
+	 * @method _getById
 	 * @protected
 	 * @param {string} id
 	 * @return {Resource} リソースオブジェクト
 	 */
-	_get(id:string) : Resource {
+	_getById(id:string) : Resource {
 		var params = this._params;
 		this._reset();
 		var result:any = this._client.request("GET", this._apiPath() + "/" + Util.urlEncode(id), params);

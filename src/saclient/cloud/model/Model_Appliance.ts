@@ -86,13 +86,13 @@ class Model_Appliance extends Model {
 	/**
 	 * 指定したIDを持つ唯一のリソースを取得します。
 	 * 
-	 * @method get
+	 * @method getById
 	 * @public
 	 * @param {string} id
 	 * @return {Appliance} リソースオブジェクト
 	 */
-	get(id:string) : Appliance {
-		return (<Appliance><any>(this._get(id)));
+	getById(id:string) : Appliance {
+		return (<Appliance><any>(this._getById(id)));
 	}
 	
 	/**

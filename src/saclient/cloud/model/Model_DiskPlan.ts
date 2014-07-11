@@ -86,13 +86,13 @@ class Model_DiskPlan extends Model {
 	/**
 	 * 指定したIDを持つ唯一のリソースを取得します。
 	 * 
-	 * @method get
+	 * @method getById
 	 * @public
 	 * @param {string} id
 	 * @return {DiskPlan} リソースオブジェクト
 	 */
-	get(id:string) : DiskPlan {
-		return (<DiskPlan><any>(this._get(id)));
+	getById(id:string) : DiskPlan {
+		return (<DiskPlan><any>(this._getById(id)));
 	}
 	
 	/**

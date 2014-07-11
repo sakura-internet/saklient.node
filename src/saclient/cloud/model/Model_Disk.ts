@@ -86,13 +86,13 @@ class Model_Disk extends Model {
 	/**
 	 * 指定したIDを持つ唯一のリソースを取得します。
 	 * 
-	 * @method get
+	 * @method getById
 	 * @public
 	 * @param {string} id
 	 * @return {Disk} リソースオブジェクト
 	 */
-	get(id:string) : Disk {
-		return (<Disk><any>(this._get(id)));
+	getById(id:string) : Disk {
+		return (<Disk><any>(this._getById(id)));
 	}
 	
 	/**
