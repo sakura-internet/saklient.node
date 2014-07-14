@@ -109,14 +109,13 @@ describe('Server', function(){
 		console.log('stopping server...');
 		server.stop();
 		
-		(function(){
-			console.log('checking instance status...');
-			server.reload();
-			if (server.isUp()) return setTimeout(arguments.callee, 1000);
+		console.log('checking instance status...');
+		server.afterDown(function(server, result){
+			result.should.be.ok;
 			console.log('deleting server...');
 			server.destroy();
 			done();
-		})();
+		});
 		
 	});
 	

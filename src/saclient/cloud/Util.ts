@@ -76,5 +76,26 @@ class Util {
 		return (<U[]><any>(a));
 	}
 	
+	/**
+	 * @static
+	 * @method sleep
+	 * @public
+	 * @param {number} sec
+	 * @return {void}
+	 */
+	static sleep(sec:number) : void {}
+	
+	/**
+	 * @static
+	 * @method setTimeout
+	 * @public
+	 * @param {number} ms
+	 * @param {any} fn
+	 * @return {void}
+	 */
+	static setTimeout(fn:any, ms:number) : void {
+		setTimeout(fn, ms);
+	}
+	
 }
 

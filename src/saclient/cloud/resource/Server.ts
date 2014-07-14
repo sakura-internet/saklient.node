@@ -244,6 +244,65 @@ class Server extends Resource {
 	}
 	
 	/**
+	 * サーバが指定のステータスに遷移するまで待機します。
+	 * 
+	 * @ignore
+	 * @method afterStatus
+	 * @private
+	 * @param {string} status
+	 * @param {number} timeout=60
+	 * @param {(Server, boolean) => void} callback
+	 * @return {void}
+	 */
+	private afterStatus(status:string, callback:(Server, boolean) => void, timeout:number=60) : void {
+		var step = 3;
+		var fn:() => void = null;
+		fn = () => /* : void */ {
+			this.reload();
+			var s:string = this.get_instance()["status"];
+			if (s == null) s = EServerInstanceStatus.down;
+			if (s == status) {
+				callback(this, true);
+				return;
+			};
+			timeout -= step;
+			if (0 < timeout) {
+				setTimeout(fn, step * 1000);
+			}
+			else {
+				callback(this, false);
+			};
+		};
+		fn();
+	}
+	
+	/**
+	 * サーバが起動するまで待機します。
+	 * 
+	 * @method afterUp
+	 * @public
+	 * @param {number} timeout=60
+	 * @param {(Server, boolean) => void} callback
+	 * @return {void}
+	 */
+	afterUp(callback:(Server, boolean) => void, timeout:number=60) : void {
+		this.afterStatus(EServerInstanceStatus.up, callback, timeout);
+	}
+	
+	/**
+	 * サーバが停止するまで待機します。
+	 * 
+	 * @method afterDown
+	 * @public
+	 * @param {number} timeout=60
+	 * @param {(Server, boolean) => void} callback
+	 * @return {void}
+	 */
+	afterDown(callback:(Server, boolean) => void, timeout:number=60) : void {
+		this.afterStatus(EServerInstanceStatus.down, callback, timeout);
+	}
+	
+	/**
 	 * サーバのプランを変更します。
 	 * 
 	 * @method changePlan
