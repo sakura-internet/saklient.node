@@ -1,11 +1,12 @@
 /// <reference path="../../node.d.ts" />
+/// <reference path="../../node-fibers.d.ts" />
 
 export = Client;
 
 import ExceptionFactory = require('./errors/ExceptionFactory');
 
-// https://github.com/dhruvbird/http-sync
-var httpSync:any = require('http-sync');
+var Fiber:any = require('fibers');
+var https:any = require('https');
 
 class Client {
 	
@@ -46,6 +47,8 @@ class Client {
 	}
 	
 	request(method:string, path:string, params?:any) : any {
+		var _fiber = Fiber.current;
+		//
 		method = method.toUpperCase();
 		path = path.replace(/^\/?/, '/');
 		var json:string = params!=null ? JSON.stringify(params) : null;
@@ -67,9 +70,9 @@ class Client {
 //			console.log("// APIリクエスト中: "+method+" "+path);
 //			console.log(params);
 		
-		var pathSegs = path.match(/^(https?):\/\/([^\/]+)(.+)$/);
+		var pathSegs = path.match(/^(https?:)\/\/([^\/]+)(.+)$/);
 		
-		var req = httpSync.request({
+		var opts = {
 			method: method=='GET' ? 'GET' : 'POST',
 			headers: {
 				//'Content-Type': 'application/x-www-form-urlencoded',
@@ -82,19 +85,38 @@ class Client {
 				'X-Sakura-Error-Level': 'warning'
 			},
 			protocol: pathSegs[1],
-			port: pathSegs[1]=='https' ? 443 : 80,
+			port: pathSegs[1]=='https:' ? 443 : 80,
 			host: pathSegs[2],
 			path: pathSegs[3]
+		};
+		opts.headers['Content-Length'] = json!=null ? json.length : 0;
+		var req = https.request(opts, (res)=>{
+			var body:string = '';
+			res.setEncoding('utf8');
+			res.on('data', (chunk)=>{
+				body += chunk;
+			});
+			res.on('end', ()=>{
+				//console.log(body);
+				var ret:any = body ? JSON.parse(body) : null;
+				if (!(res && 200<=res.statusCode && res.statusCode<300)) {
+					var ex = ExceptionFactory.create(res.statusCode, ret ? ret.error_code : null, ret ? ret.error_msg : "");
+					var r = _fiber.throwInto(ex);
+					_fiber = null;
+					return r;
+				}
+				var r = _fiber.run(ret);
+				_fiber = null;
+				return r;
+			});
 		});
-		if (json!=null) {
-			req.write(json);
-		}
-		var data:any = req.end();
-		var ret:any = data && data.body ? JSON.parse(data.body) : null;
-		if (!(data && 200<=data.statusCode && data.statusCode<300)) {
-			throw ExceptionFactory.create(data.statusCode, ret && ret.error_code, ret && ret.error_msg);
-		}
-		return ret;
+		req.on('error', (ex)=>{
+			throw ExceptionFactory.create(null, null, ex.message);
+		});
+		if (json!=null) req.write(json);
+		req.end();
+		//
+		return Fiber.yield();
 	}
 
 }

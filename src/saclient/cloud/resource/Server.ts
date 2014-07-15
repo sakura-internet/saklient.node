@@ -247,59 +247,48 @@ class Server extends Resource {
 	 * サーバが指定のステータスに遷移するまで待機します。
 	 * 
 	 * @ignore
-	 * @method afterStatus
+	 * @method sleepUntil
 	 * @private
 	 * @param {string} status
 	 * @param {number} timeout=60
-	 * @param {(Server, boolean) => void} callback
-	 * @return {void}
+	 * @return {boolean}
 	 */
-	private afterStatus(status:string, callback:(Server, boolean) => void, timeout:number=60) : void {
+	private sleepUntil(status:string, timeout:number=60) : boolean {
 		var step = 3;
-		var fn:() => void = null;
-		fn = () => /* : void */ {
+		while (0 < timeout) {
 			this.reload();
 			var s:string = this.get_instance()["status"];
 			if (s == null) s = EServerInstanceStatus.down;
-			if (s == status) {
-				callback(this, true);
-				return;
-			};
+			if (s == status) return true;
+			;
 			timeout -= step;
-			if (0 < timeout) {
-				setTimeout(fn, step * 1000);
-			}
-			else {
-				callback(this, false);
-			};
+			if (0 < timeout) Util.sleep(step);
 		};
-		fn();
+		return false;
 	}
 	
 	/**
 	 * サーバが起動するまで待機します。
 	 * 
-	 * @method afterUp
+	 * @method sleepUntilUp
 	 * @public
 	 * @param {number} timeout=60
-	 * @param {(Server, boolean) => void} callback
-	 * @return {void}
+	 * @return {boolean}
 	 */
-	afterUp(callback:(Server, boolean) => void, timeout:number=60) : void {
-		this.afterStatus(EServerInstanceStatus.up, callback, timeout);
+	sleepUntilUp(timeout:number=60) : boolean {
+		return this.sleepUntil(EServerInstanceStatus.up, timeout);
 	}
 	
 	/**
 	 * サーバが停止するまで待機します。
 	 * 
-	 * @method afterDown
+	 * @method sleepUntilDown
 	 * @public
 	 * @param {number} timeout=60
-	 * @param {(Server, boolean) => void} callback
-	 * @return {void}
+	 * @return {boolean}
 	 */
-	afterDown(callback:(Server, boolean) => void, timeout:number=60) : void {
-		this.afterStatus(EServerInstanceStatus.down, callback, timeout);
+	sleepUntilDown(timeout:number=60) : boolean {
+		return this.sleepUntil(EServerInstanceStatus.down, timeout);
 	}
 	
 	/**

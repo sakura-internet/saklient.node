@@ -49,7 +49,8 @@ module.exports = function (grunt) {
 		name.match(/^grunt-/) && grunt.loadNpmTasks(name);
 	}
 	
-	grunt.registerTask('default', ['typescript','shell','yuidoc']);
+	//grunt.registerTask('default', ['typescript','shell','yuidoc']);
+	grunt.registerTask('default', ['typescript','shell']);
 
 };
 

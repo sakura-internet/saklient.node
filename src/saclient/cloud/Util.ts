@@ -3,6 +3,8 @@
 export = Util;
 
 
+import Fiber = require('fibers');
+
 /**
  * @class Util
  * @constructor
@@ -83,7 +85,11 @@ class Util {
 	 * @param {number} sec
 	 * @return {void}
 	 */
-	static sleep(sec:number) : void {}
+	static sleep(sec:number) : void {
+		var _fiber = Fiber.current;
+		setTimeout(function(){ return _fiber.run(); }, sec*1000);
+		Fiber.yield();
+	}
 	
 	/**
 	 * @static

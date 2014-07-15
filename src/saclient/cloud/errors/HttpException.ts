@@ -1,13 +1,16 @@
 /// <reference path="../../../node.d.ts" />
+/// <reference path="./Error.ts" />
 
 export = HttpException;
+
+import Error = require('./Error');
 
 /**
  * @class HttpException
  * @constructor
  * @extends NativeException
  */
-class HttpException implements Error {
+class HttpException extends Error {
 	
 	/**
 	 * @member saclient.cloud.errors.HttpException#status
@@ -17,27 +20,6 @@ class HttpException implements Error {
 	status : number;
 	
 	/**
-	 * @member saclient.cloud.errors.HttpException#name
-	 * @type string
-	 * @public
-	 */
-	name : string;
-	
-	/**
-	 * @member saclient.cloud.errors.HttpException#message
-	 * @type string
-	 * @public
-	 */
-	message : string;
-	
-	/**
-	 * @member saclient.cloud.errors.HttpException#stack
-	 * @type string
-	 * @public
-	 */
-	stack : string;
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -45,9 +27,10 @@ class HttpException implements Error {
 	 * @param {string} name=null
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		this.status = status;
+		super(message);
 		this.name = code;
-		this.message = message;
+		this.message = (code ? '['+code+'] ' : '') + message;
+		this.status = status;
 		this.stack = (<any>new Error()).stack;
 	}
 	

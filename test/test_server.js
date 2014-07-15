@@ -1,12 +1,14 @@
 var should = require('should');
 var assert = require('assert');
-var fs = require('fs');
-var path = require('path');
-var dateformat = require('dateformat');
 
+var path = require('path');
 var root = path.dirname(__dirname);
 module.paths.push(root + '/lib');
 var saclient = require('saclient');
+
+var fs = require('fs');
+var dateformat = require('dateformat');
+var Fiber = require('fibers');
 
 describe('Server', function(){
 	
@@ -47,76 +49,83 @@ describe('Server', function(){
 	
 	
 	it('should be found', function(){
-		
-		console.log('finding servers...');
-		var servers = api.server.find();
-		servers.should.be.an.instanceof(Array);
-		servers.length.should.be.above(0);
-		
-		console.log('checking each server...');
-		servers.forEach(function(server){
-			server.should.be.an.instanceof(saclient.cloud.resource.Server);
-			server.plan.should.be.an.instanceof(saclient.cloud.resource.ServerPlan);
-			server.plan.cpu.should.be.above(0);
-			server.plan.memoryMib.should.be.above(0);
-			server.plan.memoryGib.should.be.above(0);
-			(server.plan.memoryMib / server.plan.memoryGib).should.equal(1024);
-			server.tags.should.be.an.instanceof(Array);
-			server.tags.forEach(function(tag){
-				tag.should.be.an.instanceof(String);
+		Fiber(function(){
+			console.log('finding servers...');
+			var servers = api.server.find();
+			servers.should.be.an.instanceof(Array);
+			servers.length.should.be.above(0);
+			
+			console.log('checking each server...');
+			servers.forEach(function(server){
+				server.should.be.an.instanceof(saclient.cloud.resource.Server);
+				server.plan.should.be.an.instanceof(saclient.cloud.resource.ServerPlan);
+				server.plan.cpu.should.be.above(0);
+				server.plan.memoryMib.should.be.above(0);
+				server.plan.memoryGib.should.be.above(0);
+				(server.plan.memoryMib / server.plan.memoryGib).should.equal(1024);
+				server.tags.should.be.an.instanceof(Array);
+				server.tags.forEach(function(tag){
+					tag.should.be.an.instanceof(String);
+				});
 			});
-		});
-		
+			
+		}).run();
 	});
 	
 	
 	
 	it('should be CRUDed and power-controlled', function(done){
-		
-		var name = '!js_mocha-' + dateformat('yyyyMMdd_hhmmss') + '-' + Math.random().toString(36).slice(2);
-		var description = 'This instance was created by saclient.node mocha';
-		var tag = 'saclient-test';
-		var cpu = 1;
-		var mem = 2;
-		//
-		console.log('creating server...');
-		var server = api.server.create();
-		server.should.be.an.instanceof(saclient.cloud.resource.Server);
-		server.name = name;
-		server.description = description;
-		server.tags = [tag];
-		server.plan = api.product.server.getBySpec(cpu, mem);
-		server.save();
-		//
-		server.id.should.be.above(0);
-		server.name.should.equal(name);
-		server.description.should.equal(description);
-		server.tags.should.be.an.instanceof(Array);
-		server.tags.length.should.equal(1);
-		server.tags[0].should.equal(tag);
-		server.plan.cpu.should.equal(cpu);
-		server.plan.memoryGib.should.equal(mem);
-		
-		console.log('booting server...');
-		server.boot();
-		
-		console.log('checking conflict...');
-		(function(){
+		Fiber(function(){
+			
+			var name = '!js_mocha-' + dateformat('yyyyMMdd_hhmmss') + '-' + Math.random().toString(36).slice(2);
+			var description = 'This instance was created by saclient.node mocha';
+			var tag = 'saclient-test';
+			var cpu = 1;
+			var mem = 2;
+			//
+			console.log('creating server...');
+			var server = api.server.create();
+			server.should.be.an.instanceof(saclient.cloud.resource.Server);
+			server.name = name;
+			server.description = description;
+			server.tags = [tag];
+			server.plan = api.product.server.getBySpec(cpu, mem);
+			server.save();
+			//
+			server.id.should.be.above(0);
+			server.name.should.equal(name);
+			server.description.should.equal(description);
+			server.tags.should.be.an.instanceof(Array);
+			server.tags.length.should.equal(1);
+			server.tags[0].should.equal(tag);
+			server.plan.cpu.should.equal(cpu);
+			server.plan.memoryGib.should.equal(mem);
+			
+			console.log('booting server...');
 			server.boot();
-		}).should.throw(saclient.cloud.errors.HttpConflictException);
-		// 'サーバ起動中の起動試行時は HttpConflictException がスローされなければなりません'
-		
-		console.log('stopping server...');
-		server.stop();
-		
-		console.log('checking instance status...');
-		server.afterDown(function(server, result){
-			result.should.be.ok;
+			
+			// 'should.throw' does not work correctly in a Fiber
+			var ex = null;
+			try {
+				server.boot();
+			}
+			catch (ex_) {
+				// 'should.*' does not work correctly in a 'catch' block in a Fiber
+				ex = ex_;
+			}
+			ex.should.be.an.instanceof(saclient.cloud.errors.HttpConflictException);
+			// 'サーバ起動中の起動試行時は HttpConflictException がスローされなければなりません'
+			
+			console.log('stopping server...');
+			server.stop();
+			
+			console.log('checking instance status...');
+			server.sleepUntilDown().should.be.ok;
 			console.log('deleting server...');
 			server.destroy();
 			done();
-		});
-		
+			
+		}).run();
 	});
 	
 	
