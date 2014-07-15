@@ -4,7 +4,7 @@ export = EApplianceClass;
 
 import Util = require('../Util');
 
-var _map = {
+var _map_EApplianceClass = {
 	"loadbalancer": 10,
 	"vpcrouter": 20
 };
@@ -19,8 +19,8 @@ class EApplianceClass {
 	static vpcrouter : string = "vpcrouter";
 	
 	static compare(lhs:string, rhs:string) : number {
-		var l = _map[lhs];
-		var r = _map[rhs];
+		var l = _map_EApplianceClass[lhs];
+		var r = _map_EApplianceClass[rhs];
 		if (l==null || r==null) return null;
 		var ret = l - r;
 		return 0 < ret ? 1 : (ret < 0 ? -1 : 0);
