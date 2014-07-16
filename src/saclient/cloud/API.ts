@@ -279,5 +279,15 @@ class API {
 		return ret;
 	}
 	
+	/**
+	 * @method sleep
+	 * @public
+	 * @param {number} sec
+	 * @return {void}
+	 */
+	sleep(sec:number) : void {
+		Util.sleep(sec);
+	}
+	
 }
 

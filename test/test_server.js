@@ -69,6 +69,9 @@ describe('Server', function(){
 				});
 			});
 			
+			servers = api.server.limit(1).find();
+			servers.length.should.equal(1);
+			
 		}).run();
 	});
 	
@@ -115,6 +118,8 @@ describe('Server', function(){
 			}
 			ex.should.be.an.instanceof(saclient.cloud.errors.HttpConflictException);
 			// 'サーバ起動中の起動試行時は HttpConflictException がスローされなければなりません'
+			
+			api.sleep(3);
 			
 			console.log("\t"+'stopping server...');
 			server.stop();

@@ -171,7 +171,7 @@ class Model {
 	 * @return {Model} this
 	 */
 	_offset(offset:number) : Model {
-		this._params.Begin = offset;
+		this._params["Begin"] = offset;
 		return (<Model><any>(this));
 	}
 	
@@ -186,7 +186,7 @@ class Model {
 	 * @return {Model} this
 	 */
 	_limit(count:number) : Model {
-		this._params.Count = count;
+		this._params["Count"] = count;
 		return (<Model><any>(this));
 	}
 	

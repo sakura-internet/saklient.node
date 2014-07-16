@@ -273,12 +273,12 @@ class Disk extends Resource {
 	 * 
 	 * @method afterCopy
 	 * @public
-	 * @param {number} timeout
+	 * @param {number} timeoutSec
 	 * @param {(Disk, boolean) => void} callback
 	 * @return {void}
 	 */
-	afterCopy(timeout:number, callback:(Disk, boolean) => void) : void {
-		var ret = this.sleepWhileCopying(timeout);
+	afterCopy(timeoutSec:number, callback:(Disk, boolean) => void) : void {
+		var ret = this.sleepWhileCopying(timeoutSec);
 		callback(this, ret);
 	}
 	
@@ -287,19 +287,19 @@ class Disk extends Resource {
 	 * 
 	 * @method sleepWhileCopying
 	 * @public
-	 * @param {number} timeout=3600
+	 * @param {number} timeoutSec=3600
 	 * @return {boolean}
 	 */
-	sleepWhileCopying(timeout:number=3600) : boolean {
+	sleepWhileCopying(timeoutSec:number=3600) : boolean {
 		var step = 3;
-		while (0 < timeout) {
+		while (0 < timeoutSec) {
 			this.reload();
 			var a:string = this.get_availability();
 			if (a == EAvailability.available) return true;
 			;
-			if (a != EAvailability.migrating) timeout = 0;
-			timeout -= step;
-			if (0 < timeout) Util.sleep(step);
+			if (a != EAvailability.migrating) timeoutSec = 0;
+			timeoutSec -= step;
+			if (0 < timeoutSec) Util.sleep(step);
 		};
 		return false;
 	}
