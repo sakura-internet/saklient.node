@@ -14,12 +14,16 @@ describe('Server', function(){
 	
 	var config, api;
 	
+	function trace(msg) {
+		console.log("        "+msg);
+	}
+	
 	
 	
 	before(function(){
 		
 		// load config file
-		console.log("\t"+'loading config file');
+		trace('loading config file');
 		var testOkFile = root + '/testok';
 		assert(fs.existsSync(testOkFile), testOkFile + ' is not found (You must "touch" this file to confirm that the tests can make your expenses)');
 		var configFile = root + '/config.sh';
@@ -39,7 +43,7 @@ describe('Server', function(){
 		//assert(config.SACLOUD_ZONE, 'SACLOUD_ZONE must be defined in config.sh');
 		
 		// authorize
-		console.log("\t"+'creating an API instance');
+		trace('creating an API instance');
 		api = saclient.cloud.API.authorize(config.SACLOUD_TOKEN, config.SACLOUD_SECRET);
 		if (config.SACLOUD_ZONE) api = api.inZone(config.SACLOUD_ZONE);
 		api.should.be.an.instanceof(saclient.cloud.API);
@@ -50,12 +54,12 @@ describe('Server', function(){
 	
 	it('should be found', function(){
 		Fiber(function(){
-			console.log("\t"+'finding servers...');
+			trace('finding servers...');
 			var servers = api.server.find();
 			servers.should.be.an.instanceof(Array);
 			servers.length.should.be.above(0);
 			
-			console.log("\t"+'checking each server...');
+			trace('checking each server...');
 			servers.forEach(function(server){
 				server.should.be.an.instanceof(saclient.cloud.resource.Server);
 				server.plan.should.be.an.instanceof(saclient.cloud.resource.ServerPlan);
@@ -77,7 +81,7 @@ describe('Server', function(){
 	
 	
 	
-	it('should be CRUDed and power-controlled', function(done){
+	it('should be CRUDed', function(done){
 		Fiber(function(){
 			
 			var name = '!js_mocha-' + dateformat('yyyyMMdd_hhmmss') + '-' + Math.random().toString(36).slice(2);
@@ -85,8 +89,30 @@ describe('Server', function(){
 			var tag = 'saclient-test';
 			var cpu = 1;
 			var mem = 2;
-			//
-			console.log("\t"+'creating server...');
+			
+			// search archives
+			trace('searching archives...');
+			var archives = api.archive
+				.withNameLike('CentOS 6.5 64bit')
+				.withSizeGib(20)
+				.withSharedScope()
+				.limit(1)
+				.find();
+			archives.length.should.be.above(0);
+			var archive = archives[0];
+			
+			// create a disk
+			trace('creating a disk...');
+			var disk = api.disk.create();
+			disk.name = name;
+			disk.description = description;
+			disk.tags = [tag];
+			disk.source = archive;
+			disk.save();
+			//console.log(disk.dump());
+			
+			// create a server
+			trace('creating a server...');
 			var server = api.server.create();
 			server.should.be.an.instanceof(saclient.cloud.resource.Server);
 			server.name = name;
@@ -94,7 +120,8 @@ describe('Server', function(){
 			server.tags = [tag];
 			server.plan = api.product.server.getBySpec(cpu, mem);
 			server.save();
-			//
+			
+			// check the server properties
 			server.id.should.be.above(0);
 			server.name.should.equal(name);
 			server.description.should.equal(description);
@@ -104,9 +131,26 @@ describe('Server', function(){
 			server.plan.cpu.should.equal(cpu);
 			server.plan.memoryGib.should.equal(mem);
 			
-			console.log("\t"+'booting server...');
+			// wait disk copy
+			trace('waiting disk copy...');
+			if (!disk.sleepWhileCopying()) fail('アーカイブからディスクへのコピーがタイムアウトしました');
+			disk.source = null;
+			disk.reload();
+			disk.source.should.be.an.instanceof(saclient.cloud.resource.Archive);
+			disk.source.id.should.equal(archive.id);
+			disk.sizeGib.should.equal(archive.sizeGib);
+			//console.log(disk.dump());
+			
+			// connect the disk to the server
+			trace('connecting the disk to the server...');
+			disk.connectTo(server);
+			
+			// boot
+			trace('booting the server...');
 			server.boot();
 			
+			// boot conflict
+			trace('checking the server power conflicts...');
 			// 'should.throw' does not work correctly in a Fiber
 			var ex = null;
 			try {
@@ -119,15 +163,54 @@ describe('Server', function(){
 			ex.should.be.an.instanceof(saclient.cloud.errors.HttpConflictException);
 			// 'サーバ起動中の起動試行時は HttpConflictException がスローされなければなりません'
 			
+			// stop the server
 			api.sleep(3);
-			
-			console.log("\t"+'stopping server...');
+			trace('stopping the server...');
 			server.stop();
-			
-			console.log("\t"+'checking instance status...');
 			server.sleepUntilDown().should.be.ok;
-			console.log("\t"+'deleting server...');
+			
+			// disconnect the disk from the server
+			trace('disconnecting the disk from the server...');
+			disk.disconnect();
+			
+			// delete the server
+			trace('deleting the server...');
 			server.destroy();
+			
+			// duplicate the disk
+			trace('duplicating the disk (expanding to 40GiB)...');
+			var disk2 = api.disk.create();
+			disk2.name = name + '-copy';
+			disk2.description = description;
+			disk2.tags = [tag];
+			disk2.source = disk;
+			disk2.sizeGib = 40;
+			disk2.save();
+			
+			// wait disk duplication
+			trace('waiting disk duplication...');
+			if (!disk2.sleepWhileCopying()) fail('ディスクの複製がタイムアウトしました');
+			disk2.source = null;
+			disk2.reload();
+			disk2.source.should.be.an.instanceof(saclient.cloud.resource.Disk);
+			disk2.source.id.should.equal(disk.id);
+			disk2.sizeGib.should.equal(40);
+			
+			// delete the disk
+			trace('deleting the disk...');
+			
+			var id = disk2.id;
+			disk2.destroy();
+			ex = null;
+			try { api.disk.getById(id); } catch (ex_) { ex = ex_; }
+			ex.should.be.an.instanceof(saclient.cloud.errors.HttpNotFoundException);
+			
+			id = disk.id;
+			disk.destroy();
+			ex = null;
+			try { api.disk.getById(id); } catch (ex_) { ex = ex_; }
+			ex.should.be.an.instanceof(saclient.cloud.errors.HttpNotFoundException);
+			
 			done();
 			
 		}).run();

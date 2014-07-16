@@ -155,11 +155,11 @@ class ServerInstance extends Resource {
 	/**
 	 * (This method is generated in Translator_default#buildImpl)
 	 * 
-	 * @method apiDeserialize
-	 * @public
+	 * @method apiDeserializeImpl
+	 * @protected
 	 * @param {any} r
 	 */
-	apiDeserialize(r:any) {
+	apiDeserializeImpl(r:any) {
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -194,12 +194,12 @@ class ServerInstance extends Resource {
 	/**
 	 * (This method is generated in Translator_default#buildImpl)
 	 * 
-	 * @method apiSerialize
-	 * @public
+	 * @method apiSerializeImpl
+	 * @protected
 	 * @param {boolean} withClean=false
 	 * @return {any}
 	 */
-	apiSerialize(withClean:boolean=false) : any {
+	apiSerializeImpl(withClean:boolean=false) : any {
 		var ret:any = {  };
 		if (withClean || this.n_status) {
 			ret["Status"] = this.m_status;

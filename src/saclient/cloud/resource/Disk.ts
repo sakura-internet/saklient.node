@@ -217,54 +217,147 @@ class Disk extends Resource {
 	}
 	
 	/**
+	 * @method set_sizeGib
+	 * @protected
+	 * @param {number} sizeGib
+	 * @return {number}
+	 */
+	set_sizeGib(sizeGib:number) : number {
+		this.sizeMib = sizeGib * 1024;
+		return sizeGib;
+	}
+	
+	/**
 	 * サイズ[GiB]
 	 * 
 	 * @property sizeGib
 	 * @type number
-	 * @readOnly
 	 * @public
 	 */
 	get sizeGib() : number { return this.get_sizeGib(); }
+	set sizeGib(v:number) { this.set_sizeGib(v); }
 	
+	
+	/**
+	 * @private
+	 * @member saclient.cloud.resource.Disk#_source
+	 * @type any
+	 */
+	private _source : any;
+	
+	/**
+	 * @method get_source
+	 * @public
+	 * @return {any}
+	 */
+	get_source() : any {
+		return this._source;
+	}
+	
+	/**
+	 * @method set_source
+	 * @public
+	 * @param {any} source
+	 * @return {any}
+	 */
+	set_source(source:any) : any {
+		this._source = source;
+		return source;
+	}
+	
+	/**
+	 * ディスクのコピー元
+	 * 
+	 * @property source
+	 * @type any
+	 * @public
+	 */
+	get source() : any { return this.get_source(); }
+	set source(v:any) { this.set_source(v); }
+	
+	
+	/**
+	 * @private
+	 * @method _onAfterApiDeserialize
+	 * @protected
+	 * @param {any} r
+	 * @return {void}
+	 */
+	_onAfterApiDeserialize(r:any) : void {
+		if (r == null) return;
+		;
+		if (("SourceArchive" in r)) {
+			var s:any = r["SourceArchive"];
+			if (s != null) {
+				var id:any = s["ID"];
+				if (id != null) {
+					this._source = new Archive(this._client, s);
+				};
+			};
+		};
+		if (("SourceDisk" in r)) {
+			var s:any = r["SourceDisk"];
+			if (s != null) {
+				var id:any = s["ID"];
+				if (id != null) {
+					this._source = new Disk(this._client, s);
+				};
+			};
+		};
+	}
+	
+	/**
+	 * @private
+	 * @method _onAfterApiSerialize
+	 * @protected
+	 * @param {boolean} withClean
+	 * @param {any} r
+	 * @return {void}
+	 */
+	_onAfterApiSerialize(r:any, withClean:boolean) : void {
+		if (r == null) return;
+		;
+		if (this._source != null) {
+			if (this._source instanceof Archive) {
+				var archive:Archive = (<Archive><any>(this._source));
+				var s:any = withClean ? archive.apiSerialize(true) : { ID: archive._id() };
+				r["SourceArchive"] = s;
+			}
+			else if (this._source instanceof Disk) {
+				var disk:Disk = (<Disk><any>(this._source));
+				var s:any = withClean ? disk.apiSerialize(true) : { ID: disk._id() };
+				r["SourceDisk"] = s;
+			}
+			else {
+				r["SourceArchive"] = { ID: 1 };
+			};
+		};
+	}
 	
 	/**
 	 * ディスクをサーバに取り付けます。
 	 * 
-	 * @method attachTo
+	 * @method connectTo
 	 * @chainable
 	 * @public
-	 * @param {string} serverId
+	 * @param {Server} server
 	 * @return {Disk}
 	 */
-	attachTo(serverId:string) : Disk {
-		this._client.request("PUT", "/disk/" + this._id() + "/to/server/" + serverId);
+	connectTo(server:Server) : Disk {
+		this._client.request("PUT", "/disk/" + this._id() + "/to/server/" + server._id());
 		return this;
 	}
 	
 	/**
 	 * ディスクをサーバから取り外します。
 	 * 
-	 * @method detach
+	 * @method disconnect
 	 * @chainable
 	 * @public
 	 * @return {Disk}
 	 */
-	detach() : Disk {
+	disconnect() : Disk {
 		this._client.request("DELETE", "/disk/" + this._id() + "/to/server");
-		return this;
-	}
-	
-	/**
-	 * この後に save() するディスクのコピー元となるアーカイブを設定します。
-	 * 
-	 * @method copyFrom
-	 * @chainable
-	 * @public
-	 * @param {Archive} archive
-	 * @return {Disk}
-	 */
-	copyFrom(archive:Archive) : Disk {
-		this.setParam("SourceArchive", { ID: archive._id() });
 		return this;
 	}
 	
@@ -524,14 +617,28 @@ class Disk extends Resource {
 	}
 	
 	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method set_sizeMib
+	 * @private
+	 * @param {number} v
+	 * @return {number}
+	 */
+	private set_sizeMib(v:number) : number {
+		this.m_sizeMib = v;
+		this.n_sizeMib = true;
+		return this.m_sizeMib;
+	}
+	
+	/**
 	 * サイズ[MiB]
 	 * 
 	 * @property sizeMib
 	 * @type number
-	 * @readOnly
 	 * @public
 	 */
 	get sizeMib() : number { return this.get_sizeMib(); }
+	set sizeMib(v:number) { this.set_sizeMib(v); }
 	
 	
 	/**
@@ -653,11 +760,11 @@ class Disk extends Resource {
 	/**
 	 * (This method is generated in Translator_default#buildImpl)
 	 * 
-	 * @method apiDeserialize
-	 * @public
+	 * @method apiDeserializeImpl
+	 * @protected
 	 * @param {any} r
 	 */
-	apiDeserialize(r:any) {
+	apiDeserializeImpl(r:any) {
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -760,12 +867,12 @@ class Disk extends Resource {
 	/**
 	 * (This method is generated in Translator_default#buildImpl)
 	 * 
-	 * @method apiSerialize
-	 * @public
+	 * @method apiSerializeImpl
+	 * @protected
 	 * @param {boolean} withClean=false
 	 * @return {any}
 	 */
-	apiSerialize(withClean:boolean=false) : any {
+	apiSerializeImpl(withClean:boolean=false) : any {
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			ret["ID"] = this.m_id;

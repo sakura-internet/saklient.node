@@ -123,12 +123,61 @@ class Resource {
 	isIncomplete : boolean;
 	
 	/**
+	 * @private
+	 * @method _onBeforeSave
+	 * @protected
+	 * @param {any} r
+	 * @return {void}
+	 */
+	_onBeforeSave(r:any) : void {}
+	
+	/**
+	 * @private
+	 * @method _onAfterApiDeserialize
+	 * @protected
+	 * @param {any} r
+	 * @return {void}
+	 */
+	_onAfterApiDeserialize(r:any) : void {}
+	
+	/**
+	 * @private
+	 * @method _onAfterApiSerialize
+	 * @protected
+	 * @param {boolean} withClean
+	 * @param {any} r
+	 * @return {void}
+	 */
+	_onAfterApiSerialize(r:any, withClean:boolean) : void {}
+	
+	/**
+	 * @method apiDeserializeImpl
+	 * @protected
+	 * @param {any} r
+	 * @return {void}
+	 */
+	apiDeserializeImpl(r:any) : void {}
+	
+	/**
 	 * @method apiDeserialize
 	 * @public
 	 * @param {any} r
 	 * @return {void}
 	 */
-	apiDeserialize(r:any) : void {}
+	apiDeserialize(r:any) : void {
+		this.apiDeserializeImpl(r);
+		this._onAfterApiDeserialize(r);
+	}
+	
+	/**
+	 * @method apiSerializeImpl
+	 * @protected
+	 * @param {boolean} withClean=false
+	 * @return {any}
+	 */
+	apiSerializeImpl(withClean:boolean=false) : any {
+		return null;
+	}
 	
 	/**
 	 * @method apiSerialize
@@ -137,7 +186,9 @@ class Resource {
 	 * @return {any}
 	 */
 	apiSerialize(withClean:boolean=false) : any {
-		return null;
+		var ret:any = this.apiSerializeImpl(withClean);
+		this._onAfterApiSerialize(ret, withClean);
+		return ret;
 	}
 	
 	/**
@@ -174,6 +225,7 @@ class Resource {
 				r[k] = v;
 			}
 		});
+		this._onBeforeSave(r);
 		var method = this.isNew ? "POST" : "PUT";
 		var path = this._apiPath();
 		if (!this.isNew) path += "/" + Util.urlEncode(this._id());

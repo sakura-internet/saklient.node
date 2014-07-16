@@ -12,7 +12,7 @@
     "doc": "doc"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha"
+    "test": "./node_modules/.bin/mocha -t 600000"
   },
   "keywords": [
     "sakura",
