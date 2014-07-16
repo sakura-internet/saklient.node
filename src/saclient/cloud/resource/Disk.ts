@@ -8,6 +8,8 @@ import Resource = require('./Resource');
 import Icon = require('./Icon');
 import DiskPlan = require('./DiskPlan');
 import Server = require('./Server');
+import Archive = require('./Archive');
+import EAvailability = require('../enums/EAvailability');
 import EDiskConnection = require('../enums/EDiskConnection');
 
 /**
@@ -101,6 +103,15 @@ class Disk extends Resource {
 	m_server : Server;
 	
 	/**
+	 * 有効状態
+	 * 
+	 * @member saclient.cloud.resource.Disk#m_availability
+	 * @type string
+	 * @protected
+	 */
+	m_availability : string;
+	
+	/**
 	 * @private
 	 * @method _apiPath
 	 * @protected
@@ -177,6 +188,26 @@ class Disk extends Resource {
 	}
 	
 	/**
+	 * @method get_isAvailable
+	 * @protected
+	 * @return {boolean}
+	 */
+	get_isAvailable() : boolean {
+		return this.get_availability() == EAvailability.available;
+	}
+	
+	/**
+	 * ディスクが利用可能なときtrueを返します。
+	 * 
+	 * @property isAvailable
+	 * @type boolean
+	 * @readOnly
+	 * @public
+	 */
+	get isAvailable() : boolean { return this.get_isAvailable(); }
+	
+	
+	/**
 	 * @method get_sizeGib
 	 * @protected
 	 * @return {number}
@@ -221,6 +252,56 @@ class Disk extends Resource {
 	detach() : Disk {
 		this._client.request("DELETE", "/disk/" + this._id() + "/to/server");
 		return this;
+	}
+	
+	/**
+	 * この後に save() するディスクのコピー元となるアーカイブを設定します。
+	 * 
+	 * @method copyFrom
+	 * @chainable
+	 * @public
+	 * @param {Archive} archive
+	 * @return {Disk}
+	 */
+	copyFrom(archive:Archive) : Disk {
+		this.setParam("SourceArchive", { ID: archive._id() });
+		return this;
+	}
+	
+	/**
+	 * コピー中のディスクが利用可能になるまで待機します。
+	 * 
+	 * @method afterCopy
+	 * @public
+	 * @param {number} timeout
+	 * @param {(Disk, boolean) => void} callback
+	 * @return {void}
+	 */
+	afterCopy(timeout:number, callback:(Disk, boolean) => void) : void {
+		var ret = this.sleepWhileCopying(timeout);
+		callback(this, ret);
+	}
+	
+	/**
+	 * コピー中のディスクが利用可能になるまで待機します。
+	 * 
+	 * @method sleepWhileCopying
+	 * @public
+	 * @param {number} timeout=3600
+	 * @return {boolean}
+	 */
+	sleepWhileCopying(timeout:number=3600) : boolean {
+		var step = 3;
+		while (0 < timeout) {
+			this.reload();
+			var a:string = this.get_availability();
+			if (a == EAvailability.available) return true;
+			;
+			if (a != EAvailability.migrating) timeout = 0;
+			timeout -= step;
+			if (0 < timeout) Util.sleep(step);
+		};
+		return false;
 	}
 	
 	/**
@@ -541,6 +622,35 @@ class Disk extends Resource {
 	
 	
 	/**
+	 * @member saclient.cloud.resource.Disk#n_availability
+	 * @type boolean
+	 * @private
+	 */
+	private n_availability : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_availability
+	 * @private
+	 * @return {string}
+	 */
+	private get_availability() : string {
+		return this.m_availability;
+	}
+	
+	/**
+	 * 有効状態
+	 * 
+	 * @property availability
+	 * @type string
+	 * @readOnly
+	 * @public
+	 */
+	get availability() : string { return this.get_availability(); }
+	
+	
+	/**
 	 * (This method is generated in Translator_default#buildImpl)
 	 * 
 	 * @method apiDeserialize
@@ -637,6 +747,14 @@ class Disk extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_server = false;
+		if (("Availability" in r)) {
+			this.m_availability = r["Availability"] == null ? null : "" + r["Availability"];
+		}
+		else {
+			this.m_availability = null;
+			this.isIncomplete = true;
+		};
+		this.n_availability = false;
 	}
 	
 	/**
@@ -682,6 +800,9 @@ class Disk extends Resource {
 		};
 		if (withClean || this.n_server) {
 			ret["Server"] = withClean ? (this.m_server == null ? null : this.m_server.apiSerialize(withClean)) : (this.m_server == null ? { ID: "0" } : this.m_server.apiSerializeID());
+		};
+		if (withClean || this.n_availability) {
+			ret["Availability"] = this.m_availability;
 		};
 		return ret;
 	}

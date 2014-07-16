@@ -5,6 +5,7 @@ export = Model_Archive;
 import Util = require('../Util');
 import Model = require('./Model');
 import Archive = require('../resource/Archive');
+import EScope = require('../enums/EScope');
 
 /**
  * アーカイブを検索するための機能を備えたクラス。
@@ -131,6 +132,46 @@ class Model_Archive extends Model {
 	 */
 	withTag(tag:string) : Model_Archive {
 		this._filterBy("Tags.Name", tag, true);
+		return this;
+	}
+	
+	/**
+	 * 指定したサイズのアーカイブに絞り込みます。
+	 * 
+	 * @method withSizeGib
+	 * @chainable
+	 * @public
+	 * @param {number} sizeGib
+	 * @return {Model_Archive}
+	 */
+	withSizeGib(sizeGib:number) : Model_Archive {
+		this._filterBy("SizeMB", sizeGib * 1024);
+		return this;
+	}
+	
+	/**
+	 * パブリックアーカイブに絞り込みます。
+	 * 
+	 * @method withSharedScope
+	 * @chainable
+	 * @public
+	 * @return {Model_Archive}
+	 */
+	withSharedScope() : Model_Archive {
+		this._filterBy("Scope", EScope.shared);
+		return this;
+	}
+	
+	/**
+	 * プライベートアーカイブに絞り込みます。
+	 * 
+	 * @method withUserScope
+	 * @chainable
+	 * @public
+	 * @return {Model_Archive}
+	 */
+	withUserScope() : Model_Archive {
+		this._filterBy("Scope", EScope.user);
 		return this;
 	}
 	

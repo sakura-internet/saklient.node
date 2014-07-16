@@ -94,6 +94,15 @@ class Server extends Resource {
 	m_instance : ServerInstance;
 	
 	/**
+	 * 有効状態
+	 * 
+	 * @member saclient.cloud.resource.Server#m_availability
+	 * @type string
+	 * @protected
+	 */
+	m_availability : string;
+	
+	/**
 	 * @private
 	 * @method _apiPath
 	 * @protected
@@ -244,29 +253,16 @@ class Server extends Resource {
 	}
 	
 	/**
-	 * サーバが起動するまで待機します。
-	 * 
-	 * @method afterUp
-	 * @public
-	 * @param {number} timeout=60
-	 * @param {(Server, boolean) => void} callback
-	 * @return {void}
-	 */
-	afterUp(callback:(Server, boolean) => void, timeout:number=60) : void {
-		this.afterStatus(EServerInstanceStatus.up, callback, timeout);
-	}
-	
-	/**
 	 * サーバが停止するまで待機します。
 	 * 
 	 * @method afterDown
 	 * @public
-	 * @param {number} timeout=60
+	 * @param {number} timeoutSec
 	 * @param {(Server, boolean) => void} callback
 	 * @return {void}
 	 */
-	afterDown(callback:(Server, boolean) => void, timeout:number=60) : void {
-		this.afterStatus(EServerInstanceStatus.down, callback, timeout);
+	afterDown(timeoutSec:number, callback:(Server, boolean) => void) : void {
+		this.afterStatus(EServerInstanceStatus.down, timeoutSec, callback);
 	}
 	
 	/**
@@ -275,26 +271,14 @@ class Server extends Resource {
 	 * @ignore
 	 * @method afterStatus
 	 * @private
+	 * @param {number} timeoutSec
 	 * @param {string} status
-	 * @param {number} timeout=60
 	 * @param {(Server, boolean) => void} callback
 	 * @return {void}
 	 */
-	private afterStatus(status:string, callback:(Server, boolean) => void, timeout:number=60) : void {
-		var ret = this.sleepUntil(status, timeout);
+	private afterStatus(status:string, timeoutSec:number, callback:(Server, boolean) => void) : void {
+		var ret = this.sleepUntil(status, timeoutSec);
 		callback(this, ret);
-	}
-	
-	/**
-	 * サーバが起動するまで待機します。
-	 * 
-	 * @method sleepUntilUp
-	 * @public
-	 * @param {number} timeout=60
-	 * @return {boolean}
-	 */
-	sleepUntilUp(timeout:number=60) : boolean {
-		return this.sleepUntil(EServerInstanceStatus.up, timeout);
 	}
 	
 	/**
@@ -302,11 +286,11 @@ class Server extends Resource {
 	 * 
 	 * @method sleepUntilDown
 	 * @public
-	 * @param {number} timeout=60
+	 * @param {number} timeoutSec=180
 	 * @return {boolean}
 	 */
-	sleepUntilDown(timeout:number=60) : boolean {
-		return this.sleepUntil(EServerInstanceStatus.down, timeout);
+	sleepUntilDown(timeoutSec:number=180) : boolean {
+		return this.sleepUntil(EServerInstanceStatus.down, timeoutSec);
 	}
 	
 	/**
@@ -316,19 +300,19 @@ class Server extends Resource {
 	 * @method sleepUntil
 	 * @private
 	 * @param {string} status
-	 * @param {number} timeout=60
+	 * @param {number} timeoutSec=180
 	 * @return {boolean}
 	 */
-	private sleepUntil(status:string, timeout:number=60) : boolean {
+	private sleepUntil(status:string, timeoutSec:number=180) : boolean {
 		var step = 3;
-		while (0 < timeout) {
+		while (0 < timeoutSec) {
 			this.reload();
 			var s:string = this.get_instance()["status"];
 			if (s == null) s = EServerInstanceStatus.down;
 			if (s == status) return true;
 			;
-			timeout -= step;
-			if (0 < timeout) Util.sleep(step);
+			timeoutSec -= step;
+			if (0 < timeoutSec) Util.sleep(step);
 		};
 		return false;
 	}
@@ -664,6 +648,35 @@ class Server extends Resource {
 	
 	
 	/**
+	 * @member saclient.cloud.resource.Server#n_availability
+	 * @type boolean
+	 * @private
+	 */
+	private n_availability : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_availability
+	 * @private
+	 * @return {string}
+	 */
+	private get_availability() : string {
+		return this.m_availability;
+	}
+	
+	/**
+	 * 有効状態
+	 * 
+	 * @property availability
+	 * @type string
+	 * @readOnly
+	 * @public
+	 */
+	get availability() : string { return this.get_availability(); }
+	
+	
+	/**
 	 * (This method is generated in Translator_default#buildImpl)
 	 * 
 	 * @method apiDeserialize
@@ -764,6 +777,14 @@ class Server extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_instance = false;
+		if (("Availability" in r)) {
+			this.m_availability = r["Availability"] == null ? null : "" + r["Availability"];
+		}
+		else {
+			this.m_availability = null;
+			this.isIncomplete = true;
+		};
+		this.n_availability = false;
 	}
 	
 	/**
@@ -813,6 +834,9 @@ class Server extends Resource {
 		};
 		if (withClean || this.n_instance) {
 			ret["Instance"] = withClean ? (this.m_instance == null ? null : this.m_instance.apiSerialize(withClean)) : (this.m_instance == null ? { ID: "0" } : this.m_instance.apiSerializeID());
+		};
+		if (withClean || this.n_availability) {
+			ret["Availability"] = this.m_availability;
 		};
 		return ret;
 	}

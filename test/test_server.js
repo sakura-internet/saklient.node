@@ -19,7 +19,7 @@ describe('Server', function(){
 	before(function(){
 		
 		// load config file
-		console.log('loading config file');
+		console.log("\t"+'loading config file');
 		var testOkFile = root + '/testok';
 		assert(fs.existsSync(testOkFile), testOkFile + ' is not found (You must "touch" this file to confirm that the tests can make your expenses)');
 		var configFile = root + '/config.sh';
@@ -39,7 +39,7 @@ describe('Server', function(){
 		//assert(config.SACLOUD_ZONE, 'SACLOUD_ZONE must be defined in config.sh');
 		
 		// authorize
-		console.log('creating an API instance');
+		console.log("\t"+'creating an API instance');
 		api = saclient.cloud.API.authorize(config.SACLOUD_TOKEN, config.SACLOUD_SECRET);
 		if (config.SACLOUD_ZONE) api = api.inZone(config.SACLOUD_ZONE);
 		api.should.be.an.instanceof(saclient.cloud.API);
@@ -50,12 +50,12 @@ describe('Server', function(){
 	
 	it('should be found', function(){
 		Fiber(function(){
-			console.log('finding servers...');
+			console.log("\t"+'finding servers...');
 			var servers = api.server.find();
 			servers.should.be.an.instanceof(Array);
 			servers.length.should.be.above(0);
 			
-			console.log('checking each server...');
+			console.log("\t"+'checking each server...');
 			servers.forEach(function(server){
 				server.should.be.an.instanceof(saclient.cloud.resource.Server);
 				server.plan.should.be.an.instanceof(saclient.cloud.resource.ServerPlan);
@@ -83,7 +83,7 @@ describe('Server', function(){
 			var cpu = 1;
 			var mem = 2;
 			//
-			console.log('creating server...');
+			console.log("\t"+'creating server...');
 			var server = api.server.create();
 			server.should.be.an.instanceof(saclient.cloud.resource.Server);
 			server.name = name;
@@ -101,7 +101,7 @@ describe('Server', function(){
 			server.plan.cpu.should.equal(cpu);
 			server.plan.memoryGib.should.equal(mem);
 			
-			console.log('booting server...');
+			console.log("\t"+'booting server...');
 			server.boot();
 			
 			// 'should.throw' does not work correctly in a Fiber
@@ -116,12 +116,12 @@ describe('Server', function(){
 			ex.should.be.an.instanceof(saclient.cloud.errors.HttpConflictException);
 			// 'サーバ起動中の起動試行時は HttpConflictException がスローされなければなりません'
 			
-			console.log('stopping server...');
+			console.log("\t"+'stopping server...');
 			server.stop();
 			
-			console.log('checking instance status...');
+			console.log("\t"+'checking instance status...');
 			server.sleepUntilDown().should.be.ok;
-			console.log('deleting server...');
+			console.log("\t"+'deleting server...');
 			server.destroy();
 			done();
 			

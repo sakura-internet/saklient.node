@@ -84,6 +84,17 @@ class Model_Disk extends Model {
 	}
 	
 	/**
+	 * *
+	 * 
+	 * @method create
+	 * @public
+	 * @return {Disk}
+	 */
+	create() : Disk {
+		return (<Disk><any>(this._create()));
+	}
+	
+	/**
 	 * 指定したIDを持つ唯一のリソースを取得します。
 	 * 
 	 * @method getById
@@ -131,6 +142,20 @@ class Model_Disk extends Model {
 	 */
 	withTag(tag:string) : Model_Disk {
 		this._filterBy("Tags.Name", tag, true);
+		return this;
+	}
+	
+	/**
+	 * 指定したサイズのディスクに絞り込みます。
+	 * 
+	 * @method withSizeGib
+	 * @chainable
+	 * @public
+	 * @param {number} sizeGib
+	 * @return {Model_Disk}
+	 */
+	withSizeGib(sizeGib:number) : Model_Disk {
+		this._filterBy("SizeMB", sizeGib * 1024);
 		return this;
 	}
 	

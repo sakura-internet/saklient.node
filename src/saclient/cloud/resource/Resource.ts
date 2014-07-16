@@ -40,6 +40,25 @@ class Resource {
 	
 	/**
 	 * @private
+	 * @member saclient.cloud.resource.Resource#_params
+	 * @type any
+	 * @protected
+	 */
+	_params : any;
+	
+	/**
+	 * @method setParam
+	 * @public
+	 * @param {any} value
+	 * @param {string} key
+	 * @return {void}
+	 */
+	setParam(key:string, value:any) : void {
+		this._params[key] = value;
+	}
+	
+	/**
+	 * @private
 	 * @method _apiPath
 	 * @protected
 	 * @return {string}
@@ -86,6 +105,7 @@ class Resource {
 	 */
 	constructor(client:Client) {
 		this._client = client;
+		this._params = {};
 	}
 	
 	/**
@@ -144,12 +164,22 @@ class Resource {
 	 * @return {Resource} this
 	 */
 	_save() : Resource {
-		var r:any = {};
-		r[this._rootKey()] = this.apiSerialize();
+		var r:any = this.apiSerialize();
+		var params:any = this._params;
+		this._params = {};
+		var keys:string[] = Object.keys(params);
+		keys.forEach((k)=>{
+			{
+				var v:any = params[k];
+				r[k] = v;
+			}
+		});
 		var method = this.isNew ? "POST" : "PUT";
 		var path = this._apiPath();
 		if (!this.isNew) path += "/" + Util.urlEncode(this._id());
-		var result:any = this._client.request(method, path, r);
+		var q:any = {};
+		q[this._rootKey()] = r;
+		var result:any = this._client.request(method, path, q);
 		this.apiDeserialize(result[this._rootKey()]);
 		return this;
 	}
