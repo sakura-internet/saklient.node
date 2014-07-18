@@ -46,6 +46,16 @@ class Model_DiskPlan extends Model {
 	}
 	
 	/**
+	 * @private
+	 * @method _className
+	 * @protected
+	 * @return {string}
+	 */
+	_className() : string {
+		return "DiskPlan";
+	}
+	
+	/**
 	 * 次に取得するリストの開始オフセットを指定します。
 	 * 
 	 * @method offset

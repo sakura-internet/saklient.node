@@ -13,6 +13,92 @@ class Util {
 	
 	/**
 	 * @static
+	 * @method existsPath
+	 * @public
+	 * @param {any} obj
+	 * @param {string} path
+	 * @return {any}
+	 */
+	static existsPath(obj:any, path:string) : any {
+		var aPath:string[] = path.split(".");
+		for (var __it1:number=0; __it1<aPath.length; __it1++) {
+			var seg = aPath[__it1];
+			if (obj == null) {
+				return false;
+			};
+			if (!(obj instanceof Object)) {
+				return false;
+			};
+			if (seg == "") {
+				continue;
+			};
+			if (!(seg in obj)) {
+				return false;
+			};
+			obj = obj[seg];
+		};
+		return true;
+	}
+	
+	/**
+	 * @static
+	 * @method getByPath
+	 * @public
+	 * @param {any} obj
+	 * @param {string} path
+	 * @return {any}
+	 */
+	static getByPath(obj:any, path:string) : any {
+		var aPath:string[] = path.split(".");
+		for (var __it1:number=0; __it1<aPath.length; __it1++) {
+			var seg = aPath[__it1];
+			if (obj == null) {
+				return null;
+			};
+			if (!(obj instanceof Object)) {
+				return null;
+			};
+			if (seg == "") {
+				continue;
+			};
+			if (!(seg in obj)) {
+				return null;
+			};
+			obj = obj[seg];
+		};
+		return obj;
+	}
+	
+	/**
+	 * @todo array support
+	 * @todo overwriting
+	 * @todo writing into children of non-object
+	 * @static
+	 * @method setByPath
+	 * @public
+	 * @param {any} obj
+	 * @param {any} value
+	 * @param {string} path
+	 * @return {void}
+	 */
+	static setByPath(obj:any, path:string, value:any) : void {
+		var aPath:string[] = path.split(".");
+		var key:string = aPath.pop();
+		for (var __it1:number=0; __it1<aPath.length; __it1++) {
+			var seg = aPath[__it1];
+			if (seg == "") {
+				continue;
+			};
+			if (!(seg in obj)) {
+				obj[seg] = {};
+			};
+			obj = obj[seg];
+		};
+		obj[key] = value;
+	}
+	
+	/**
+	 * @static
 	 * @method createClassInstance
 	 * @public
 	 * @param {string} classPath
@@ -25,7 +111,9 @@ class Util {
 		var clazz:any = function(){ return proto.apply(this, args); };
 		clazz.prototype = proto.prototype;
 		return new clazz();
-		if (ret == null) throw "Could not create class instance of " + classPath;
+		if (ret == null) {
+			throw "Could not create class instance of " + classPath;
+		};
 		return ret;
 	}
 	
@@ -37,8 +125,9 @@ class Util {
 	 * @return {Date}
 	 */
 	static str2date(s:string) : Date {
-		if (s == null) return null;
-		;
+		if (s == null) {
+			return null;
+		};
 		return new Date(Date.parse(s));
 	}
 	
@@ -50,8 +139,9 @@ class Util {
 	 * @return {string}
 	 */
 	static date2str(d:Date) : string {
-		if (d == null) return null;
-		;
+		if (d == null) {
+			return null;
+		};
 		return ""+d;
 	}
 	

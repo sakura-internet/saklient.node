@@ -186,32 +186,32 @@ class IPv6Net extends Resource {
 			r = {  };
 		};
 		this.isIncomplete = false;
-		if (("ID" in r)) {
-			this.m_id = r["ID"] == null ? null : "" + r["ID"];
+		if (Util.existsPath(r, "ID")) {
+			this.m_id = Util.getByPath(r, "ID") == null ? null : "" + Util.getByPath(r, "ID");
 		}
 		else {
 			this.m_id = null;
 			this.isIncomplete = true;
 		};
 		this.n_id = false;
-		if (("IPv6Prefix" in r)) {
-			this.m_ipv6Prefix = r["IPv6Prefix"] == null ? null : "" + r["IPv6Prefix"];
+		if (Util.existsPath(r, "IPv6Prefix")) {
+			this.m_ipv6Prefix = Util.getByPath(r, "IPv6Prefix") == null ? null : "" + Util.getByPath(r, "IPv6Prefix");
 		}
 		else {
 			this.m_ipv6Prefix = null;
 			this.isIncomplete = true;
 		};
 		this.n_ipv6Prefix = false;
-		if (("IPv6PrefixLen" in r)) {
-			this.m_ipv6PrefixLen = r["IPv6PrefixLen"] == null ? null : parseInt("" + r["IPv6PrefixLen"], 10);
+		if (Util.existsPath(r, "IPv6PrefixLen")) {
+			this.m_ipv6PrefixLen = Util.getByPath(r, "IPv6PrefixLen") == null ? null : parseInt("" + Util.getByPath(r, "IPv6PrefixLen"), 10);
 		}
 		else {
 			this.m_ipv6PrefixLen = null;
 			this.isIncomplete = true;
 		};
 		this.n_ipv6PrefixLen = false;
-		if (("IPv6PrefixTail" in r)) {
-			this.m_ipv6PrefixTail = r["IPv6PrefixTail"] == null ? null : "" + r["IPv6PrefixTail"];
+		if (Util.existsPath(r, "IPv6PrefixTail")) {
+			this.m_ipv6PrefixTail = Util.getByPath(r, "IPv6PrefixTail") == null ? null : "" + Util.getByPath(r, "IPv6PrefixTail");
 		}
 		else {
 			this.m_ipv6PrefixTail = null;

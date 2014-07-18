@@ -3,7 +3,7 @@ var assert = require('assert');
 
 var path = require('path');
 var root = path.dirname(__dirname);
-module.paths.push(root + '/lib');
+module.paths.unshift(root + '/lib');
 var saclient = require('saclient');
 
 var ExceptionFactory = saclient.cloud.errors.ExceptionFactory;

@@ -89,6 +89,16 @@ class Resource {
 	
 	/**
 	 * @private
+	 * @method _className
+	 * @protected
+	 * @return {string}
+	 */
+	_className() : string {
+		return null;
+	}
+	
+	/**
+	 * @private
 	 * @method _id
 	 * @public
 	 * @return {string}
@@ -198,8 +208,9 @@ class Resource {
 	 */
 	apiSerializeID() : any {
 		var id:string = this._id();
-		if (id == null) return null;
-		;
+		if (id == null) {
+			return null;
+		};
 		var r:any = {};
 		r["ID"] = id;
 		return r;
@@ -219,16 +230,17 @@ class Resource {
 		var params:any = this._params;
 		this._params = {};
 		var keys:string[] = Object.keys(params);
-		keys.forEach((k)=>{
-			{
-				var v:any = params[k];
-				r[k] = v;
-			}
-		});
+		for (var __it1:number=0; __it1<keys.length; __it1++) {
+			var k = keys[__it1];
+			var v:any = params[k];
+			r[k] = v;
+		};
 		this._onBeforeSave(r);
 		var method = this.isNew ? "POST" : "PUT";
 		var path = this._apiPath();
-		if (!this.isNew) path += "/" + Util.urlEncode(this._id());
+		if (!this.isNew) {
+			path += "/" + Util.urlEncode(this._id());
+		};
 		var q:any = {};
 		q[this._rootKey()] = r;
 		var result:any = this._client.request(method, path, q);
@@ -244,8 +256,9 @@ class Resource {
 	 * @return {void}
 	 */
 	destroy() : void {
-		if (this.isNew) return;
-		;
+		if (this.isNew) {
+			return;
+		};
 		var path = this._apiPath() + "/" + Util.urlEncode(this._id());
 		this._client.request("DELETE", path);
 	}

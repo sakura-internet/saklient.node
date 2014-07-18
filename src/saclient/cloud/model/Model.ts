@@ -149,6 +149,16 @@ class Model {
 	}
 	
 	/**
+	 * @private
+	 * @method _className
+	 * @protected
+	 * @return {string}
+	 */
+	_className() : string {
+		return null;
+	}
+	
+	/**
 	 * @constructor
 	 * @public
 	 * @param {Client} client
@@ -215,7 +225,7 @@ class Model {
 	 * @return {Resource}
 	 */
 	_create() : Resource {
-		return Util.createClassInstance("saclient.cloud.resource." + this._rootKey(), [this._client, null]);
+		return Util.createClassInstance("saclient.cloud.resource." + this._className(), [this._client, null]);
 	}
 	
 	/**
@@ -234,7 +244,7 @@ class Model {
 		this._total = 1;
 		this._count = 1;
 		var record:any = result[this._rootKey()];
-		return (<Resource><any>(Util.createClassInstance("saclient.cloud.resource." + this._rootKey(), [this._client, record])));
+		return (<Resource><any>(Util.createClassInstance("saclient.cloud.resource." + this._className(), [this._client, record])));
 	}
 	
 	/**
@@ -253,12 +263,11 @@ class Model {
 		this._count = (<number><any>(result["Count"]));
 		var records:any[] = (<any[]><any>(result[this._rootKeyM()]));
 		var data:Resource[] = [];
-		records.forEach((record)=>{
-			{
-				var i = Util.createClassInstance("saclient.cloud.resource." + this._rootKey(), [this._client, record]);
-				data.push(i);
-			}
-		});
+		for (var __it1:number=0; __it1<records.length; __it1++) {
+			var record = records[__it1];
+			var i = Util.createClassInstance("saclient.cloud.resource." + this._className(), [this._client, record]);
+			data.push(i);
+		};
 		return (<Resource[]><any>(data));
 	}
 	
@@ -276,10 +285,11 @@ class Model {
 		var result:any = this._client.request("GET", this._apiPath(), params);
 		this._total = (<number><any>(result["Total"]));
 		this._count = (<number><any>(result["Count"]));
-		if (this._total == 0) return null;
-		;
+		if (this._total == 0) {
+			return null;
+		};
 		var records:any[] = (<any[]><any>(result[this._rootKeyM()]));
-		return (<Resource><any>(Util.createClassInstance("saclient.cloud.resource." + this._rootKey(), [this._client, records[0]])));
+		return (<Resource><any>(Util.createClassInstance("saclient.cloud.resource." + this._className(), [this._client, records[0]])));
 	}
 	
 	/**

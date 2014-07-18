@@ -186,32 +186,32 @@ class InternetPlan extends Resource {
 			r = {  };
 		};
 		this.isIncomplete = false;
-		if (("ID" in r)) {
-			this.m_id = r["ID"] == null ? null : "" + r["ID"];
+		if (Util.existsPath(r, "ID")) {
+			this.m_id = Util.getByPath(r, "ID") == null ? null : "" + Util.getByPath(r, "ID");
 		}
 		else {
 			this.m_id = null;
 			this.isIncomplete = true;
 		};
 		this.n_id = false;
-		if (("Name" in r)) {
-			this.m_name = r["Name"] == null ? null : "" + r["Name"];
+		if (Util.existsPath(r, "Name")) {
+			this.m_name = Util.getByPath(r, "Name") == null ? null : "" + Util.getByPath(r, "Name");
 		}
 		else {
 			this.m_name = null;
 			this.isIncomplete = true;
 		};
 		this.n_name = false;
-		if (("BandWidthMbps" in r)) {
-			this.m_bandWidthMbps = r["BandWidthMbps"] == null ? null : parseInt("" + r["BandWidthMbps"], 10);
+		if (Util.existsPath(r, "BandWidthMbps")) {
+			this.m_bandWidthMbps = Util.getByPath(r, "BandWidthMbps") == null ? null : parseInt("" + Util.getByPath(r, "BandWidthMbps"), 10);
 		}
 		else {
 			this.m_bandWidthMbps = null;
 			this.isIncomplete = true;
 		};
 		this.n_bandWidthMbps = false;
-		if (("ServiceClass" in r)) {
-			this.m_serviceClass = r["ServiceClass"] == null ? null : "" + r["ServiceClass"];
+		if (Util.existsPath(r, "ServiceClass")) {
+			this.m_serviceClass = Util.getByPath(r, "ServiceClass") == null ? null : "" + Util.getByPath(r, "ServiceClass");
 		}
 		else {
 			this.m_serviceClass = null;

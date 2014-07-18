@@ -44,6 +44,15 @@ class Iface extends Resource {
 	m_userIpAddress : string;
 	
 	/**
+	 * サーバ
+	 * 
+	 * @member saclient.cloud.resource.Iface#m_serverId
+	 * @type string
+	 * @protected
+	 */
+	m_serverId : string;
+	
+	/**
 	 * @private
 	 * @method _apiPath
 	 * @protected
@@ -242,6 +251,49 @@ class Iface extends Resource {
 	
 	
 	/**
+	 * @member saclient.cloud.resource.Iface#n_serverId
+	 * @type boolean
+	 * @private
+	 */
+	private n_serverId : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_serverId
+	 * @private
+	 * @return {string}
+	 */
+	private get_serverId() : string {
+		return this.m_serverId;
+	}
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method set_serverId
+	 * @private
+	 * @param {string} v
+	 * @return {string}
+	 */
+	private set_serverId(v:string) : string {
+		this.m_serverId = v;
+		this.n_serverId = true;
+		return this.m_serverId;
+	}
+	
+	/**
+	 * サーバ
+	 * 
+	 * @property serverId
+	 * @type string
+	 * @public
+	 */
+	get serverId() : string { return this.get_serverId(); }
+	set serverId(v:string) { this.set_serverId(v); }
+	
+	
+	/**
 	 * (This method is generated in Translator_default#buildImpl)
 	 * 
 	 * @method apiDeserializeImpl
@@ -254,38 +306,46 @@ class Iface extends Resource {
 			r = {  };
 		};
 		this.isIncomplete = false;
-		if (("ID" in r)) {
-			this.m_id = r["ID"] == null ? null : "" + r["ID"];
+		if (Util.existsPath(r, "ID")) {
+			this.m_id = Util.getByPath(r, "ID") == null ? null : "" + Util.getByPath(r, "ID");
 		}
 		else {
 			this.m_id = null;
 			this.isIncomplete = true;
 		};
 		this.n_id = false;
-		if (("MACAddress" in r)) {
-			this.m_macAddress = r["MACAddress"] == null ? null : "" + r["MACAddress"];
+		if (Util.existsPath(r, "MACAddress")) {
+			this.m_macAddress = Util.getByPath(r, "MACAddress") == null ? null : "" + Util.getByPath(r, "MACAddress");
 		}
 		else {
 			this.m_macAddress = null;
 			this.isIncomplete = true;
 		};
 		this.n_macAddress = false;
-		if (("IPAddress" in r)) {
-			this.m_ipAddress = r["IPAddress"] == null ? null : "" + r["IPAddress"];
+		if (Util.existsPath(r, "IPAddress")) {
+			this.m_ipAddress = Util.getByPath(r, "IPAddress") == null ? null : "" + Util.getByPath(r, "IPAddress");
 		}
 		else {
 			this.m_ipAddress = null;
 			this.isIncomplete = true;
 		};
 		this.n_ipAddress = false;
-		if (("UserIPAddress" in r)) {
-			this.m_userIpAddress = r["UserIPAddress"] == null ? null : "" + r["UserIPAddress"];
+		if (Util.existsPath(r, "UserIPAddress")) {
+			this.m_userIpAddress = Util.getByPath(r, "UserIPAddress") == null ? null : "" + Util.getByPath(r, "UserIPAddress");
 		}
 		else {
 			this.m_userIpAddress = null;
 			this.isIncomplete = true;
 		};
 		this.n_userIpAddress = false;
+		if (Util.existsPath(r, "Server.ID")) {
+			this.m_serverId = Util.getByPath(r, "Server.ID") == null ? null : "" + Util.getByPath(r, "Server.ID");
+		}
+		else {
+			this.m_serverId = null;
+			this.isIncomplete = true;
+		};
+		this.n_serverId = false;
 	}
 	
 	/**
@@ -309,6 +369,9 @@ class Iface extends Resource {
 		};
 		if (withClean || this.n_userIpAddress) {
 			ret["UserIPAddress"] = this.m_userIpAddress;
+		};
+		if (withClean || this.n_serverId) {
+			ret["Server.ID"] = this.m_serverId;
 		};
 		return ret;
 	}

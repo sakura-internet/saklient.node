@@ -10,6 +10,7 @@ import Model_Server = require('./model/Model_Server');
 import Model_Disk = require('./model/Model_Disk');
 import Model_Appliance = require('./model/Model_Appliance');
 import Model_Archive = require('./model/Model_Archive');
+import Model_Iface = require('./model/Model_Iface');
 import Model_IPv6Net = require('./model/Model_IPv6Net');
 
 /**
@@ -205,6 +206,32 @@ class API {
 	
 	/**
 	 * @private
+	 * @member saclient.cloud.API#_iface
+	 * @type Model_Iface
+	 * @protected
+	 */
+	_iface : Model_Iface;
+	
+	/**
+	 * @method get_iface
+	 * @protected
+	 * @return {Model_Iface}
+	 */
+	get_iface() : Model_Iface {
+		return this._iface;
+	}
+	
+	/**
+	 * @property iface
+	 * @type Model_Iface
+	 * @readOnly
+	 * @public
+	 */
+	get iface() : Model_Iface { return this.get_iface(); }
+	
+	
+	/**
+	 * @private
 	 * @member saclient.cloud.API#_ipv6net
 	 * @type Model_IPv6Net
 	 * @protected
@@ -242,6 +269,7 @@ class API {
 		this._disk = new Model_Disk(client);
 		this._appliance = new Model_Appliance(client);
 		this._archive = new Model_Archive(client);
+		this._iface = new Model_Iface(client);
 		this._ipv6net = new Model_IPv6Net(client);
 	}
 	

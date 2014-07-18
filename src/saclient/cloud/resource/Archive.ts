@@ -540,51 +540,50 @@ class Archive extends Resource {
 			r = {  };
 		};
 		this.isIncomplete = false;
-		if (("ID" in r)) {
-			this.m_id = r["ID"] == null ? null : "" + r["ID"];
+		if (Util.existsPath(r, "ID")) {
+			this.m_id = Util.getByPath(r, "ID") == null ? null : "" + Util.getByPath(r, "ID");
 		}
 		else {
 			this.m_id = null;
 			this.isIncomplete = true;
 		};
 		this.n_id = false;
-		if (("Scope" in r)) {
-			this.m_scope = r["Scope"] == null ? null : "" + r["Scope"];
+		if (Util.existsPath(r, "Scope")) {
+			this.m_scope = Util.getByPath(r, "Scope") == null ? null : "" + Util.getByPath(r, "Scope");
 		}
 		else {
 			this.m_scope = null;
 			this.isIncomplete = true;
 		};
 		this.n_scope = false;
-		if (("Name" in r)) {
-			this.m_name = r["Name"] == null ? null : "" + r["Name"];
+		if (Util.existsPath(r, "Name")) {
+			this.m_name = Util.getByPath(r, "Name") == null ? null : "" + Util.getByPath(r, "Name");
 		}
 		else {
 			this.m_name = null;
 			this.isIncomplete = true;
 		};
 		this.n_name = false;
-		if (("Description" in r)) {
-			this.m_description = r["Description"] == null ? null : "" + r["Description"];
+		if (Util.existsPath(r, "Description")) {
+			this.m_description = Util.getByPath(r, "Description") == null ? null : "" + Util.getByPath(r, "Description");
 		}
 		else {
 			this.m_description = null;
 			this.isIncomplete = true;
 		};
 		this.n_description = false;
-		if (("Tags" in r)) {
-			if (r["Tags"] == null) {
+		if (Util.existsPath(r, "Tags")) {
+			if (Util.getByPath(r, "Tags") == null) {
 				this.m_tags = [];
 			}
 			else {
 				this.m_tags = [];
-				(<any[]><any>(r["Tags"])).forEach((t)=>{
-					{
-						var v:string = null;
-						v = t == null ? null : "" + t;
-						this.m_tags.push(v);
-					}
-				});
+				for (var __it1:number=0; __it1<(<any[]><any>(Util.getByPath(r, "Tags"))).length; __it1++) {
+					var t = (<any[]><any>(Util.getByPath(r, "Tags")))[__it1];
+					var v1:string = null;
+					v1 = t == null ? null : "" + t;
+					this.m_tags.push(v1);
+				};
 			};
 		}
 		else {
@@ -592,32 +591,32 @@ class Archive extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_tags = false;
-		if (("Icon" in r)) {
-			this.m_icon = r["Icon"] == null ? null : new Icon(this._client, r["Icon"]);
+		if (Util.existsPath(r, "Icon")) {
+			this.m_icon = Util.getByPath(r, "Icon") == null ? null : new Icon(this._client, Util.getByPath(r, "Icon"));
 		}
 		else {
 			this.m_icon = null;
 			this.isIncomplete = true;
 		};
 		this.n_icon = false;
-		if (("SizeMB" in r)) {
-			this.m_sizeMib = r["SizeMB"] == null ? null : parseInt("" + r["SizeMB"], 10);
+		if (Util.existsPath(r, "SizeMB")) {
+			this.m_sizeMib = Util.getByPath(r, "SizeMB") == null ? null : parseInt("" + Util.getByPath(r, "SizeMB"), 10);
 		}
 		else {
 			this.m_sizeMib = null;
 			this.isIncomplete = true;
 		};
 		this.n_sizeMib = false;
-		if (("ServiceClass" in r)) {
-			this.m_serviceClass = r["ServiceClass"] == null ? null : "" + r["ServiceClass"];
+		if (Util.existsPath(r, "ServiceClass")) {
+			this.m_serviceClass = Util.getByPath(r, "ServiceClass") == null ? null : "" + Util.getByPath(r, "ServiceClass");
 		}
 		else {
 			this.m_serviceClass = null;
 			this.isIncomplete = true;
 		};
 		this.n_serviceClass = false;
-		if (("Plan" in r)) {
-			this.m_plan = r["Plan"] == null ? null : new DiskPlan(this._client, r["Plan"]);
+		if (Util.existsPath(r, "Plan")) {
+			this.m_plan = Util.getByPath(r, "Plan") == null ? null : new DiskPlan(this._client, Util.getByPath(r, "Plan"));
 		}
 		else {
 			this.m_plan = null;
@@ -650,13 +649,12 @@ class Archive extends Resource {
 		};
 		if (withClean || this.n_tags) {
 			ret["Tags"] = [];
-			this.m_tags.forEach((r)=>{
-				{
-					var v:any = null;
-					v = r;
-					ret["Tags"].push(v);
-				}
-			});
+			for (var __it1:number=0; __it1<this.m_tags.length; __it1++) {
+				var r1 = this.m_tags[__it1];
+				var v:any = null;
+				v = r1;
+				ret["Tags"].push(v);
+			};
 		};
 		if (withClean || this.n_icon) {
 			ret["Icon"] = withClean ? (this.m_icon == null ? null : this.m_icon.apiSerialize(withClean)) : (this.m_icon == null ? { ID: "0" } : this.m_icon.apiSerializeID());

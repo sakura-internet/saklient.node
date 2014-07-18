@@ -308,11 +308,16 @@ class Server extends Resource {
 		while (0 < timeoutSec) {
 			this.reload();
 			var s:string = this.get_instance()["status"];
-			if (s == null) s = EServerInstanceStatus.down;
-			if (s == status) return true;
-			;
+			if (s == null) {
+				s = EServerInstanceStatus.down;
+			};
+			if (s == status) {
+				return true;
+			};
 			timeoutSec -= step;
-			if (0 < timeoutSec) Util.sleep(step);
+			if (0 < timeoutSec) {
+				Util.sleep(step);
+			};
 		};
 		return false;
 	}
@@ -689,43 +694,42 @@ class Server extends Resource {
 			r = {  };
 		};
 		this.isIncomplete = false;
-		if (("ID" in r)) {
-			this.m_id = r["ID"] == null ? null : "" + r["ID"];
+		if (Util.existsPath(r, "ID")) {
+			this.m_id = Util.getByPath(r, "ID") == null ? null : "" + Util.getByPath(r, "ID");
 		}
 		else {
 			this.m_id = null;
 			this.isIncomplete = true;
 		};
 		this.n_id = false;
-		if (("Name" in r)) {
-			this.m_name = r["Name"] == null ? null : "" + r["Name"];
+		if (Util.existsPath(r, "Name")) {
+			this.m_name = Util.getByPath(r, "Name") == null ? null : "" + Util.getByPath(r, "Name");
 		}
 		else {
 			this.m_name = null;
 			this.isIncomplete = true;
 		};
 		this.n_name = false;
-		if (("Description" in r)) {
-			this.m_description = r["Description"] == null ? null : "" + r["Description"];
+		if (Util.existsPath(r, "Description")) {
+			this.m_description = Util.getByPath(r, "Description") == null ? null : "" + Util.getByPath(r, "Description");
 		}
 		else {
 			this.m_description = null;
 			this.isIncomplete = true;
 		};
 		this.n_description = false;
-		if (("Tags" in r)) {
-			if (r["Tags"] == null) {
+		if (Util.existsPath(r, "Tags")) {
+			if (Util.getByPath(r, "Tags") == null) {
 				this.m_tags = [];
 			}
 			else {
 				this.m_tags = [];
-				(<any[]><any>(r["Tags"])).forEach((t)=>{
-					{
-						var v:string = null;
-						v = t == null ? null : "" + t;
-						this.m_tags.push(v);
-					}
-				});
+				for (var __it1:number=0; __it1<(<any[]><any>(Util.getByPath(r, "Tags"))).length; __it1++) {
+					var t = (<any[]><any>(Util.getByPath(r, "Tags")))[__it1];
+					var v1:string = null;
+					v1 = t == null ? null : "" + t;
+					this.m_tags.push(v1);
+				};
 			};
 		}
 		else {
@@ -733,35 +737,34 @@ class Server extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_tags = false;
-		if (("Icon" in r)) {
-			this.m_icon = r["Icon"] == null ? null : new Icon(this._client, r["Icon"]);
+		if (Util.existsPath(r, "Icon")) {
+			this.m_icon = Util.getByPath(r, "Icon") == null ? null : new Icon(this._client, Util.getByPath(r, "Icon"));
 		}
 		else {
 			this.m_icon = null;
 			this.isIncomplete = true;
 		};
 		this.n_icon = false;
-		if (("ServerPlan" in r)) {
-			this.m_plan = r["ServerPlan"] == null ? null : new ServerPlan(this._client, r["ServerPlan"]);
+		if (Util.existsPath(r, "ServerPlan")) {
+			this.m_plan = Util.getByPath(r, "ServerPlan") == null ? null : new ServerPlan(this._client, Util.getByPath(r, "ServerPlan"));
 		}
 		else {
 			this.m_plan = null;
 			this.isIncomplete = true;
 		};
 		this.n_plan = false;
-		if (("Interfaces" in r)) {
-			if (r["Interfaces"] == null) {
+		if (Util.existsPath(r, "Interfaces")) {
+			if (Util.getByPath(r, "Interfaces") == null) {
 				this.m_ifaces = [];
 			}
 			else {
 				this.m_ifaces = [];
-				(<any[]><any>(r["Interfaces"])).forEach((t)=>{
-					{
-						var v:Iface = null;
-						v = t == null ? null : new Iface(this._client, t);
-						this.m_ifaces.push(v);
-					}
-				});
+				for (var __it2:number=0; __it2<(<any[]><any>(Util.getByPath(r, "Interfaces"))).length; __it2++) {
+					var t = (<any[]><any>(Util.getByPath(r, "Interfaces")))[__it2];
+					var v2:Iface = null;
+					v2 = t == null ? null : new Iface(this._client, t);
+					this.m_ifaces.push(v2);
+				};
 			};
 		}
 		else {
@@ -769,16 +772,16 @@ class Server extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_ifaces = false;
-		if (("Instance" in r)) {
-			this.m_instance = r["Instance"] == null ? null : new ServerInstance(this._client, r["Instance"]);
+		if (Util.existsPath(r, "Instance")) {
+			this.m_instance = Util.getByPath(r, "Instance") == null ? null : new ServerInstance(this._client, Util.getByPath(r, "Instance"));
 		}
 		else {
 			this.m_instance = null;
 			this.isIncomplete = true;
 		};
 		this.n_instance = false;
-		if (("Availability" in r)) {
-			this.m_availability = r["Availability"] == null ? null : "" + r["Availability"];
+		if (Util.existsPath(r, "Availability")) {
+			this.m_availability = Util.getByPath(r, "Availability") == null ? null : "" + Util.getByPath(r, "Availability");
 		}
 		else {
 			this.m_availability = null;
@@ -808,13 +811,12 @@ class Server extends Resource {
 		};
 		if (withClean || this.n_tags) {
 			ret["Tags"] = [];
-			this.m_tags.forEach((r)=>{
-				{
-					var v:any = null;
-					v = r;
-					ret["Tags"].push(v);
-				}
-			});
+			for (var __it1:number=0; __it1<this.m_tags.length; __it1++) {
+				var r1 = this.m_tags[__it1];
+				var v:any = null;
+				v = r1;
+				ret["Tags"].push(v);
+			};
 		};
 		if (withClean || this.n_icon) {
 			ret["Icon"] = withClean ? (this.m_icon == null ? null : this.m_icon.apiSerialize(withClean)) : (this.m_icon == null ? { ID: "0" } : this.m_icon.apiSerializeID());
@@ -824,13 +826,12 @@ class Server extends Resource {
 		};
 		if (withClean || this.n_ifaces) {
 			ret["Interfaces"] = [];
-			this.m_ifaces.forEach((r)=>{
-				{
-					var v:any = null;
-					v = withClean ? (r == null ? null : r.apiSerialize(withClean)) : (r == null ? { ID: "0" } : r.apiSerializeID());
-					ret["Interfaces"].push(v);
-				}
-			});
+			for (var __it2:number=0; __it2<this.m_ifaces.length; __it2++) {
+				var r2 = this.m_ifaces[__it2];
+				var v:any = null;
+				v = withClean ? (r2 == null ? null : r2.apiSerialize(withClean)) : (r2 == null ? { ID: "0" } : r2.apiSerializeID());
+				ret["Interfaces"].push(v);
+			};
 		};
 		if (withClean || this.n_instance) {
 			ret["Instance"] = withClean ? (this.m_instance == null ? null : this.m_instance.apiSerialize(withClean)) : (this.m_instance == null ? { ID: "0" } : this.m_instance.apiSerializeID());

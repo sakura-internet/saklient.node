@@ -223,7 +223,7 @@ class Disk extends Resource {
 	 * @return {number}
 	 */
 	set_sizeGib(sizeGib:number) : number {
-		this.sizeMib = sizeGib * 1024;
+		this.set_sizeMib(sizeGib * 1024);
 		return sizeGib;
 	}
 	
@@ -284,8 +284,9 @@ class Disk extends Resource {
 	 * @return {void}
 	 */
 	_onAfterApiDeserialize(r:any) : void {
-		if (r == null) return;
-		;
+		if (r == null) {
+			return;
+		};
 		if (("SourceArchive" in r)) {
 			var s:any = r["SourceArchive"];
 			if (s != null) {
@@ -315,21 +316,24 @@ class Disk extends Resource {
 	 * @return {void}
 	 */
 	_onAfterApiSerialize(r:any, withClean:boolean) : void {
-		if (r == null) return;
-		;
+		if (r == null) {
+			return;
+		};
 		if (this._source != null) {
 			if (this._source instanceof Archive) {
 				var archive:Archive = (<Archive><any>(this._source));
 				var s:any = withClean ? archive.apiSerialize(true) : { ID: archive._id() };
 				r["SourceArchive"] = s;
 			}
-			else if (this._source instanceof Disk) {
-				var disk:Disk = (<Disk><any>(this._source));
-				var s:any = withClean ? disk.apiSerialize(true) : { ID: disk._id() };
-				r["SourceDisk"] = s;
-			}
 			else {
-				r["SourceArchive"] = { ID: 1 };
+				if (this._source instanceof Disk) {
+					var disk:Disk = (<Disk><any>(this._source));
+					var s:any = withClean ? disk.apiSerialize(true) : { ID: disk._id() };
+					r["SourceDisk"] = s;
+				}
+				else {
+					r["SourceArchive"] = { ID: 1 };
+				};
 			};
 		};
 	}
@@ -388,11 +392,16 @@ class Disk extends Resource {
 		while (0 < timeoutSec) {
 			this.reload();
 			var a:string = this.get_availability();
-			if (a == EAvailability.available) return true;
-			;
-			if (a != EAvailability.migrating) timeoutSec = 0;
+			if (a == EAvailability.available) {
+				return true;
+			};
+			if (a != EAvailability.migrating) {
+				timeoutSec = 0;
+			};
 			timeoutSec -= step;
-			if (0 < timeoutSec) Util.sleep(step);
+			if (0 < timeoutSec) {
+				Util.sleep(step);
+			};
 		};
 		return false;
 	}
@@ -770,43 +779,42 @@ class Disk extends Resource {
 			r = {  };
 		};
 		this.isIncomplete = false;
-		if (("ID" in r)) {
-			this.m_id = r["ID"] == null ? null : "" + r["ID"];
+		if (Util.existsPath(r, "ID")) {
+			this.m_id = Util.getByPath(r, "ID") == null ? null : "" + Util.getByPath(r, "ID");
 		}
 		else {
 			this.m_id = null;
 			this.isIncomplete = true;
 		};
 		this.n_id = false;
-		if (("Name" in r)) {
-			this.m_name = r["Name"] == null ? null : "" + r["Name"];
+		if (Util.existsPath(r, "Name")) {
+			this.m_name = Util.getByPath(r, "Name") == null ? null : "" + Util.getByPath(r, "Name");
 		}
 		else {
 			this.m_name = null;
 			this.isIncomplete = true;
 		};
 		this.n_name = false;
-		if (("Description" in r)) {
-			this.m_description = r["Description"] == null ? null : "" + r["Description"];
+		if (Util.existsPath(r, "Description")) {
+			this.m_description = Util.getByPath(r, "Description") == null ? null : "" + Util.getByPath(r, "Description");
 		}
 		else {
 			this.m_description = null;
 			this.isIncomplete = true;
 		};
 		this.n_description = false;
-		if (("Tags" in r)) {
-			if (r["Tags"] == null) {
+		if (Util.existsPath(r, "Tags")) {
+			if (Util.getByPath(r, "Tags") == null) {
 				this.m_tags = [];
 			}
 			else {
 				this.m_tags = [];
-				(<any[]><any>(r["Tags"])).forEach((t)=>{
-					{
-						var v:string = null;
-						v = t == null ? null : "" + t;
-						this.m_tags.push(v);
-					}
-				});
+				for (var __it1:number=0; __it1<(<any[]><any>(Util.getByPath(r, "Tags"))).length; __it1++) {
+					var t = (<any[]><any>(Util.getByPath(r, "Tags")))[__it1];
+					var v1:string = null;
+					v1 = t == null ? null : "" + t;
+					this.m_tags.push(v1);
+				};
 			};
 		}
 		else {
@@ -814,48 +822,48 @@ class Disk extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_tags = false;
-		if (("Icon" in r)) {
-			this.m_icon = r["Icon"] == null ? null : new Icon(this._client, r["Icon"]);
+		if (Util.existsPath(r, "Icon")) {
+			this.m_icon = Util.getByPath(r, "Icon") == null ? null : new Icon(this._client, Util.getByPath(r, "Icon"));
 		}
 		else {
 			this.m_icon = null;
 			this.isIncomplete = true;
 		};
 		this.n_icon = false;
-		if (("SizeMB" in r)) {
-			this.m_sizeMib = r["SizeMB"] == null ? null : parseInt("" + r["SizeMB"], 10);
+		if (Util.existsPath(r, "SizeMB")) {
+			this.m_sizeMib = Util.getByPath(r, "SizeMB") == null ? null : parseInt("" + Util.getByPath(r, "SizeMB"), 10);
 		}
 		else {
 			this.m_sizeMib = null;
 			this.isIncomplete = true;
 		};
 		this.n_sizeMib = false;
-		if (("ServiceClass" in r)) {
-			this.m_serviceClass = r["ServiceClass"] == null ? null : "" + r["ServiceClass"];
+		if (Util.existsPath(r, "ServiceClass")) {
+			this.m_serviceClass = Util.getByPath(r, "ServiceClass") == null ? null : "" + Util.getByPath(r, "ServiceClass");
 		}
 		else {
 			this.m_serviceClass = null;
 			this.isIncomplete = true;
 		};
 		this.n_serviceClass = false;
-		if (("Plan" in r)) {
-			this.m_plan = r["Plan"] == null ? null : new DiskPlan(this._client, r["Plan"]);
+		if (Util.existsPath(r, "Plan")) {
+			this.m_plan = Util.getByPath(r, "Plan") == null ? null : new DiskPlan(this._client, Util.getByPath(r, "Plan"));
 		}
 		else {
 			this.m_plan = null;
 			this.isIncomplete = true;
 		};
 		this.n_plan = false;
-		if (("Server" in r)) {
-			this.m_server = r["Server"] == null ? null : new Server(this._client, r["Server"]);
+		if (Util.existsPath(r, "Server")) {
+			this.m_server = Util.getByPath(r, "Server") == null ? null : new Server(this._client, Util.getByPath(r, "Server"));
 		}
 		else {
 			this.m_server = null;
 			this.isIncomplete = true;
 		};
 		this.n_server = false;
-		if (("Availability" in r)) {
-			this.m_availability = r["Availability"] == null ? null : "" + r["Availability"];
+		if (Util.existsPath(r, "Availability")) {
+			this.m_availability = Util.getByPath(r, "Availability") == null ? null : "" + Util.getByPath(r, "Availability");
 		}
 		else {
 			this.m_availability = null;
@@ -885,13 +893,12 @@ class Disk extends Resource {
 		};
 		if (withClean || this.n_tags) {
 			ret["Tags"] = [];
-			this.m_tags.forEach((r)=>{
-				{
-					var v:any = null;
-					v = r;
-					ret["Tags"].push(v);
-				}
-			});
+			for (var __it1:number=0; __it1<this.m_tags.length; __it1++) {
+				var r1 = this.m_tags[__it1];
+				var v:any = null;
+				v = r1;
+				ret["Tags"].push(v);
+			};
 		};
 		if (withClean || this.n_icon) {
 			ret["Icon"] = withClean ? (this.m_icon == null ? null : this.m_icon.apiSerialize(withClean)) : (this.m_icon == null ? { ID: "0" } : this.m_icon.apiSerializeID());

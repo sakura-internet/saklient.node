@@ -46,6 +46,16 @@ class Model_InternetPlan extends Model {
 	}
 	
 	/**
+	 * @private
+	 * @method _className
+	 * @protected
+	 * @return {string}
+	 */
+	_className() : string {
+		return "InternetPlan";
+	}
+	
+	/**
 	 * 次に取得するリストの開始オフセットを指定します。
 	 * 
 	 * @method offset

@@ -47,6 +47,16 @@ class Model_Server extends Model {
 	}
 	
 	/**
+	 * @private
+	 * @method _className
+	 * @protected
+	 * @return {string}
+	 */
+	_className() : string {
+		return "Server";
+	}
+	
+	/**
 	 * 次に取得するリストの開始オフセットを指定します。
 	 * 
 	 * @method offset
