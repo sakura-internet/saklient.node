@@ -351,6 +351,20 @@ class Server extends Resource {
 	}
 	
 	/**
+	 * インタフェースを1つ増設し、それを取得します。
+	 * 
+	 * @method addIface
+	 * @public
+	 * @return {Iface}
+	 */
+	addIface() : Iface {
+		var model:any = Util.createClassInstance("saclient.cloud.model.Model_Iface", [this._client]);
+		var res:Iface = model.create();
+		res.setProperty("serverId", this._id());
+		return res.save();
+	}
+	
+	/**
 	 * @member saclient.cloud.resource.Server#n_id
 	 * @type boolean
 	 * @private
@@ -801,16 +815,16 @@ class Server extends Resource {
 	apiSerializeImpl(withClean:boolean=false) : any {
 		var ret:any = {  };
 		if (withClean || this.n_id) {
-			ret["ID"] = this.m_id;
+			Util.setByPath(ret, "ID", this.m_id);
 		};
 		if (withClean || this.n_name) {
-			ret["Name"] = this.m_name;
+			Util.setByPath(ret, "Name", this.m_name);
 		};
 		if (withClean || this.n_description) {
-			ret["Description"] = this.m_description;
+			Util.setByPath(ret, "Description", this.m_description);
 		};
 		if (withClean || this.n_tags) {
-			ret["Tags"] = [];
+			Util.setByPath(ret, "Tags", []);
 			for (var __it1:number=0; __it1<this.m_tags.length; __it1++) {
 				var r1 = this.m_tags[__it1];
 				var v:any = null;
@@ -819,13 +833,13 @@ class Server extends Resource {
 			};
 		};
 		if (withClean || this.n_icon) {
-			ret["Icon"] = withClean ? (this.m_icon == null ? null : this.m_icon.apiSerialize(withClean)) : (this.m_icon == null ? { ID: "0" } : this.m_icon.apiSerializeID());
+			Util.setByPath(ret, "Icon", withClean ? (this.m_icon == null ? null : this.m_icon.apiSerialize(withClean)) : (this.m_icon == null ? { ID: "0" } : this.m_icon.apiSerializeID()));
 		};
 		if (withClean || this.n_plan) {
-			ret["ServerPlan"] = withClean ? (this.m_plan == null ? null : this.m_plan.apiSerialize(withClean)) : (this.m_plan == null ? { ID: "0" } : this.m_plan.apiSerializeID());
+			Util.setByPath(ret, "ServerPlan", withClean ? (this.m_plan == null ? null : this.m_plan.apiSerialize(withClean)) : (this.m_plan == null ? { ID: "0" } : this.m_plan.apiSerializeID()));
 		};
 		if (withClean || this.n_ifaces) {
-			ret["Interfaces"] = [];
+			Util.setByPath(ret, "Interfaces", []);
 			for (var __it2:number=0; __it2<this.m_ifaces.length; __it2++) {
 				var r2 = this.m_ifaces[__it2];
 				var v:any = null;
@@ -834,10 +848,10 @@ class Server extends Resource {
 			};
 		};
 		if (withClean || this.n_instance) {
-			ret["Instance"] = withClean ? (this.m_instance == null ? null : this.m_instance.apiSerialize(withClean)) : (this.m_instance == null ? { ID: "0" } : this.m_instance.apiSerializeID());
+			Util.setByPath(ret, "Instance", withClean ? (this.m_instance == null ? null : this.m_instance.apiSerialize(withClean)) : (this.m_instance == null ? { ID: "0" } : this.m_instance.apiSerializeID()));
 		};
 		if (withClean || this.n_availability) {
-			ret["Availability"] = this.m_availability;
+			Util.setByPath(ret, "Availability", this.m_availability);
 		};
 		return ret;
 	}

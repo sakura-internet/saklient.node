@@ -8,6 +8,7 @@ var saclient = require('saclient');
 
 var fs = require('fs');
 var dateformat = require('dateformat');
+var exec = require('child_process').exec;
 var Fiber = require('fibers');
 
 describe('Server', function(){
@@ -16,6 +17,14 @@ describe('Server', function(){
 	
 	function trace(msg) {
 		console.log("        "+msg);
+	}
+	
+	function execSync(cmd) {
+		var _fiber = Fiber.current;
+		exec(cmd, function(err, stdout, stderr){
+			_fiber.run(stdout);
+		});
+		return Fiber.yield();
 	}
 	
 	
@@ -89,6 +98,9 @@ describe('Server', function(){
 			var tag = 'saclient-test';
 			var cpu = 1;
 			var mem = 2;
+			var hostName = 'saclient-test';
+			var sshPublicKey = 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3sSg8Vfxrs3eFTx3G//wMRlgqmFGxh5Ia8DZSSf2YrkZGqKbL1t2AsiUtIMwxGiEVVBc0K89lORzra7qoHQj5v5Xlcdqodgcs9nwuSeS38XWO6tXNF4a8LvKnfGS55+uzmBmVUwAztr3TIJR5TTWxZXpcxSsSEHx7nIcr31zcvosjgdxqvSokAsIgJyPQyxCxsPK8SFIsUV+aATqBCWNyp+R1jECPkd74ipEBoccnA0pYZnRhIsKNWR9phBRXIVd5jx/gK5jHqouhFWvCucUs0gwilEGwpng3b/YxrinNskpfOpMhOD9zjNU58OCoMS8MA17yqoZv59l3u16CrnrD saclient-test@local';
+			var sshPrivateKeyFile = root + '/test-sshkey.txt';
 			
 			// search archives
 			trace('searching archives...');
@@ -131,9 +143,16 @@ describe('Server', function(){
 			server.plan.cpu.should.equal(cpu);
 			server.plan.memoryGib.should.equal(mem);
 			
+			// connect to shared segment
+			trace('connecting the server to shared segment...');
+			var iface = server.addIface();
+			iface.should.be.an.instanceof(saclient.cloud.resource.Iface);
+			iface.id.should.be.above(0);
+			iface.connectToSharedSegment();
+			
 			// wait disk copy
 			trace('waiting disk copy...');
-			if (!disk.sleepWhileCopying()) fail('アーカイブからディスクへのコピーがタイムアウトしました');
+			if (!disk.sleepWhileCopying()) should.fail('アーカイブからディスクへのコピーがタイムアウトしました');
 			disk.source = null;
 			disk.reload();
 			disk.source.should.be.an.instanceof(saclient.cloud.resource.Archive);
@@ -145,9 +164,18 @@ describe('Server', function(){
 			trace('connecting the disk to the server...');
 			disk.connectTo(server);
 			
+			// config the disk
+			trace('writing configuration to the disk...');
+			var diskconf = disk.createConfig();
+			diskconf.hostName = hostName;
+			diskconf.password = Math.random().toString(36).slice(2);
+			diskconf.sshKey = sshPublicKey;
+			diskconf.write();
+			
 			// boot
 			trace('booting the server...');
 			server.boot();
+			api.sleep(3);
 			
 			// boot conflict
 			trace('checking the server power conflicts...');
@@ -163,8 +191,22 @@ describe('Server', function(){
 			ex.should.be.an.instanceof(saclient.cloud.errors.HttpConflictException);
 			// 'サーバ起動中の起動試行時は HttpConflictException がスローされなければなりません'
 			
+			// ssh
+			var ipAddress = server.ifaces[0].ipAddress;
+			(!!ipAddress).should.be.true;
+			var cmd = 'ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i'+sshPrivateKeyFile+' root@'+ipAddress+' hostname 2>/dev/null';
+			var sshSuccess = false;
+			trace('trying to SSH to the server...');
+			for (var i=0; i<10; i++) {
+				api.sleep(5);
+				if (hostName != execSync(cmd).replace(/\s+$/, '')) continue;
+				sshSuccess = true;
+				break;
+			}
+			if (!sshSuccess) should.fail('作成したサーバへ正常にSSHできません');
+			
 			// stop the server
-			api.sleep(3);
+			api.sleep(1);
 			trace('stopping the server...');
 			server.stop();
 			server.sleepUntilDown().should.be.ok;
@@ -189,7 +231,7 @@ describe('Server', function(){
 			
 			// wait disk duplication
 			trace('waiting disk duplication...');
-			if (!disk2.sleepWhileCopying()) fail('ディスクの複製がタイムアウトしました');
+			if (!disk2.sleepWhileCopying()) should.fail('ディスクの複製がタイムアウトしました');
 			disk2.source = null;
 			disk2.reload();
 			disk2.source.should.be.an.instanceof(saclient.cloud.resource.Disk);

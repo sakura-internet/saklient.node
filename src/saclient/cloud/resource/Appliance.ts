@@ -632,19 +632,19 @@ class Appliance extends Resource {
 	apiSerializeImpl(withClean:boolean=false) : any {
 		var ret:any = {  };
 		if (withClean || this.n_id) {
-			ret["ID"] = this.m_id;
+			Util.setByPath(ret, "ID", this.m_id);
 		};
 		if (withClean || this.n_clazz) {
-			ret["Class"] = this.m_clazz;
+			Util.setByPath(ret, "Class", this.m_clazz);
 		};
 		if (withClean || this.n_name) {
-			ret["Name"] = this.m_name;
+			Util.setByPath(ret, "Name", this.m_name);
 		};
 		if (withClean || this.n_description) {
-			ret["Description"] = this.m_description;
+			Util.setByPath(ret, "Description", this.m_description);
 		};
 		if (withClean || this.n_tags) {
-			ret["Tags"] = [];
+			Util.setByPath(ret, "Tags", []);
 			for (var __it1:number=0; __it1<this.m_tags.length; __it1++) {
 				var r1 = this.m_tags[__it1];
 				var v:any = null;
@@ -653,10 +653,10 @@ class Appliance extends Resource {
 			};
 		};
 		if (withClean || this.n_icon) {
-			ret["Icon"] = withClean ? (this.m_icon == null ? null : this.m_icon.apiSerialize(withClean)) : (this.m_icon == null ? { ID: "0" } : this.m_icon.apiSerializeID());
+			Util.setByPath(ret, "Icon", withClean ? (this.m_icon == null ? null : this.m_icon.apiSerialize(withClean)) : (this.m_icon == null ? { ID: "0" } : this.m_icon.apiSerializeID()));
 		};
 		if (withClean || this.n_ifaces) {
-			ret["Interfaces"] = [];
+			Util.setByPath(ret, "Interfaces", []);
 			for (var __it2:number=0; __it2<this.m_ifaces.length; __it2++) {
 				var r2 = this.m_ifaces[__it2];
 				var v:any = null;
@@ -665,7 +665,7 @@ class Appliance extends Resource {
 			};
 		};
 		if (withClean || this.n_serviceClass) {
-			ret["ServiceClass"] = this.m_serviceClass;
+			Util.setByPath(ret, "ServiceClass", this.m_serviceClass);
 		};
 		return ret;
 	}

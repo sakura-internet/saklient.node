@@ -202,13 +202,13 @@ class ServerInstance extends Resource {
 	apiSerializeImpl(withClean:boolean=false) : any {
 		var ret:any = {  };
 		if (withClean || this.n_status) {
-			ret["Status"] = this.m_status;
+			Util.setByPath(ret, "Status", this.m_status);
 		};
 		if (withClean || this.n_beforeStatus) {
-			ret["BeforeStatus"] = this.m_beforeStatus;
+			Util.setByPath(ret, "BeforeStatus", this.m_beforeStatus);
 		};
 		if (withClean || this.n_statusChangedAt) {
-			ret["StatusChangedAt"] = this.m_statusChangedAt == null ? null : Util.date2str(this.m_statusChangedAt);
+			Util.setByPath(ret, "StatusChangedAt", this.m_statusChangedAt == null ? null : Util.date2str(this.m_statusChangedAt));
 		};
 		return ret;
 	}

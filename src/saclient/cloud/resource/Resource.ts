@@ -217,6 +217,29 @@ class Resource {
 	}
 	
 	/**
+	 * @method normalizeFieldName
+	 * @protected
+	 * @param {string} name
+	 * @return {string}
+	 */
+	normalizeFieldName(name:string) : string {
+		return name;
+	}
+	
+	/**
+	 * @method setProperty
+	 * @public
+	 * @param {string} name
+	 * @param {any} value
+	 * @return {void}
+	 */
+	setProperty(name:string, value:any) : void {
+		name = this.normalizeFieldName(name);
+		this["m_" + name] = value;
+		this["n_" + name] = true;
+	}
+	
+	/**
 	 * このローカルオブジェクトに現在設定されているリソース情報をAPIに送信し、上書き保存します。
 	 * 
 	 * @private

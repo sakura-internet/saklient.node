@@ -9,6 +9,7 @@ import Icon = require('./Icon');
 import DiskPlan = require('./DiskPlan');
 import Server = require('./Server');
 import Archive = require('./Archive');
+import DiskConfig = require('./DiskConfig');
 import EAvailability = require('../enums/EAvailability');
 import EDiskConnection = require('../enums/EDiskConnection');
 
@@ -363,6 +364,17 @@ class Disk extends Resource {
 	disconnect() : Disk {
 		this._client.request("DELETE", "/disk/" + this._id() + "/to/server");
 		return this;
+	}
+	
+	/**
+	 * *
+	 * 
+	 * @method createConfig
+	 * @public
+	 * @return {DiskConfig}
+	 */
+	createConfig() : DiskConfig {
+		return new DiskConfig(this._client, this._id());
 	}
 	
 	/**
@@ -883,16 +895,16 @@ class Disk extends Resource {
 	apiSerializeImpl(withClean:boolean=false) : any {
 		var ret:any = {  };
 		if (withClean || this.n_id) {
-			ret["ID"] = this.m_id;
+			Util.setByPath(ret, "ID", this.m_id);
 		};
 		if (withClean || this.n_name) {
-			ret["Name"] = this.m_name;
+			Util.setByPath(ret, "Name", this.m_name);
 		};
 		if (withClean || this.n_description) {
-			ret["Description"] = this.m_description;
+			Util.setByPath(ret, "Description", this.m_description);
 		};
 		if (withClean || this.n_tags) {
-			ret["Tags"] = [];
+			Util.setByPath(ret, "Tags", []);
 			for (var __it1:number=0; __it1<this.m_tags.length; __it1++) {
 				var r1 = this.m_tags[__it1];
 				var v:any = null;
@@ -901,22 +913,22 @@ class Disk extends Resource {
 			};
 		};
 		if (withClean || this.n_icon) {
-			ret["Icon"] = withClean ? (this.m_icon == null ? null : this.m_icon.apiSerialize(withClean)) : (this.m_icon == null ? { ID: "0" } : this.m_icon.apiSerializeID());
+			Util.setByPath(ret, "Icon", withClean ? (this.m_icon == null ? null : this.m_icon.apiSerialize(withClean)) : (this.m_icon == null ? { ID: "0" } : this.m_icon.apiSerializeID()));
 		};
 		if (withClean || this.n_sizeMib) {
-			ret["SizeMB"] = this.m_sizeMib;
+			Util.setByPath(ret, "SizeMB", this.m_sizeMib);
 		};
 		if (withClean || this.n_serviceClass) {
-			ret["ServiceClass"] = this.m_serviceClass;
+			Util.setByPath(ret, "ServiceClass", this.m_serviceClass);
 		};
 		if (withClean || this.n_plan) {
-			ret["Plan"] = withClean ? (this.m_plan == null ? null : this.m_plan.apiSerialize(withClean)) : (this.m_plan == null ? { ID: "0" } : this.m_plan.apiSerializeID());
+			Util.setByPath(ret, "Plan", withClean ? (this.m_plan == null ? null : this.m_plan.apiSerialize(withClean)) : (this.m_plan == null ? { ID: "0" } : this.m_plan.apiSerializeID()));
 		};
 		if (withClean || this.n_server) {
-			ret["Server"] = withClean ? (this.m_server == null ? null : this.m_server.apiSerialize(withClean)) : (this.m_server == null ? { ID: "0" } : this.m_server.apiSerializeID());
+			Util.setByPath(ret, "Server", withClean ? (this.m_server == null ? null : this.m_server.apiSerialize(withClean)) : (this.m_server == null ? { ID: "0" } : this.m_server.apiSerializeID()));
 		};
 		if (withClean || this.n_availability) {
-			ret["Availability"] = this.m_availability;
+			Util.setByPath(ret, "Availability", this.m_availability);
 		};
 		return ret;
 	}

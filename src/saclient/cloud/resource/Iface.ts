@@ -129,6 +129,19 @@ class Iface extends Resource {
 	}
 	
 	/**
+	 * 共有セグメントに接続します。
+	 * 
+	 * @method connectToSharedSegment
+	 * @chainable
+	 * @public
+	 * @return {Iface}
+	 */
+	connectToSharedSegment() : Iface {
+		this._client.request("PUT", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/to/switch/shared");
+		return this.reload();
+	}
+	
+	/**
 	 * @member saclient.cloud.resource.Iface#n_id
 	 * @type boolean
 	 * @private
@@ -359,19 +372,19 @@ class Iface extends Resource {
 	apiSerializeImpl(withClean:boolean=false) : any {
 		var ret:any = {  };
 		if (withClean || this.n_id) {
-			ret["ID"] = this.m_id;
+			Util.setByPath(ret, "ID", this.m_id);
 		};
 		if (withClean || this.n_macAddress) {
-			ret["MACAddress"] = this.m_macAddress;
+			Util.setByPath(ret, "MACAddress", this.m_macAddress);
 		};
 		if (withClean || this.n_ipAddress) {
-			ret["IPAddress"] = this.m_ipAddress;
+			Util.setByPath(ret, "IPAddress", this.m_ipAddress);
 		};
 		if (withClean || this.n_userIpAddress) {
-			ret["UserIPAddress"] = this.m_userIpAddress;
+			Util.setByPath(ret, "UserIPAddress", this.m_userIpAddress);
 		};
 		if (withClean || this.n_serverId) {
-			ret["Server.ID"] = this.m_serverId;
+			Util.setByPath(ret, "Server.ID", this.m_serverId);
 		};
 		return ret;
 	}

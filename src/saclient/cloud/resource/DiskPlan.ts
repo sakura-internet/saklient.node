@@ -189,13 +189,13 @@ class DiskPlan extends Resource {
 	apiSerializeImpl(withClean:boolean=false) : any {
 		var ret:any = {  };
 		if (withClean || this.n_id) {
-			ret["ID"] = this.m_id;
+			Util.setByPath(ret, "ID", this.m_id);
 		};
 		if (withClean || this.n_name) {
-			ret["Name"] = this.m_name;
+			Util.setByPath(ret, "Name", this.m_name);
 		};
 		if (withClean || this.n_storageClass) {
-			ret["StorageClass"] = this.m_storageClass;
+			Util.setByPath(ret, "StorageClass", this.m_storageClass);
 		};
 		return ret;
 	}

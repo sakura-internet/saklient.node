@@ -94,6 +94,17 @@ class Model_Iface extends Model {
 	}
 	
 	/**
+	 * *
+	 * 
+	 * @method create
+	 * @public
+	 * @return {Iface}
+	 */
+	create() : Iface {
+		return (<Iface><any>(this._create()));
+	}
+	
+	/**
 	 * 指定したIDを持つ唯一のリソースを取得します。
 	 * 
 	 * @method getById
