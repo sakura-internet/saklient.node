@@ -1,6 +1,6 @@
 /// <reference path="../../../node.d.ts" />
 
-export = InternetPlan;
+export = RouterPlan;
 
 import Util = require('../Util');
 import Client = require('../Client');
@@ -9,35 +9,35 @@ import Resource = require('./Resource');
 /**
  * ルータのプラン情報へのアクセス機能を備えたクラス。
  * 
- * @class InternetPlan
+ * @class RouterPlan
  * @constructor
  * @extends Resource
  */
-class InternetPlan extends Resource {
+class RouterPlan extends Resource {
 	
 	/**
-	 * @member saclient.cloud.resource.InternetPlan#m_id
+	 * @member saclient.cloud.resource.RouterPlan#m_id
 	 * @type string
 	 * @protected
 	 */
 	m_id : string;
 	
 	/**
-	 * @member saclient.cloud.resource.InternetPlan#m_name
+	 * @member saclient.cloud.resource.RouterPlan#m_name
 	 * @type string
 	 * @protected
 	 */
 	m_name : string;
 	
 	/**
-	 * @member saclient.cloud.resource.InternetPlan#m_bandWidthMbps
+	 * @member saclient.cloud.resource.RouterPlan#m_bandWidthMbps
 	 * @type number
 	 * @protected
 	 */
 	m_bandWidthMbps : number;
 	
 	/**
-	 * @member saclient.cloud.resource.InternetPlan#m_serviceClass
+	 * @member saclient.cloud.resource.RouterPlan#m_serviceClass
 	 * @type string
 	 * @protected
 	 */
@@ -66,7 +66,7 @@ class InternetPlan extends Resource {
 	}
 	
 	/**
-	 * @member saclient.cloud.resource.InternetPlan#n_id
+	 * @member saclient.cloud.resource.RouterPlan#n_id
 	 * @type boolean
 	 * @private
 	 */
@@ -93,7 +93,7 @@ class InternetPlan extends Resource {
 	
 	
 	/**
-	 * @member saclient.cloud.resource.InternetPlan#n_name
+	 * @member saclient.cloud.resource.RouterPlan#n_name
 	 * @type boolean
 	 * @private
 	 */
@@ -120,7 +120,7 @@ class InternetPlan extends Resource {
 	
 	
 	/**
-	 * @member saclient.cloud.resource.InternetPlan#n_bandWidthMbps
+	 * @member saclient.cloud.resource.RouterPlan#n_bandWidthMbps
 	 * @type boolean
 	 * @private
 	 */
@@ -147,7 +147,7 @@ class InternetPlan extends Resource {
 	
 	
 	/**
-	 * @member saclient.cloud.resource.InternetPlan#n_serviceClass
+	 * @member saclient.cloud.resource.RouterPlan#n_serviceClass
 	 * @type boolean
 	 * @private
 	 */

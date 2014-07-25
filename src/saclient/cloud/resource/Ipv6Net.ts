@@ -1,47 +1,78 @@
 /// <reference path="../../../node.d.ts" />
 
-export = IPv6Net;
+export = Ipv6Net;
 
 import Util = require('../Util');
 import Client = require('../Client');
 import Resource = require('./Resource');
+import Swytch = require('./Swytch');
 
 /**
  * IPv6ネットワークのリソース情報へのアクセス機能や操作機能を備えたクラス。
  * 
- * @class IPv6Net
+ * @class Ipv6Net
  * @constructor
  * @extends Resource
  */
-class IPv6Net extends Resource {
+class Ipv6Net extends Resource {
 	
 	/**
-	 * @member saclient.cloud.resource.IPv6Net#m_id
+	 * @member saclient.cloud.resource.Ipv6Net#m_id
 	 * @type string
 	 * @protected
 	 */
 	m_id : string;
 	
 	/**
-	 * @member saclient.cloud.resource.IPv6Net#m_ipv6Prefix
+	 * @member saclient.cloud.resource.Ipv6Net#m_prefix
 	 * @type string
 	 * @protected
 	 */
-	m_ipv6Prefix : string;
+	m_prefix : string;
 	
 	/**
-	 * @member saclient.cloud.resource.IPv6Net#m_ipv6PrefixLen
+	 * @member saclient.cloud.resource.Ipv6Net#m_prefixLen
 	 * @type number
 	 * @protected
 	 */
-	m_ipv6PrefixLen : number;
+	m_prefixLen : number;
 	
 	/**
-	 * @member saclient.cloud.resource.IPv6Net#m_ipv6PrefixTail
+	 * @member saclient.cloud.resource.Ipv6Net#m_prefixTail
 	 * @type string
 	 * @protected
 	 */
-	m_ipv6PrefixTail : string;
+	m_prefixTail : string;
+	
+	/**
+	 * @private
+	 * @method _apiPath
+	 * @protected
+	 * @return {string}
+	 */
+	_apiPath() : string {
+		return "/ipv6net";
+	}
+	
+	/**
+	 * @private
+	 * @method _rootKey
+	 * @protected
+	 * @return {string}
+	 */
+	_rootKey() : string {
+		return "IPv6Net";
+	}
+	
+	/**
+	 * @private
+	 * @method _rootKeyM
+	 * @protected
+	 * @return {string}
+	 */
+	_rootKeyM() : string {
+		return "IPv6Nets";
+	}
 	
 	/**
 	 * @private
@@ -51,6 +82,17 @@ class IPv6Net extends Resource {
 	 */
 	_id() : string {
 		return this.get_id();
+	}
+	
+	/**
+	 * 最新のリソース情報を再取得します。
+	 * 
+	 * @method reload
+	 * @public
+	 * @return {Swytch} this
+	 */
+	reload() : Swytch {
+		return (<Swytch><any>(this._reload()));
 	}
 	
 	/**
@@ -66,7 +108,7 @@ class IPv6Net extends Resource {
 	}
 	
 	/**
-	 * @member saclient.cloud.resource.IPv6Net#n_id
+	 * @member saclient.cloud.resource.Ipv6Net#n_id
 	 * @type boolean
 	 * @private
 	 */
@@ -93,84 +135,84 @@ class IPv6Net extends Resource {
 	
 	
 	/**
-	 * @member saclient.cloud.resource.IPv6Net#n_ipv6Prefix
+	 * @member saclient.cloud.resource.Ipv6Net#n_prefix
 	 * @type boolean
 	 * @private
 	 */
-	private n_ipv6Prefix : boolean = false;
+	private n_prefix : boolean = false;
 	
 	/**
 	 * (This method is generated in Translator_default#buildImpl)
 	 * 
-	 * @method get_ipv6Prefix
+	 * @method get_prefix
 	 * @private
 	 * @return {string}
 	 */
-	private get_ipv6Prefix() : string {
-		return this.m_ipv6Prefix;
+	private get_prefix() : string {
+		return this.m_prefix;
 	}
 	
 	/**
-	 * @property ipv6Prefix
+	 * @property prefix
 	 * @type string
 	 * @readOnly
 	 * @public
 	 */
-	get ipv6Prefix() : string { return this.get_ipv6Prefix(); }
+	get prefix() : string { return this.get_prefix(); }
 	
 	
 	/**
-	 * @member saclient.cloud.resource.IPv6Net#n_ipv6PrefixLen
+	 * @member saclient.cloud.resource.Ipv6Net#n_prefixLen
 	 * @type boolean
 	 * @private
 	 */
-	private n_ipv6PrefixLen : boolean = false;
+	private n_prefixLen : boolean = false;
 	
 	/**
 	 * (This method is generated in Translator_default#buildImpl)
 	 * 
-	 * @method get_ipv6PrefixLen
+	 * @method get_prefixLen
 	 * @private
 	 * @return {number}
 	 */
-	private get_ipv6PrefixLen() : number {
-		return this.m_ipv6PrefixLen;
+	private get_prefixLen() : number {
+		return this.m_prefixLen;
 	}
 	
 	/**
-	 * @property ipv6PrefixLen
+	 * @property prefixLen
 	 * @type number
 	 * @readOnly
 	 * @public
 	 */
-	get ipv6PrefixLen() : number { return this.get_ipv6PrefixLen(); }
+	get prefixLen() : number { return this.get_prefixLen(); }
 	
 	
 	/**
-	 * @member saclient.cloud.resource.IPv6Net#n_ipv6PrefixTail
+	 * @member saclient.cloud.resource.Ipv6Net#n_prefixTail
 	 * @type boolean
 	 * @private
 	 */
-	private n_ipv6PrefixTail : boolean = false;
+	private n_prefixTail : boolean = false;
 	
 	/**
 	 * (This method is generated in Translator_default#buildImpl)
 	 * 
-	 * @method get_ipv6PrefixTail
+	 * @method get_prefixTail
 	 * @private
 	 * @return {string}
 	 */
-	private get_ipv6PrefixTail() : string {
-		return this.m_ipv6PrefixTail;
+	private get_prefixTail() : string {
+		return this.m_prefixTail;
 	}
 	
 	/**
-	 * @property ipv6PrefixTail
+	 * @property prefixTail
 	 * @type string
 	 * @readOnly
 	 * @public
 	 */
-	get ipv6PrefixTail() : string { return this.get_ipv6PrefixTail(); }
+	get prefixTail() : string { return this.get_prefixTail(); }
 	
 	
 	/**
@@ -195,29 +237,29 @@ class IPv6Net extends Resource {
 		};
 		this.n_id = false;
 		if (Util.existsPath(r, "IPv6Prefix")) {
-			this.m_ipv6Prefix = Util.getByPath(r, "IPv6Prefix") == null ? null : "" + Util.getByPath(r, "IPv6Prefix");
+			this.m_prefix = Util.getByPath(r, "IPv6Prefix") == null ? null : "" + Util.getByPath(r, "IPv6Prefix");
 		}
 		else {
-			this.m_ipv6Prefix = null;
+			this.m_prefix = null;
 			this.isIncomplete = true;
 		};
-		this.n_ipv6Prefix = false;
+		this.n_prefix = false;
 		if (Util.existsPath(r, "IPv6PrefixLen")) {
-			this.m_ipv6PrefixLen = Util.getByPath(r, "IPv6PrefixLen") == null ? null : parseInt("" + Util.getByPath(r, "IPv6PrefixLen"), 10);
+			this.m_prefixLen = Util.getByPath(r, "IPv6PrefixLen") == null ? null : parseInt("" + Util.getByPath(r, "IPv6PrefixLen"), 10);
 		}
 		else {
-			this.m_ipv6PrefixLen = null;
+			this.m_prefixLen = null;
 			this.isIncomplete = true;
 		};
-		this.n_ipv6PrefixLen = false;
+		this.n_prefixLen = false;
 		if (Util.existsPath(r, "IPv6PrefixTail")) {
-			this.m_ipv6PrefixTail = Util.getByPath(r, "IPv6PrefixTail") == null ? null : "" + Util.getByPath(r, "IPv6PrefixTail");
+			this.m_prefixTail = Util.getByPath(r, "IPv6PrefixTail") == null ? null : "" + Util.getByPath(r, "IPv6PrefixTail");
 		}
 		else {
-			this.m_ipv6PrefixTail = null;
+			this.m_prefixTail = null;
 			this.isIncomplete = true;
 		};
-		this.n_ipv6PrefixTail = false;
+		this.n_prefixTail = false;
 	}
 	
 	/**
@@ -233,14 +275,14 @@ class IPv6Net extends Resource {
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);
 		};
-		if (withClean || this.n_ipv6Prefix) {
-			Util.setByPath(ret, "IPv6Prefix", this.m_ipv6Prefix);
+		if (withClean || this.n_prefix) {
+			Util.setByPath(ret, "IPv6Prefix", this.m_prefix);
 		};
-		if (withClean || this.n_ipv6PrefixLen) {
-			Util.setByPath(ret, "IPv6PrefixLen", this.m_ipv6PrefixLen);
+		if (withClean || this.n_prefixLen) {
+			Util.setByPath(ret, "IPv6PrefixLen", this.m_prefixLen);
 		};
-		if (withClean || this.n_ipv6PrefixTail) {
-			Util.setByPath(ret, "IPv6PrefixTail", this.m_ipv6PrefixTail);
+		if (withClean || this.n_prefixTail) {
+			Util.setByPath(ret, "IPv6PrefixTail", this.m_prefixTail);
 		};
 		return ret;
 	}

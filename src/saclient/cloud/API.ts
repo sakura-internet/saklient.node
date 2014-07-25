@@ -11,7 +11,9 @@ import Model_Disk = require('./model/Model_Disk');
 import Model_Appliance = require('./model/Model_Appliance');
 import Model_Archive = require('./model/Model_Archive');
 import Model_Iface = require('./model/Model_Iface');
-import Model_IPv6Net = require('./model/Model_IPv6Net');
+import Model_Swytch = require('./model/Model_Swytch');
+import Model_Router = require('./model/Model_Router');
+import Model_Ipv6Net = require('./model/Model_Ipv6Net');
 
 /**
  * さくらのクラウドAPIクライアントを利用する際、最初にアクセスすべきルートとなるクラス。
@@ -232,28 +234,80 @@ class API {
 	
 	/**
 	 * @private
-	 * @member saclient.cloud.API#_ipv6net
-	 * @type Model_IPv6Net
+	 * @member saclient.cloud.API#_swytch
+	 * @type Model_Swytch
 	 * @protected
 	 */
-	_ipv6net : Model_IPv6Net;
+	_swytch : Model_Swytch;
 	
 	/**
-	 * @method get_ipv6net
+	 * @method get_swytch
 	 * @protected
-	 * @return {Model_IPv6Net}
+	 * @return {Model_Swytch}
 	 */
-	get_ipv6net() : Model_IPv6Net {
-		return this._ipv6net;
+	get_swytch() : Model_Swytch {
+		return this._swytch;
 	}
 	
 	/**
-	 * @property ipv6net
-	 * @type Model_IPv6Net
+	 * @property swytch
+	 * @type Model_Swytch
 	 * @readOnly
 	 * @public
 	 */
-	get ipv6net() : Model_IPv6Net { return this.get_ipv6net(); }
+	get swytch() : Model_Swytch { return this.get_swytch(); }
+	
+	
+	/**
+	 * @private
+	 * @member saclient.cloud.API#_router
+	 * @type Model_Router
+	 * @protected
+	 */
+	_router : Model_Router;
+	
+	/**
+	 * @method get_router
+	 * @protected
+	 * @return {Model_Router}
+	 */
+	get_router() : Model_Router {
+		return this._router;
+	}
+	
+	/**
+	 * @property router
+	 * @type Model_Router
+	 * @readOnly
+	 * @public
+	 */
+	get router() : Model_Router { return this.get_router(); }
+	
+	
+	/**
+	 * @private
+	 * @member saclient.cloud.API#_ipv6Net
+	 * @type Model_Ipv6Net
+	 * @protected
+	 */
+	_ipv6Net : Model_Ipv6Net;
+	
+	/**
+	 * @method get_ipv6Net
+	 * @protected
+	 * @return {Model_Ipv6Net}
+	 */
+	get_ipv6Net() : Model_Ipv6Net {
+		return this._ipv6Net;
+	}
+	
+	/**
+	 * @property ipv6Net
+	 * @type Model_Ipv6Net
+	 * @readOnly
+	 * @public
+	 */
+	get ipv6Net() : Model_Ipv6Net { return this.get_ipv6Net(); }
 	
 	
 	/**
@@ -270,7 +324,9 @@ class API {
 		this._appliance = new Model_Appliance(client);
 		this._archive = new Model_Archive(client);
 		this._iface = new Model_Iface(client);
-		this._ipv6net = new Model_IPv6Net(client);
+		this._swytch = new Model_Swytch(client);
+		this._router = new Model_Router(client);
+		this._ipv6Net = new Model_Ipv6Net(client);
 	}
 	
 	/**

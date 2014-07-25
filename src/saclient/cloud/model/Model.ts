@@ -201,6 +201,36 @@ class Model {
 	}
 	
 	/**
+	 * APIのフィルタリング設定を直接指定します。
+	 * 
+	 * @private
+	 * @method _filterBy
+	 * @chainable
+	 * @protected
+	 * @param {any} value
+	 * @param {string} key
+	 * @param {boolean} multiple=false
+	 * @return {Model}
+	 */
+	_filterBy(key:string, value:any, multiple:boolean=false) : Model {
+		if (!("Filter" in this._params)) {
+			this._params["Filter"] = {};
+		};
+		var filter:any = this._params["Filter"];
+		if (multiple) {
+			if (!(key in filter)) {
+				filter[key] = [];
+			};
+			var values:any[] = filter[key];
+			values.push(value);
+		}
+		else {
+			filter[key] = value;
+		};
+		return (<Model><any>(this));
+	}
+	
+	/**
 	 * 次のリクエストのために設定されているステートをすべて破棄します。
 	 * 
 	 * @private
@@ -290,32 +320,6 @@ class Model {
 		};
 		var records:any[] = (<any[]><any>(result[this._rootKeyM()]));
 		return (<Resource><any>(Util.createClassInstance("saclient.cloud.resource." + this._className(), [this._client, records[0]])));
-	}
-	
-	/**
-	 * @private
-	 * @method _filterBy
-	 * @protected
-	 * @param {any} value
-	 * @param {string} key
-	 * @param {boolean} multiple=false
-	 * @return {void}
-	 */
-	_filterBy(key:string, value:any, multiple:boolean=false) : void {
-		if (!("Filter" in this._params)) {
-			this._params["Filter"] = {};
-		};
-		var filter:any = this._params["Filter"];
-		if (multiple) {
-			if (!(key in filter)) {
-				filter[key] = [];
-			};
-			var values:any[] = filter[key];
-			values.push(value);
-		}
-		else {
-			filter[key] = value;
-		};
 	}
 	
 }

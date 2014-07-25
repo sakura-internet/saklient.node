@@ -1,19 +1,19 @@
 /// <reference path="../../../node.d.ts" />
 
-export = Model_Appliance;
+export = Model_Swytch;
 
 import Util = require('../Util');
 import Model = require('./Model');
-import Appliance = require('../resource/Appliance');
+import Swytch = require('../resource/Swytch');
 
 /**
- * アプライアンスを検索するための機能を備えたクラス。
+ * スイッチを検索するための機能を備えたクラス。
  * 
- * @class Model_Appliance
+ * @class Model_Swytch
  * @constructor
  * @extends Model
  */
-class Model_Appliance extends Model {
+class Model_Swytch extends Model {
 	
 	/**
 	 * @private
@@ -22,7 +22,7 @@ class Model_Appliance extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		return "/appliance";
+		return "/switch";
 	}
 	
 	/**
@@ -32,7 +32,7 @@ class Model_Appliance extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		return "Appliance";
+		return "Switch";
 	}
 	
 	/**
@@ -42,7 +42,7 @@ class Model_Appliance extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		return "Appliances";
+		return "Switches";
 	}
 	
 	/**
@@ -52,7 +52,7 @@ class Model_Appliance extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
-		return "Appliance";
+		return "Swytch";
 	}
 	
 	/**
@@ -62,10 +62,10 @@ class Model_Appliance extends Model {
 	 * @chainable
 	 * @public
 	 * @param {number} offset オフセット
-	 * @return {Model_Appliance} this
+	 * @return {Model_Swytch} this
 	 */
-	offset(offset:number) : Model_Appliance {
-		return (<Model_Appliance><any>(this._offset(offset)));
+	offset(offset:number) : Model_Swytch {
+		return (<Model_Swytch><any>(this._offset(offset)));
 	}
 	
 	/**
@@ -75,10 +75,10 @@ class Model_Appliance extends Model {
 	 * @chainable
 	 * @public
 	 * @param {number} count 上限レコード数
-	 * @return {Model_Appliance} this
+	 * @return {Model_Swytch} this
 	 */
-	limit(count:number) : Model_Appliance {
-		return (<Model_Appliance><any>(this._limit(count)));
+	limit(count:number) : Model_Swytch {
+		return (<Model_Swytch><any>(this._limit(count)));
 	}
 	
 	/**
@@ -90,10 +90,10 @@ class Model_Appliance extends Model {
 	 * @param {any} value
 	 * @param {string} key
 	 * @param {boolean} multiple=false
-	 * @return {Model_Appliance}
+	 * @return {Model_Swytch}
 	 */
-	filterBy(key:string, value:any, multiple:boolean=false) : Model_Appliance {
-		return (<Model_Appliance><any>(this._filterBy(key, value, multiple)));
+	filterBy(key:string, value:any, multiple:boolean=false) : Model_Swytch {
+		return (<Model_Swytch><any>(this._filterBy(key, value, multiple)));
 	}
 	
 	/**
@@ -102,10 +102,21 @@ class Model_Appliance extends Model {
 	 * @method reset
 	 * @chainable
 	 * @public
-	 * @return {Model_Appliance} this
+	 * @return {Model_Swytch} this
 	 */
-	reset() : Model_Appliance {
-		return (<Model_Appliance><any>(this._reset()));
+	reset() : Model_Swytch {
+		return (<Model_Swytch><any>(this._reset()));
+	}
+	
+	/**
+	 * *
+	 * 
+	 * @method create
+	 * @public
+	 * @return {Swytch}
+	 */
+	create() : Swytch {
+		return (<Swytch><any>(this._create()));
 	}
 	
 	/**
@@ -114,10 +125,10 @@ class Model_Appliance extends Model {
 	 * @method getById
 	 * @public
 	 * @param {string} id
-	 * @return {Appliance} リソースオブジェクト
+	 * @return {Swytch} リソースオブジェクト
 	 */
-	getById(id:string) : Appliance {
-		return (<Appliance><any>(this._getById(id)));
+	getById(id:string) : Swytch {
+		return (<Swytch><any>(this._getById(id)));
 	}
 	
 	/**
@@ -125,37 +136,23 @@ class Model_Appliance extends Model {
 	 * 
 	 * @method find
 	 * @public
-	 * @return {Appliance[]} リソースオブジェクトの配列
+	 * @return {Swytch[]} リソースオブジェクトの配列
 	 */
-	find() : Appliance[] {
-		return Util.castArray(this._find(), (<Appliance><any>(null)));
+	find() : Swytch[] {
+		return Util.castArray(this._find(), (<Swytch><any>(null)));
 	}
 	
 	/**
-	 * 指定した文字列を名前に含むアプライアンスに絞り込みます。
+	 * 指定した文字列を名前に含むスイッチに絞り込みます。
 	 * 
 	 * @method withNameLike
 	 * @chainable
 	 * @public
 	 * @param {string} name
-	 * @return {Model_Appliance}
+	 * @return {Model_Swytch}
 	 */
-	withNameLike(name:string) : Model_Appliance {
+	withNameLike(name:string) : Model_Swytch {
 		this._filterBy("Name", name);
-		return this;
-	}
-	
-	/**
-	 * 指定したタグを持つアプライアンスに絞り込みます。
-	 * 
-	 * @method withTag
-	 * @chainable
-	 * @public
-	 * @param {string} tag
-	 * @return {Model_Appliance}
-	 */
-	withTag(tag:string) : Model_Appliance {
-		this._filterBy("Tags.Name", tag, true);
 		return this;
 	}
 	

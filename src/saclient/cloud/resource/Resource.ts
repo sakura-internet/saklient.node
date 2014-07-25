@@ -302,6 +302,21 @@ class Resource {
 	}
 	
 	/**
+	 * このリソースが存在するかを調べます。
+	 * 
+	 * @method exists
+	 * @public
+	 * @return {boolean}
+	 */
+	exists() : boolean {
+		var params:any = {};
+		Util.setByPath(params, "Filter.ID", [this._id()]);
+		Util.setByPath(params, "Include", ["ID"]);
+		var result:any = this._client.request("GET", this._apiPath(), params);
+		return result["Count"] == 1;
+	}
+	
+	/**
 	 * @method dump
 	 * @public
 	 * @return {any}

@@ -215,39 +215,39 @@ class DiskConfig {
 	
 	/**
 	 * @private
-	 * @member saclient.cloud.resource.DiskConfig#_gateway
+	 * @member saclient.cloud.resource.DiskConfig#_defaultRoute
 	 * @type string
 	 * @protected
 	 */
-	_gateway : string;
+	_defaultRoute : string;
 	
 	/**
-	 * @method get_gateway
+	 * @method get_defaultRoute
 	 * @protected
 	 * @return {string}
 	 */
-	get_gateway() : string {
-		return this._gateway;
+	get_defaultRoute() : string {
+		return this._defaultRoute;
 	}
 	
 	/**
-	 * @method set_gateway
+	 * @method set_defaultRoute
 	 * @protected
 	 * @param {string} v
 	 * @return {string}
 	 */
-	set_gateway(v:string) : string {
-		this._gateway = v;
+	set_defaultRoute(v:string) : string {
+		this._defaultRoute = v;
 		return v;
 	}
 	
 	/**
-	 * @property gateway
+	 * @property defaultRoute
 	 * @type string
 	 * @public
 	 */
-	get gateway() : string { return this.get_gateway(); }
-	set gateway(v:string) { this.set_gateway(v); }
+	get defaultRoute() : string { return this.get_defaultRoute(); }
+	set defaultRoute(v:string) { this.set_defaultRoute(v); }
 	
 	
 	/**
@@ -301,7 +301,7 @@ class DiskConfig {
 		this._password = null;
 		this._sshKey = null;
 		this._ipAddress = null;
-		this._gateway = null;
+		this._defaultRoute = null;
 		this._networkMaskLen = null;
 	}
 	
@@ -327,8 +327,8 @@ class DiskConfig {
 		if (this._ipAddress != null) {
 			Util.setByPath(q, "UserIPAddress", this._ipAddress);
 		};
-		if (this._gateway != null) {
-			Util.setByPath(q, "UserSubnet.DefaultRoute", this._gateway);
+		if (this._defaultRoute != null) {
+			Util.setByPath(q, "UserSubnet.DefaultRoute", this._defaultRoute);
 		};
 		if (this._networkMaskLen != null) {
 			Util.setByPath(q, "UserSubnet.NetworkMaskLen", this._networkMaskLen);

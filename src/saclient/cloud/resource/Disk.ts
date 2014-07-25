@@ -400,7 +400,7 @@ class Disk extends Resource {
 	 * @return {boolean}
 	 */
 	sleepWhileCopying(timeoutSec:number=3600) : boolean {
-		var step = 3;
+		var step:number = 3;
 		while (0 < timeoutSec) {
 			this.reload();
 			var a:string = this.get_availability();

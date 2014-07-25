@@ -83,6 +83,21 @@ class Model_Archive extends Model {
 	}
 	
 	/**
+	 * APIのフィルタリング設定を直接指定します。
+	 * 
+	 * @method filterBy
+	 * @chainable
+	 * @public
+	 * @param {any} value
+	 * @param {string} key
+	 * @param {boolean} multiple=false
+	 * @return {Model_Archive}
+	 */
+	filterBy(key:string, value:any, multiple:boolean=false) : Model_Archive {
+		return (<Model_Archive><any>(this._filterBy(key, value, multiple)));
+	}
+	
+	/**
 	 * 次のリクエストのために設定されているステートをすべて破棄します。
 	 * 
 	 * @method reset

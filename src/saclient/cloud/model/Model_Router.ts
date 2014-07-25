@@ -1,19 +1,19 @@
 /// <reference path="../../../node.d.ts" />
 
-export = Model_Appliance;
+export = Model_Router;
 
 import Util = require('../Util');
 import Model = require('./Model');
-import Appliance = require('../resource/Appliance');
+import Router = require('../resource/Router');
 
 /**
- * アプライアンスを検索するための機能を備えたクラス。
+ * ルータを検索するための機能を備えたクラス。
  * 
- * @class Model_Appliance
+ * @class Model_Router
  * @constructor
  * @extends Model
  */
-class Model_Appliance extends Model {
+class Model_Router extends Model {
 	
 	/**
 	 * @private
@@ -22,7 +22,7 @@ class Model_Appliance extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		return "/appliance";
+		return "/internet";
 	}
 	
 	/**
@@ -32,7 +32,7 @@ class Model_Appliance extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		return "Appliance";
+		return "Internet";
 	}
 	
 	/**
@@ -42,7 +42,7 @@ class Model_Appliance extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		return "Appliances";
+		return "Internet";
 	}
 	
 	/**
@@ -52,7 +52,7 @@ class Model_Appliance extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
-		return "Appliance";
+		return "Router";
 	}
 	
 	/**
@@ -62,10 +62,10 @@ class Model_Appliance extends Model {
 	 * @chainable
 	 * @public
 	 * @param {number} offset オフセット
-	 * @return {Model_Appliance} this
+	 * @return {Model_Router} this
 	 */
-	offset(offset:number) : Model_Appliance {
-		return (<Model_Appliance><any>(this._offset(offset)));
+	offset(offset:number) : Model_Router {
+		return (<Model_Router><any>(this._offset(offset)));
 	}
 	
 	/**
@@ -75,10 +75,10 @@ class Model_Appliance extends Model {
 	 * @chainable
 	 * @public
 	 * @param {number} count 上限レコード数
-	 * @return {Model_Appliance} this
+	 * @return {Model_Router} this
 	 */
-	limit(count:number) : Model_Appliance {
-		return (<Model_Appliance><any>(this._limit(count)));
+	limit(count:number) : Model_Router {
+		return (<Model_Router><any>(this._limit(count)));
 	}
 	
 	/**
@@ -90,10 +90,10 @@ class Model_Appliance extends Model {
 	 * @param {any} value
 	 * @param {string} key
 	 * @param {boolean} multiple=false
-	 * @return {Model_Appliance}
+	 * @return {Model_Router}
 	 */
-	filterBy(key:string, value:any, multiple:boolean=false) : Model_Appliance {
-		return (<Model_Appliance><any>(this._filterBy(key, value, multiple)));
+	filterBy(key:string, value:any, multiple:boolean=false) : Model_Router {
+		return (<Model_Router><any>(this._filterBy(key, value, multiple)));
 	}
 	
 	/**
@@ -102,10 +102,21 @@ class Model_Appliance extends Model {
 	 * @method reset
 	 * @chainable
 	 * @public
-	 * @return {Model_Appliance} this
+	 * @return {Model_Router} this
 	 */
-	reset() : Model_Appliance {
-		return (<Model_Appliance><any>(this._reset()));
+	reset() : Model_Router {
+		return (<Model_Router><any>(this._reset()));
+	}
+	
+	/**
+	 * *
+	 * 
+	 * @method create
+	 * @public
+	 * @return {Router}
+	 */
+	create() : Router {
+		return (<Router><any>(this._create()));
 	}
 	
 	/**
@@ -114,10 +125,10 @@ class Model_Appliance extends Model {
 	 * @method getById
 	 * @public
 	 * @param {string} id
-	 * @return {Appliance} リソースオブジェクト
+	 * @return {Router} リソースオブジェクト
 	 */
-	getById(id:string) : Appliance {
-		return (<Appliance><any>(this._getById(id)));
+	getById(id:string) : Router {
+		return (<Router><any>(this._getById(id)));
 	}
 	
 	/**
@@ -125,37 +136,37 @@ class Model_Appliance extends Model {
 	 * 
 	 * @method find
 	 * @public
-	 * @return {Appliance[]} リソースオブジェクトの配列
+	 * @return {Router[]} リソースオブジェクトの配列
 	 */
-	find() : Appliance[] {
-		return Util.castArray(this._find(), (<Appliance><any>(null)));
+	find() : Router[] {
+		return Util.castArray(this._find(), (<Router><any>(null)));
 	}
 	
 	/**
-	 * 指定した文字列を名前に含むアプライアンスに絞り込みます。
+	 * 指定した文字列を名前に含むルータに絞り込みます。
 	 * 
 	 * @method withNameLike
 	 * @chainable
 	 * @public
 	 * @param {string} name
-	 * @return {Model_Appliance}
+	 * @return {Model_Router}
 	 */
-	withNameLike(name:string) : Model_Appliance {
+	withNameLike(name:string) : Model_Router {
 		this._filterBy("Name", name);
 		return this;
 	}
 	
 	/**
-	 * 指定したタグを持つアプライアンスに絞り込みます。
+	 * 指定した帯域幅のルータに絞り込みます。
 	 * 
-	 * @method withTag
+	 * @method withBandWidthMbps
 	 * @chainable
 	 * @public
-	 * @param {string} tag
-	 * @return {Model_Appliance}
+	 * @param {number} mbps
+	 * @return {Model_Router}
 	 */
-	withTag(tag:string) : Model_Appliance {
-		this._filterBy("Tags.Name", tag, true);
+	withBandWidthMbps(mbps:number) : Model_Router {
+		this._filterBy("BandWidthMbps", mbps);
 		return this;
 	}
 	

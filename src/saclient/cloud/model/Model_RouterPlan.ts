@@ -1,19 +1,19 @@
 /// <reference path="../../../node.d.ts" />
 
-export = Model_IPv6Net;
+export = Model_RouterPlan;
 
 import Util = require('../Util');
 import Model = require('./Model');
-import IPv6Net = require('../resource/IPv6Net');
+import RouterPlan = require('../resource/RouterPlan');
 
 /**
- * IPv6ネットワークを検索するための機能を備えたクラス。
+ * ルータのプランを検索するための機能を備えたクラス。
  * 
- * @class Model_IPv6Net
+ * @class Model_RouterPlan
  * @constructor
  * @extends Model
  */
-class Model_IPv6Net extends Model {
+class Model_RouterPlan extends Model {
 	
 	/**
 	 * @private
@@ -22,7 +22,7 @@ class Model_IPv6Net extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		return "/ipv6net";
+		return "/product/internet";
 	}
 	
 	/**
@@ -32,7 +32,7 @@ class Model_IPv6Net extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		return "IPv6Net";
+		return "InternetPlan";
 	}
 	
 	/**
@@ -42,7 +42,7 @@ class Model_IPv6Net extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		return "IPv6Nets";
+		return "InternetPlans";
 	}
 	
 	/**
@@ -52,7 +52,7 @@ class Model_IPv6Net extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
-		return "IPv6Net";
+		return "RouterPlan";
 	}
 	
 	/**
@@ -62,10 +62,10 @@ class Model_IPv6Net extends Model {
 	 * @chainable
 	 * @public
 	 * @param {number} offset オフセット
-	 * @return {Model_IPv6Net} this
+	 * @return {Model_RouterPlan} this
 	 */
-	offset(offset:number) : Model_IPv6Net {
-		return (<Model_IPv6Net><any>(this._offset(offset)));
+	offset(offset:number) : Model_RouterPlan {
+		return (<Model_RouterPlan><any>(this._offset(offset)));
 	}
 	
 	/**
@@ -75,10 +75,25 @@ class Model_IPv6Net extends Model {
 	 * @chainable
 	 * @public
 	 * @param {number} count 上限レコード数
-	 * @return {Model_IPv6Net} this
+	 * @return {Model_RouterPlan} this
 	 */
-	limit(count:number) : Model_IPv6Net {
-		return (<Model_IPv6Net><any>(this._limit(count)));
+	limit(count:number) : Model_RouterPlan {
+		return (<Model_RouterPlan><any>(this._limit(count)));
+	}
+	
+	/**
+	 * APIのフィルタリング設定を直接指定します。
+	 * 
+	 * @method filterBy
+	 * @chainable
+	 * @public
+	 * @param {any} value
+	 * @param {string} key
+	 * @param {boolean} multiple=false
+	 * @return {Model_RouterPlan}
+	 */
+	filterBy(key:string, value:any, multiple:boolean=false) : Model_RouterPlan {
+		return (<Model_RouterPlan><any>(this._filterBy(key, value, multiple)));
 	}
 	
 	/**
@@ -87,10 +102,10 @@ class Model_IPv6Net extends Model {
 	 * @method reset
 	 * @chainable
 	 * @public
-	 * @return {Model_IPv6Net} this
+	 * @return {Model_RouterPlan} this
 	 */
-	reset() : Model_IPv6Net {
-		return (<Model_IPv6Net><any>(this._reset()));
+	reset() : Model_RouterPlan {
+		return (<Model_RouterPlan><any>(this._reset()));
 	}
 	
 	/**
@@ -99,10 +114,10 @@ class Model_IPv6Net extends Model {
 	 * @method getById
 	 * @public
 	 * @param {string} id
-	 * @return {IPv6Net} リソースオブジェクト
+	 * @return {RouterPlan} リソースオブジェクト
 	 */
-	getById(id:string) : IPv6Net {
-		return (<IPv6Net><any>(this._getById(id)));
+	getById(id:string) : RouterPlan {
+		return (<RouterPlan><any>(this._getById(id)));
 	}
 	
 	/**
@@ -110,10 +125,10 @@ class Model_IPv6Net extends Model {
 	 * 
 	 * @method find
 	 * @public
-	 * @return {IPv6Net[]} リソースオブジェクトの配列
+	 * @return {RouterPlan[]} リソースオブジェクトの配列
 	 */
-	find() : IPv6Net[] {
-		return Util.castArray(this._find(), (<IPv6Net><any>(null)));
+	find() : RouterPlan[] {
+		return Util.castArray(this._find(), (<RouterPlan><any>(null)));
 	}
 	
 }

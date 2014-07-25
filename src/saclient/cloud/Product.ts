@@ -5,7 +5,7 @@ export = Product;
 import Util = require('./Util');
 import Model_ServerPlan = require('./model/Model_ServerPlan');
 import Model_DiskPlan = require('./model/Model_DiskPlan');
-import Model_InternetPlan = require('./model/Model_InternetPlan');
+import Model_RouterPlan = require('./model/Model_RouterPlan');
 import Client = require('./Client');
 
 /**
@@ -68,28 +68,28 @@ class Product {
 	
 	/**
 	 * @private
-	 * @member saclient.cloud.Product#_internet
-	 * @type Model_InternetPlan
+	 * @member saclient.cloud.Product#_router
+	 * @type Model_RouterPlan
 	 * @protected
 	 */
-	_internet : Model_InternetPlan;
+	_router : Model_RouterPlan;
 	
 	/**
-	 * @method get_internet
+	 * @method get_router
 	 * @protected
-	 * @return {Model_InternetPlan}
+	 * @return {Model_RouterPlan}
 	 */
-	get_internet() : Model_InternetPlan {
-		return this._internet;
+	get_router() : Model_RouterPlan {
+		return this._router;
 	}
 	
 	/**
-	 * @property internet
-	 * @type Model_InternetPlan
+	 * @property router
+	 * @type Model_RouterPlan
 	 * @readOnly
 	 * @public
 	 */
-	get internet() : Model_InternetPlan { return this.get_internet(); }
+	get router() : Model_RouterPlan { return this.get_router(); }
 	
 	
 	/**
@@ -100,7 +100,7 @@ class Product {
 	constructor(client:Client) {
 		this._server = new Model_ServerPlan(client);
 		this._disk = new Model_DiskPlan(client);
-		this._internet = new Model_InternetPlan(client);
+		this._router = new Model_RouterPlan(client);
 	}
 	
 }
