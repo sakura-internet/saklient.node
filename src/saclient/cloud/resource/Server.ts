@@ -10,6 +10,7 @@ import Disk = require('./Disk');
 import Iface = require('./Iface');
 import ServerPlan = require('./ServerPlan');
 import ServerInstance = require('./ServerInstance');
+import IsoImage = require('./IsoImage');
 import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
 
 /**
@@ -351,7 +352,7 @@ class Server extends Resource {
 	}
 	
 	/**
-	 * インタフェースを1つ増設し、それを取得します。
+	 * サーバにインタフェースを1つ増設し、それを取得します。
 	 * 
 	 * @method addIface
 	 * @public
@@ -362,6 +363,38 @@ class Server extends Resource {
 		var res:Iface = model.create();
 		res.setProperty("serverId", this._id());
 		return res.save();
+	}
+	
+	/**
+	 * サーバにISOイメージを挿入します。
+	 * 
+	 * @method insertIsoImage
+	 * @chainable
+	 * @public
+	 * @param {IsoImage} iso
+	 * @return {Server}
+	 */
+	insertIsoImage(iso:IsoImage) : Server {
+		var path:string = this._apiPath() + "/" + Util.urlEncode(this._id()) + "/cdrom";
+		var q:any = { CDROM: { ID: iso._id() } };
+		var result:any = this._client.request("PUT", path, q);
+		this.reload();
+		return this;
+	}
+	
+	/**
+	 * サーバに挿入されているISOイメージを排出します。
+	 * 
+	 * @method ejectIsoImage
+	 * @chainable
+	 * @public
+	 * @return {Server}
+	 */
+	ejectIsoImage() : Server {
+		var path:string = this._apiPath() + "/" + Util.urlEncode(this._id()) + "/cdrom";
+		var result:any = this._client.request("DELETE", path);
+		this.reload();
+		return this;
 	}
 	
 	/**

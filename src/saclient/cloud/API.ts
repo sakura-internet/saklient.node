@@ -10,6 +10,7 @@ import Model_Server = require('./model/Model_Server');
 import Model_Disk = require('./model/Model_Disk');
 import Model_Appliance = require('./model/Model_Appliance');
 import Model_Archive = require('./model/Model_Archive');
+import Model_IsoImage = require('./model/Model_IsoImage');
 import Model_Iface = require('./model/Model_Iface');
 import Model_Swytch = require('./model/Model_Swytch');
 import Model_Router = require('./model/Model_Router');
@@ -208,6 +209,32 @@ class API {
 	
 	/**
 	 * @private
+	 * @member saclient.cloud.API#_isoImage
+	 * @type Model_IsoImage
+	 * @protected
+	 */
+	_isoImage : Model_IsoImage;
+	
+	/**
+	 * @method get_isoImage
+	 * @protected
+	 * @return {Model_IsoImage}
+	 */
+	get_isoImage() : Model_IsoImage {
+		return this._isoImage;
+	}
+	
+	/**
+	 * @property isoImage
+	 * @type Model_IsoImage
+	 * @readOnly
+	 * @public
+	 */
+	get isoImage() : Model_IsoImage { return this.get_isoImage(); }
+	
+	
+	/**
+	 * @private
 	 * @member saclient.cloud.API#_iface
 	 * @type Model_Iface
 	 * @protected
@@ -323,6 +350,7 @@ class API {
 		this._disk = new Model_Disk(client);
 		this._appliance = new Model_Appliance(client);
 		this._archive = new Model_Archive(client);
+		this._isoImage = new Model_IsoImage(client);
 		this._iface = new Model_Iface(client);
 		this._swytch = new Model_Swytch(client);
 		this._router = new Model_Router(client);

@@ -6,6 +6,7 @@ import Util = require('../Util');
 import Model = require('./Model');
 import Server = require('../resource/Server');
 import ServerPlan = require('../resource/ServerPlan');
+import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
 
 /**
  * サーバを検索するための機能を備えたクラス。
@@ -197,6 +198,30 @@ class Model_Server extends Model {
 	withInstanceStatus(status:string) : Model_Server {
 		this._filterBy("Instance.Status", status, true);
 		return this;
+	}
+	
+	/**
+	 * インスタンスが起動中のサーバに絞り込みます。
+	 * 
+	 * @method withInstanceUp
+	 * @chainable
+	 * @public
+	 * @return {Model_Server}
+	 */
+	withInstanceUp() : Model_Server {
+		return this.withInstanceStatus(EServerInstanceStatus.up);
+	}
+	
+	/**
+	 * インスタンスが停止中のサーバに絞り込みます。
+	 * 
+	 * @method withInstanceDown
+	 * @chainable
+	 * @public
+	 * @return {Model_Server}
+	 */
+	withInstanceDown() : Model_Server {
+		return this.withInstanceStatus(EServerInstanceStatus.down);
 	}
 	
 }

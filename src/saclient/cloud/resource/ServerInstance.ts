@@ -5,6 +5,7 @@ export = ServerInstance;
 import Util = require('../Util');
 import Client = require('../Client');
 import Resource = require('./Resource');
+import IsoImage = require('./IsoImage');
 import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
 
 /**
@@ -17,6 +18,8 @@ import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
 class ServerInstance extends Resource {
 	
 	/**
+	 * 起動状態
+	 * 
 	 * @member saclient.cloud.resource.ServerInstance#m_status
 	 * @type string
 	 * @protected
@@ -24,6 +27,8 @@ class ServerInstance extends Resource {
 	m_status : string;
 	
 	/**
+	 * 前回の起動状態
+	 * 
 	 * @member saclient.cloud.resource.ServerInstance#m_beforeStatus
 	 * @type string
 	 * @protected
@@ -31,11 +36,22 @@ class ServerInstance extends Resource {
 	m_beforeStatus : string;
 	
 	/**
+	 * 現在の起動状態に変化した日時
+	 * 
 	 * @member saclient.cloud.resource.ServerInstance#m_statusChangedAt
 	 * @type Date
 	 * @protected
 	 */
 	m_statusChangedAt : Date;
+	
+	/**
+	 * 挿入されているISOイメージ
+	 * 
+	 * @member saclient.cloud.resource.ServerInstance#m_isoImage
+	 * @type IsoImage
+	 * @protected
+	 */
+	m_isoImage : IsoImage;
 	
 	/**
 	 * @private
@@ -90,6 +106,8 @@ class ServerInstance extends Resource {
 	}
 	
 	/**
+	 * 起動状態
+	 * 
 	 * @property status
 	 * @type string
 	 * @readOnly
@@ -117,6 +135,8 @@ class ServerInstance extends Resource {
 	}
 	
 	/**
+	 * 前回の起動状態
+	 * 
 	 * @property beforeStatus
 	 * @type string
 	 * @readOnly
@@ -144,12 +164,43 @@ class ServerInstance extends Resource {
 	}
 	
 	/**
+	 * 現在の起動状態に変化した日時
+	 * 
 	 * @property statusChangedAt
 	 * @type Date
 	 * @readOnly
 	 * @public
 	 */
 	get statusChangedAt() : Date { return this.get_statusChangedAt(); }
+	
+	
+	/**
+	 * @member saclient.cloud.resource.ServerInstance#n_isoImage
+	 * @type boolean
+	 * @private
+	 */
+	private n_isoImage : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_isoImage
+	 * @private
+	 * @return {IsoImage}
+	 */
+	private get_isoImage() : IsoImage {
+		return this.m_isoImage;
+	}
+	
+	/**
+	 * 挿入されているISOイメージ
+	 * 
+	 * @property isoImage
+	 * @type IsoImage
+	 * @readOnly
+	 * @public
+	 */
+	get isoImage() : IsoImage { return this.get_isoImage(); }
 	
 	
 	/**
@@ -189,6 +240,14 @@ class ServerInstance extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_statusChangedAt = false;
+		if (Util.existsPath(r, "CDROM")) {
+			this.m_isoImage = Util.getByPath(r, "CDROM") == null ? null : new IsoImage(this._client, Util.getByPath(r, "CDROM"));
+		}
+		else {
+			this.m_isoImage = null;
+			this.isIncomplete = true;
+		};
+		this.n_isoImage = false;
 	}
 	
 	/**
@@ -209,6 +268,9 @@ class ServerInstance extends Resource {
 		};
 		if (withClean || this.n_statusChangedAt) {
 			Util.setByPath(ret, "StatusChangedAt", this.m_statusChangedAt == null ? null : Util.date2str(this.m_statusChangedAt));
+		};
+		if (withClean || this.n_isoImage) {
+			Util.setByPath(ret, "CDROM", withClean ? (this.m_isoImage == null ? null : this.m_isoImage.apiSerialize(withClean)) : (this.m_isoImage == null ? { ID: "0" } : this.m_isoImage.apiSerializeID()));
 		};
 		return ret;
 	}
