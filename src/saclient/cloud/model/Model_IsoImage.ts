@@ -2,7 +2,7 @@
 
 export = Model_IsoImage;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import Model = require('./Model');
 import IsoImage = require('../resource/IsoImage');
 import EScope = require('../enums/EScope');

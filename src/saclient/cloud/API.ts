@@ -2,7 +2,7 @@
 
 export = API;
 
-import Util = require('./Util');
+import Util = require('../Util');
 import Client = require('./Client');
 import Product = require('./Product');
 import Model_Icon = require('./model/Model_Icon');

@@ -2,7 +2,7 @@
 
 export = EDiskConnection;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 
 var _map_EDiskConnection = {
 	"ide": 100,

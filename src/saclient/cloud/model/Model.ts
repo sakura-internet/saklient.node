@@ -2,7 +2,7 @@
 
 export = Model;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import Client = require('../Client');
 import Resource = require('../resource/Resource');
 import TQueryParams = require('./TQueryParams');

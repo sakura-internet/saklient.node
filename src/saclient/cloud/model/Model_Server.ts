@@ -2,7 +2,7 @@
 
 export = Model_Server;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import Model = require('./Model');
 import Server = require('../resource/Server');
 import ServerPlan = require('../resource/ServerPlan');

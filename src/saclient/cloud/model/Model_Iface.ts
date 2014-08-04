@@ -2,7 +2,7 @@
 
 export = Model_Iface;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import Model = require('./Model');
 import Iface = require('../resource/Iface');
 

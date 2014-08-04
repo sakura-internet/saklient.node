@@ -2,7 +2,7 @@
 
 export = Appliance;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');

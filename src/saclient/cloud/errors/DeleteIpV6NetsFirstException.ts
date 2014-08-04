@@ -2,7 +2,7 @@
 
 export = DeleteIpV6NetsFirstException;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import HttpConflictException = require('./HttpConflictException');
 
 /**

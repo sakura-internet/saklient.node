@@ -2,7 +2,7 @@
 
 export = EApplianceClass;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 
 var _map_EApplianceClass = {
 	"loadbalancer": 10,

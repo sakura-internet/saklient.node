@@ -6,7 +6,7 @@ var root = path.dirname(__dirname);
 module.paths.unshift(root + '/lib');
 var saclient = require('saclient');
 
-var Util = saclient.cloud.Util;
+var Util = saclient.Util;
 
 describe('Util', function () {
 	

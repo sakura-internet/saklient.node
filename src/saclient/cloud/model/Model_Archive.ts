@@ -2,7 +2,7 @@
 
 export = Model_Archive;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import Model = require('./Model');
 import Archive = require('../resource/Archive');
 import EScope = require('../enums/EScope');

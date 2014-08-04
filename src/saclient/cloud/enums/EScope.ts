@@ -2,7 +2,7 @@
 
 export = EScope;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 
 var _map_EScope = {
 	"user": 100,

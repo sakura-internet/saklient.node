@@ -2,7 +2,7 @@
 
 export = Model_DiskPlan;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import Model = require('./Model');
 import DiskPlan = require('../resource/DiskPlan');
 

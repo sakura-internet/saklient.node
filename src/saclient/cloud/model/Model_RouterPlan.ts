@@ -2,7 +2,7 @@
 
 export = Model_RouterPlan;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import Model = require('./Model');
 import RouterPlan = require('../resource/RouterPlan');
 

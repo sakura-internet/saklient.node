@@ -2,7 +2,7 @@
 
 export = DiskConfig;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import Client = require('../Client');
 
 /**

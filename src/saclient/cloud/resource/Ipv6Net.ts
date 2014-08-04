@@ -2,7 +2,7 @@
 
 export = Ipv6Net;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import Client = require('../Client');
 import Resource = require('./Resource');
 import Swytch = require('./Swytch');

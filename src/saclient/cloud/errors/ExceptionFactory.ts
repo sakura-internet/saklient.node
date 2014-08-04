@@ -2,7 +2,7 @@
 
 export = ExceptionFactory;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import HttpException = require('./HttpException');
 import AccessApiKeyDisabledException = require('./AccessApiKeyDisabledException');
 import AccessSakuraException = require('./AccessSakuraException');

@@ -2,7 +2,7 @@
 
 export = TQueryParams;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 
 interface TQueryParams {
 	Begin? : number;

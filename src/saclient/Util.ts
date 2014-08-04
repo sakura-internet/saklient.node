@@ -1,8 +1,8 @@
-/// <reference path="../../node.d.ts" />
+/// <reference path="../node.d.ts" />
 
 export = Util;
 
-import SaclientException = require('../errors/SaclientException');
+import SaclientException = require('./errors/SaclientException');
 
 import Fiber = require('fibers');
 

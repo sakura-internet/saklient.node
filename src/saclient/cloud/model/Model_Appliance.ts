@@ -2,7 +2,7 @@
 
 export = Model_Appliance;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import Model = require('./Model');
 import Appliance = require('../resource/Appliance');
 

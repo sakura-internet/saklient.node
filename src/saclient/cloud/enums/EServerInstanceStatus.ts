@@ -2,7 +2,7 @@
 
 export = EServerInstanceStatus;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 
 var _map_EServerInstanceStatus = {
 	"down": 0,

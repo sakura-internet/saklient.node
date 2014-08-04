@@ -2,7 +2,7 @@
 
 export = Model_Swytch;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import Model = require('./Model');
 import Swytch = require('../resource/Swytch');
 

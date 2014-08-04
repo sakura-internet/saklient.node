@@ -2,7 +2,7 @@
 
 export = UnknownOsTypeException;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import HttpServiceUnavailableException = require('./HttpServiceUnavailableException');
 
 /**

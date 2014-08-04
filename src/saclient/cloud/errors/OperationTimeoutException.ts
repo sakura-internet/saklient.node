@@ -2,7 +2,7 @@
 
 export = OperationTimeoutException;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import HttpServiceUnavailableException = require('./HttpServiceUnavailableException');
 
 /**

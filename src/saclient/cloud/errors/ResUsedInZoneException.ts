@@ -2,7 +2,7 @@
 
 export = ResUsedInZoneException;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import HttpConflictException = require('./HttpConflictException');
 
 /**

@@ -2,7 +2,7 @@
 
 export = Model_Icon;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import Model = require('./Model');
 import Icon = require('../resource/Icon');
 

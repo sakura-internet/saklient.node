@@ -2,7 +2,7 @@
 
 export = PaymentTelCertificationException;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import HttpPaymentRequiredException = require('./HttpPaymentRequiredException');
 
 /**

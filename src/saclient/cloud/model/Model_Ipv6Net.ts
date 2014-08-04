@@ -2,7 +2,7 @@
 
 export = Model_Ipv6Net;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import Model = require('./Model');
 import Ipv6Net = require('../resource/Ipv6Net');
 

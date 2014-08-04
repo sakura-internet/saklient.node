@@ -2,7 +2,7 @@
 
 export = Model_Disk;
 
-import Util = require('../Util');
+import Util = require('../../Util');
 import Model = require('./Model');
 import Disk = require('../resource/Disk');
 
