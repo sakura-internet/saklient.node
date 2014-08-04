@@ -28,6 +28,7 @@ class Model {
 	 * @return {Client}
 	 */
 	get_client() : Client {
+		Util.validateArgCount(arguments.length, 0);
 		return this._client;
 	}
 	
@@ -54,6 +55,7 @@ class Model {
 	 * @return {TQueryParams}
 	 */
 	get_params() : TQueryParams {
+		Util.validateArgCount(arguments.length, 0);
 		return this._params;
 	}
 	
@@ -80,6 +82,7 @@ class Model {
 	 * @return {number}
 	 */
 	get_total() : number {
+		Util.validateArgCount(arguments.length, 0);
 		return this._total;
 	}
 	
@@ -106,6 +109,7 @@ class Model {
 	 * @return {number}
 	 */
 	get_count() : number {
+		Util.validateArgCount(arguments.length, 0);
 		return this._count;
 	}
 	
@@ -125,6 +129,7 @@ class Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return null;
 	}
 	
@@ -135,6 +140,7 @@ class Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return null;
 	}
 	
@@ -145,6 +151,7 @@ class Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return null;
 	}
 	
@@ -155,6 +162,7 @@ class Model {
 	 * @return {string}
 	 */
 	_className() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return null;
 	}
 	
@@ -164,6 +172,8 @@ class Model {
 	 * @param {Client} client
 	 */
 	constructor(client:Client) {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(client, "saclient.cloud.Client");
 		this._client = client;
 		this._params = {};
 		this._total = null;
@@ -181,6 +191,8 @@ class Model {
 	 * @return {Model} this
 	 */
 	_offset(offset:number) : Model {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(offset, "number");
 		this._params["Begin"] = offset;
 		return (<Model><any>(this));
 	}
@@ -196,6 +208,8 @@ class Model {
 	 * @return {Model} this
 	 */
 	_limit(count:number) : Model {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(count, "number");
 		this._params["Count"] = count;
 		return (<Model><any>(this));
 	}
@@ -213,6 +227,10 @@ class Model {
 	 * @return {Model}
 	 */
 	_filterBy(key:string, value:any, multiple:boolean=false) : Model {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(key, "string");
+		Util.validateType(value, "any");
+		Util.validateType(multiple, "boolean");
 		if (!("Filter" in this._params)) {
 			this._params["Filter"] = {};
 		};
@@ -240,6 +258,7 @@ class Model {
 	 * @return {Model} this
 	 */
 	_reset() : Model {
+		Util.validateArgCount(arguments.length, 0);
 		this._params = {};
 		this._total = 0;
 		this._count = 0;
@@ -255,6 +274,7 @@ class Model {
 	 * @return {Resource}
 	 */
 	_create() : Resource {
+		Util.validateArgCount(arguments.length, 0);
 		return Util.createClassInstance("saclient.cloud.resource." + this._className(), [this._client, null]);
 	}
 	
@@ -268,6 +288,8 @@ class Model {
 	 * @return {Resource} リソースオブジェクト
 	 */
 	_getById(id:string) : Resource {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(id, "string");
 		var params = this._params;
 		this._reset();
 		var result:any = this._client.request("GET", this._apiPath() + "/" + Util.urlEncode(id), params);
@@ -286,6 +308,7 @@ class Model {
 	 * @return {Resource[]} リソースオブジェクトの配列
 	 */
 	_find() : Resource[] {
+		Util.validateArgCount(arguments.length, 0);
 		var params = this._params;
 		this._reset();
 		var result:any = this._client.request("GET", this._apiPath(), params);
@@ -310,6 +333,7 @@ class Model {
 	 * @return {Resource} リソースオブジェクト
 	 */
 	_findOne() : Resource {
+		Util.validateArgCount(arguments.length, 0);
 		var params = this._params;
 		this._reset();
 		var result:any = this._client.request("GET", this._apiPath(), params);

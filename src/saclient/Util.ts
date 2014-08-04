@@ -5,6 +5,7 @@ export = Util;
 import SaclientException = require('./errors/SaclientException');
 
 import Fiber = require('fibers');
+var saclient = require('../saclient');
 
 /**
  * @class Util
@@ -196,6 +197,18 @@ class Util {
 	
 	/**
 	 * @static
+	 * @method validateArgCount
+	 * @public
+	 * @param {number} actual
+	 * @param {number} expected
+	 * @return {void}
+	 */
+	static validateArgCount(actual:number, expected:number) : void {
+		if (actual < expected) throw new SaclientException("argument_count_mismatch", "Argument count mismatch");
+	}
+	
+	/**
+	 * @static
 	 * @method validateType
 	 * @public
 	 * @param {any} value
@@ -203,9 +216,18 @@ class Util {
 	 * @return {void}
 	 */
 	static validateType(value:any, typeName:string) : void {
-		if (typeName == "test") {
-			throw new SaclientException("type_mismatch", "Type mismatch");
-		};
+		if (typeName=="any" || value==null) return;
+		var isOk:boolean = false;
+		if (typeName.match(/^[a-z]+$/)) {
+			isOk = typeof value == typeName;
+		}
+		else if (typeName.match(/^saclient\./)) {
+			isOk = value instanceof require("../"+typeName.replace(/\./g, "/"));
+		}
+		else {
+			isOk = value instanceof Util.getByPath(global, typeName);
+		}
+		if (!isOk) throw new SaclientException("argument_type_mismatch", "Type mismatch");
 	}
 	
 }

@@ -2,7 +2,6 @@
 
 export = AccessStaffException;
 
-import Util = require('../../Util');
 import HttpForbiddenException = require('../../errors/HttpForbiddenException');
 
 /**

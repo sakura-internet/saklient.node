@@ -2,7 +2,6 @@
 
 export = FilterArrayComparisonException;
 
-import Util = require('../../Util');
 import HttpBadRequestException = require('../../errors/HttpBadRequestException');
 
 /**

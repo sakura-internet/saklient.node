@@ -2,7 +2,6 @@
 
 export = HttpProxyAuthenticationRequiredException;
 
-import Util = require('../Util');
 import HttpException = require('./HttpException');
 
 /**

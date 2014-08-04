@@ -43,6 +43,7 @@ class Icon extends Resource {
 	 * @return {string}
 	 */
 	_apiPath() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "/icon";
 	}
 	
@@ -53,6 +54,7 @@ class Icon extends Resource {
 	 * @return {string}
 	 */
 	_rootKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Icon";
 	}
 	
@@ -63,6 +65,7 @@ class Icon extends Resource {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Icons";
 	}
 	
@@ -73,6 +76,7 @@ class Icon extends Resource {
 	 * @return {string}
 	 */
 	_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.get_id();
 	}
 	
@@ -85,6 +89,7 @@ class Icon extends Resource {
 	 * @return {Icon} this
 	 */
 	save() : Icon {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Icon><any>(this._save()));
 	}
 	
@@ -97,6 +102,7 @@ class Icon extends Resource {
 	 * @return {Icon} this
 	 */
 	reload() : Icon {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Icon><any>(this._reload()));
 	}
 	
@@ -109,6 +115,9 @@ class Icon extends Resource {
 	 */
 	constructor(client:Client, r:any) {
 		super(client);
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(client, "saclient.cloud.Client");
+		Util.validateType(r, "any");
 		this.apiDeserialize(r);
 	}
 	
@@ -127,6 +136,7 @@ class Icon extends Resource {
 	 * @return {string}
 	 */
 	private get_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_id;
 	}
 	
@@ -154,6 +164,7 @@ class Icon extends Resource {
 	 * @return {string}
 	 */
 	private get_name() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_name;
 	}
 	
@@ -181,6 +192,7 @@ class Icon extends Resource {
 	 * @return {string}
 	 */
 	private get_url() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_url;
 	}
 	
@@ -201,6 +213,8 @@ class Icon extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserializeImpl(r:any) {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(r, "any");
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -241,6 +255,8 @@ class Icon extends Resource {
 	 * @return {any}
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
+		Util.validateArgCount(arguments.length, 0);
+		Util.validateType(withClean, "boolean");
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);

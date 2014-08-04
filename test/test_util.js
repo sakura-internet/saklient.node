@@ -7,6 +7,8 @@ module.paths.unshift(root + '/lib');
 var saclient = require('saclient');
 
 var Util = saclient.Util;
+var API = saclient.cloud.API;
+var SaclientException = saclient.errors.SaclientException;
 
 describe('Util', function () {
 	
@@ -42,6 +44,15 @@ describe('Util', function () {
 		//
 		test.first.second *= 10;
 		Util.getByPath(test, 'first.second').should.equal(4560);
+	});
+	
+	it('should validate arguments', function(){
+		(function(){
+			API.authorize('abc');
+		}).should.throw(/argument_count_mismatch/);
+		(function(){
+			API.authorize('abc', []);
+		}).should.throw(/argument_type_mismatch/);
 	});
 
 });

@@ -43,6 +43,7 @@ class DiskPlan extends Resource {
 	 * @return {string}
 	 */
 	_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.get_id();
 	}
 	
@@ -55,6 +56,9 @@ class DiskPlan extends Resource {
 	 */
 	constructor(client:Client, r:any) {
 		super(client);
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(client, "saclient.cloud.Client");
+		Util.validateType(r, "any");
 		this.apiDeserialize(r);
 	}
 	
@@ -73,6 +77,7 @@ class DiskPlan extends Resource {
 	 * @return {string}
 	 */
 	private get_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_id;
 	}
 	
@@ -100,6 +105,7 @@ class DiskPlan extends Resource {
 	 * @return {string}
 	 */
 	private get_name() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_name;
 	}
 	
@@ -127,6 +133,7 @@ class DiskPlan extends Resource {
 	 * @return {string}
 	 */
 	private get_storageClass() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_storageClass;
 	}
 	
@@ -147,6 +154,8 @@ class DiskPlan extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserializeImpl(r:any) {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(r, "any");
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -187,6 +196,8 @@ class DiskPlan extends Resource {
 	 * @return {any}
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
+		Util.validateArgCount(arguments.length, 0);
+		Util.validateType(withClean, "boolean");
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);

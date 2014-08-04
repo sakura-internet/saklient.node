@@ -2,7 +2,6 @@
 
 export = CopyToItselfException;
 
-import Util = require('../../Util');
 import HttpBadRequestException = require('../../errors/HttpBadRequestException');
 
 /**

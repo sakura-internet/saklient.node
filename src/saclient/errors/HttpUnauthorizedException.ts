@@ -2,7 +2,6 @@
 
 export = HttpUnauthorizedException;
 
-import Util = require('../Util');
 import HttpException = require('./HttpException');
 
 /**

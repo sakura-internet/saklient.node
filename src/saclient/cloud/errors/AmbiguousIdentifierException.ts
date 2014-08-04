@@ -2,7 +2,6 @@
 
 export = AmbiguousIdentifierException;
 
-import Util = require('../../Util');
 import HttpNotFoundException = require('../../errors/HttpNotFoundException');
 
 /**

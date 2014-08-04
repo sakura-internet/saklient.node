@@ -23,6 +23,7 @@ class Model_IsoImage extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "/cdrom";
 	}
 	
@@ -33,6 +34,7 @@ class Model_IsoImage extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "CDROM";
 	}
 	
@@ -43,6 +45,7 @@ class Model_IsoImage extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "CDROMs";
 	}
 	
@@ -53,6 +56,7 @@ class Model_IsoImage extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "IsoImage";
 	}
 	
@@ -66,6 +70,8 @@ class Model_IsoImage extends Model {
 	 * @return {Model_IsoImage} this
 	 */
 	offset(offset:number) : Model_IsoImage {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(offset, "number");
 		return (<Model_IsoImage><any>(this._offset(offset)));
 	}
 	
@@ -79,6 +85,8 @@ class Model_IsoImage extends Model {
 	 * @return {Model_IsoImage} this
 	 */
 	limit(count:number) : Model_IsoImage {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(count, "number");
 		return (<Model_IsoImage><any>(this._limit(count)));
 	}
 	
@@ -94,6 +102,10 @@ class Model_IsoImage extends Model {
 	 * @return {Model_IsoImage}
 	 */
 	filterBy(key:string, value:any, multiple:boolean=false) : Model_IsoImage {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(key, "string");
+		Util.validateType(value, "any");
+		Util.validateType(multiple, "boolean");
 		return (<Model_IsoImage><any>(this._filterBy(key, value, multiple)));
 	}
 	
@@ -106,6 +118,7 @@ class Model_IsoImage extends Model {
 	 * @return {Model_IsoImage} this
 	 */
 	reset() : Model_IsoImage {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Model_IsoImage><any>(this._reset()));
 	}
 	
@@ -118,6 +131,8 @@ class Model_IsoImage extends Model {
 	 * @return {IsoImage} リソースオブジェクト
 	 */
 	getById(id:string) : IsoImage {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(id, "string");
 		return (<IsoImage><any>(this._getById(id)));
 	}
 	
@@ -129,6 +144,7 @@ class Model_IsoImage extends Model {
 	 * @return {IsoImage[]} リソースオブジェクトの配列
 	 */
 	find() : IsoImage[] {
+		Util.validateArgCount(arguments.length, 0);
 		return Util.castArray(this._find(), (<IsoImage><any>(null)));
 	}
 	
@@ -142,6 +158,8 @@ class Model_IsoImage extends Model {
 	 * @return {Model_IsoImage}
 	 */
 	withNameLike(name:string) : Model_IsoImage {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(name, "string");
 		this._filterBy("Name", name);
 		return this;
 	}
@@ -156,6 +174,8 @@ class Model_IsoImage extends Model {
 	 * @return {Model_IsoImage}
 	 */
 	withTag(tag:string) : Model_IsoImage {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(tag, "string");
 		this._filterBy("Tags.Name", tag, true);
 		return this;
 	}
@@ -170,6 +190,8 @@ class Model_IsoImage extends Model {
 	 * @return {Model_IsoImage}
 	 */
 	withSizeGib(sizeGib:number) : Model_IsoImage {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(sizeGib, "number");
 		this._filterBy("SizeMB", sizeGib * 1024);
 		return this;
 	}
@@ -183,6 +205,7 @@ class Model_IsoImage extends Model {
 	 * @return {Model_IsoImage}
 	 */
 	withSharedScope() : Model_IsoImage {
+		Util.validateArgCount(arguments.length, 0);
 		this._filterBy("Scope", EScope.shared);
 		return this;
 	}
@@ -196,6 +219,7 @@ class Model_IsoImage extends Model {
 	 * @return {Model_IsoImage}
 	 */
 	withUserScope() : Model_IsoImage {
+		Util.validateArgCount(arguments.length, 0);
 		this._filterBy("Scope", EScope.user);
 		return this;
 	}

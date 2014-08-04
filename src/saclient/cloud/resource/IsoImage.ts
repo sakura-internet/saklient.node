@@ -96,6 +96,7 @@ class IsoImage extends Resource {
 	 * @return {string}
 	 */
 	_apiPath() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "/cdrom";
 	}
 	
@@ -106,6 +107,7 @@ class IsoImage extends Resource {
 	 * @return {string}
 	 */
 	_rootKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "CDROM";
 	}
 	
@@ -116,6 +118,7 @@ class IsoImage extends Resource {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "CDROMs";
 	}
 	
@@ -126,6 +129,7 @@ class IsoImage extends Resource {
 	 * @return {string}
 	 */
 	_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.get_id();
 	}
 	
@@ -138,6 +142,7 @@ class IsoImage extends Resource {
 	 * @return {IsoImage} this
 	 */
 	save() : IsoImage {
+		Util.validateArgCount(arguments.length, 0);
 		return (<IsoImage><any>(this._save()));
 	}
 	
@@ -150,6 +155,7 @@ class IsoImage extends Resource {
 	 * @return {IsoImage} this
 	 */
 	reload() : IsoImage {
+		Util.validateArgCount(arguments.length, 0);
 		return (<IsoImage><any>(this._reload()));
 	}
 	
@@ -162,6 +168,9 @@ class IsoImage extends Resource {
 	 */
 	constructor(client:Client, r:any) {
 		super(client);
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(client, "saclient.cloud.Client");
+		Util.validateType(r, "any");
 		this.apiDeserialize(r);
 	}
 	
@@ -171,6 +180,7 @@ class IsoImage extends Resource {
 	 * @return {number}
 	 */
 	get_sizeGib() : number {
+		Util.validateArgCount(arguments.length, 0);
 		return this.get_sizeMib() >> 10;
 	}
 	
@@ -200,6 +210,7 @@ class IsoImage extends Resource {
 	 * @return {string}
 	 */
 	private get_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_id;
 	}
 	
@@ -229,6 +240,7 @@ class IsoImage extends Resource {
 	 * @return {string}
 	 */
 	private get_scope() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_scope;
 	}
 	
@@ -241,6 +253,8 @@ class IsoImage extends Resource {
 	 * @return {string}
 	 */
 	private set_scope(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this.m_scope = v;
 		this.n_scope = true;
 		return this.m_scope;
@@ -272,6 +286,7 @@ class IsoImage extends Resource {
 	 * @return {string}
 	 */
 	private get_name() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_name;
 	}
 	
@@ -284,6 +299,8 @@ class IsoImage extends Resource {
 	 * @return {string}
 	 */
 	private set_name(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this.m_name = v;
 		this.n_name = true;
 		return this.m_name;
@@ -315,6 +332,7 @@ class IsoImage extends Resource {
 	 * @return {string}
 	 */
 	private get_description() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_description;
 	}
 	
@@ -327,6 +345,8 @@ class IsoImage extends Resource {
 	 * @return {string}
 	 */
 	private set_description(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this.m_description = v;
 		this.n_description = true;
 		return this.m_description;
@@ -358,6 +378,7 @@ class IsoImage extends Resource {
 	 * @return {string[]}
 	 */
 	private get_tags() : string[] {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_tags;
 	}
 	
@@ -370,6 +391,8 @@ class IsoImage extends Resource {
 	 * @return {string[]}
 	 */
 	private set_tags(v:string[]) : string[] {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "Array");
 		this.m_tags = v;
 		this.n_tags = true;
 		return this.m_tags;
@@ -401,6 +424,7 @@ class IsoImage extends Resource {
 	 * @return {Icon}
 	 */
 	private get_icon() : Icon {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_icon;
 	}
 	
@@ -413,6 +437,8 @@ class IsoImage extends Resource {
 	 * @return {Icon}
 	 */
 	private set_icon(v:Icon) : Icon {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "saclient.cloud.resource.Icon");
 		this.m_icon = v;
 		this.n_icon = true;
 		return this.m_icon;
@@ -444,6 +470,7 @@ class IsoImage extends Resource {
 	 * @return {number}
 	 */
 	private get_sizeMib() : number {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_sizeMib;
 	}
 	
@@ -473,6 +500,7 @@ class IsoImage extends Resource {
 	 * @return {string}
 	 */
 	private get_serviceClass() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_serviceClass;
 	}
 	
@@ -495,6 +523,8 @@ class IsoImage extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserializeImpl(r:any) {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(r, "any");
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -586,6 +616,8 @@ class IsoImage extends Resource {
 	 * @return {any}
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
+		Util.validateArgCount(arguments.length, 0);
+		Util.validateType(withClean, "boolean");
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);

@@ -2,7 +2,6 @@
 
 export = AccessSakuraException;
 
-import Util = require('../../Util');
 import HttpForbiddenException = require('../../errors/HttpForbiddenException');
 
 /**

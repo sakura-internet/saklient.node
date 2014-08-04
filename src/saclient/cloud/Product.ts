@@ -28,6 +28,7 @@ class Product {
 	 * @return {Model_ServerPlan}
 	 */
 	get_server() : Model_ServerPlan {
+		Util.validateArgCount(arguments.length, 0);
 		return this._server;
 	}
 	
@@ -54,6 +55,7 @@ class Product {
 	 * @return {Model_DiskPlan}
 	 */
 	get_disk() : Model_DiskPlan {
+		Util.validateArgCount(arguments.length, 0);
 		return this._disk;
 	}
 	
@@ -80,6 +82,7 @@ class Product {
 	 * @return {Model_RouterPlan}
 	 */
 	get_router() : Model_RouterPlan {
+		Util.validateArgCount(arguments.length, 0);
 		return this._router;
 	}
 	
@@ -98,6 +101,8 @@ class Product {
 	 * @param {Client} client
 	 */
 	constructor(client:Client) {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(client, "saclient.cloud.Client");
 		this._server = new Model_ServerPlan(client);
 		this._disk = new Model_DiskPlan(client);
 		this._router = new Model_RouterPlan(client);

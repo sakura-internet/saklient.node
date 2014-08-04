@@ -22,6 +22,7 @@ class Model_Appliance extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "/appliance";
 	}
 	
@@ -32,6 +33,7 @@ class Model_Appliance extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Appliance";
 	}
 	
@@ -42,6 +44,7 @@ class Model_Appliance extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Appliances";
 	}
 	
@@ -52,6 +55,7 @@ class Model_Appliance extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Appliance";
 	}
 	
@@ -65,6 +69,8 @@ class Model_Appliance extends Model {
 	 * @return {Model_Appliance} this
 	 */
 	offset(offset:number) : Model_Appliance {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(offset, "number");
 		return (<Model_Appliance><any>(this._offset(offset)));
 	}
 	
@@ -78,6 +84,8 @@ class Model_Appliance extends Model {
 	 * @return {Model_Appliance} this
 	 */
 	limit(count:number) : Model_Appliance {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(count, "number");
 		return (<Model_Appliance><any>(this._limit(count)));
 	}
 	
@@ -93,6 +101,10 @@ class Model_Appliance extends Model {
 	 * @return {Model_Appliance}
 	 */
 	filterBy(key:string, value:any, multiple:boolean=false) : Model_Appliance {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(key, "string");
+		Util.validateType(value, "any");
+		Util.validateType(multiple, "boolean");
 		return (<Model_Appliance><any>(this._filterBy(key, value, multiple)));
 	}
 	
@@ -105,6 +117,7 @@ class Model_Appliance extends Model {
 	 * @return {Model_Appliance} this
 	 */
 	reset() : Model_Appliance {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Model_Appliance><any>(this._reset()));
 	}
 	
@@ -117,6 +130,8 @@ class Model_Appliance extends Model {
 	 * @return {Appliance} リソースオブジェクト
 	 */
 	getById(id:string) : Appliance {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(id, "string");
 		return (<Appliance><any>(this._getById(id)));
 	}
 	
@@ -128,6 +143,7 @@ class Model_Appliance extends Model {
 	 * @return {Appliance[]} リソースオブジェクトの配列
 	 */
 	find() : Appliance[] {
+		Util.validateArgCount(arguments.length, 0);
 		return Util.castArray(this._find(), (<Appliance><any>(null)));
 	}
 	
@@ -141,6 +157,8 @@ class Model_Appliance extends Model {
 	 * @return {Model_Appliance}
 	 */
 	withNameLike(name:string) : Model_Appliance {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(name, "string");
 		this._filterBy("Name", name);
 		return this;
 	}
@@ -155,6 +173,8 @@ class Model_Appliance extends Model {
 	 * @return {Model_Appliance}
 	 */
 	withTag(tag:string) : Model_Appliance {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(tag, "string");
 		this._filterBy("Tags.Name", tag, true);
 		return this;
 	}
@@ -169,6 +189,8 @@ class Model_Appliance extends Model {
 	 * @return {Model_Appliance}
 	 */
 	withTags(tags:string[]) : Model_Appliance {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(tags, "Array");
 		this._filterBy("Tags.Name", tags, true);
 		return this;
 	}

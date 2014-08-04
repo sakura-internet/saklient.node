@@ -2,7 +2,6 @@
 
 export = UnknownException;
 
-import Util = require('../../Util');
 import HttpInternalServerErrorException = require('../../errors/HttpInternalServerErrorException');
 
 /**

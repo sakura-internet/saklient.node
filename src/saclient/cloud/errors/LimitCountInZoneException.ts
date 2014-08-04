@@ -2,7 +2,6 @@
 
 export = LimitCountInZoneException;
 
-import Util = require('../../Util');
 import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**

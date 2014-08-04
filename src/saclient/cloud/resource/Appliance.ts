@@ -97,6 +97,7 @@ class Appliance extends Resource {
 	 * @return {string}
 	 */
 	_apiPath() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "/appliance";
 	}
 	
@@ -107,6 +108,7 @@ class Appliance extends Resource {
 	 * @return {string}
 	 */
 	_rootKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Appliance";
 	}
 	
@@ -117,6 +119,7 @@ class Appliance extends Resource {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Appliances";
 	}
 	
@@ -127,6 +130,7 @@ class Appliance extends Resource {
 	 * @return {string}
 	 */
 	_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.get_id();
 	}
 	
@@ -139,6 +143,7 @@ class Appliance extends Resource {
 	 * @return {Appliance} this
 	 */
 	save() : Appliance {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Appliance><any>(this._save()));
 	}
 	
@@ -151,6 +156,7 @@ class Appliance extends Resource {
 	 * @return {Appliance} this
 	 */
 	reload() : Appliance {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Appliance><any>(this._reload()));
 	}
 	
@@ -163,6 +169,9 @@ class Appliance extends Resource {
 	 */
 	constructor(client:Client, r:any) {
 		super(client);
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(client, "saclient.cloud.Client");
+		Util.validateType(r, "any");
 		this.apiDeserialize(r);
 	}
 	
@@ -175,6 +184,7 @@ class Appliance extends Resource {
 	 * @return {Appliance}
 	 */
 	boot() : Appliance {
+		Util.validateArgCount(arguments.length, 0);
 		this._client.request("PUT", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/power");
 		return this;
 	}
@@ -188,6 +198,7 @@ class Appliance extends Resource {
 	 * @return {Appliance}
 	 */
 	shutdown() : Appliance {
+		Util.validateArgCount(arguments.length, 0);
 		this._client.request("DELETE", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/power");
 		return this;
 	}
@@ -201,6 +212,7 @@ class Appliance extends Resource {
 	 * @return {Appliance}
 	 */
 	stop() : Appliance {
+		Util.validateArgCount(arguments.length, 0);
 		this._client.request("DELETE", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/power", { Force: true });
 		return this;
 	}
@@ -214,6 +226,7 @@ class Appliance extends Resource {
 	 * @return {Appliance}
 	 */
 	reboot() : Appliance {
+		Util.validateArgCount(arguments.length, 0);
 		this._client.request("PUT", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/reset");
 		return this;
 	}
@@ -233,6 +246,7 @@ class Appliance extends Resource {
 	 * @return {string}
 	 */
 	private get_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_id;
 	}
 	
@@ -262,6 +276,7 @@ class Appliance extends Resource {
 	 * @return {string}
 	 */
 	private get_clazz() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_clazz;
 	}
 	
@@ -274,6 +289,8 @@ class Appliance extends Resource {
 	 * @return {string}
 	 */
 	private set_clazz(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this.m_clazz = v;
 		this.n_clazz = true;
 		return this.m_clazz;
@@ -305,6 +322,7 @@ class Appliance extends Resource {
 	 * @return {string}
 	 */
 	private get_name() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_name;
 	}
 	
@@ -317,6 +335,8 @@ class Appliance extends Resource {
 	 * @return {string}
 	 */
 	private set_name(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this.m_name = v;
 		this.n_name = true;
 		return this.m_name;
@@ -348,6 +368,7 @@ class Appliance extends Resource {
 	 * @return {string}
 	 */
 	private get_description() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_description;
 	}
 	
@@ -360,6 +381,8 @@ class Appliance extends Resource {
 	 * @return {string}
 	 */
 	private set_description(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this.m_description = v;
 		this.n_description = true;
 		return this.m_description;
@@ -391,6 +414,7 @@ class Appliance extends Resource {
 	 * @return {string[]}
 	 */
 	private get_tags() : string[] {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_tags;
 	}
 	
@@ -403,6 +427,8 @@ class Appliance extends Resource {
 	 * @return {string[]}
 	 */
 	private set_tags(v:string[]) : string[] {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "Array");
 		this.m_tags = v;
 		this.n_tags = true;
 		return this.m_tags;
@@ -434,6 +460,7 @@ class Appliance extends Resource {
 	 * @return {Icon}
 	 */
 	private get_icon() : Icon {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_icon;
 	}
 	
@@ -446,6 +473,8 @@ class Appliance extends Resource {
 	 * @return {Icon}
 	 */
 	private set_icon(v:Icon) : Icon {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "saclient.cloud.resource.Icon");
 		this.m_icon = v;
 		this.n_icon = true;
 		return this.m_icon;
@@ -477,6 +506,7 @@ class Appliance extends Resource {
 	 * @return {Iface[]}
 	 */
 	private get_ifaces() : Iface[] {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_ifaces;
 	}
 	
@@ -506,6 +536,7 @@ class Appliance extends Resource {
 	 * @return {string}
 	 */
 	private get_serviceClass() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_serviceClass;
 	}
 	
@@ -528,6 +559,8 @@ class Appliance extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserializeImpl(r:any) {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(r, "any");
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -630,6 +663,8 @@ class Appliance extends Resource {
 	 * @return {any}
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
+		Util.validateArgCount(arguments.length, 0);
+		Util.validateType(withClean, "boolean");
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);

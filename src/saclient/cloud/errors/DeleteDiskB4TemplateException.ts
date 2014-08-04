@@ -2,7 +2,6 @@
 
 export = DeleteDiskB4TemplateException;
 
-import Util = require('../../Util');
 import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**

@@ -2,7 +2,6 @@
 
 export = HttpUpgradeRequiredException;
 
-import Util = require('../Util');
 import HttpException = require('./HttpException');
 
 /**

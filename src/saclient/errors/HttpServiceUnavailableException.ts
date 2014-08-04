@@ -2,7 +2,6 @@
 
 export = HttpServiceUnavailableException;
 
-import Util = require('../Util');
 import HttpException = require('./HttpException');
 
 /**

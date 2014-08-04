@@ -22,6 +22,7 @@ class Model_Swytch extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "/switch";
 	}
 	
@@ -32,6 +33,7 @@ class Model_Swytch extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Switch";
 	}
 	
@@ -42,6 +44,7 @@ class Model_Swytch extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Switches";
 	}
 	
@@ -52,6 +55,7 @@ class Model_Swytch extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Swytch";
 	}
 	
@@ -65,6 +69,8 @@ class Model_Swytch extends Model {
 	 * @return {Model_Swytch} this
 	 */
 	offset(offset:number) : Model_Swytch {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(offset, "number");
 		return (<Model_Swytch><any>(this._offset(offset)));
 	}
 	
@@ -78,6 +84,8 @@ class Model_Swytch extends Model {
 	 * @return {Model_Swytch} this
 	 */
 	limit(count:number) : Model_Swytch {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(count, "number");
 		return (<Model_Swytch><any>(this._limit(count)));
 	}
 	
@@ -93,6 +101,10 @@ class Model_Swytch extends Model {
 	 * @return {Model_Swytch}
 	 */
 	filterBy(key:string, value:any, multiple:boolean=false) : Model_Swytch {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(key, "string");
+		Util.validateType(value, "any");
+		Util.validateType(multiple, "boolean");
 		return (<Model_Swytch><any>(this._filterBy(key, value, multiple)));
 	}
 	
@@ -105,6 +117,7 @@ class Model_Swytch extends Model {
 	 * @return {Model_Swytch} this
 	 */
 	reset() : Model_Swytch {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Model_Swytch><any>(this._reset()));
 	}
 	
@@ -116,6 +129,7 @@ class Model_Swytch extends Model {
 	 * @return {Swytch}
 	 */
 	create() : Swytch {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Swytch><any>(this._create()));
 	}
 	
@@ -128,6 +142,8 @@ class Model_Swytch extends Model {
 	 * @return {Swytch} リソースオブジェクト
 	 */
 	getById(id:string) : Swytch {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(id, "string");
 		return (<Swytch><any>(this._getById(id)));
 	}
 	
@@ -139,6 +155,7 @@ class Model_Swytch extends Model {
 	 * @return {Swytch[]} リソースオブジェクトの配列
 	 */
 	find() : Swytch[] {
+		Util.validateArgCount(arguments.length, 0);
 		return Util.castArray(this._find(), (<Swytch><any>(null)));
 	}
 	
@@ -152,6 +169,8 @@ class Model_Swytch extends Model {
 	 * @return {Model_Swytch}
 	 */
 	withNameLike(name:string) : Model_Swytch {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(name, "string");
 		this._filterBy("Name", name);
 		return this;
 	}

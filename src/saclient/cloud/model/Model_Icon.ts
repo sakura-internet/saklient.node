@@ -22,6 +22,7 @@ class Model_Icon extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "/icon";
 	}
 	
@@ -32,6 +33,7 @@ class Model_Icon extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Icon";
 	}
 	
@@ -42,6 +44,7 @@ class Model_Icon extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Icons";
 	}
 	
@@ -52,6 +55,7 @@ class Model_Icon extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Icon";
 	}
 	
@@ -65,6 +69,8 @@ class Model_Icon extends Model {
 	 * @return {Model_Icon} this
 	 */
 	offset(offset:number) : Model_Icon {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(offset, "number");
 		return (<Model_Icon><any>(this._offset(offset)));
 	}
 	
@@ -78,6 +84,8 @@ class Model_Icon extends Model {
 	 * @return {Model_Icon} this
 	 */
 	limit(count:number) : Model_Icon {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(count, "number");
 		return (<Model_Icon><any>(this._limit(count)));
 	}
 	
@@ -93,6 +101,10 @@ class Model_Icon extends Model {
 	 * @return {Model_Icon}
 	 */
 	filterBy(key:string, value:any, multiple:boolean=false) : Model_Icon {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(key, "string");
+		Util.validateType(value, "any");
+		Util.validateType(multiple, "boolean");
 		return (<Model_Icon><any>(this._filterBy(key, value, multiple)));
 	}
 	
@@ -105,6 +117,7 @@ class Model_Icon extends Model {
 	 * @return {Model_Icon} this
 	 */
 	reset() : Model_Icon {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Model_Icon><any>(this._reset()));
 	}
 	
@@ -117,6 +130,8 @@ class Model_Icon extends Model {
 	 * @return {Icon} リソースオブジェクト
 	 */
 	getById(id:string) : Icon {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(id, "string");
 		return (<Icon><any>(this._getById(id)));
 	}
 	
@@ -128,6 +143,7 @@ class Model_Icon extends Model {
 	 * @return {Icon[]} リソースオブジェクトの配列
 	 */
 	find() : Icon[] {
+		Util.validateArgCount(arguments.length, 0);
 		return Util.castArray(this._find(), (<Icon><any>(null)));
 	}
 	
@@ -141,6 +157,8 @@ class Model_Icon extends Model {
 	 * @return {Model_Icon}
 	 */
 	withNameLike(name:string) : Model_Icon {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(name, "string");
 		this._filterBy("Name", name);
 		return this;
 	}
@@ -155,6 +173,8 @@ class Model_Icon extends Model {
 	 * @return {Model_Icon}
 	 */
 	withTag(tag:string) : Model_Icon {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(tag, "string");
 		this._filterBy("Tags.Name", tag, true);
 		return this;
 	}
@@ -169,6 +189,8 @@ class Model_Icon extends Model {
 	 * @return {Model_Icon}
 	 */
 	withTags(tags:string[]) : Model_Icon {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(tags, "Array");
 		this._filterBy("Tags.Name", tags, true);
 		return this;
 	}

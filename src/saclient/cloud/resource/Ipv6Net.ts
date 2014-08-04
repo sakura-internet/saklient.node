@@ -51,6 +51,7 @@ class Ipv6Net extends Resource {
 	 * @return {string}
 	 */
 	_apiPath() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "/ipv6net";
 	}
 	
@@ -61,6 +62,7 @@ class Ipv6Net extends Resource {
 	 * @return {string}
 	 */
 	_rootKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "IPv6Net";
 	}
 	
@@ -71,6 +73,7 @@ class Ipv6Net extends Resource {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "IPv6Nets";
 	}
 	
@@ -81,6 +84,7 @@ class Ipv6Net extends Resource {
 	 * @return {string}
 	 */
 	_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.get_id();
 	}
 	
@@ -92,6 +96,7 @@ class Ipv6Net extends Resource {
 	 * @return {Swytch} this
 	 */
 	reload() : Swytch {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Swytch><any>(this._reload()));
 	}
 	
@@ -104,6 +109,9 @@ class Ipv6Net extends Resource {
 	 */
 	constructor(client:Client, r:any) {
 		super(client);
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(client, "saclient.cloud.Client");
+		Util.validateType(r, "any");
 		this.apiDeserialize(r);
 	}
 	
@@ -122,6 +130,7 @@ class Ipv6Net extends Resource {
 	 * @return {string}
 	 */
 	private get_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_id;
 	}
 	
@@ -149,6 +158,7 @@ class Ipv6Net extends Resource {
 	 * @return {string}
 	 */
 	private get_prefix() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_prefix;
 	}
 	
@@ -176,6 +186,7 @@ class Ipv6Net extends Resource {
 	 * @return {number}
 	 */
 	private get_prefixLen() : number {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_prefixLen;
 	}
 	
@@ -203,6 +214,7 @@ class Ipv6Net extends Resource {
 	 * @return {string}
 	 */
 	private get_prefixTail() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_prefixTail;
 	}
 	
@@ -223,6 +235,8 @@ class Ipv6Net extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserializeImpl(r:any) {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(r, "any");
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -271,6 +285,8 @@ class Ipv6Net extends Resource {
 	 * @return {any}
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
+		Util.validateArgCount(arguments.length, 0);
+		Util.validateType(withClean, "boolean");
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);

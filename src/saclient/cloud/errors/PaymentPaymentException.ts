@@ -2,7 +2,6 @@
 
 export = PaymentPaymentException;
 
-import Util = require('../../Util');
 import HttpPaymentRequiredException = require('../../errors/HttpPaymentRequiredException');
 
 /**

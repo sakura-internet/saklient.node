@@ -2,7 +2,6 @@
 
 export = AccountNotFoundException;
 
-import Util = require('../../Util');
 import HttpBadRequestException = require('../../errors/HttpBadRequestException');
 
 /**

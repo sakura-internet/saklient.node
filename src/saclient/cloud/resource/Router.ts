@@ -80,6 +80,7 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	_apiPath() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "/internet";
 	}
 	
@@ -90,6 +91,7 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	_rootKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Internet";
 	}
 	
@@ -100,6 +102,7 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Internet";
 	}
 	
@@ -110,6 +113,7 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.get_id();
 	}
 	
@@ -122,6 +126,7 @@ class Router extends Resource {
 	 * @return {Router} this
 	 */
 	save() : Router {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Router><any>(this._save()));
 	}
 	
@@ -134,6 +139,7 @@ class Router extends Resource {
 	 * @return {Router} this
 	 */
 	reload() : Router {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Router><any>(this._reload()));
 	}
 	
@@ -146,6 +152,9 @@ class Router extends Resource {
 	 */
 	constructor(client:Client, r:any) {
 		super(client);
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(client, "saclient.cloud.Client");
+		Util.validateType(r, "any");
 		this.apiDeserialize(r);
 	}
 	
@@ -159,6 +168,9 @@ class Router extends Resource {
 	 * @return {void}
 	 */
 	afterCreate(timeoutSec:number, callback:(Router, boolean) => void) : void {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(timeoutSec, "number");
+		Util.validateType(callback, "function");
 		var ret = this.sleepWhileCreating(timeoutSec);
 		callback(this, ret);
 	}
@@ -172,6 +184,8 @@ class Router extends Resource {
 	 * @return {boolean}
 	 */
 	sleepWhileCreating(timeoutSec:number=120) : boolean {
+		Util.validateArgCount(arguments.length, 0);
+		Util.validateType(timeoutSec, "number");
 		var step:number = 3;
 		while (0 < timeoutSec) {
 			if (this.exists()) {
@@ -194,6 +208,7 @@ class Router extends Resource {
 	 * @return {Swytch}
 	 */
 	getSwytch() : Swytch {
+		Util.validateArgCount(arguments.length, 0);
 		var model:any = Util.createClassInstance("saclient.cloud.model.Model_Swytch", [this._client]);
 		var id:string = this.get_swytchId();
 		return model.getById(id);
@@ -207,6 +222,7 @@ class Router extends Resource {
 	 * @return {Ipv6Net}
 	 */
 	addIpv6Net() : Ipv6Net {
+		Util.validateArgCount(arguments.length, 0);
 		var result:any = this._client.request("POST", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/ipv6net");
 		this.reload();
 		return new Ipv6Net(this._client, result["IPv6Net"]);
@@ -222,6 +238,8 @@ class Router extends Resource {
 	 * @return {Router}
 	 */
 	removeIpv6Net(ipv6Net:Ipv6Net) : Router {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(ipv6Net, "saclient.cloud.resource.Ipv6Net");
 		this._client.request("DELETE", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/ipv6net/" + ipv6Net._id());
 		this.reload();
 		return this;
@@ -237,6 +255,9 @@ class Router extends Resource {
 	 * @return {Ipv4Net}
 	 */
 	addStaticRoute(maskLen:number, nextHop:string) : Ipv4Net {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(maskLen, "number");
+		Util.validateType(nextHop, "string");
 		var q:any = {};
 		Util.setByPath(q, "NetworkMaskLen", maskLen);
 		Util.setByPath(q, "NextHop", nextHop);
@@ -255,6 +276,8 @@ class Router extends Resource {
 	 * @return {Router}
 	 */
 	removeStaticRoute(ipv4Net:Ipv4Net) : Router {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(ipv4Net, "saclient.cloud.resource.Ipv4Net");
 		this._client.request("DELETE", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/subnet/" + ipv4Net._id());
 		this.reload();
 		return this;
@@ -270,6 +293,8 @@ class Router extends Resource {
 	 * @return {Router}
 	 */
 	changePlan(bandWidthMbps:number) : Router {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(bandWidthMbps, "number");
 		var path:string = this._apiPath() + "/" + Util.urlEncode(this._id()) + "/bandwidth";
 		var q:any = {};
 		Util.setByPath(q, "Internet.BandWidthMbps", bandWidthMbps);
@@ -293,6 +318,7 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	private get_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_id;
 	}
 	
@@ -322,6 +348,7 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	private get_name() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_name;
 	}
 	
@@ -334,6 +361,8 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	private set_name(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this.m_name = v;
 		this.n_name = true;
 		return this.m_name;
@@ -365,6 +394,7 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	private get_description() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_description;
 	}
 	
@@ -377,6 +407,8 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	private set_description(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this.m_description = v;
 		this.n_description = true;
 		return this.m_description;
@@ -408,6 +440,7 @@ class Router extends Resource {
 	 * @return {number}
 	 */
 	private get_networkMaskLen() : number {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_networkMaskLen;
 	}
 	
@@ -420,6 +453,8 @@ class Router extends Resource {
 	 * @return {number}
 	 */
 	private set_networkMaskLen(v:number) : number {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "number");
 		this.m_networkMaskLen = v;
 		this.n_networkMaskLen = true;
 		return this.m_networkMaskLen;
@@ -451,6 +486,7 @@ class Router extends Resource {
 	 * @return {number}
 	 */
 	private get_bandWidthMbps() : number {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_bandWidthMbps;
 	}
 	
@@ -463,6 +499,8 @@ class Router extends Resource {
 	 * @return {number}
 	 */
 	private set_bandWidthMbps(v:number) : number {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "number");
 		this.m_bandWidthMbps = v;
 		this.n_bandWidthMbps = true;
 		return this.m_bandWidthMbps;
@@ -494,6 +532,7 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	private get_swytchId() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_swytchId;
 	}
 	
@@ -516,6 +555,8 @@ class Router extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserializeImpl(r:any) {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(r, "any");
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -580,6 +621,8 @@ class Router extends Resource {
 	 * @return {any}
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
+		Util.validateArgCount(arguments.length, 0);
+		Util.validateType(withClean, "boolean");
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);

@@ -22,6 +22,7 @@ class Model_Router extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "/internet";
 	}
 	
@@ -32,6 +33,7 @@ class Model_Router extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Internet";
 	}
 	
@@ -42,6 +44,7 @@ class Model_Router extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Internet";
 	}
 	
@@ -52,6 +55,7 @@ class Model_Router extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Router";
 	}
 	
@@ -65,6 +69,8 @@ class Model_Router extends Model {
 	 * @return {Model_Router} this
 	 */
 	offset(offset:number) : Model_Router {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(offset, "number");
 		return (<Model_Router><any>(this._offset(offset)));
 	}
 	
@@ -78,6 +84,8 @@ class Model_Router extends Model {
 	 * @return {Model_Router} this
 	 */
 	limit(count:number) : Model_Router {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(count, "number");
 		return (<Model_Router><any>(this._limit(count)));
 	}
 	
@@ -93,6 +101,10 @@ class Model_Router extends Model {
 	 * @return {Model_Router}
 	 */
 	filterBy(key:string, value:any, multiple:boolean=false) : Model_Router {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(key, "string");
+		Util.validateType(value, "any");
+		Util.validateType(multiple, "boolean");
 		return (<Model_Router><any>(this._filterBy(key, value, multiple)));
 	}
 	
@@ -105,6 +117,7 @@ class Model_Router extends Model {
 	 * @return {Model_Router} this
 	 */
 	reset() : Model_Router {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Model_Router><any>(this._reset()));
 	}
 	
@@ -116,6 +129,7 @@ class Model_Router extends Model {
 	 * @return {Router}
 	 */
 	create() : Router {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Router><any>(this._create()));
 	}
 	
@@ -128,6 +142,8 @@ class Model_Router extends Model {
 	 * @return {Router} リソースオブジェクト
 	 */
 	getById(id:string) : Router {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(id, "string");
 		return (<Router><any>(this._getById(id)));
 	}
 	
@@ -139,6 +155,7 @@ class Model_Router extends Model {
 	 * @return {Router[]} リソースオブジェクトの配列
 	 */
 	find() : Router[] {
+		Util.validateArgCount(arguments.length, 0);
 		return Util.castArray(this._find(), (<Router><any>(null)));
 	}
 	
@@ -152,6 +169,8 @@ class Model_Router extends Model {
 	 * @return {Model_Router}
 	 */
 	withNameLike(name:string) : Model_Router {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(name, "string");
 		this._filterBy("Name", name);
 		return this;
 	}
@@ -166,6 +185,8 @@ class Model_Router extends Model {
 	 * @return {Model_Router}
 	 */
 	withBandWidthMbps(mbps:number) : Model_Router {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(mbps, "number");
 		this._filterBy("BandWidthMbps", mbps);
 		return this;
 	}

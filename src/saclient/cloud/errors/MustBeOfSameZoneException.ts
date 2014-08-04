@@ -2,7 +2,6 @@
 
 export = MustBeOfSameZoneException;
 
-import Util = require('../../Util');
 import HttpBadRequestException = require('../../errors/HttpBadRequestException');
 
 /**

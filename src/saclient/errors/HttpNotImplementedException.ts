@@ -2,7 +2,6 @@
 
 export = HttpNotImplementedException;
 
-import Util = require('../Util');
 import HttpException = require('./HttpException');
 
 /**

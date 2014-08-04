@@ -2,7 +2,6 @@
 
 export = HttpLockedException;
 
-import Util = require('../Util');
 import HttpException = require('./HttpException');
 
 /**

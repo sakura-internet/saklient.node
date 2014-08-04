@@ -22,6 +22,7 @@ class Model_RouterPlan extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "/product/internet";
 	}
 	
@@ -32,6 +33,7 @@ class Model_RouterPlan extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "InternetPlan";
 	}
 	
@@ -42,6 +44,7 @@ class Model_RouterPlan extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "InternetPlans";
 	}
 	
@@ -52,6 +55,7 @@ class Model_RouterPlan extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "RouterPlan";
 	}
 	
@@ -65,6 +69,8 @@ class Model_RouterPlan extends Model {
 	 * @return {Model_RouterPlan} this
 	 */
 	offset(offset:number) : Model_RouterPlan {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(offset, "number");
 		return (<Model_RouterPlan><any>(this._offset(offset)));
 	}
 	
@@ -78,6 +84,8 @@ class Model_RouterPlan extends Model {
 	 * @return {Model_RouterPlan} this
 	 */
 	limit(count:number) : Model_RouterPlan {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(count, "number");
 		return (<Model_RouterPlan><any>(this._limit(count)));
 	}
 	
@@ -93,6 +101,10 @@ class Model_RouterPlan extends Model {
 	 * @return {Model_RouterPlan}
 	 */
 	filterBy(key:string, value:any, multiple:boolean=false) : Model_RouterPlan {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(key, "string");
+		Util.validateType(value, "any");
+		Util.validateType(multiple, "boolean");
 		return (<Model_RouterPlan><any>(this._filterBy(key, value, multiple)));
 	}
 	
@@ -105,6 +117,7 @@ class Model_RouterPlan extends Model {
 	 * @return {Model_RouterPlan} this
 	 */
 	reset() : Model_RouterPlan {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Model_RouterPlan><any>(this._reset()));
 	}
 	
@@ -117,6 +130,8 @@ class Model_RouterPlan extends Model {
 	 * @return {RouterPlan} リソースオブジェクト
 	 */
 	getById(id:string) : RouterPlan {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(id, "string");
 		return (<RouterPlan><any>(this._getById(id)));
 	}
 	
@@ -128,6 +143,7 @@ class Model_RouterPlan extends Model {
 	 * @return {RouterPlan[]} リソースオブジェクトの配列
 	 */
 	find() : RouterPlan[] {
+		Util.validateArgCount(arguments.length, 0);
 		return Util.castArray(this._find(), (<RouterPlan><any>(null)));
 	}
 	

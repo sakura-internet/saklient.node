@@ -27,6 +27,7 @@ class DiskConfig {
 	 * @return {Client}
 	 */
 	get_client() : Client {
+		Util.validateArgCount(arguments.length, 0);
 		return this._client;
 	}
 	
@@ -53,6 +54,7 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	get_diskId() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this._diskId;
 	}
 	
@@ -79,6 +81,7 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	get_hostName() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this._hostName;
 	}
 	
@@ -89,6 +92,8 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	set_hostName(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this._hostName = v;
 		return v;
 	}
@@ -116,6 +121,7 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	get_password() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this._password;
 	}
 	
@@ -126,6 +132,8 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	set_password(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this._password = v;
 		return v;
 	}
@@ -153,6 +161,7 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	get_sshKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this._sshKey;
 	}
 	
@@ -163,6 +172,8 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	set_sshKey(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this._sshKey = v;
 		return v;
 	}
@@ -190,6 +201,7 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	get_ipAddress() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this._ipAddress;
 	}
 	
@@ -200,6 +212,8 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	set_ipAddress(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this._ipAddress = v;
 		return v;
 	}
@@ -227,6 +241,7 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	get_defaultRoute() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this._defaultRoute;
 	}
 	
@@ -237,6 +252,8 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	set_defaultRoute(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this._defaultRoute = v;
 		return v;
 	}
@@ -264,6 +281,7 @@ class DiskConfig {
 	 * @return {number}
 	 */
 	get_networkMaskLen() : number {
+		Util.validateArgCount(arguments.length, 0);
 		return this._networkMaskLen;
 	}
 	
@@ -274,6 +292,8 @@ class DiskConfig {
 	 * @return {number}
 	 */
 	set_networkMaskLen(v:number) : number {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "number");
 		this._networkMaskLen = v;
 		return v;
 	}
@@ -295,6 +315,9 @@ class DiskConfig {
 	 * @param {Client} client
 	 */
 	constructor(client:Client, diskId:string) {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(client, "saclient.cloud.Client");
+		Util.validateType(diskId, "string");
 		this._client = client;
 		this._diskId = diskId;
 		this._hostName = null;
@@ -314,6 +337,7 @@ class DiskConfig {
 	 * @return {DiskConfig}
 	 */
 	write() : DiskConfig {
+		Util.validateArgCount(arguments.length, 0);
 		var q:any = {};
 		if (this._hostName != null) {
 			Util.setByPath(q, "HostName", this._hostName);

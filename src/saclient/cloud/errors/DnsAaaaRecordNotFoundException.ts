@@ -2,7 +2,6 @@
 
 export = DnsAaaaRecordNotFoundException;
 
-import Util = require('../../Util');
 import HttpBadRequestException = require('../../errors/HttpBadRequestException');
 
 /**

@@ -25,6 +25,7 @@ class Model_Server extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "/server";
 	}
 	
@@ -35,6 +36,7 @@ class Model_Server extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Server";
 	}
 	
@@ -45,6 +47,7 @@ class Model_Server extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Servers";
 	}
 	
@@ -55,6 +58,7 @@ class Model_Server extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Server";
 	}
 	
@@ -68,6 +72,8 @@ class Model_Server extends Model {
 	 * @return {Model_Server} this
 	 */
 	offset(offset:number) : Model_Server {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(offset, "number");
 		return (<Model_Server><any>(this._offset(offset)));
 	}
 	
@@ -81,6 +87,8 @@ class Model_Server extends Model {
 	 * @return {Model_Server} this
 	 */
 	limit(count:number) : Model_Server {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(count, "number");
 		return (<Model_Server><any>(this._limit(count)));
 	}
 	
@@ -96,6 +104,10 @@ class Model_Server extends Model {
 	 * @return {Model_Server}
 	 */
 	filterBy(key:string, value:any, multiple:boolean=false) : Model_Server {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(key, "string");
+		Util.validateType(value, "any");
+		Util.validateType(multiple, "boolean");
 		return (<Model_Server><any>(this._filterBy(key, value, multiple)));
 	}
 	
@@ -108,6 +120,7 @@ class Model_Server extends Model {
 	 * @return {Model_Server} this
 	 */
 	reset() : Model_Server {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Model_Server><any>(this._reset()));
 	}
 	
@@ -119,6 +132,7 @@ class Model_Server extends Model {
 	 * @return {Server}
 	 */
 	create() : Server {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Server><any>(this._create()));
 	}
 	
@@ -131,6 +145,8 @@ class Model_Server extends Model {
 	 * @return {Server} リソースオブジェクト
 	 */
 	getById(id:string) : Server {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(id, "string");
 		return (<Server><any>(this._getById(id)));
 	}
 	
@@ -142,6 +158,7 @@ class Model_Server extends Model {
 	 * @return {Server[]} リソースオブジェクトの配列
 	 */
 	find() : Server[] {
+		Util.validateArgCount(arguments.length, 0);
 		return Util.castArray(this._find(), (<Server><any>(null)));
 	}
 	
@@ -155,6 +172,8 @@ class Model_Server extends Model {
 	 * @return {Model_Server}
 	 */
 	withNameLike(name:string) : Model_Server {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(name, "string");
 		this._filterBy("Name", name);
 		return this;
 	}
@@ -169,6 +188,8 @@ class Model_Server extends Model {
 	 * @return {Model_Server}
 	 */
 	withTag(tag:string) : Model_Server {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(tag, "string");
 		this._filterBy("Tags.Name", tag, true);
 		return this;
 	}
@@ -183,6 +204,8 @@ class Model_Server extends Model {
 	 * @return {Model_Server}
 	 */
 	withTags(tags:string[]) : Model_Server {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(tags, "Array");
 		this._filterBy("Tags.Name", tags, true);
 		return this;
 	}
@@ -197,6 +220,8 @@ class Model_Server extends Model {
 	 * @return {Model_Server}
 	 */
 	withPlan(plan:ServerPlan) : Model_Server {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(plan, "saclient.cloud.resource.ServerPlan");
 		this._filterBy("ServerPlan.ID", plan._id(), true);
 		return this;
 	}
@@ -211,6 +236,8 @@ class Model_Server extends Model {
 	 * @return {Model_Server}
 	 */
 	withStatus(status:string) : Model_Server {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(status, "string");
 		this._filterBy("Instance.Status", status, true);
 		return this;
 	}
@@ -224,6 +251,7 @@ class Model_Server extends Model {
 	 * @return {Model_Server}
 	 */
 	withStatusUp() : Model_Server {
+		Util.validateArgCount(arguments.length, 0);
 		return this.withStatus(EServerInstanceStatus.up);
 	}
 	
@@ -236,6 +264,7 @@ class Model_Server extends Model {
 	 * @return {Model_Server}
 	 */
 	withStatusDown() : Model_Server {
+		Util.validateArgCount(arguments.length, 0);
 		return this.withStatus(EServerInstanceStatus.down);
 	}
 	
@@ -249,6 +278,8 @@ class Model_Server extends Model {
 	 * @return {Model_Server}
 	 */
 	withIsoImage(iso:IsoImage) : Model_Server {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(iso, "saclient.cloud.resource.IsoImage");
 		this._filterBy("Instance.CDROM.ID", iso._id(), true);
 		return this;
 	}

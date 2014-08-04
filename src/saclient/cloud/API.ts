@@ -39,6 +39,7 @@ class API {
 	 * @return {Client}
 	 */
 	get_client() : Client {
+		Util.validateArgCount(arguments.length, 0);
 		return this._client;
 	}
 	
@@ -65,6 +66,7 @@ class API {
 	 * @return {Product}
 	 */
 	get_product() : Product {
+		Util.validateArgCount(arguments.length, 0);
 		return this._product;
 	}
 	
@@ -91,6 +93,7 @@ class API {
 	 * @return {Model_Icon}
 	 */
 	get_icon() : Model_Icon {
+		Util.validateArgCount(arguments.length, 0);
 		return this._icon;
 	}
 	
@@ -117,6 +120,7 @@ class API {
 	 * @return {Model_Server}
 	 */
 	get_server() : Model_Server {
+		Util.validateArgCount(arguments.length, 0);
 		return this._server;
 	}
 	
@@ -143,6 +147,7 @@ class API {
 	 * @return {Model_Disk}
 	 */
 	get_disk() : Model_Disk {
+		Util.validateArgCount(arguments.length, 0);
 		return this._disk;
 	}
 	
@@ -169,6 +174,7 @@ class API {
 	 * @return {Model_Appliance}
 	 */
 	get_appliance() : Model_Appliance {
+		Util.validateArgCount(arguments.length, 0);
 		return this._appliance;
 	}
 	
@@ -195,6 +201,7 @@ class API {
 	 * @return {Model_Archive}
 	 */
 	get_archive() : Model_Archive {
+		Util.validateArgCount(arguments.length, 0);
 		return this._archive;
 	}
 	
@@ -221,6 +228,7 @@ class API {
 	 * @return {Model_IsoImage}
 	 */
 	get_isoImage() : Model_IsoImage {
+		Util.validateArgCount(arguments.length, 0);
 		return this._isoImage;
 	}
 	
@@ -247,6 +255,7 @@ class API {
 	 * @return {Model_Iface}
 	 */
 	get_iface() : Model_Iface {
+		Util.validateArgCount(arguments.length, 0);
 		return this._iface;
 	}
 	
@@ -273,6 +282,7 @@ class API {
 	 * @return {Model_Swytch}
 	 */
 	get_swytch() : Model_Swytch {
+		Util.validateArgCount(arguments.length, 0);
 		return this._swytch;
 	}
 	
@@ -299,6 +309,7 @@ class API {
 	 * @return {Model_Router}
 	 */
 	get_router() : Model_Router {
+		Util.validateArgCount(arguments.length, 0);
 		return this._router;
 	}
 	
@@ -325,6 +336,7 @@ class API {
 	 * @return {Model_Ipv6Net}
 	 */
 	get_ipv6Net() : Model_Ipv6Net {
+		Util.validateArgCount(arguments.length, 0);
 		return this._ipv6Net;
 	}
 	
@@ -343,6 +355,8 @@ class API {
 	 * @param {Client} client
 	 */
 	constructor(client:Client) {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(client, "saclient.cloud.Client");
 		this._client = client;
 		this._product = new Product(client);
 		this._icon = new Model_Icon(client);
@@ -371,6 +385,9 @@ class API {
 	 * @return {API} APIクライアント
 	 */
 	static authorize(token:string, secret:string) : API {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(token, "string");
+		Util.validateType(secret, "string");
 		var c:Client = new Client(token, secret);
 		return new API(c);
 	}
@@ -385,6 +402,8 @@ class API {
 	 * @return {API} APIクライアント
 	 */
 	inZone(name:string) : API {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(name, "string");
 		var ret = new API(this._client.cloneInstance());
 		ret._client.setApiRoot("https://secure.sakura.ad.jp/cloud/");
 		ret._client.setApiRootSuffix("zone/" + name);
@@ -398,6 +417,8 @@ class API {
 	 * @return {void}
 	 */
 	sleep(sec:number) : void {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(sec, "number");
 		Util.sleep(sec);
 	}
 	

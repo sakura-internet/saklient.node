@@ -98,6 +98,7 @@ class Swytch extends Resource {
 	 * @return {string}
 	 */
 	_apiPath() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "/switch";
 	}
 	
@@ -108,6 +109,7 @@ class Swytch extends Resource {
 	 * @return {string}
 	 */
 	_rootKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Switch";
 	}
 	
@@ -118,6 +120,7 @@ class Swytch extends Resource {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Switches";
 	}
 	
@@ -128,6 +131,7 @@ class Swytch extends Resource {
 	 * @return {string}
 	 */
 	_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.get_id();
 	}
 	
@@ -140,6 +144,7 @@ class Swytch extends Resource {
 	 * @return {Swytch} this
 	 */
 	save() : Swytch {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Swytch><any>(this._save()));
 	}
 	
@@ -152,6 +157,7 @@ class Swytch extends Resource {
 	 * @return {Swytch} this
 	 */
 	reload() : Swytch {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Swytch><any>(this._reload()));
 	}
 	
@@ -164,6 +170,9 @@ class Swytch extends Resource {
 	 */
 	constructor(client:Client, r:any) {
 		super(client);
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(client, "saclient.cloud.Client");
+		Util.validateType(r, "any");
 		this.apiDeserialize(r);
 	}
 	
@@ -175,6 +184,7 @@ class Swytch extends Resource {
 	 * @return {Ipv6Net}
 	 */
 	addIpv6Net() : Ipv6Net {
+		Util.validateArgCount(arguments.length, 0);
 		var ret:Ipv6Net = this.get_router().addIpv6Net();
 		this.reload();
 		return ret;
@@ -189,6 +199,7 @@ class Swytch extends Resource {
 	 * @return {Swytch}
 	 */
 	removeIpv6Net() : Swytch {
+		Util.validateArgCount(arguments.length, 0);
 		var nets:Ipv6Net[] = this.get_ipv6Nets();
 		this.get_router().removeIpv6Net(nets[0]);
 		this.reload();
@@ -205,6 +216,9 @@ class Swytch extends Resource {
 	 * @return {Ipv4Net}
 	 */
 	addStaticRoute(maskLen:number, nextHop:string) : Ipv4Net {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(maskLen, "number");
+		Util.validateType(nextHop, "string");
 		var ret:Ipv4Net = this.get_router().addStaticRoute(maskLen, nextHop);
 		this.reload();
 		return ret;
@@ -220,6 +234,8 @@ class Swytch extends Resource {
 	 * @return {Swytch}
 	 */
 	removeStaticRoute(ipv4Net:Ipv4Net) : Swytch {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(ipv4Net, "saclient.cloud.resource.Ipv4Net");
 		this.get_router().removeStaticRoute(ipv4Net);
 		this.reload();
 		return this;
@@ -235,6 +251,8 @@ class Swytch extends Resource {
 	 * @return {Swytch}
 	 */
 	changePlan(bandWidthMbps:number) : Swytch {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(bandWidthMbps, "number");
 		this.get_router().changePlan(bandWidthMbps);
 		this.reload();
 		return this;
@@ -255,6 +273,7 @@ class Swytch extends Resource {
 	 * @return {string}
 	 */
 	private get_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_id;
 	}
 	
@@ -284,6 +303,7 @@ class Swytch extends Resource {
 	 * @return {string}
 	 */
 	private get_name() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_name;
 	}
 	
@@ -296,6 +316,8 @@ class Swytch extends Resource {
 	 * @return {string}
 	 */
 	private set_name(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this.m_name = v;
 		this.n_name = true;
 		return this.m_name;
@@ -327,6 +349,7 @@ class Swytch extends Resource {
 	 * @return {string}
 	 */
 	private get_description() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_description;
 	}
 	
@@ -339,6 +362,8 @@ class Swytch extends Resource {
 	 * @return {string}
 	 */
 	private set_description(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this.m_description = v;
 		this.n_description = true;
 		return this.m_description;
@@ -370,6 +395,7 @@ class Swytch extends Resource {
 	 * @return {string}
 	 */
 	private get_userDefaultRoute() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_userDefaultRoute;
 	}
 	
@@ -399,6 +425,7 @@ class Swytch extends Resource {
 	 * @return {number}
 	 */
 	private get_userMaskLen() : number {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_userMaskLen;
 	}
 	
@@ -428,6 +455,7 @@ class Swytch extends Resource {
 	 * @return {Router}
 	 */
 	private get_router() : Router {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_router;
 	}
 	
@@ -457,6 +485,7 @@ class Swytch extends Resource {
 	 * @return {Ipv4Net[]}
 	 */
 	private get_ipv4Nets() : Ipv4Net[] {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_ipv4Nets;
 	}
 	
@@ -486,6 +515,7 @@ class Swytch extends Resource {
 	 * @return {Ipv6Net[]}
 	 */
 	private get_ipv6Nets() : Ipv6Net[] {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_ipv6Nets;
 	}
 	
@@ -508,6 +538,8 @@ class Swytch extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserializeImpl(r:any) {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(r, "any");
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -610,6 +642,8 @@ class Swytch extends Resource {
 	 * @return {any}
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
+		Util.validateArgCount(arguments.length, 0);
+		Util.validateType(withClean, "boolean");
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);

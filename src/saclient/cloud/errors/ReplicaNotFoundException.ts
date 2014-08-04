@@ -2,7 +2,6 @@
 
 export = ReplicaNotFoundException;
 
-import Util = require('../../Util');
 import HttpNotFoundException = require('../../errors/HttpNotFoundException');
 
 /**

@@ -2,7 +2,6 @@
 
 export = ApiProxyTimeoutNonGetException;
 
-import Util = require('../../Util');
 import HttpGatewayTimeoutException = require('../../errors/HttpGatewayTimeoutException');
 
 /**

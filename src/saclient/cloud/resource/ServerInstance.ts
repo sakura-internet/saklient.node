@@ -62,6 +62,9 @@ class ServerInstance extends Resource {
 	 */
 	constructor(client:Client, r:any) {
 		super(client);
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(client, "saclient.cloud.Client");
+		Util.validateType(r, "any");
 		this.apiDeserialize(r);
 	}
 	
@@ -73,6 +76,7 @@ class ServerInstance extends Resource {
 	 * @return {boolean}
 	 */
 	isUp() : boolean {
+		Util.validateArgCount(arguments.length, 0);
 		return this.get_status() != null && EServerInstanceStatus.compare(this.get_status(), EServerInstanceStatus.up) == 0;
 	}
 	
@@ -84,6 +88,7 @@ class ServerInstance extends Resource {
 	 * @return {boolean}
 	 */
 	isDown() : boolean {
+		Util.validateArgCount(arguments.length, 0);
 		return this.get_status() == null || EServerInstanceStatus.compare(this.get_status(), EServerInstanceStatus.down) == 0;
 	}
 	
@@ -102,6 +107,7 @@ class ServerInstance extends Resource {
 	 * @return {string}
 	 */
 	private get_status() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_status;
 	}
 	
@@ -131,6 +137,7 @@ class ServerInstance extends Resource {
 	 * @return {string}
 	 */
 	private get_beforeStatus() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_beforeStatus;
 	}
 	
@@ -160,6 +167,7 @@ class ServerInstance extends Resource {
 	 * @return {Date}
 	 */
 	private get_statusChangedAt() : Date {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_statusChangedAt;
 	}
 	
@@ -189,6 +197,7 @@ class ServerInstance extends Resource {
 	 * @return {IsoImage}
 	 */
 	private get_isoImage() : IsoImage {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_isoImage;
 	}
 	
@@ -211,6 +220,8 @@ class ServerInstance extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserializeImpl(r:any) {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(r, "any");
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -259,6 +270,8 @@ class ServerInstance extends Resource {
 	 * @return {any}
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
+		Util.validateArgCount(arguments.length, 0);
+		Util.validateType(withClean, "boolean");
 		var ret:any = {  };
 		if (withClean || this.n_status) {
 			Util.setByPath(ret, "Status", this.m_status);

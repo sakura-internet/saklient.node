@@ -2,7 +2,6 @@
 
 export = ResourcePathNotFoundException;
 
-import Util = require('../../Util');
 import HttpNotFoundException = require('../../errors/HttpNotFoundException');
 
 /**

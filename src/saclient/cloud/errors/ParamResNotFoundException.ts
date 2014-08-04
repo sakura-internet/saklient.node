@@ -2,7 +2,6 @@
 
 export = ParamResNotFoundException;
 
-import Util = require('../../Util');
 import HttpBadRequestException = require('../../errors/HttpBadRequestException');
 
 /**

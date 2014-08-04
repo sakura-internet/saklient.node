@@ -119,6 +119,7 @@ class Disk extends Resource {
 	 * @return {string}
 	 */
 	_apiPath() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "/disk";
 	}
 	
@@ -129,6 +130,7 @@ class Disk extends Resource {
 	 * @return {string}
 	 */
 	_rootKey() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Disk";
 	}
 	
@@ -139,6 +141,7 @@ class Disk extends Resource {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return "Disks";
 	}
 	
@@ -149,6 +152,7 @@ class Disk extends Resource {
 	 * @return {string}
 	 */
 	_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.get_id();
 	}
 	
@@ -161,6 +165,7 @@ class Disk extends Resource {
 	 * @return {Disk} this
 	 */
 	save() : Disk {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Disk><any>(this._save()));
 	}
 	
@@ -173,6 +178,7 @@ class Disk extends Resource {
 	 * @return {Disk} this
 	 */
 	reload() : Disk {
+		Util.validateArgCount(arguments.length, 0);
 		return (<Disk><any>(this._reload()));
 	}
 	
@@ -185,6 +191,9 @@ class Disk extends Resource {
 	 */
 	constructor(client:Client, r:any) {
 		super(client);
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(client, "saclient.cloud.Client");
+		Util.validateType(r, "any");
 		this.apiDeserialize(r);
 	}
 	
@@ -194,6 +203,7 @@ class Disk extends Resource {
 	 * @return {boolean}
 	 */
 	get_isAvailable() : boolean {
+		Util.validateArgCount(arguments.length, 0);
 		return this.get_availability() == EAvailability.available;
 	}
 	
@@ -214,6 +224,7 @@ class Disk extends Resource {
 	 * @return {number}
 	 */
 	get_sizeGib() : number {
+		Util.validateArgCount(arguments.length, 0);
 		return this.get_sizeMib() >> 10;
 	}
 	
@@ -224,6 +235,8 @@ class Disk extends Resource {
 	 * @return {number}
 	 */
 	set_sizeGib(sizeGib:number) : number {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(sizeGib, "number");
 		this.set_sizeMib(sizeGib * 1024);
 		return sizeGib;
 	}
@@ -252,6 +265,7 @@ class Disk extends Resource {
 	 * @return {any}
 	 */
 	get_source() : any {
+		Util.validateArgCount(arguments.length, 0);
 		return this._source;
 	}
 	
@@ -262,6 +276,8 @@ class Disk extends Resource {
 	 * @return {any}
 	 */
 	set_source(source:any) : any {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(source, "any");
 		this._source = source;
 		return source;
 	}
@@ -285,6 +301,8 @@ class Disk extends Resource {
 	 * @return {void}
 	 */
 	_onAfterApiDeserialize(r:any) : void {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(r, "any");
 		if (r == null) {
 			return;
 		};
@@ -317,6 +335,9 @@ class Disk extends Resource {
 	 * @return {void}
 	 */
 	_onAfterApiSerialize(r:any, withClean:boolean) : void {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(r, "any");
+		Util.validateType(withClean, "boolean");
 		if (r == null) {
 			return;
 		};
@@ -349,6 +370,8 @@ class Disk extends Resource {
 	 * @return {Disk}
 	 */
 	connectTo(server:Server) : Disk {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(server, "saclient.cloud.resource.Server");
 		this._client.request("PUT", "/disk/" + this._id() + "/to/server/" + server._id());
 		return this;
 	}
@@ -362,6 +385,7 @@ class Disk extends Resource {
 	 * @return {Disk}
 	 */
 	disconnect() : Disk {
+		Util.validateArgCount(arguments.length, 0);
 		this._client.request("DELETE", "/disk/" + this._id() + "/to/server");
 		return this;
 	}
@@ -374,6 +398,7 @@ class Disk extends Resource {
 	 * @return {DiskConfig}
 	 */
 	createConfig() : DiskConfig {
+		Util.validateArgCount(arguments.length, 0);
 		return new DiskConfig(this._client, this._id());
 	}
 	
@@ -387,6 +412,9 @@ class Disk extends Resource {
 	 * @return {void}
 	 */
 	afterCopy(timeoutSec:number, callback:(Disk, boolean) => void) : void {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(timeoutSec, "number");
+		Util.validateType(callback, "function");
 		var ret = this.sleepWhileCopying(timeoutSec);
 		callback(this, ret);
 	}
@@ -400,6 +428,8 @@ class Disk extends Resource {
 	 * @return {boolean}
 	 */
 	sleepWhileCopying(timeoutSec:number=3600) : boolean {
+		Util.validateArgCount(arguments.length, 0);
+		Util.validateType(timeoutSec, "number");
 		var step:number = 3;
 		while (0 < timeoutSec) {
 			this.reload();
@@ -433,6 +463,7 @@ class Disk extends Resource {
 	 * @return {string}
 	 */
 	private get_id() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_id;
 	}
 	
@@ -462,6 +493,7 @@ class Disk extends Resource {
 	 * @return {string}
 	 */
 	private get_name() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_name;
 	}
 	
@@ -474,6 +506,8 @@ class Disk extends Resource {
 	 * @return {string}
 	 */
 	private set_name(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this.m_name = v;
 		this.n_name = true;
 		return this.m_name;
@@ -505,6 +539,7 @@ class Disk extends Resource {
 	 * @return {string}
 	 */
 	private get_description() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_description;
 	}
 	
@@ -517,6 +552,8 @@ class Disk extends Resource {
 	 * @return {string}
 	 */
 	private set_description(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
 		this.m_description = v;
 		this.n_description = true;
 		return this.m_description;
@@ -548,6 +585,7 @@ class Disk extends Resource {
 	 * @return {string[]}
 	 */
 	private get_tags() : string[] {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_tags;
 	}
 	
@@ -560,6 +598,8 @@ class Disk extends Resource {
 	 * @return {string[]}
 	 */
 	private set_tags(v:string[]) : string[] {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "Array");
 		this.m_tags = v;
 		this.n_tags = true;
 		return this.m_tags;
@@ -591,6 +631,7 @@ class Disk extends Resource {
 	 * @return {Icon}
 	 */
 	private get_icon() : Icon {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_icon;
 	}
 	
@@ -603,6 +644,8 @@ class Disk extends Resource {
 	 * @return {Icon}
 	 */
 	private set_icon(v:Icon) : Icon {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "saclient.cloud.resource.Icon");
 		this.m_icon = v;
 		this.n_icon = true;
 		return this.m_icon;
@@ -634,6 +677,7 @@ class Disk extends Resource {
 	 * @return {number}
 	 */
 	private get_sizeMib() : number {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_sizeMib;
 	}
 	
@@ -646,6 +690,8 @@ class Disk extends Resource {
 	 * @return {number}
 	 */
 	private set_sizeMib(v:number) : number {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "number");
 		this.m_sizeMib = v;
 		this.n_sizeMib = true;
 		return this.m_sizeMib;
@@ -677,6 +723,7 @@ class Disk extends Resource {
 	 * @return {string}
 	 */
 	private get_serviceClass() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_serviceClass;
 	}
 	
@@ -706,6 +753,7 @@ class Disk extends Resource {
 	 * @return {DiskPlan}
 	 */
 	private get_plan() : DiskPlan {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_plan;
 	}
 	
@@ -735,6 +783,7 @@ class Disk extends Resource {
 	 * @return {Server}
 	 */
 	private get_server() : Server {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_server;
 	}
 	
@@ -764,6 +813,7 @@ class Disk extends Resource {
 	 * @return {string}
 	 */
 	private get_availability() : string {
+		Util.validateArgCount(arguments.length, 0);
 		return this.m_availability;
 	}
 	
@@ -786,6 +836,8 @@ class Disk extends Resource {
 	 * @param {any} r
 	 */
 	apiDeserializeImpl(r:any) {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(r, "any");
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -893,6 +945,8 @@ class Disk extends Resource {
 	 * @return {any}
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
+		Util.validateArgCount(arguments.length, 0);
+		Util.validateType(withClean, "boolean");
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);

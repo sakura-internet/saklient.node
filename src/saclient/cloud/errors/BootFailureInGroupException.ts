@@ -2,7 +2,6 @@
 
 export = BootFailureInGroupException;
 
-import Util = require('../../Util');
 import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavailableException');
 
 /**
