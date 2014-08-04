@@ -3,7 +3,7 @@
 export = ServiceTemporarilyUnavailableException;
 
 import Util = require('../../Util');
-import HttpServiceUnavailableException = require('./HttpServiceUnavailableException');
+import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavailableException');
 
 /**
  * サービスが利用できません。この機能は一時的に利用できない状態にあります。メンテナンス情報、サポートサイトをご確認ください。

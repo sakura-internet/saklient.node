@@ -3,7 +3,7 @@
 export = DisconnectB4UpdateException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。サーバと接続された状態では変更できない値が含まれています。

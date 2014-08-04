@@ -3,7 +3,7 @@
 export = HostOperationFailureException;
 
 import Util = require('../../Util');
-import HttpServiceUnavailableException = require('./HttpServiceUnavailableException');
+import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavailableException');
 
 /**
  * サービスが利用できません。サーバの操作に失敗しました。このエラーが繰り返し発生する場合は、メンテナンス情報、サポートサイトをご確認ください。

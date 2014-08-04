@@ -3,7 +3,7 @@
 export = UnknownOsTypeException;
 
 import Util = require('../../Util');
-import HttpServiceUnavailableException = require('./HttpServiceUnavailableException');
+import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavailableException');
 
 /**
  * サービスが利用できません。ディスクにインストールされたOSが特定できないため、正しく修正できません。

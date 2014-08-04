@@ -3,7 +3,7 @@
 export = ApiProxyTimeoutException;
 
 import Util = require('../../Util');
-import HttpGatewayTimeoutException = require('./HttpGatewayTimeoutException');
+import HttpGatewayTimeoutException = require('../../errors/HttpGatewayTimeoutException');
 
 /**
  * APIプロクシがタイムアウトしました。サーバが混雑している可能性があります。

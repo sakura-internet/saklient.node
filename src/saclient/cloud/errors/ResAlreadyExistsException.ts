@@ -3,7 +3,7 @@
 export = ResAlreadyExistsException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。このIDのリソースは既に存在します。

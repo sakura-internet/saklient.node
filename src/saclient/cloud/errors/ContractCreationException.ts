@@ -3,7 +3,7 @@
 export = ContractCreationException;
 
 import Util = require('../../Util');
-import HttpServiceUnavailableException = require('./HttpServiceUnavailableException');
+import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavailableException');
 
 /**
  * 要求を受け付けできません。契約コードを発行することができません。メンテナンス情報、サポートサイトをご確認ください。

@@ -3,7 +3,7 @@
 export = ServerIsCleaningException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。サーバが終了処理中です。しばらく時間をおいてから再度お試しください。

@@ -3,7 +3,7 @@
 export = AmbiguousIdentifierException;
 
 import Util = require('../../Util');
-import HttpNotFoundException = require('./HttpNotFoundException');
+import HttpNotFoundException = require('../../errors/HttpNotFoundException');
 
 /**
  * 対象が見つかりません。識別名から一意にリソースを特定できません。

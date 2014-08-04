@@ -3,7 +3,7 @@
 export = MissingIsoImageException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。ISOイメージが見つかりません。イメージを正しくアップロードし、FTP共有を終了した後に再度お試しください。

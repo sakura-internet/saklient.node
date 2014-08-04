@@ -3,7 +3,7 @@
 export = BootFailureInGroupException;
 
 import Util = require('../../Util');
-import HttpServiceUnavailableException = require('./HttpServiceUnavailableException');
+import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavailableException');
 
 /**
  * サービスが利用できません。サーバ起動グループ指定に問題がある可能性があります。

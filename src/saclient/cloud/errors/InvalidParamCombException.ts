@@ -3,7 +3,7 @@
 export = InvalidParamCombException;
 
 import Util = require('../../Util');
-import HttpBadRequestException = require('./HttpBadRequestException');
+import HttpBadRequestException = require('../../errors/HttpBadRequestException');
 
 /**
  * 不適切な要求です。同時に指定できないパラメータが含まれています。

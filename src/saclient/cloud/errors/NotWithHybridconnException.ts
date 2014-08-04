@@ -3,7 +3,7 @@
 export = NotWithHybridconnException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。ハイブリッド接続と併用する場合はお問い合わせください。

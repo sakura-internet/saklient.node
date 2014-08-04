@@ -3,7 +3,7 @@
 export = AccessSakuraException;
 
 import Util = require('../../Util');
-import HttpForbiddenException = require('./HttpForbiddenException');
+import HttpForbiddenException = require('../../errors/HttpForbiddenException');
 
 /**
  * 要求された操作は許可されていません。さくらインターネットの会員メニューより認証後に実行してください。

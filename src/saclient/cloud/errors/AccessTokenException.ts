@@ -3,7 +3,7 @@
 export = AccessTokenException;
 
 import Util = require('../../Util');
-import HttpForbiddenException = require('./HttpForbiddenException');
+import HttpForbiddenException = require('../../errors/HttpForbiddenException');
 
 /**
  * 要求された操作は許可されていません。この操作は有効期限内のトークンが必要です。

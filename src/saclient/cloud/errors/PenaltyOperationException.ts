@@ -3,7 +3,7 @@
 export = PenaltyOperationException;
 
 import Util = require('../../Util');
-import HttpPaymentRequiredException = require('./HttpPaymentRequiredException');
+import HttpPaymentRequiredException = require('../../errors/HttpPaymentRequiredException');
 
 /**
  * お客様のご都合により操作を受け付けることができません。

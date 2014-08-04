@@ -108,7 +108,7 @@ class Util {
 	 */
 	static createClassInstance(classPath:string, args:any[]) : any {
 		var ret:any = null;
-		var proto = require(classPath.replace(/\./g, '/').replace(/^saclient\/cloud/, './'));
+		var proto = require(classPath.replace(/\./g, '/').replace(/^saclient\//, './'));
 		var clazz:any = function(){ return proto.apply(this, args); };
 		clazz.prototype = proto.prototype;
 		return new clazz();

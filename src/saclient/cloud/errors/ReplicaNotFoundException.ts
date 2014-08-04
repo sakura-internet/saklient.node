@@ -3,7 +3,7 @@
 export = ReplicaNotFoundException;
 
 import Util = require('../../Util');
-import HttpNotFoundException = require('./HttpNotFoundException');
+import HttpNotFoundException = require('../../errors/HttpNotFoundException');
 
 /**
  * 対象が見つかりません。このストレージには指定リソースの複製が存在しません。

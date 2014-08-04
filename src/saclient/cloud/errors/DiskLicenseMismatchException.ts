@@ -3,7 +3,7 @@
 export = DiskLicenseMismatchException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。ライセンスの問題により、組み合わせて使用できないディスクが接続されています。

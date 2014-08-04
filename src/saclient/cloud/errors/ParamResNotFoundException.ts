@@ -3,7 +3,7 @@
 export = ParamResNotFoundException;
 
 import Util = require('../../Util');
-import HttpBadRequestException = require('./HttpBadRequestException');
+import HttpBadRequestException = require('../../errors/HttpBadRequestException');
 
 /**
  * 不適切な要求です。パラメータで指定されたリソースが存在しません。IDをご確認ください。

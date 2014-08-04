@@ -3,7 +3,7 @@
 export = OperationFailureException;
 
 import Util = require('../../Util');
-import HttpServiceUnavailableException = require('./HttpServiceUnavailableException');
+import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavailableException');
 
 /**
  * サービスが利用できません。操作に失敗しました。サーバが混雑している可能性があります。

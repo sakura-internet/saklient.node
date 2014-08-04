@@ -3,7 +3,7 @@
 export = ResourcePathNotFoundException;
 
 import Util = require('../../Util');
-import HttpNotFoundException = require('./HttpNotFoundException');
+import HttpNotFoundException = require('../../errors/HttpNotFoundException');
 
 /**
  * 対象が見つかりません。パスに誤りがあります。

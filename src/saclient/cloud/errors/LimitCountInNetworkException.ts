@@ -3,7 +3,7 @@
 export = LimitCountInNetworkException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求を受け付けできません。ネットワーク内リソース数上限により、リソースの割り当てに失敗しました。

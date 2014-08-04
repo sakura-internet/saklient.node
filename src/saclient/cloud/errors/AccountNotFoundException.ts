@@ -3,7 +3,7 @@
 export = AccountNotFoundException;
 
 import Util = require('../../Util');
-import HttpBadRequestException = require('./HttpBadRequestException');
+import HttpBadRequestException = require('../../errors/HttpBadRequestException');
 
 /**
  * 不適切な要求です。アカウントが存在しません。IDをご確認ください。

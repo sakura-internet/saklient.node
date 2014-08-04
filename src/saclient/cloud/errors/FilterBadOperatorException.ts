@@ -3,7 +3,7 @@
 export = FilterBadOperatorException;
 
 import Util = require('../../Util');
-import HttpBadRequestException = require('./HttpBadRequestException');
+import HttpBadRequestException = require('../../errors/HttpBadRequestException');
 
 /**
  * 不適切な要求です。フィールドの型に対応していない演算子がフィルタ中に含まれています。

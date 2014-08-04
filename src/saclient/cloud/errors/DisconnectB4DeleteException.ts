@@ -3,7 +3,7 @@
 export = DisconnectB4DeleteException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。サーバとの接続を切り離した後に実行してください。

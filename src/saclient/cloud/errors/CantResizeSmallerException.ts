@@ -3,7 +3,7 @@
 export = CantResizeSmallerException;
 
 import Util = require('../../Util');
-import HttpBadRequestException = require('./HttpBadRequestException');
+import HttpBadRequestException = require('../../errors/HttpBadRequestException');
 
 /**
  * 不適切な要求です。現在の容量よりも小さくリサイズすることはできません。

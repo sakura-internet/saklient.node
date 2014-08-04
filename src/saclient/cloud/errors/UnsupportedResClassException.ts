@@ -3,7 +3,7 @@
 export = UnsupportedResClassException;
 
 import Util = require('../../Util');
-import HttpBadRequestException = require('./HttpBadRequestException');
+import HttpBadRequestException = require('../../errors/HttpBadRequestException');
 
 /**
  * 不適切な要求です。この種類のリソースは要求された操作に対応しません。

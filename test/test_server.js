@@ -188,7 +188,7 @@ describe('Server', function(){
 				// 'should.*' does not work correctly in a 'catch' block in a Fiber
 				ex = ex_;
 			}
-			ex.should.be.an.instanceof(saclient.cloud.errors.HttpConflictException);
+			ex.should.be.an.instanceof(saclient.errors.HttpConflictException);
 			// 'サーバ起動中の起動試行時は HttpConflictException がスローされなければなりません'
 			
 			// ssh
@@ -245,13 +245,13 @@ describe('Server', function(){
 			disk2.destroy();
 			ex = null;
 			try { api.disk.getById(id); } catch (ex_) { ex = ex_; }
-			ex.should.be.an.instanceof(saclient.cloud.errors.HttpNotFoundException);
+			ex.should.be.an.instanceof(saclient.errors.HttpNotFoundException);
 			
 			id = disk.id;
 			disk.destroy();
 			ex = null;
 			try { api.disk.getById(id); } catch (ex_) { ex = ex_; }
-			ex.should.be.an.instanceof(saclient.cloud.errors.HttpNotFoundException);
+			ex.should.be.an.instanceof(saclient.errors.HttpNotFoundException);
 			
 			done();
 			

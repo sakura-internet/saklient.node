@@ -3,7 +3,7 @@
 export = PaymentTelCertificationException;
 
 import Util = require('../../Util');
-import HttpPaymentRequiredException = require('./HttpPaymentRequiredException');
+import HttpPaymentRequiredException = require('../../errors/HttpPaymentRequiredException');
 
 /**
  * 要求を受け付けできません。電話認証を先に実行してください。

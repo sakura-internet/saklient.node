@@ -3,7 +3,7 @@
 export = CdromIsIncompleteException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。このISOイメージは不完全です。複製処理等の完了後に再度お試しください。

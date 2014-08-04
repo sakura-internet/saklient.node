@@ -3,7 +3,7 @@
 export = ServerCouldNotStopException;
 
 import Util = require('../../Util');
-import HttpServiceUnavailableException = require('./HttpServiceUnavailableException');
+import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavailableException');
 
 /**
  * サービスが利用できません。サーバを停止できません。再度お試しください。

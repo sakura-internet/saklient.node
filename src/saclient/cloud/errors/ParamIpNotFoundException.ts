@@ -3,7 +3,7 @@
 export = ParamIpNotFoundException;
 
 import Util = require('../../Util');
-import HttpBadRequestException = require('./HttpBadRequestException');
+import HttpBadRequestException = require('../../errors/HttpBadRequestException');
 
 /**
  * 不適切な要求です。パラメータで指定されたIPアドレスを含むネットワークが存在しません。

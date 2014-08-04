@@ -3,7 +3,7 @@
 export = DeleteDiskB4TemplateException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。このテンプレートから作成したすべてのディスクを削除した後に実行してください。

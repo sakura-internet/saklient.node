@@ -3,7 +3,7 @@
 export = DeleteStaticRouteFirstException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。ルータを削除する前に、スタティックルートを削除してください。

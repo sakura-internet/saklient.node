@@ -3,7 +3,7 @@
 export = FtpMustBeClosedException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。リソースのFTP共有を終了した後に実行してください。

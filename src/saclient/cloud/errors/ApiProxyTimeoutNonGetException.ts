@@ -3,7 +3,7 @@
 export = ApiProxyTimeoutNonGetException;
 
 import Util = require('../../Util');
-import HttpGatewayTimeoutException = require('./HttpGatewayTimeoutException');
+import HttpGatewayTimeoutException = require('../../errors/HttpGatewayTimeoutException');
 
 /**
  * APIプロクシが応答しません。要求は実行された可能性があります。しばらく時間をおいてからご確認ください。

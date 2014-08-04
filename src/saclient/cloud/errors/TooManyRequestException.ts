@@ -3,7 +3,7 @@
 export = TooManyRequestException;
 
 import Util = require('../../Util');
-import HttpServiceUnavailableException = require('./HttpServiceUnavailableException');
+import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavailableException');
 
 /**
  * 要求を受け付けできません。リクエストの密度が高すぎます。

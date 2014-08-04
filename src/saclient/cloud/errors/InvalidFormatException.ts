@@ -3,7 +3,7 @@
 export = InvalidFormatException;
 
 import Util = require('../../Util');
-import HttpBadRequestException = require('./HttpBadRequestException');
+import HttpBadRequestException = require('../../errors/HttpBadRequestException');
 
 /**
  * 不適切な要求です。パラメータに含まれている値のフォーマットが一部不正です。

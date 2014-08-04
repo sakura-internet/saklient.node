@@ -3,7 +3,7 @@
 
 export = Client;
 
-import ExceptionFactory = require('./errors/ExceptionFactory');
+import ExceptionFactory = require('../errors/ExceptionFactory');
 
 var Fiber:any = require('fibers');
 var https:any = require('https');

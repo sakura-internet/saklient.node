@@ -3,7 +3,7 @@
 export = LimitCountInMemberException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求を受け付けできません。アカウント数上限により作成失敗しました。

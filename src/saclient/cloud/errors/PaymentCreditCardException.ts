@@ -3,7 +3,7 @@
 export = PaymentCreditCardException;
 
 import Util = require('../../Util');
-import HttpPaymentRequiredException = require('./HttpPaymentRequiredException');
+import HttpPaymentRequiredException = require('../../errors/HttpPaymentRequiredException');
 
 /**
  * 要求を受け付けできません。クレジットカードの使用期限、利用限度額をご確認ください。

@@ -3,7 +3,7 @@
 export = InvalidRangeException;
 
 import Util = require('../../Util');
-import HttpBadRequestException = require('./HttpBadRequestException');
+import HttpBadRequestException = require('../../errors/HttpBadRequestException');
 
 /**
  * 不適切な要求です。パラメータに含まれている値の範囲が一部不正です。

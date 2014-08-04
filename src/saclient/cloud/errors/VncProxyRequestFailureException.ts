@@ -3,7 +3,7 @@
 export = VncProxyRequestFailureException;
 
 import Util = require('../../Util');
-import HttpServiceUnavailableException = require('./HttpServiceUnavailableException');
+import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavailableException');
 
 /**
  * サービスが利用できません。VNCプロクシの要求に失敗しました。

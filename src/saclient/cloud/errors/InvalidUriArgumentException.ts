@@ -3,7 +3,7 @@
 export = InvalidUriArgumentException;
 
 import Util = require('../../Util');
-import HttpNotFoundException = require('./HttpNotFoundException');
+import HttpNotFoundException = require('../../errors/HttpNotFoundException');
 
 /**
  * 対象が見つかりません。パスに使用できない文字が含まれています。

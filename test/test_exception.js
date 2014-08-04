@@ -6,7 +6,7 @@ var root = path.dirname(__dirname);
 module.paths.unshift(root + '/lib');
 var saclient = require('saclient');
 
-var ExceptionFactory = saclient.cloud.errors.ExceptionFactory;
+var ExceptionFactory = saclient.errors.ExceptionFactory;
 
 describe('Exception', function () {
 
@@ -14,13 +14,13 @@ describe('Exception', function () {
 		var x;
 
 		x = ExceptionFactory.create(404);
-		x.should.be.an.instanceof(saclient.cloud.errors.HttpNotFoundException);
+		x.should.be.an.instanceof(saclient.errors.HttpNotFoundException);
 
 		x = ExceptionFactory.create(409, 'server_power_must_be_up');
 		x.should.be.an.instanceof(saclient.cloud.errors.ServerPowerMustBeUpException);
 
 		x = ExceptionFactory.create(666, 'nameless_http_error', 'Ia! Cthulhu Fthagn!');
-		x.should.be.an.instanceof(saclient.cloud.errors.HttpException);
+		x.should.be.an.instanceof(saclient.errors.HttpException);
 		x.message.should.equal('[nameless_http_error] Ia! Cthulhu Fthagn!');
 
 	});

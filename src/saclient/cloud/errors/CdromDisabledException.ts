@@ -3,7 +3,7 @@
 export = CdromDisabledException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。ISOイメージが無効化されています。排出後に再度お試しください。

@@ -3,7 +3,7 @@
 export = AccessXhrOrApiKeyException;
 
 import Util = require('../../Util');
-import HttpForbiddenException = require('./HttpForbiddenException');
+import HttpForbiddenException = require('../../errors/HttpForbiddenException');
 
 /**
  * 要求された操作は許可されていません。XHRまたはAPIキーによるアクセスのみ許可されています。

@@ -3,7 +3,7 @@
 export = DiskIsCopyingException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。このディスクへのコピー処理が進行中です。完了後に再度お試しください。

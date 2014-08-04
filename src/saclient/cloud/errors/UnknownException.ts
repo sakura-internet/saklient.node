@@ -3,7 +3,7 @@
 export = UnknownException;
 
 import Util = require('../../Util');
-import HttpInternalServerErrorException = require('./HttpInternalServerErrorException');
+import HttpInternalServerErrorException = require('../../errors/HttpInternalServerErrorException');
 
 /**
  * 予期しないエラーが発生しました。このエラーが繰り返し発生する場合は、サポートサイトやメンテナンス情報をご確認ください。

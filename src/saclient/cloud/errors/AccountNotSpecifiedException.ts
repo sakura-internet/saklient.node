@@ -3,7 +3,7 @@
 export = AccountNotSpecifiedException;
 
 import Util = require('../../Util');
-import HttpForbiddenException = require('./HttpForbiddenException');
+import HttpForbiddenException = require('../../errors/HttpForbiddenException');
 
 /**
  * 要求された操作は許可されていません。このAPIはアカウントを特定できる認証方法でアクセスする必要があります。

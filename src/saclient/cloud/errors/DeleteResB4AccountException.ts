@@ -3,7 +3,7 @@
 export = DeleteResB4AccountException;
 
 import Util = require('../../Util');
-import HttpConflictException = require('./HttpConflictException');
+import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。現在のアカウントで使用している全てのリソースを削除した後に実行してください。
