@@ -159,5 +159,19 @@ class Model_Appliance extends Model {
 		return this;
 	}
 	
+	/**
+	 * 指定したタグを持つアプライアンスに絞り込みます。
+	 * 
+	 * @method withTags
+	 * @chainable
+	 * @public
+	 * @param {string[]} tags
+	 * @return {Model_Appliance}
+	 */
+	withTags(tags:string[]) : Model_Appliance {
+		this._filterBy("Tags.Name", tags, true);
+		return this;
+	}
+	
 }
 

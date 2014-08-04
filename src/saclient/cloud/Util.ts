@@ -2,6 +2,7 @@
 
 export = Util;
 
+import SaclientException = require('../errors/SaclientException');
 
 import Fiber = require('fibers');
 
@@ -191,6 +192,20 @@ class Util {
 	 */
 	static setTimeout(fn:any, ms:number) : void {
 		setTimeout(fn, ms);
+	}
+	
+	/**
+	 * @static
+	 * @method validateType
+	 * @public
+	 * @param {any} value
+	 * @param {string} typeName
+	 * @return {void}
+	 */
+	static validateType(value:any, typeName:string) : void {
+		if (typeName == "test") {
+			throw new SaclientException("type_mismatch", "Type mismatch");
+		};
 	}
 	
 }

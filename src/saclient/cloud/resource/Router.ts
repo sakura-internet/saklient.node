@@ -152,6 +152,20 @@ class Router extends Resource {
 	/**
 	 * 作成中のルータが利用可能になるまで待機します。
 	 * 
+	 * @method afterCreate
+	 * @public
+	 * @param {number} timeoutSec
+	 * @param {(Router, boolean) => void} callback
+	 * @return {void}
+	 */
+	afterCreate(timeoutSec:number, callback:(Router, boolean) => void) : void {
+		var ret = this.sleepWhileCreating(timeoutSec);
+		callback(this, ret);
+	}
+	
+	/**
+	 * 作成中のルータが利用可能になるまで待機します。
+	 * 
 	 * @method sleepWhileCreating
 	 * @public
 	 * @param {number} timeoutSec=120

@@ -161,6 +161,20 @@ class Model_Archive extends Model {
 	}
 	
 	/**
+	 * 指定したタグを持つアーカイブに絞り込みます。
+	 * 
+	 * @method withTags
+	 * @chainable
+	 * @public
+	 * @param {string[]} tags
+	 * @return {Model_Archive}
+	 */
+	withTags(tags:string[]) : Model_Archive {
+		this._filterBy("Tags.Name", tags, true);
+		return this;
+	}
+	
+	/**
 	 * 指定したサイズのアーカイブに絞り込みます。
 	 * 
 	 * @method withSizeGib

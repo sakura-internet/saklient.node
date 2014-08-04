@@ -133,7 +133,7 @@ class Model_IsoImage extends Model {
 	}
 	
 	/**
-	 * 指定した文字列を名前に含むアーカイブに絞り込みます。
+	 * 指定した文字列を名前に含むISOイメージに絞り込みます。
 	 * 
 	 * @method withNameLike
 	 * @chainable
@@ -147,7 +147,7 @@ class Model_IsoImage extends Model {
 	}
 	
 	/**
-	 * 指定したタグを持つアーカイブに絞り込みます。
+	 * 指定したタグを持つISOイメージに絞り込みます。
 	 * 
 	 * @method withTag
 	 * @chainable
@@ -161,7 +161,7 @@ class Model_IsoImage extends Model {
 	}
 	
 	/**
-	 * 指定したサイズのアーカイブに絞り込みます。
+	 * 指定したサイズのISOイメージに絞り込みます。
 	 * 
 	 * @method withSizeGib
 	 * @chainable
@@ -175,7 +175,7 @@ class Model_IsoImage extends Model {
 	}
 	
 	/**
-	 * パブリックアーカイブに絞り込みます。
+	 * パブリックISOイメージに絞り込みます。
 	 * 
 	 * @method withSharedScope
 	 * @chainable
@@ -188,7 +188,7 @@ class Model_IsoImage extends Model {
 	}
 	
 	/**
-	 * プライベートアーカイブに絞り込みます。
+	 * プライベートISOイメージに絞り込みます。
 	 * 
 	 * @method withUserScope
 	 * @chainable

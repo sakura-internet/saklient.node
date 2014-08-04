@@ -159,5 +159,19 @@ class Model_Icon extends Model {
 		return this;
 	}
 	
+	/**
+	 * 指定したタグを持つアイコンに絞り込みます。
+	 * 
+	 * @method withTags
+	 * @chainable
+	 * @public
+	 * @param {string[]} tags
+	 * @return {Model_Icon}
+	 */
+	withTags(tags:string[]) : Model_Icon {
+		this._filterBy("Tags.Name", tags, true);
+		return this;
+	}
+	
 }
 

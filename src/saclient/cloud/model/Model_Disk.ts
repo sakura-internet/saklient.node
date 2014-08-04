@@ -171,6 +171,20 @@ class Model_Disk extends Model {
 	}
 	
 	/**
+	 * 指定したタグを持つディスクに絞り込みます。
+	 * 
+	 * @method withTags
+	 * @chainable
+	 * @public
+	 * @param {string[]} tags
+	 * @return {Model_Disk}
+	 */
+	withTags(tags:string[]) : Model_Disk {
+		this._filterBy("Tags.Name", tags, true);
+		return this;
+	}
+	
+	/**
 	 * 指定したサイズのディスクに絞り込みます。
 	 * 
 	 * @method withSizeGib

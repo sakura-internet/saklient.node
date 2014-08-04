@@ -6,6 +6,7 @@ import Util = require('../Util');
 import Model = require('./Model');
 import Server = require('../resource/Server');
 import ServerPlan = require('../resource/ServerPlan');
+import IsoImage = require('../resource/IsoImage');
 import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
 
 /**
@@ -175,6 +176,20 @@ class Model_Server extends Model {
 	/**
 	 * 指定したタグを持つサーバに絞り込みます。
 	 * 
+	 * @method withTags
+	 * @chainable
+	 * @public
+	 * @param {string[]} tags
+	 * @return {Model_Server}
+	 */
+	withTags(tags:string[]) : Model_Server {
+		this._filterBy("Tags.Name", tags, true);
+		return this;
+	}
+	
+	/**
+	 * 指定したタグを持つサーバに絞り込みます。
+	 * 
 	 * @method withPlan
 	 * @chainable
 	 * @public
@@ -189,13 +204,13 @@ class Model_Server extends Model {
 	/**
 	 * インスタンスが指定した状態にあるサーバに絞り込みます。
 	 * 
-	 * @method withInstanceStatus
+	 * @method withStatus
 	 * @chainable
 	 * @public
 	 * @param {string} status
 	 * @return {Model_Server}
 	 */
-	withInstanceStatus(status:string) : Model_Server {
+	withStatus(status:string) : Model_Server {
 		this._filterBy("Instance.Status", status, true);
 		return this;
 	}
@@ -203,25 +218,39 @@ class Model_Server extends Model {
 	/**
 	 * インスタンスが起動中のサーバに絞り込みます。
 	 * 
-	 * @method withInstanceUp
+	 * @method withStatusUp
 	 * @chainable
 	 * @public
 	 * @return {Model_Server}
 	 */
-	withInstanceUp() : Model_Server {
-		return this.withInstanceStatus(EServerInstanceStatus.up);
+	withStatusUp() : Model_Server {
+		return this.withStatus(EServerInstanceStatus.up);
 	}
 	
 	/**
 	 * インスタンスが停止中のサーバに絞り込みます。
 	 * 
-	 * @method withInstanceDown
+	 * @method withStatusDown
 	 * @chainable
 	 * @public
 	 * @return {Model_Server}
 	 */
-	withInstanceDown() : Model_Server {
-		return this.withInstanceStatus(EServerInstanceStatus.down);
+	withStatusDown() : Model_Server {
+		return this.withStatus(EServerInstanceStatus.down);
+	}
+	
+	/**
+	 * 指定したISOイメージが挿入されているサーバに絞り込みます。
+	 * 
+	 * @method withIsoImage
+	 * @chainable
+	 * @public
+	 * @param {IsoImage} iso
+	 * @return {Model_Server}
+	 */
+	withIsoImage(iso:IsoImage) : Model_Server {
+		this._filterBy("Instance.CDROM.ID", iso._id(), true);
+		return this;
 	}
 	
 }
