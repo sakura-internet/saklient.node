@@ -1,19 +1,20 @@
 /// <reference path="../../../node.d.ts" />
 
-export = Model_Disk;
+export = Model_Script;
 
 import Util = require('../../Util');
 import Model = require('./Model');
-import Disk = require('../resource/Disk');
+import Script = require('../resource/Script');
+import EScope = require('../enums/EScope');
 
 /**
- * ディスクを検索するための機能を備えたクラス。
+ * スクリプトを検索するための機能を備えたクラス。
  * 
- * @class Model_Disk
+ * @class Model_Script
  * @constructor
  * @extends Model
  */
-class Model_Disk extends Model {
+class Model_Script extends Model {
 	
 	/**
 	 * @private
@@ -22,7 +23,7 @@ class Model_Disk extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		return "/disk";
+		return "/note";
 	}
 	
 	/**
@@ -32,7 +33,7 @@ class Model_Disk extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		return "Disk";
+		return "Note";
 	}
 	
 	/**
@@ -42,7 +43,7 @@ class Model_Disk extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		return "Disks";
+		return "Notes";
 	}
 	
 	/**
@@ -52,7 +53,7 @@ class Model_Disk extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
-		return "Disk";
+		return "Script";
 	}
 	
 	/**
@@ -62,12 +63,12 @@ class Model_Disk extends Model {
 	 * @chainable
 	 * @public
 	 * @param {number} offset オフセット
-	 * @return {Model_Disk} this
+	 * @return {Model_Script} this
 	 */
-	offset(offset:number) : Model_Disk {
+	offset(offset:number) : Model_Script {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(offset, "number");
-		return (<Model_Disk><any>(this._offset(offset)));
+		return (<Model_Script><any>(this._offset(offset)));
 	}
 	
 	/**
@@ -77,12 +78,12 @@ class Model_Disk extends Model {
 	 * @chainable
 	 * @public
 	 * @param {number} count 上限レコード数
-	 * @return {Model_Disk} this
+	 * @return {Model_Script} this
 	 */
-	limit(count:number) : Model_Disk {
+	limit(count:number) : Model_Script {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(count, "number");
-		return (<Model_Disk><any>(this._limit(count)));
+		return (<Model_Script><any>(this._limit(count)));
 	}
 	
 	/**
@@ -94,13 +95,13 @@ class Model_Disk extends Model {
 	 * @param {any} value
 	 * @param {string} key
 	 * @param {boolean} multiple=false
-	 * @return {Model_Disk}
+	 * @return {Model_Script}
 	 */
-	filterBy(key:string, value:any, multiple:boolean=false) : Model_Disk {
+	filterBy(key:string, value:any, multiple:boolean=false) : Model_Script {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(key, "string");
 		Util.validateType(multiple, "boolean");
-		return (<Model_Disk><any>(this._filterBy(key, value, multiple)));
+		return (<Model_Script><any>(this._filterBy(key, value, multiple)));
 	}
 	
 	/**
@@ -109,21 +110,10 @@ class Model_Disk extends Model {
 	 * @method reset
 	 * @chainable
 	 * @public
-	 * @return {Model_Disk} this
+	 * @return {Model_Script} this
 	 */
-	reset() : Model_Disk {
-		return (<Model_Disk><any>(this._reset()));
-	}
-	
-	/**
-	 * *
-	 * 
-	 * @method create
-	 * @public
-	 * @return {Disk}
-	 */
-	create() : Disk {
-		return (<Disk><any>(this._create()));
+	reset() : Model_Script {
+		return (<Model_Script><any>(this._reset()));
 	}
 	
 	/**
@@ -132,12 +122,12 @@ class Model_Disk extends Model {
 	 * @method getById
 	 * @public
 	 * @param {string} id
-	 * @return {Disk} リソースオブジェクト
+	 * @return {Script} リソースオブジェクト
 	 */
-	getById(id:string) : Disk {
+	getById(id:string) : Script {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(id, "string");
-		return (<Disk><any>(this._getById(id)));
+		return (<Script><any>(this._getById(id)));
 	}
 	
 	/**
@@ -145,22 +135,22 @@ class Model_Disk extends Model {
 	 * 
 	 * @method find
 	 * @public
-	 * @return {Disk[]} リソースオブジェクトの配列
+	 * @return {Script[]} リソースオブジェクトの配列
 	 */
-	find() : Disk[] {
-		return Util.castArray(this._find(), (<Disk><any>(null)));
+	find() : Script[] {
+		return Util.castArray(this._find(), (<Script><any>(null)));
 	}
 	
 	/**
-	 * 指定した文字列を名前に含むディスクに絞り込みます。
+	 * 指定した文字列を名前に含むスクリプトに絞り込みます。
 	 * 
 	 * @method withNameLike
 	 * @chainable
 	 * @public
 	 * @param {string} name
-	 * @return {Model_Disk}
+	 * @return {Model_Script}
 	 */
-	withNameLike(name:string) : Model_Disk {
+	withNameLike(name:string) : Model_Script {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(name, "string");
 		this._filterBy("Name", name);
@@ -168,15 +158,15 @@ class Model_Disk extends Model {
 	}
 	
 	/**
-	 * 指定したタグを持つディスクに絞り込みます。
+	 * 指定したタグを持つスクリプトに絞り込みます。
 	 * 
 	 * @method withTag
 	 * @chainable
 	 * @public
 	 * @param {string} tag
-	 * @return {Model_Disk}
+	 * @return {Model_Script}
 	 */
-	withTag(tag:string) : Model_Disk {
+	withTag(tag:string) : Model_Script {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(tag, "string");
 		this._filterBy("Tags.Name", tag, true);
@@ -184,15 +174,15 @@ class Model_Disk extends Model {
 	}
 	
 	/**
-	 * 指定したタグを持つディスクに絞り込みます。
+	 * 指定したタグを持つスクリプトに絞り込みます。
 	 * 
 	 * @method withTags
 	 * @chainable
 	 * @public
 	 * @param {string[]} tags
-	 * @return {Model_Disk}
+	 * @return {Model_Script}
 	 */
-	withTags(tags:string[]) : Model_Disk {
+	withTags(tags:string[]) : Model_Script {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(tags, "Array");
 		this._filterBy("Tags.Name", tags, true);
@@ -200,34 +190,28 @@ class Model_Disk extends Model {
 	}
 	
 	/**
-	 * 指定したサイズのディスクに絞り込みます。
+	 * パブリックスクリプトに絞り込みます。
 	 * 
-	 * @method withSizeGib
+	 * @method withSharedScope
 	 * @chainable
 	 * @public
-	 * @param {number} sizeGib
-	 * @return {Model_Disk}
+	 * @return {Model_Script}
 	 */
-	withSizeGib(sizeGib:number) : Model_Disk {
-		Util.validateArgCount(arguments.length, 1);
-		Util.validateType(sizeGib, "number");
-		this._filterBy("SizeMB", sizeGib * 1024);
+	withSharedScope() : Model_Script {
+		this._filterBy("Scope", EScope.shared);
 		return this;
 	}
 	
 	/**
-	 * 指定したサーバへ接続されているディスクに絞り込みます。
+	 * プライベートスクリプトに絞り込みます。
 	 * 
-	 * @method withServerId
+	 * @method withUserScope
 	 * @chainable
 	 * @public
-	 * @param {string} id
-	 * @return {Model_Disk}
+	 * @return {Model_Script}
 	 */
-	withServerId(id:string) : Model_Disk {
-		Util.validateArgCount(arguments.length, 1);
-		Util.validateType(id, "string");
-		this._filterBy("Server.ID", id);
+	withUserScope() : Model_Script {
+		this._filterBy("Scope", EScope.user);
 		return this;
 	}
 	

@@ -22,7 +22,6 @@ class Model_DiskPlan extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "/product/disk";
 	}
 	
@@ -33,7 +32,6 @@ class Model_DiskPlan extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "DiskPlan";
 	}
 	
@@ -44,7 +42,6 @@ class Model_DiskPlan extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "DiskPlans";
 	}
 	
@@ -55,7 +52,6 @@ class Model_DiskPlan extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "DiskPlan";
 	}
 	
@@ -103,7 +99,6 @@ class Model_DiskPlan extends Model {
 	filterBy(key:string, value:any, multiple:boolean=false) : Model_DiskPlan {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(key, "string");
-		Util.validateType(value, "any");
 		Util.validateType(multiple, "boolean");
 		return (<Model_DiskPlan><any>(this._filterBy(key, value, multiple)));
 	}
@@ -117,7 +112,6 @@ class Model_DiskPlan extends Model {
 	 * @return {Model_DiskPlan} this
 	 */
 	reset() : Model_DiskPlan {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Model_DiskPlan><any>(this._reset()));
 	}
 	
@@ -143,7 +137,6 @@ class Model_DiskPlan extends Model {
 	 * @return {DiskPlan[]} リソースオブジェクトの配列
 	 */
 	find() : DiskPlan[] {
-		Util.validateArgCount(arguments.length, 0);
 		return Util.castArray(this._find(), (<DiskPlan><any>(null)));
 	}
 	

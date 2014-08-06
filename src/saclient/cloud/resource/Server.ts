@@ -110,7 +110,6 @@ class Server extends Resource {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "/server";
 	}
 	
@@ -121,7 +120,6 @@ class Server extends Resource {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Server";
 	}
 	
@@ -132,7 +130,6 @@ class Server extends Resource {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Servers";
 	}
 	
@@ -143,7 +140,6 @@ class Server extends Resource {
 	 * @return {string}
 	 */
 	_id() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.get_id();
 	}
 	
@@ -156,7 +152,6 @@ class Server extends Resource {
 	 * @return {Server} this
 	 */
 	save() : Server {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Server><any>(this._save()));
 	}
 	
@@ -169,7 +164,6 @@ class Server extends Resource {
 	 * @return {Server} this
 	 */
 	reload() : Server {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Server><any>(this._reload()));
 	}
 	
@@ -184,7 +178,6 @@ class Server extends Resource {
 		super(client);
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(client, "saclient.cloud.Client");
-		Util.validateType(r, "any");
 		this.apiDeserialize(r);
 	}
 	
@@ -196,7 +189,6 @@ class Server extends Resource {
 	 * @return {boolean}
 	 */
 	isUp() : boolean {
-		Util.validateArgCount(arguments.length, 0);
 		return this.get_instance().isUp();
 	}
 	
@@ -208,7 +200,6 @@ class Server extends Resource {
 	 * @return {boolean}
 	 */
 	isDown() : boolean {
-		Util.validateArgCount(arguments.length, 0);
 		return this.get_instance().isDown();
 	}
 	
@@ -221,7 +212,6 @@ class Server extends Resource {
 	 * @return {Server}
 	 */
 	boot() : Server {
-		Util.validateArgCount(arguments.length, 0);
 		this._client.request("PUT", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/power");
 		return this.reload();
 	}
@@ -235,7 +225,6 @@ class Server extends Resource {
 	 * @return {Server}
 	 */
 	shutdown() : Server {
-		Util.validateArgCount(arguments.length, 0);
 		this._client.request("DELETE", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/power");
 		return this.reload();
 	}
@@ -249,7 +238,6 @@ class Server extends Resource {
 	 * @return {Server}
 	 */
 	stop() : Server {
-		Util.validateArgCount(arguments.length, 0);
 		this._client.request("DELETE", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/power", { Force: true });
 		return this.reload();
 	}
@@ -263,7 +251,6 @@ class Server extends Resource {
 	 * @return {Server}
 	 */
 	reboot() : Server {
-		Util.validateArgCount(arguments.length, 0);
 		this._client.request("PUT", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/reset");
 		return this.reload();
 	}
@@ -313,7 +300,6 @@ class Server extends Resource {
 	 * @return {boolean}
 	 */
 	sleepUntilDown(timeoutSec:number=180) : boolean {
-		Util.validateArgCount(arguments.length, 0);
 		Util.validateType(timeoutSec, "number");
 		return this.sleepUntil(EServerInstanceStatus.down, timeoutSec);
 	}
@@ -376,7 +362,6 @@ class Server extends Resource {
 	 * @return {Disk[]}
 	 */
 	findDisks() : Disk[] {
-		Util.validateArgCount(arguments.length, 0);
 		var model:any = Util.createClassInstance("saclient.cloud.model.Model_Disk", [this._client]);
 		return model.withServerId(this._id()).find();
 	}
@@ -389,7 +374,6 @@ class Server extends Resource {
 	 * @return {Iface}
 	 */
 	addIface() : Iface {
-		Util.validateArgCount(arguments.length, 0);
 		var model:any = Util.createClassInstance("saclient.cloud.model.Model_Iface", [this._client]);
 		var res:Iface = model.create();
 		res.setProperty("serverId", this._id());
@@ -424,7 +408,6 @@ class Server extends Resource {
 	 * @return {Server}
 	 */
 	ejectIsoImage() : Server {
-		Util.validateArgCount(arguments.length, 0);
 		var path:string = this._apiPath() + "/" + Util.urlEncode(this._id()) + "/cdrom";
 		var result:any = this._client.request("DELETE", path);
 		this.reload();
@@ -446,7 +429,6 @@ class Server extends Resource {
 	 * @return {string}
 	 */
 	private get_id() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_id;
 	}
 	
@@ -476,7 +458,6 @@ class Server extends Resource {
 	 * @return {string}
 	 */
 	private get_name() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_name;
 	}
 	
@@ -522,7 +503,6 @@ class Server extends Resource {
 	 * @return {string}
 	 */
 	private get_description() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_description;
 	}
 	
@@ -568,7 +548,6 @@ class Server extends Resource {
 	 * @return {string[]}
 	 */
 	private get_tags() : string[] {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_tags;
 	}
 	
@@ -614,7 +593,6 @@ class Server extends Resource {
 	 * @return {Icon}
 	 */
 	private get_icon() : Icon {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_icon;
 	}
 	
@@ -660,7 +638,6 @@ class Server extends Resource {
 	 * @return {ServerPlan}
 	 */
 	private get_plan() : ServerPlan {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_plan;
 	}
 	
@@ -706,7 +683,6 @@ class Server extends Resource {
 	 * @return {Iface[]}
 	 */
 	private get_ifaces() : Iface[] {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_ifaces;
 	}
 	
@@ -736,7 +712,6 @@ class Server extends Resource {
 	 * @return {ServerInstance}
 	 */
 	private get_instance() : ServerInstance {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_instance;
 	}
 	
@@ -766,7 +741,6 @@ class Server extends Resource {
 	 * @return {string}
 	 */
 	private get_availability() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_availability;
 	}
 	
@@ -790,7 +764,6 @@ class Server extends Resource {
 	 */
 	apiDeserializeImpl(r:any) {
 		Util.validateArgCount(arguments.length, 1);
-		Util.validateType(r, "any");
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -901,7 +874,6 @@ class Server extends Resource {
 	 * @return {any}
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
-		Util.validateArgCount(arguments.length, 0);
 		Util.validateType(withClean, "boolean");
 		var ret:any = {  };
 		if (withClean || this.n_id) {

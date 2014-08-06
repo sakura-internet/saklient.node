@@ -28,7 +28,6 @@ class Product {
 	 * @return {Model_ServerPlan}
 	 */
 	get_server() : Model_ServerPlan {
-		Util.validateArgCount(arguments.length, 0);
 		return this._server;
 	}
 	
@@ -55,7 +54,6 @@ class Product {
 	 * @return {Model_DiskPlan}
 	 */
 	get_disk() : Model_DiskPlan {
-		Util.validateArgCount(arguments.length, 0);
 		return this._disk;
 	}
 	
@@ -82,7 +80,6 @@ class Product {
 	 * @return {Model_RouterPlan}
 	 */
 	get_router() : Model_RouterPlan {
-		Util.validateArgCount(arguments.length, 0);
 		return this._router;
 	}
 	

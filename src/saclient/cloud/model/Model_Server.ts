@@ -25,7 +25,6 @@ class Model_Server extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "/server";
 	}
 	
@@ -36,7 +35,6 @@ class Model_Server extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Server";
 	}
 	
@@ -47,7 +45,6 @@ class Model_Server extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Servers";
 	}
 	
@@ -58,7 +55,6 @@ class Model_Server extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Server";
 	}
 	
@@ -106,7 +102,6 @@ class Model_Server extends Model {
 	filterBy(key:string, value:any, multiple:boolean=false) : Model_Server {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(key, "string");
-		Util.validateType(value, "any");
 		Util.validateType(multiple, "boolean");
 		return (<Model_Server><any>(this._filterBy(key, value, multiple)));
 	}
@@ -120,7 +115,6 @@ class Model_Server extends Model {
 	 * @return {Model_Server} this
 	 */
 	reset() : Model_Server {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Model_Server><any>(this._reset()));
 	}
 	
@@ -132,7 +126,6 @@ class Model_Server extends Model {
 	 * @return {Server}
 	 */
 	create() : Server {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Server><any>(this._create()));
 	}
 	
@@ -158,7 +151,6 @@ class Model_Server extends Model {
 	 * @return {Server[]} リソースオブジェクトの配列
 	 */
 	find() : Server[] {
-		Util.validateArgCount(arguments.length, 0);
 		return Util.castArray(this._find(), (<Server><any>(null)));
 	}
 	
@@ -251,7 +243,6 @@ class Model_Server extends Model {
 	 * @return {Model_Server}
 	 */
 	withStatusUp() : Model_Server {
-		Util.validateArgCount(arguments.length, 0);
 		return this.withStatus(EServerInstanceStatus.up);
 	}
 	
@@ -264,7 +255,6 @@ class Model_Server extends Model {
 	 * @return {Model_Server}
 	 */
 	withStatusDown() : Model_Server {
-		Util.validateArgCount(arguments.length, 0);
 		return this.withStatus(EServerInstanceStatus.down);
 	}
 	

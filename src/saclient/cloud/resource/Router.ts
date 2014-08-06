@@ -80,7 +80,6 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "/internet";
 	}
 	
@@ -91,7 +90,6 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Internet";
 	}
 	
@@ -102,7 +100,6 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Internet";
 	}
 	
@@ -113,7 +110,6 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	_id() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.get_id();
 	}
 	
@@ -126,7 +122,6 @@ class Router extends Resource {
 	 * @return {Router} this
 	 */
 	save() : Router {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Router><any>(this._save()));
 	}
 	
@@ -139,7 +134,6 @@ class Router extends Resource {
 	 * @return {Router} this
 	 */
 	reload() : Router {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Router><any>(this._reload()));
 	}
 	
@@ -154,7 +148,6 @@ class Router extends Resource {
 		super(client);
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(client, "saclient.cloud.Client");
-		Util.validateType(r, "any");
 		this.apiDeserialize(r);
 	}
 	
@@ -184,7 +177,6 @@ class Router extends Resource {
 	 * @return {boolean}
 	 */
 	sleepWhileCreating(timeoutSec:number=120) : boolean {
-		Util.validateArgCount(arguments.length, 0);
 		Util.validateType(timeoutSec, "number");
 		var step:number = 3;
 		while (0 < timeoutSec) {
@@ -208,7 +200,6 @@ class Router extends Resource {
 	 * @return {Swytch}
 	 */
 	getSwytch() : Swytch {
-		Util.validateArgCount(arguments.length, 0);
 		var model:any = Util.createClassInstance("saclient.cloud.model.Model_Swytch", [this._client]);
 		var id:string = this.get_swytchId();
 		return model.getById(id);
@@ -222,7 +213,6 @@ class Router extends Resource {
 	 * @return {Ipv6Net}
 	 */
 	addIpv6Net() : Ipv6Net {
-		Util.validateArgCount(arguments.length, 0);
 		var result:any = this._client.request("POST", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/ipv6net");
 		this.reload();
 		return new Ipv6Net(this._client, result["IPv6Net"]);
@@ -318,7 +308,6 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	private get_id() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_id;
 	}
 	
@@ -348,7 +337,6 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	private get_name() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_name;
 	}
 	
@@ -394,7 +382,6 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	private get_description() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_description;
 	}
 	
@@ -440,7 +427,6 @@ class Router extends Resource {
 	 * @return {number}
 	 */
 	private get_networkMaskLen() : number {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_networkMaskLen;
 	}
 	
@@ -486,7 +472,6 @@ class Router extends Resource {
 	 * @return {number}
 	 */
 	private get_bandWidthMbps() : number {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_bandWidthMbps;
 	}
 	
@@ -532,7 +517,6 @@ class Router extends Resource {
 	 * @return {string}
 	 */
 	private get_swytchId() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_swytchId;
 	}
 	
@@ -556,7 +540,6 @@ class Router extends Resource {
 	 */
 	apiDeserializeImpl(r:any) {
 		Util.validateArgCount(arguments.length, 1);
-		Util.validateType(r, "any");
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -621,7 +604,6 @@ class Router extends Resource {
 	 * @return {any}
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
-		Util.validateArgCount(arguments.length, 0);
 		Util.validateType(withClean, "boolean");
 		var ret:any = {  };
 		if (withClean || this.n_id) {

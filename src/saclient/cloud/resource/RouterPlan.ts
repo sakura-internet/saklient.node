@@ -50,7 +50,6 @@ class RouterPlan extends Resource {
 	 * @return {string}
 	 */
 	_id() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.get_id();
 	}
 	
@@ -65,7 +64,6 @@ class RouterPlan extends Resource {
 		super(client);
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(client, "saclient.cloud.Client");
-		Util.validateType(r, "any");
 		this.apiDeserialize(r);
 	}
 	
@@ -84,7 +82,6 @@ class RouterPlan extends Resource {
 	 * @return {string}
 	 */
 	private get_id() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_id;
 	}
 	
@@ -112,7 +109,6 @@ class RouterPlan extends Resource {
 	 * @return {string}
 	 */
 	private get_name() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_name;
 	}
 	
@@ -140,7 +136,6 @@ class RouterPlan extends Resource {
 	 * @return {number}
 	 */
 	private get_bandWidthMbps() : number {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_bandWidthMbps;
 	}
 	
@@ -168,7 +163,6 @@ class RouterPlan extends Resource {
 	 * @return {string}
 	 */
 	private get_serviceClass() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_serviceClass;
 	}
 	
@@ -190,7 +184,6 @@ class RouterPlan extends Resource {
 	 */
 	apiDeserializeImpl(r:any) {
 		Util.validateArgCount(arguments.length, 1);
-		Util.validateType(r, "any");
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -239,7 +232,6 @@ class RouterPlan extends Resource {
 	 * @return {any}
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
-		Util.validateArgCount(arguments.length, 0);
 		Util.validateType(withClean, "boolean");
 		var ret:any = {  };
 		if (withClean || this.n_id) {

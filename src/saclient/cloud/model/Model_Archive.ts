@@ -23,7 +23,6 @@ class Model_Archive extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "/archive";
 	}
 	
@@ -34,7 +33,6 @@ class Model_Archive extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Archive";
 	}
 	
@@ -45,7 +43,6 @@ class Model_Archive extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Archives";
 	}
 	
@@ -56,7 +53,6 @@ class Model_Archive extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Archive";
 	}
 	
@@ -104,7 +100,6 @@ class Model_Archive extends Model {
 	filterBy(key:string, value:any, multiple:boolean=false) : Model_Archive {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(key, "string");
-		Util.validateType(value, "any");
 		Util.validateType(multiple, "boolean");
 		return (<Model_Archive><any>(this._filterBy(key, value, multiple)));
 	}
@@ -118,7 +113,6 @@ class Model_Archive extends Model {
 	 * @return {Model_Archive} this
 	 */
 	reset() : Model_Archive {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Model_Archive><any>(this._reset()));
 	}
 	
@@ -144,7 +138,6 @@ class Model_Archive extends Model {
 	 * @return {Archive[]} リソースオブジェクトの配列
 	 */
 	find() : Archive[] {
-		Util.validateArgCount(arguments.length, 0);
 		return Util.castArray(this._find(), (<Archive><any>(null)));
 	}
 	
@@ -221,7 +214,6 @@ class Model_Archive extends Model {
 	 * @return {Model_Archive}
 	 */
 	withSharedScope() : Model_Archive {
-		Util.validateArgCount(arguments.length, 0);
 		this._filterBy("Scope", EScope.shared);
 		return this;
 	}
@@ -235,7 +227,6 @@ class Model_Archive extends Model {
 	 * @return {Model_Archive}
 	 */
 	withUserScope() : Model_Archive {
-		Util.validateArgCount(arguments.length, 0);
 		this._filterBy("Scope", EScope.user);
 		return this;
 	}

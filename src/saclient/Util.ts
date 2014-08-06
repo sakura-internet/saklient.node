@@ -216,7 +216,7 @@ class Util {
 	 * @return {void}
 	 */
 	static validateType(value:any, typeName:string) : void {
-		if (typeName=="any" || value==null) return;
+		if (typeName=="any" || typeName=="void" || value==null) return;
 		var isOk:boolean = false;
 		if (typeName.match(/^[a-z]+$/)) {
 			isOk = typeof value == typeName;
@@ -227,7 +227,7 @@ class Util {
 		else {
 			isOk = value instanceof Util.getByPath(global, typeName);
 		}
-		if (!isOk) throw new SaclientException("argument_type_mismatch", "Type mismatch");
+		if (!isOk) throw new SaclientException("argument_type_mismatch", "Argument type mismatch (expected "+typeName+")");
 	}
 	
 }

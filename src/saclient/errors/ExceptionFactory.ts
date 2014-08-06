@@ -168,10 +168,6 @@ class ExceptionFactory {
 	 * @return {HttpException}
 	 */
 	static create(status:number, code:string=null, message:string="") : HttpException {
-		Util.validateArgCount(arguments.length, 1);
-		Util.validateType(status, "number");
-		Util.validateType(code, "string");
-		Util.validateType(message, "string");
 		switch (code) {
 			case "access_apikey_disabled": {
 				return new AccessApiKeyDisabledException(status, code, message);

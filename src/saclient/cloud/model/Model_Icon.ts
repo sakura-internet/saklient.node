@@ -5,6 +5,7 @@ export = Model_Icon;
 import Util = require('../../Util');
 import Model = require('./Model');
 import Icon = require('../resource/Icon');
+import EScope = require('../enums/EScope');
 
 /**
  * アイコンを検索するための機能を備えたクラス。
@@ -22,7 +23,6 @@ class Model_Icon extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "/icon";
 	}
 	
@@ -33,7 +33,6 @@ class Model_Icon extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Icon";
 	}
 	
@@ -44,7 +43,6 @@ class Model_Icon extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Icons";
 	}
 	
@@ -55,7 +53,6 @@ class Model_Icon extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Icon";
 	}
 	
@@ -103,7 +100,6 @@ class Model_Icon extends Model {
 	filterBy(key:string, value:any, multiple:boolean=false) : Model_Icon {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(key, "string");
-		Util.validateType(value, "any");
 		Util.validateType(multiple, "boolean");
 		return (<Model_Icon><any>(this._filterBy(key, value, multiple)));
 	}
@@ -117,7 +113,6 @@ class Model_Icon extends Model {
 	 * @return {Model_Icon} this
 	 */
 	reset() : Model_Icon {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Model_Icon><any>(this._reset()));
 	}
 	
@@ -143,7 +138,6 @@ class Model_Icon extends Model {
 	 * @return {Icon[]} リソースオブジェクトの配列
 	 */
 	find() : Icon[] {
-		Util.validateArgCount(arguments.length, 0);
 		return Util.castArray(this._find(), (<Icon><any>(null)));
 	}
 	
@@ -192,6 +186,32 @@ class Model_Icon extends Model {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(tags, "Array");
 		this._filterBy("Tags.Name", tags, true);
+		return this;
+	}
+	
+	/**
+	 * パブリックアイコンに絞り込みます。
+	 * 
+	 * @method withSharedScope
+	 * @chainable
+	 * @public
+	 * @return {Model_Icon}
+	 */
+	withSharedScope() : Model_Icon {
+		this._filterBy("Scope", EScope.shared);
+		return this;
+	}
+	
+	/**
+	 * プライベートアイコンに絞り込みます。
+	 * 
+	 * @method withUserScope
+	 * @chainable
+	 * @public
+	 * @return {Model_Icon}
+	 */
+	withUserScope() : Model_Icon {
+		this._filterBy("Scope", EScope.user);
 		return this;
 	}
 	

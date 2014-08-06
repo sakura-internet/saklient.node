@@ -26,7 +26,6 @@ class Resource {
 	 * @return {Client}
 	 */
 	get_client() : Client {
-		Util.validateArgCount(arguments.length, 0);
 		return this._client;
 	}
 	
@@ -57,7 +56,6 @@ class Resource {
 	setParam(key:string, value:any) : void {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(key, "string");
-		Util.validateType(value, "any");
 		this._params[key] = value;
 	}
 	
@@ -68,7 +66,6 @@ class Resource {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return null;
 	}
 	
@@ -79,7 +76,6 @@ class Resource {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return null;
 	}
 	
@@ -90,7 +86,6 @@ class Resource {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return null;
 	}
 	
@@ -101,7 +96,6 @@ class Resource {
 	 * @return {string}
 	 */
 	_className() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return null;
 	}
 	
@@ -112,7 +106,6 @@ class Resource {
 	 * @return {string}
 	 */
 	_id() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return null;
 	}
 	
@@ -152,7 +145,6 @@ class Resource {
 	 */
 	_onBeforeSave(r:any) : void {
 		Util.validateArgCount(arguments.length, 1);
-		Util.validateType(r, "any");
 	}
 	
 	/**
@@ -164,7 +156,6 @@ class Resource {
 	 */
 	_onAfterApiDeserialize(r:any) : void {
 		Util.validateArgCount(arguments.length, 1);
-		Util.validateType(r, "any");
 	}
 	
 	/**
@@ -177,7 +168,6 @@ class Resource {
 	 */
 	_onAfterApiSerialize(r:any, withClean:boolean) : void {
 		Util.validateArgCount(arguments.length, 2);
-		Util.validateType(r, "any");
 		Util.validateType(withClean, "boolean");
 	}
 	
@@ -189,7 +179,6 @@ class Resource {
 	 */
 	apiDeserializeImpl(r:any) : void {
 		Util.validateArgCount(arguments.length, 1);
-		Util.validateType(r, "any");
 	}
 	
 	/**
@@ -200,7 +189,6 @@ class Resource {
 	 */
 	apiDeserialize(r:any) : void {
 		Util.validateArgCount(arguments.length, 1);
-		Util.validateType(r, "any");
 		this.apiDeserializeImpl(r);
 		this._onAfterApiDeserialize(r);
 	}
@@ -212,7 +200,6 @@ class Resource {
 	 * @return {any}
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
-		Util.validateArgCount(arguments.length, 0);
 		Util.validateType(withClean, "boolean");
 		return null;
 	}
@@ -224,7 +211,6 @@ class Resource {
 	 * @return {any}
 	 */
 	apiSerialize(withClean:boolean=false) : any {
-		Util.validateArgCount(arguments.length, 0);
 		Util.validateType(withClean, "boolean");
 		var ret:any = this.apiSerializeImpl(withClean);
 		this._onAfterApiSerialize(ret, withClean);
@@ -237,7 +223,6 @@ class Resource {
 	 * @return {any}
 	 */
 	apiSerializeID() : any {
-		Util.validateArgCount(arguments.length, 0);
 		var id:string = this._id();
 		if (id == null) {
 			return null;
@@ -269,7 +254,6 @@ class Resource {
 	setProperty(name:string, value:any) : void {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(name, "string");
-		Util.validateType(value, "any");
 		name = this.normalizeFieldName(name);
 		this["m_" + name] = value;
 		this["n_" + name] = true;
@@ -285,7 +269,6 @@ class Resource {
 	 * @return {Resource} this
 	 */
 	_save() : Resource {
-		Util.validateArgCount(arguments.length, 0);
 		var r:any = this.apiSerialize();
 		var params:any = this._params;
 		this._params = {};
@@ -316,7 +299,6 @@ class Resource {
 	 * @return {void}
 	 */
 	destroy() : void {
-		Util.validateArgCount(arguments.length, 0);
 		if (this.isNew) {
 			return;
 		};
@@ -334,7 +316,6 @@ class Resource {
 	 * @return {Resource} this
 	 */
 	_reload() : Resource {
-		Util.validateArgCount(arguments.length, 0);
 		var result:any = this._client.request("GET", this._apiPath() + "/" + Util.urlEncode(this._id()));
 		this.apiDeserialize(result[this._rootKey()]);
 		return this;
@@ -348,7 +329,6 @@ class Resource {
 	 * @return {boolean}
 	 */
 	exists() : boolean {
-		Util.validateArgCount(arguments.length, 0);
 		var params:any = {};
 		Util.setByPath(params, "Filter.ID", [this._id()]);
 		Util.setByPath(params, "Include", ["ID"]);
@@ -362,7 +342,6 @@ class Resource {
 	 * @return {any}
 	 */
 	dump() : any {
-		Util.validateArgCount(arguments.length, 0);
 		return this.apiSerialize(true);
 	}
 	

@@ -59,7 +59,6 @@ class Iface extends Resource {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "/interface";
 	}
 	
@@ -70,7 +69,6 @@ class Iface extends Resource {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Interface";
 	}
 	
@@ -81,7 +79,6 @@ class Iface extends Resource {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Interfaces";
 	}
 	
@@ -92,7 +89,6 @@ class Iface extends Resource {
 	 * @return {string}
 	 */
 	_id() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.get_id();
 	}
 	
@@ -105,7 +101,6 @@ class Iface extends Resource {
 	 * @return {Iface} this
 	 */
 	save() : Iface {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Iface><any>(this._save()));
 	}
 	
@@ -118,7 +113,6 @@ class Iface extends Resource {
 	 * @return {Iface} this
 	 */
 	reload() : Iface {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Iface><any>(this._reload()));
 	}
 	
@@ -133,7 +127,6 @@ class Iface extends Resource {
 		super(client);
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(client, "saclient.cloud.Client");
-		Util.validateType(r, "any");
 		this.apiDeserialize(r);
 	}
 	
@@ -146,7 +139,6 @@ class Iface extends Resource {
 	 * @return {Iface}
 	 */
 	connectToSharedSegment() : Iface {
-		Util.validateArgCount(arguments.length, 0);
 		this._client.request("PUT", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/to/switch/shared");
 		return this.reload();
 	}
@@ -166,7 +158,6 @@ class Iface extends Resource {
 	 * @return {string}
 	 */
 	private get_id() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_id;
 	}
 	
@@ -194,7 +185,6 @@ class Iface extends Resource {
 	 * @return {string}
 	 */
 	private get_macAddress() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_macAddress;
 	}
 	
@@ -222,7 +212,6 @@ class Iface extends Resource {
 	 * @return {string}
 	 */
 	private get_ipAddress() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_ipAddress;
 	}
 	
@@ -250,7 +239,6 @@ class Iface extends Resource {
 	 * @return {string}
 	 */
 	private get_userIpAddress() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_userIpAddress;
 	}
 	
@@ -294,7 +282,6 @@ class Iface extends Resource {
 	 * @return {string}
 	 */
 	private get_serverId() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_serverId;
 	}
 	
@@ -334,7 +321,6 @@ class Iface extends Resource {
 	 */
 	apiDeserializeImpl(r:any) {
 		Util.validateArgCount(arguments.length, 1);
-		Util.validateType(r, "any");
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -391,7 +377,6 @@ class Iface extends Resource {
 	 * @return {any}
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
-		Util.validateArgCount(arguments.length, 0);
 		Util.validateType(withClean, "boolean");
 		var ret:any = {  };
 		if (withClean || this.n_id) {

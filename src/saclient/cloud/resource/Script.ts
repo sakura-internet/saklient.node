@@ -1,26 +1,25 @@
 /// <reference path="../../../node.d.ts" />
 
-export = IsoImage;
+export = Script;
 
 import Util = require('../../Util');
 import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');
-import EScope = require('../enums/EScope');
 
 /**
- * ISOイメージのリソース情報へのアクセス機能や操作機能を備えたクラス。
+ * スクリプトのリソース情報へのアクセス機能や操作機能を備えたクラス。
  * 
- * @class IsoImage
+ * @class Script
  * @constructor
  * @extends Resource
  */
-class IsoImage extends Resource {
+class Script extends Resource {
 	
 	/**
 	 * ID
 	 * 
-	 * @member saclient.cloud.resource.IsoImage#m_id
+	 * @member saclient.cloud.resource.Script#m_id
 	 * @type string
 	 * @protected
 	 */
@@ -29,16 +28,25 @@ class IsoImage extends Resource {
 	/**
 	 * スコープ
 	 * 
-	 * @member saclient.cloud.resource.IsoImage#m_scope
+	 * @member saclient.cloud.resource.Script#m_scope
 	 * @type string
 	 * @protected
 	 */
 	m_scope : string;
 	
 	/**
+	 * クラス
+	 * 
+	 * @member saclient.cloud.resource.Script#m_clazz
+	 * @type string
+	 * @protected
+	 */
+	m_clazz : string;
+	
+	/**
 	 * 名前
 	 * 
-	 * @member saclient.cloud.resource.IsoImage#m_name
+	 * @member saclient.cloud.resource.Script#m_name
 	 * @type string
 	 * @protected
 	 */
@@ -47,7 +55,7 @@ class IsoImage extends Resource {
 	/**
 	 * 説明
 	 * 
-	 * @member saclient.cloud.resource.IsoImage#m_description
+	 * @member saclient.cloud.resource.Script#m_description
 	 * @type string
 	 * @protected
 	 */
@@ -56,7 +64,7 @@ class IsoImage extends Resource {
 	/**
 	 * タグ
 	 * 
-	 * @member saclient.cloud.resource.IsoImage#m_tags
+	 * @member saclient.cloud.resource.Script#m_tags
 	 * @type string[]
 	 * @protected
 	 */
@@ -65,29 +73,29 @@ class IsoImage extends Resource {
 	/**
 	 * アイコン
 	 * 
-	 * @member saclient.cloud.resource.IsoImage#m_icon
+	 * @member saclient.cloud.resource.Script#m_icon
 	 * @type Icon
 	 * @protected
 	 */
 	m_icon : Icon;
 	
 	/**
-	 * サイズ[MiB]
+	 * 内容
 	 * 
-	 * @member saclient.cloud.resource.IsoImage#m_sizeMib
-	 * @type number
-	 * @protected
-	 */
-	m_sizeMib : number;
-	
-	/**
-	 * サービスクラス
-	 * 
-	 * @member saclient.cloud.resource.IsoImage#m_serviceClass
+	 * @member saclient.cloud.resource.Script#m_content
 	 * @type string
 	 * @protected
 	 */
-	m_serviceClass : string;
+	m_content : string;
+	
+	/**
+	 * 注釈
+	 * 
+	 * @member saclient.cloud.resource.Script#m_annotation
+	 * @type any
+	 * @protected
+	 */
+	m_annotation : any;
 	
 	/**
 	 * @private
@@ -96,7 +104,7 @@ class IsoImage extends Resource {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		return "/cdrom";
+		return "/note";
 	}
 	
 	/**
@@ -106,7 +114,7 @@ class IsoImage extends Resource {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		return "CDROM";
+		return "Note";
 	}
 	
 	/**
@@ -116,7 +124,7 @@ class IsoImage extends Resource {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		return "CDROMs";
+		return "Notes";
 	}
 	
 	/**
@@ -135,10 +143,10 @@ class IsoImage extends Resource {
 	 * @method save
 	 * @chainable
 	 * @public
-	 * @return {IsoImage} this
+	 * @return {Script} this
 	 */
-	save() : IsoImage {
-		return (<IsoImage><any>(this._save()));
+	save() : Script {
+		return (<Script><any>(this._save()));
 	}
 	
 	/**
@@ -147,10 +155,10 @@ class IsoImage extends Resource {
 	 * @method reload
 	 * @chainable
 	 * @public
-	 * @return {IsoImage} this
+	 * @return {Script} this
 	 */
-	reload() : IsoImage {
-		return (<IsoImage><any>(this._reload()));
+	reload() : Script {
+		return (<Script><any>(this._reload()));
 	}
 	
 	/**
@@ -168,27 +176,7 @@ class IsoImage extends Resource {
 	}
 	
 	/**
-	 * @method get_sizeGib
-	 * @protected
-	 * @return {number}
-	 */
-	get_sizeGib() : number {
-		return this.get_sizeMib() >> 10;
-	}
-	
-	/**
-	 * サイズ[GiB]
-	 * 
-	 * @property sizeGib
-	 * @type number
-	 * @readOnly
-	 * @public
-	 */
-	get sizeGib() : number { return this.get_sizeGib(); }
-	
-	
-	/**
-	 * @member saclient.cloud.resource.IsoImage#n_id
+	 * @member saclient.cloud.resource.Script#n_id
 	 * @type boolean
 	 * @private
 	 */
@@ -217,7 +205,7 @@ class IsoImage extends Resource {
 	
 	
 	/**
-	 * @member saclient.cloud.resource.IsoImage#n_scope
+	 * @member saclient.cloud.resource.Script#n_scope
 	 * @type boolean
 	 * @private
 	 */
@@ -235,34 +223,63 @@ class IsoImage extends Resource {
 	}
 	
 	/**
-	 * (This method is generated in Translator_default#buildImpl)
-	 * 
-	 * @method set_scope
-	 * @private
-	 * @param {string} v
-	 * @return {string}
-	 */
-	private set_scope(v:string) : string {
-		Util.validateArgCount(arguments.length, 1);
-		Util.validateType(v, "string");
-		this.m_scope = v;
-		this.n_scope = true;
-		return this.m_scope;
-	}
-	
-	/**
 	 * スコープ
 	 * 
 	 * @property scope
 	 * @type string
+	 * @readOnly
 	 * @public
 	 */
 	get scope() : string { return this.get_scope(); }
-	set scope(v:string) { this.set_scope(v); }
 	
 	
 	/**
-	 * @member saclient.cloud.resource.IsoImage#n_name
+	 * @member saclient.cloud.resource.Script#n_clazz
+	 * @type boolean
+	 * @private
+	 */
+	private n_clazz : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_clazz
+	 * @private
+	 * @return {string}
+	 */
+	private get_clazz() : string {
+		return this.m_clazz;
+	}
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method set_clazz
+	 * @private
+	 * @param {string} v
+	 * @return {string}
+	 */
+	private set_clazz(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
+		this.m_clazz = v;
+		this.n_clazz = true;
+		return this.m_clazz;
+	}
+	
+	/**
+	 * クラス
+	 * 
+	 * @property clazz
+	 * @type string
+	 * @public
+	 */
+	get clazz() : string { return this.get_clazz(); }
+	set clazz(v:string) { this.set_clazz(v); }
+	
+	
+	/**
+	 * @member saclient.cloud.resource.Script#n_name
 	 * @type boolean
 	 * @private
 	 */
@@ -280,34 +297,18 @@ class IsoImage extends Resource {
 	}
 	
 	/**
-	 * (This method is generated in Translator_default#buildImpl)
-	 * 
-	 * @method set_name
-	 * @private
-	 * @param {string} v
-	 * @return {string}
-	 */
-	private set_name(v:string) : string {
-		Util.validateArgCount(arguments.length, 1);
-		Util.validateType(v, "string");
-		this.m_name = v;
-		this.n_name = true;
-		return this.m_name;
-	}
-	
-	/**
 	 * 名前
 	 * 
 	 * @property name
 	 * @type string
+	 * @readOnly
 	 * @public
 	 */
 	get name() : string { return this.get_name(); }
-	set name(v:string) { this.set_name(v); }
 	
 	
 	/**
-	 * @member saclient.cloud.resource.IsoImage#n_description
+	 * @member saclient.cloud.resource.Script#n_description
 	 * @type boolean
 	 * @private
 	 */
@@ -352,7 +353,7 @@ class IsoImage extends Resource {
 	
 	
 	/**
-	 * @member saclient.cloud.resource.IsoImage#n_tags
+	 * @member saclient.cloud.resource.Script#n_tags
 	 * @type boolean
 	 * @private
 	 */
@@ -397,7 +398,7 @@ class IsoImage extends Resource {
 	
 	
 	/**
-	 * @member saclient.cloud.resource.IsoImage#n_icon
+	 * @member saclient.cloud.resource.Script#n_icon
 	 * @type boolean
 	 * @private
 	 */
@@ -442,61 +443,92 @@ class IsoImage extends Resource {
 	
 	
 	/**
-	 * @member saclient.cloud.resource.IsoImage#n_sizeMib
+	 * @member saclient.cloud.resource.Script#n_content
 	 * @type boolean
 	 * @private
 	 */
-	private n_sizeMib : boolean = false;
+	private n_content : boolean = false;
 	
 	/**
 	 * (This method is generated in Translator_default#buildImpl)
 	 * 
-	 * @method get_sizeMib
-	 * @private
-	 * @return {number}
-	 */
-	private get_sizeMib() : number {
-		return this.m_sizeMib;
-	}
-	
-	/**
-	 * サイズ[MiB]
-	 * 
-	 * @property sizeMib
-	 * @type number
-	 * @readOnly
-	 * @public
-	 */
-	get sizeMib() : number { return this.get_sizeMib(); }
-	
-	
-	/**
-	 * @member saclient.cloud.resource.IsoImage#n_serviceClass
-	 * @type boolean
-	 * @private
-	 */
-	private n_serviceClass : boolean = false;
-	
-	/**
-	 * (This method is generated in Translator_default#buildImpl)
-	 * 
-	 * @method get_serviceClass
+	 * @method get_content
 	 * @private
 	 * @return {string}
 	 */
-	private get_serviceClass() : string {
-		return this.m_serviceClass;
+	private get_content() : string {
+		return this.m_content;
 	}
 	
 	/**
-	 * サービスクラス
+	 * (This method is generated in Translator_default#buildImpl)
 	 * 
-	 * @property serviceClass
+	 * @method set_content
+	 * @private
+	 * @param {string} v
+	 * @return {string}
+	 */
+	private set_content(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
+		this.m_content = v;
+		this.n_content = true;
+		return this.m_content;
+	}
+	
+	/**
+	 * 内容
+	 * 
+	 * @property content
 	 * @type string
-	 * @readOnly
 	 * @public
 	 */
-	get serviceClass() : string { return this.get_serviceClass(); }
+	get content() : string { return this.get_content(); }
+	set content(v:string) { this.set_content(v); }
+	
+	
+	/**
+	 * @member saclient.cloud.resource.Script#n_annotation
+	 * @type boolean
+	 * @private
+	 */
+	private n_annotation : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_annotation
+	 * @private
+	 * @return {any}
+	 */
+	private get_annotation() : any {
+		return this.m_annotation;
+	}
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method set_annotation
+	 * @private
+	 * @param {any} v
+	 * @return {any}
+	 */
+	private set_annotation(v:any) : any {
+		Util.validateArgCount(arguments.length, 1);
+		this.m_annotation = v;
+		this.n_annotation = true;
+		return this.m_annotation;
+	}
+	
+	/**
+	 * 注釈
+	 * 
+	 * @property annotation
+	 * @type any
+	 * @public
+	 */
+	get annotation() : any { return this.get_annotation(); }
+	set annotation(v:any) { this.set_annotation(v); }
 	
 	
 	/**
@@ -529,6 +561,14 @@ class IsoImage extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_scope = false;
+		if (Util.existsPath(r, "Class")) {
+			this.m_clazz = Util.getByPath(r, "Class") == null ? null : "" + Util.getByPath(r, "Class");
+		}
+		else {
+			this.m_clazz = null;
+			this.isIncomplete = true;
+		};
+		this.n_clazz = false;
 		if (Util.existsPath(r, "Name")) {
 			this.m_name = Util.getByPath(r, "Name") == null ? null : "" + Util.getByPath(r, "Name");
 		}
@@ -572,22 +612,22 @@ class IsoImage extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_icon = false;
-		if (Util.existsPath(r, "SizeMB")) {
-			this.m_sizeMib = Util.getByPath(r, "SizeMB") == null ? null : parseInt("" + Util.getByPath(r, "SizeMB"), 10);
+		if (Util.existsPath(r, "Content")) {
+			this.m_content = Util.getByPath(r, "Content") == null ? null : "" + Util.getByPath(r, "Content");
 		}
 		else {
-			this.m_sizeMib = null;
+			this.m_content = null;
 			this.isIncomplete = true;
 		};
-		this.n_sizeMib = false;
-		if (Util.existsPath(r, "ServiceClass")) {
-			this.m_serviceClass = Util.getByPath(r, "ServiceClass") == null ? null : "" + Util.getByPath(r, "ServiceClass");
+		this.n_content = false;
+		if (Util.existsPath(r, "Remark")) {
+			this.m_annotation = Util.getByPath(r, "Remark");
 		}
 		else {
-			this.m_serviceClass = null;
+			this.m_annotation = null;
 			this.isIncomplete = true;
 		};
-		this.n_serviceClass = false;
+		this.n_annotation = false;
 	}
 	
 	/**
@@ -607,6 +647,9 @@ class IsoImage extends Resource {
 		if (withClean || this.n_scope) {
 			Util.setByPath(ret, "Scope", this.m_scope);
 		};
+		if (withClean || this.n_clazz) {
+			Util.setByPath(ret, "Class", this.m_clazz);
+		};
 		if (withClean || this.n_name) {
 			Util.setByPath(ret, "Name", this.m_name);
 		};
@@ -625,11 +668,11 @@ class IsoImage extends Resource {
 		if (withClean || this.n_icon) {
 			Util.setByPath(ret, "Icon", withClean ? (this.m_icon == null ? null : this.m_icon.apiSerialize(withClean)) : (this.m_icon == null ? { ID: "0" } : this.m_icon.apiSerializeID()));
 		};
-		if (withClean || this.n_sizeMib) {
-			Util.setByPath(ret, "SizeMB", this.m_sizeMib);
+		if (withClean || this.n_content) {
+			Util.setByPath(ret, "Content", this.m_content);
 		};
-		if (withClean || this.n_serviceClass) {
-			Util.setByPath(ret, "ServiceClass", this.m_serviceClass);
+		if (withClean || this.n_annotation) {
+			Util.setByPath(ret, "Remark", this.m_annotation);
 		};
 		return ret;
 	}

@@ -23,7 +23,6 @@ class Model_IsoImage extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "/cdrom";
 	}
 	
@@ -34,7 +33,6 @@ class Model_IsoImage extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "CDROM";
 	}
 	
@@ -45,7 +43,6 @@ class Model_IsoImage extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "CDROMs";
 	}
 	
@@ -56,7 +53,6 @@ class Model_IsoImage extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "IsoImage";
 	}
 	
@@ -104,7 +100,6 @@ class Model_IsoImage extends Model {
 	filterBy(key:string, value:any, multiple:boolean=false) : Model_IsoImage {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(key, "string");
-		Util.validateType(value, "any");
 		Util.validateType(multiple, "boolean");
 		return (<Model_IsoImage><any>(this._filterBy(key, value, multiple)));
 	}
@@ -118,7 +113,6 @@ class Model_IsoImage extends Model {
 	 * @return {Model_IsoImage} this
 	 */
 	reset() : Model_IsoImage {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Model_IsoImage><any>(this._reset()));
 	}
 	
@@ -144,7 +138,6 @@ class Model_IsoImage extends Model {
 	 * @return {IsoImage[]} リソースオブジェクトの配列
 	 */
 	find() : IsoImage[] {
-		Util.validateArgCount(arguments.length, 0);
 		return Util.castArray(this._find(), (<IsoImage><any>(null)));
 	}
 	
@@ -205,7 +198,6 @@ class Model_IsoImage extends Model {
 	 * @return {Model_IsoImage}
 	 */
 	withSharedScope() : Model_IsoImage {
-		Util.validateArgCount(arguments.length, 0);
 		this._filterBy("Scope", EScope.shared);
 		return this;
 	}
@@ -219,7 +211,6 @@ class Model_IsoImage extends Model {
 	 * @return {Model_IsoImage}
 	 */
 	withUserScope() : Model_IsoImage {
-		Util.validateArgCount(arguments.length, 0);
 		this._filterBy("Scope", EScope.user);
 		return this;
 	}

@@ -4,6 +4,7 @@ export = DiskConfig;
 
 import Util = require('../../Util');
 import Client = require('../Client');
+import Script = require('./Script');
 
 /**
  * ディスク修正のパラメータ
@@ -27,7 +28,6 @@ class DiskConfig {
 	 * @return {Client}
 	 */
 	get_client() : Client {
-		Util.validateArgCount(arguments.length, 0);
 		return this._client;
 	}
 	
@@ -54,11 +54,12 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	get_diskId() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this._diskId;
 	}
 	
 	/**
+	 * 修正対象のディスクID
+	 * 
 	 * @property diskId
 	 * @type string
 	 * @readOnly
@@ -81,7 +82,6 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	get_hostName() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this._hostName;
 	}
 	
@@ -99,6 +99,8 @@ class DiskConfig {
 	}
 	
 	/**
+	 * ホスト名
+	 * 
 	 * @property hostName
 	 * @type string
 	 * @public
@@ -121,7 +123,6 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	get_password() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this._password;
 	}
 	
@@ -139,6 +140,8 @@ class DiskConfig {
 	}
 	
 	/**
+	 * ログインパスワード
+	 * 
 	 * @property password
 	 * @type string
 	 * @public
@@ -161,7 +164,6 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	get_sshKey() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this._sshKey;
 	}
 	
@@ -179,6 +181,8 @@ class DiskConfig {
 	}
 	
 	/**
+	 * SSHキー
+	 * 
 	 * @property sshKey
 	 * @type string
 	 * @public
@@ -201,7 +205,6 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	get_ipAddress() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this._ipAddress;
 	}
 	
@@ -219,6 +222,8 @@ class DiskConfig {
 	}
 	
 	/**
+	 * IPアドレス
+	 * 
 	 * @property ipAddress
 	 * @type string
 	 * @public
@@ -241,7 +246,6 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	get_defaultRoute() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this._defaultRoute;
 	}
 	
@@ -259,6 +263,8 @@ class DiskConfig {
 	}
 	
 	/**
+	 * デフォルトルート
+	 * 
 	 * @property defaultRoute
 	 * @type string
 	 * @public
@@ -281,7 +287,6 @@ class DiskConfig {
 	 * @return {number}
 	 */
 	get_networkMaskLen() : number {
-		Util.validateArgCount(arguments.length, 0);
 		return this._networkMaskLen;
 	}
 	
@@ -299,12 +304,42 @@ class DiskConfig {
 	}
 	
 	/**
+	 * ネットワークマスク長
+	 * 
 	 * @property networkMaskLen
 	 * @type number
 	 * @public
 	 */
 	get networkMaskLen() : number { return this.get_networkMaskLen(); }
 	set networkMaskLen(v:number) { this.set_networkMaskLen(v); }
+	
+	
+	/**
+	 * @private
+	 * @member saclient.cloud.resource.DiskConfig#_scripts
+	 * @type Script[]
+	 * @protected
+	 */
+	_scripts : Script[];
+	
+	/**
+	 * @method get_scripts
+	 * @protected
+	 * @return {Script[]}
+	 */
+	get_scripts() : Script[] {
+		return this._scripts;
+	}
+	
+	/**
+	 * スタートアップスクリプト
+	 * 
+	 * @property scripts
+	 * @type Script[]
+	 * @readOnly
+	 * @public
+	 */
+	get scripts() : Script[] { return this.get_scripts(); }
 	
 	
 	/**
@@ -326,10 +361,27 @@ class DiskConfig {
 		this._ipAddress = null;
 		this._defaultRoute = null;
 		this._networkMaskLen = null;
+		this._scripts = [];
 	}
 	
 	/**
-	 * *
+	 * スタートアップスクリプトを追加します。
+	 * 
+	 * @method addScript
+	 * @chainable
+	 * @public
+	 * @param {Script} script
+	 * @return {DiskConfig}
+	 */
+	addScript(script:Script) : DiskConfig {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(script, "saclient.cloud.resource.Script");
+		this._scripts.push(script);
+		return this;
+	}
+	
+	/**
+	 * 修正内容を実際のディスクに書き込みます。
 	 * 
 	 * @method write
 	 * @chainable
@@ -337,7 +389,6 @@ class DiskConfig {
 	 * @return {DiskConfig}
 	 */
 	write() : DiskConfig {
-		Util.validateArgCount(arguments.length, 0);
 		var q:any = {};
 		if (this._hostName != null) {
 			Util.setByPath(q, "HostName", this._hostName);
@@ -356,6 +407,14 @@ class DiskConfig {
 		};
 		if (this._networkMaskLen != null) {
 			Util.setByPath(q, "UserSubnet.NetworkMaskLen", this._networkMaskLen);
+		};
+		if (0 < this._scripts.length) {
+			var notes:any[] = [];
+			for (var __it1:number=0; __it1<this._scripts.length; __it1++) {
+				var script = this._scripts[__it1];
+				notes.push({ ID: script._id() });
+			};
+			Util.setByPath(q, "Notes", notes);
 		};
 		var path:string = "/disk/" + this._diskId + "/config";
 		var result:any = this._client.request("PUT", path, q);

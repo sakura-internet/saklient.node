@@ -16,6 +16,8 @@ import Resource = require('./Resource');
 class Icon extends Resource {
 	
 	/**
+	 * ID
+	 * 
 	 * @member saclient.cloud.resource.Icon#m_id
 	 * @type string
 	 * @protected
@@ -23,6 +25,17 @@ class Icon extends Resource {
 	m_id : string;
 	
 	/**
+	 * スコープ
+	 * 
+	 * @member saclient.cloud.resource.Icon#m_scope
+	 * @type string
+	 * @protected
+	 */
+	m_scope : string;
+	
+	/**
+	 * 名前
+	 * 
 	 * @member saclient.cloud.resource.Icon#m_name
 	 * @type string
 	 * @protected
@@ -30,6 +43,8 @@ class Icon extends Resource {
 	m_name : string;
 	
 	/**
+	 * URL
+	 * 
 	 * @member saclient.cloud.resource.Icon#m_url
 	 * @type string
 	 * @protected
@@ -43,7 +58,6 @@ class Icon extends Resource {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "/icon";
 	}
 	
@@ -54,7 +68,6 @@ class Icon extends Resource {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Icon";
 	}
 	
@@ -65,7 +78,6 @@ class Icon extends Resource {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Icons";
 	}
 	
@@ -76,7 +88,6 @@ class Icon extends Resource {
 	 * @return {string}
 	 */
 	_id() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.get_id();
 	}
 	
@@ -89,7 +100,6 @@ class Icon extends Resource {
 	 * @return {Icon} this
 	 */
 	save() : Icon {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Icon><any>(this._save()));
 	}
 	
@@ -102,7 +112,6 @@ class Icon extends Resource {
 	 * @return {Icon} this
 	 */
 	reload() : Icon {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Icon><any>(this._reload()));
 	}
 	
@@ -117,7 +126,6 @@ class Icon extends Resource {
 		super(client);
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(client, "saclient.cloud.Client");
-		Util.validateType(r, "any");
 		this.apiDeserialize(r);
 	}
 	
@@ -136,17 +144,47 @@ class Icon extends Resource {
 	 * @return {string}
 	 */
 	private get_id() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_id;
 	}
 	
 	/**
+	 * ID
+	 * 
 	 * @property id
 	 * @type string
 	 * @readOnly
 	 * @public
 	 */
 	get id() : string { return this.get_id(); }
+	
+	
+	/**
+	 * @member saclient.cloud.resource.Icon#n_scope
+	 * @type boolean
+	 * @private
+	 */
+	private n_scope : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_scope
+	 * @private
+	 * @return {string}
+	 */
+	private get_scope() : string {
+		return this.m_scope;
+	}
+	
+	/**
+	 * スコープ
+	 * 
+	 * @property scope
+	 * @type string
+	 * @readOnly
+	 * @public
+	 */
+	get scope() : string { return this.get_scope(); }
 	
 	
 	/**
@@ -164,11 +202,12 @@ class Icon extends Resource {
 	 * @return {string}
 	 */
 	private get_name() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_name;
 	}
 	
 	/**
+	 * 名前
+	 * 
 	 * @property name
 	 * @type string
 	 * @readOnly
@@ -192,11 +231,12 @@ class Icon extends Resource {
 	 * @return {string}
 	 */
 	private get_url() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return this.m_url;
 	}
 	
 	/**
+	 * URL
+	 * 
 	 * @property url
 	 * @type string
 	 * @readOnly
@@ -214,7 +254,6 @@ class Icon extends Resource {
 	 */
 	apiDeserializeImpl(r:any) {
 		Util.validateArgCount(arguments.length, 1);
-		Util.validateType(r, "any");
 		this.isNew = r == null;
 		if (this.isNew) {
 			r = {  };
@@ -228,6 +267,14 @@ class Icon extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_id = false;
+		if (Util.existsPath(r, "Scope")) {
+			this.m_scope = Util.getByPath(r, "Scope") == null ? null : "" + Util.getByPath(r, "Scope");
+		}
+		else {
+			this.m_scope = null;
+			this.isIncomplete = true;
+		};
+		this.n_scope = false;
 		if (Util.existsPath(r, "Name")) {
 			this.m_name = Util.getByPath(r, "Name") == null ? null : "" + Util.getByPath(r, "Name");
 		}
@@ -255,11 +302,13 @@ class Icon extends Resource {
 	 * @return {any}
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
-		Util.validateArgCount(arguments.length, 0);
 		Util.validateType(withClean, "boolean");
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);
+		};
+		if (withClean || this.n_scope) {
+			Util.setByPath(ret, "Scope", this.m_scope);
 		};
 		if (withClean || this.n_name) {
 			Util.setByPath(ret, "Name", this.m_name);

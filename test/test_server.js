@@ -113,6 +113,16 @@ describe('Server', function(){
 			archives.length.should.be.above(0);
 			var archive = archives[0];
 			
+			// search scripts
+			trace('searching scripts...');
+			var scripts = api.script
+				.withNameLike('WordPress')
+				.withSharedScope()
+				.limit(1)
+				.find();
+			scripts.length.should.be.above(0);
+			var script = scripts[0];
+			
 			// create a disk
 			trace('creating a disk...');
 			var disk = api.disk.create();
@@ -170,6 +180,7 @@ describe('Server', function(){
 			diskconf.hostName = hostName;
 			diskconf.password = Math.random().toString(36).slice(2);
 			diskconf.sshKey = sshPublicKey;
+			diskconf.scripts.push(script);
 			diskconf.write();
 			
 			// boot

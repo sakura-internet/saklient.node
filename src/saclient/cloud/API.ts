@@ -15,6 +15,7 @@ import Model_Iface = require('./model/Model_Iface');
 import Model_Swytch = require('./model/Model_Swytch');
 import Model_Router = require('./model/Model_Router');
 import Model_Ipv6Net = require('./model/Model_Ipv6Net');
+import Model_Script = require('./model/Model_Script');
 
 /**
  * さくらのクラウドAPIクライアントを利用する際、最初にアクセスすべきルートとなるクラス。
@@ -39,7 +40,6 @@ class API {
 	 * @return {Client}
 	 */
 	get_client() : Client {
-		Util.validateArgCount(arguments.length, 0);
 		return this._client;
 	}
 	
@@ -66,7 +66,6 @@ class API {
 	 * @return {Product}
 	 */
 	get_product() : Product {
-		Util.validateArgCount(arguments.length, 0);
 		return this._product;
 	}
 	
@@ -93,7 +92,6 @@ class API {
 	 * @return {Model_Icon}
 	 */
 	get_icon() : Model_Icon {
-		Util.validateArgCount(arguments.length, 0);
 		return this._icon;
 	}
 	
@@ -120,7 +118,6 @@ class API {
 	 * @return {Model_Server}
 	 */
 	get_server() : Model_Server {
-		Util.validateArgCount(arguments.length, 0);
 		return this._server;
 	}
 	
@@ -147,7 +144,6 @@ class API {
 	 * @return {Model_Disk}
 	 */
 	get_disk() : Model_Disk {
-		Util.validateArgCount(arguments.length, 0);
 		return this._disk;
 	}
 	
@@ -174,7 +170,6 @@ class API {
 	 * @return {Model_Appliance}
 	 */
 	get_appliance() : Model_Appliance {
-		Util.validateArgCount(arguments.length, 0);
 		return this._appliance;
 	}
 	
@@ -201,7 +196,6 @@ class API {
 	 * @return {Model_Archive}
 	 */
 	get_archive() : Model_Archive {
-		Util.validateArgCount(arguments.length, 0);
 		return this._archive;
 	}
 	
@@ -228,7 +222,6 @@ class API {
 	 * @return {Model_IsoImage}
 	 */
 	get_isoImage() : Model_IsoImage {
-		Util.validateArgCount(arguments.length, 0);
 		return this._isoImage;
 	}
 	
@@ -255,7 +248,6 @@ class API {
 	 * @return {Model_Iface}
 	 */
 	get_iface() : Model_Iface {
-		Util.validateArgCount(arguments.length, 0);
 		return this._iface;
 	}
 	
@@ -282,7 +274,6 @@ class API {
 	 * @return {Model_Swytch}
 	 */
 	get_swytch() : Model_Swytch {
-		Util.validateArgCount(arguments.length, 0);
 		return this._swytch;
 	}
 	
@@ -309,7 +300,6 @@ class API {
 	 * @return {Model_Router}
 	 */
 	get_router() : Model_Router {
-		Util.validateArgCount(arguments.length, 0);
 		return this._router;
 	}
 	
@@ -336,7 +326,6 @@ class API {
 	 * @return {Model_Ipv6Net}
 	 */
 	get_ipv6Net() : Model_Ipv6Net {
-		Util.validateArgCount(arguments.length, 0);
 		return this._ipv6Net;
 	}
 	
@@ -347,6 +336,32 @@ class API {
 	 * @public
 	 */
 	get ipv6Net() : Model_Ipv6Net { return this.get_ipv6Net(); }
+	
+	
+	/**
+	 * @private
+	 * @member saclient.cloud.API#_script
+	 * @type Model_Script
+	 * @protected
+	 */
+	_script : Model_Script;
+	
+	/**
+	 * @method get_script
+	 * @protected
+	 * @return {Model_Script}
+	 */
+	get_script() : Model_Script {
+		return this._script;
+	}
+	
+	/**
+	 * @property script
+	 * @type Model_Script
+	 * @readOnly
+	 * @public
+	 */
+	get script() : Model_Script { return this.get_script(); }
 	
 	
 	/**
@@ -369,6 +384,7 @@ class API {
 		this._swytch = new Model_Swytch(client);
 		this._router = new Model_Router(client);
 		this._ipv6Net = new Model_Ipv6Net(client);
+		this._script = new Model_Script(client);
 	}
 	
 	/**

@@ -22,7 +22,6 @@ class Model_Iface extends Model {
 	 * @return {string}
 	 */
 	_apiPath() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "/interface";
 	}
 	
@@ -33,7 +32,6 @@ class Model_Iface extends Model {
 	 * @return {string}
 	 */
 	_rootKey() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Interface";
 	}
 	
@@ -44,7 +42,6 @@ class Model_Iface extends Model {
 	 * @return {string}
 	 */
 	_rootKeyM() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Interfaces";
 	}
 	
@@ -55,7 +52,6 @@ class Model_Iface extends Model {
 	 * @return {string}
 	 */
 	_className() : string {
-		Util.validateArgCount(arguments.length, 0);
 		return "Iface";
 	}
 	
@@ -103,7 +99,6 @@ class Model_Iface extends Model {
 	filterBy(key:string, value:any, multiple:boolean=false) : Model_Iface {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(key, "string");
-		Util.validateType(value, "any");
 		Util.validateType(multiple, "boolean");
 		return (<Model_Iface><any>(this._filterBy(key, value, multiple)));
 	}
@@ -117,7 +112,6 @@ class Model_Iface extends Model {
 	 * @return {Model_Iface} this
 	 */
 	reset() : Model_Iface {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Model_Iface><any>(this._reset()));
 	}
 	
@@ -129,7 +123,6 @@ class Model_Iface extends Model {
 	 * @return {Iface}
 	 */
 	create() : Iface {
-		Util.validateArgCount(arguments.length, 0);
 		return (<Iface><any>(this._create()));
 	}
 	
@@ -155,7 +148,6 @@ class Model_Iface extends Model {
 	 * @return {Iface[]} リソースオブジェクトの配列
 	 */
 	find() : Iface[] {
-		Util.validateArgCount(arguments.length, 0);
 		return Util.castArray(this._find(), (<Iface><any>(null)));
 	}
 	
