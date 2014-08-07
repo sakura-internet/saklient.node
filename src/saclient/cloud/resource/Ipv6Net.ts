@@ -1,3 +1,5 @@
+'use strict';
+
 /// <reference path="../../../node.d.ts" />
 
 export = Ipv6Net;

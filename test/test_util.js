@@ -1,3 +1,5 @@
+'use strict';
+
 var should = require('should');
 var assert = require('assert');
 
@@ -53,6 +55,10 @@ describe('Util', function () {
 		(function(){
 			API.authorize('abc', []);
 		}).should.throw(/argument_type_mismatch/);
+		(function(){
+			var server = API.authorize('a', 'a').server.create();
+			server.availability = 'available';
+		}).should.throw(/Cannot set property/i);
 	});
 
 });

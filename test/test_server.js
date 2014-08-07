@@ -1,3 +1,5 @@
+'use strict';
+
 var should = require('should');
 var assert = require('assert');
 
@@ -180,7 +182,7 @@ describe('Server', function(){
 			diskconf.hostName = hostName;
 			diskconf.password = Math.random().toString(36).slice(2);
 			diskconf.sshKey = sshPublicKey;
-			diskconf.scripts.push(script);
+			diskconf.scripts.push(script
 			diskconf.write();
 			
 			// boot

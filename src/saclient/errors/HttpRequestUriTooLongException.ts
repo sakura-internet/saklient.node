@@ -1,3 +1,5 @@
+'use strict';
+
 /// <reference path="../../node.d.ts" />
 
 export = HttpRequestUriTooLongException;
