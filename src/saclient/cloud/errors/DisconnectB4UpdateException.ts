@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = DisconnectB4UpdateException;
 
 import HttpConflictException = require('../../errors/HttpConflictException');
+
+'use strict';
 
 /**
  * 要求された操作を行えません。サーバと接続された状態では変更できない値が含まれています。

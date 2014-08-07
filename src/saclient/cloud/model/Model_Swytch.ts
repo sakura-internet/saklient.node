@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Model_Swytch;
@@ -7,6 +5,8 @@ export = Model_Swytch;
 import Util = require('../../Util');
 import Model = require('./Model');
 import Swytch = require('../resource/Swytch');
+
+'use strict';
 
 /**
  * スイッチを検索するための機能を備えたクラス。

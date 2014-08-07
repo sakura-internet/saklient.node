@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../node.d.ts" />
 
 export = HttpUnsupportedMediaTypeException;
 
 import HttpException = require('./HttpException');
+
+'use strict';
 
 /**
  * HTTPエラー。Unsupported Media Type.

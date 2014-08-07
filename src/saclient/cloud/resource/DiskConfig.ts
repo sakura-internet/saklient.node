@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = DiskConfig;
@@ -7,6 +5,8 @@ export = DiskConfig;
 import Util = require('../../Util');
 import Client = require('../Client');
 import Script = require('./Script');
+
+'use strict';
 
 /**
  * ディスク修正のパラメータ

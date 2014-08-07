@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = CopyToItselfException;
 
 import HttpBadRequestException = require('../../errors/HttpBadRequestException');
+
+'use strict';
 
 /**
  * 不適切な要求です。自分自身をソースとするコピーはできません。

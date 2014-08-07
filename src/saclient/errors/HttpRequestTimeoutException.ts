@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../node.d.ts" />
 
 export = HttpRequestTimeoutException;
 
 import HttpException = require('./HttpException');
+
+'use strict';
 
 /**
  * HTTPエラー。Request Timeout.

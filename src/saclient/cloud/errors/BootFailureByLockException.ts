@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = BootFailureByLockException;
 
 import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavailableException');
+
+'use strict';
 
 /**
  * サービスが利用できません。サーバが予期せず終了したため、ロックされています。しばらく時間をおいてから再度お試しください。

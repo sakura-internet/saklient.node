@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = LimitSizeInAccountException;
 
 import HttpConflictException = require('../../errors/HttpConflictException');
+
+'use strict';
 
 /**
  * 要求を受け付けできません。アカウントあたりのリソースサイズ上限により、リソースの割り当てに失敗しました。

@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = UnknownOsTypeException;
 
 import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavailableException');
+
+'use strict';
 
 /**
  * サービスが利用できません。ディスクにインストールされたOSが特定できないため、正しく修正できません。

@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = DnsPtrUpdateFailureException;
 
 import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavailableException');
+
+'use strict';
 
 /**
  * サービスが利用できません。PTRレコードを設定できません。

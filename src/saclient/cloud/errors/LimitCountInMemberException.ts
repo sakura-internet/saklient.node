@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = LimitCountInMemberException;
 
 import HttpConflictException = require('../../errors/HttpConflictException');
+
+'use strict';
 
 /**
  * 要求を受け付けできません。アカウント数上限により作成失敗しました。

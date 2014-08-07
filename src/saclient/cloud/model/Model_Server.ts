@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Model_Server;
@@ -10,6 +8,8 @@ import Server = require('../resource/Server');
 import ServerPlan = require('../resource/ServerPlan');
 import IsoImage = require('../resource/IsoImage');
 import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
+
+'use strict';
 
 /**
  * サーバを検索するための機能を備えたクラス。

@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = DisconnectB4DeleteException;
 
 import HttpConflictException = require('../../errors/HttpConflictException');
+
+'use strict';
 
 /**
  * 要求された操作を行えません。サーバとの接続を切り離した後に実行してください。

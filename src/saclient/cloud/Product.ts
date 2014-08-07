@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../node.d.ts" />
 
 export = Product;
@@ -9,6 +7,8 @@ import Model_ServerPlan = require('./model/Model_ServerPlan');
 import Model_DiskPlan = require('./model/Model_DiskPlan');
 import Model_RouterPlan = require('./model/Model_RouterPlan');
 import Client = require('./Client');
+
+'use strict';
 
 /**
  * @class Product

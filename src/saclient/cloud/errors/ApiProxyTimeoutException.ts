@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = ApiProxyTimeoutException;
 
 import HttpGatewayTimeoutException = require('../../errors/HttpGatewayTimeoutException');
+
+'use strict';
 
 /**
  * APIプロクシがタイムアウトしました。サーバが混雑している可能性があります。

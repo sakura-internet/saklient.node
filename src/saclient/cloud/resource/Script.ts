@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Script;
@@ -8,6 +6,8 @@ import Util = require('../../Util');
 import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');
+
+'use strict';
 
 /**
  * スクリプトのリソース情報へのアクセス機能や操作機能を備えたクラス。

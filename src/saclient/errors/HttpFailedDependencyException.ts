@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../node.d.ts" />
 
 export = HttpFailedDependencyException;
 
 import HttpException = require('./HttpException');
+
+'use strict';
 
 /**
  * HTTPエラー。Failed Dependency.

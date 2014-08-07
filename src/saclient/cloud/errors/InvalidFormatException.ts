@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = InvalidFormatException;
 
 import HttpBadRequestException = require('../../errors/HttpBadRequestException');
+
+'use strict';
 
 /**
  * 不適切な要求です。パラメータに含まれている値のフォーマットが一部不正です。

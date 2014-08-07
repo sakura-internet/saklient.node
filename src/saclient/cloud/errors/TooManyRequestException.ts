@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = TooManyRequestException;
 
 import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavailableException');
+
+'use strict';
 
 /**
  * 要求を受け付けできません。リクエストの密度が高すぎます。

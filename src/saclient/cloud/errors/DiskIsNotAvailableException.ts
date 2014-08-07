@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = DiskIsNotAvailableException;
 
 import HttpConflictException = require('../../errors/HttpConflictException');
+
+'use strict';
 
 /**
  * 要求された操作を行えません。ディスクが利用可能な状態ではありません。コピー処理等の完了後に再度お試しください。

@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = EScope;
@@ -10,6 +8,8 @@ var _map_EScope = {
 	"user": 100,
 	"shared": 200
 };
+
+'use strict';
 
 /**
  * @class EScope

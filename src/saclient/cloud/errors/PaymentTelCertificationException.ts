@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = PaymentTelCertificationException;
 
 import HttpPaymentRequiredException = require('../../errors/HttpPaymentRequiredException');
+
+'use strict';
 
 /**
  * 要求を受け付けできません。電話認証を先に実行してください。

@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../node.d.ts" />
 
 export = ExceptionFactory;
@@ -153,6 +151,8 @@ import UnknownOsTypeException = require('../cloud/errors/UnknownOsTypeException'
 import UnsupportedResClassException = require('../cloud/errors/UnsupportedResClassException');
 import UserNotSpecifiedException = require('../cloud/errors/UserNotSpecifiedException');
 import VncProxyRequestFailureException = require('../cloud/errors/VncProxyRequestFailureException');
+
+'use strict';
 
 /**
  * @class ExceptionFactory

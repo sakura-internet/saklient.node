@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = FilterArrayComparisonException;
 
 import HttpBadRequestException = require('../../errors/HttpBadRequestException');
+
+'use strict';
 
 /**
  * 不適切な要求です。配列とは比較できない演算子がフィルタ中に含まれています。

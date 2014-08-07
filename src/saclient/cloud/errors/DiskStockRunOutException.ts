@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = DiskStockRunOutException;
 
 import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavailableException');
+
+'use strict';
 
 /**
  * サービスが利用できません。作成済みディスクを確保できませんでした。サーバが混雑している可能性があります。

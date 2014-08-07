@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = EServerInstanceStatus;
@@ -15,6 +13,8 @@ var _map_EServerInstanceStatus = {
 	"migrating": 90,
 	"up": 100
 };
+
+'use strict';
 
 /**
  * @class EServerInstanceStatus

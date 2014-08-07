@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../node.d.ts" />
 
 export = HttpProxyAuthenticationRequiredException;
 
 import HttpException = require('./HttpException');
+
+'use strict';
 
 /**
  * HTTPエラー。Proxy Authentication Required.

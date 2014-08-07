@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = RouterPlan;
@@ -7,6 +5,8 @@ export = RouterPlan;
 import Util = require('../../Util');
 import Client = require('../Client');
 import Resource = require('./Resource');
+
+'use strict';
 
 /**
  * ルータのプラン情報へのアクセス機能を備えたクラス。

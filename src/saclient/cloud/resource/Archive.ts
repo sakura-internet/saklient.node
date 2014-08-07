@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Archive;
@@ -11,6 +9,8 @@ import Icon = require('./Icon');
 import DiskPlan = require('./DiskPlan');
 import Server = require('./Server');
 import EScope = require('../enums/EScope');
+
+'use strict';
 
 /**
  * アーカイブのリソース情報へのアクセス機能や操作機能を備えたクラス。

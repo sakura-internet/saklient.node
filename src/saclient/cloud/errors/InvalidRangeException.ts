@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = InvalidRangeException;
 
 import HttpBadRequestException = require('../../errors/HttpBadRequestException');
+
+'use strict';
 
 /**
  * 不適切な要求です。パラメータに含まれている値の範囲が一部不正です。

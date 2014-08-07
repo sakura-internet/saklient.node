@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Disk;
@@ -14,6 +12,8 @@ import Archive = require('./Archive');
 import DiskConfig = require('./DiskConfig');
 import EAvailability = require('../enums/EAvailability');
 import EDiskConnection = require('../enums/EDiskConnection');
+
+'use strict';
 
 /**
  * ディスクのリソース情報へのアクセス機能や操作機能を備えたクラス。

@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Router;
@@ -11,6 +9,8 @@ import Icon = require('./Icon');
 import Swytch = require('./Swytch');
 import Ipv4Net = require('./Ipv4Net');
 import Ipv6Net = require('./Ipv6Net');
+
+'use strict';
 
 /**
  * ルータのリソース情報へのアクセス機能や操作機能を備えたクラス。

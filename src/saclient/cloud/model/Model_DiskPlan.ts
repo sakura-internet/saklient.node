@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Model_DiskPlan;
@@ -7,6 +5,8 @@ export = Model_DiskPlan;
 import Util = require('../../Util');
 import Model = require('./Model');
 import DiskPlan = require('../resource/DiskPlan');
+
+'use strict';
 
 /**
  * ディスクのプランを検索するための機能を備えたクラス。

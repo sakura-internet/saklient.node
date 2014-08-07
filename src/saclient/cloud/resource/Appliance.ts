@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Appliance;
@@ -10,6 +8,8 @@ import Resource = require('./Resource');
 import Icon = require('./Icon');
 import Iface = require('./Iface');
 import EApplianceClass = require('../enums/EApplianceClass');
+
+'use strict';
 
 /**
  * アプライアンスのリソース情報へのアクセス機能や操作機能を備えたクラス。

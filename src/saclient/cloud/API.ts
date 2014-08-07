@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../node.d.ts" />
 
 export = API;
@@ -18,6 +16,8 @@ import Model_Swytch = require('./model/Model_Swytch');
 import Model_Router = require('./model/Model_Router');
 import Model_Ipv6Net = require('./model/Model_Ipv6Net');
 import Model_Script = require('./model/Model_Script');
+
+'use strict';
 
 /**
  * さくらのクラウドAPIクライアントを利用する際、最初にアクセスすべきルートとなるクラス。

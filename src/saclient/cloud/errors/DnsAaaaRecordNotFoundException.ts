@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = DnsAaaaRecordNotFoundException;
 
 import HttpBadRequestException = require('../../errors/HttpBadRequestException');
+
+'use strict';
 
 /**
  * 不適切な要求です。対応するAAAAレコードが見つかりません。

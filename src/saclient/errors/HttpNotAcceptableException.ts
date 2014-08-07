@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../node.d.ts" />
 
 export = HttpNotAcceptableException;
 
 import HttpException = require('./HttpException');
+
+'use strict';
 
 /**
  * 要求を受け付けできません。サポートサイトやメンテナンス情報をご確認ください。

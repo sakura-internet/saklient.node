@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Model_ServerPlan;
@@ -7,6 +5,8 @@ export = Model_ServerPlan;
 import Util = require('../../Util');
 import Model = require('./Model');
 import ServerPlan = require('../resource/ServerPlan');
+
+'use strict';
 
 /**
  * サーバのプランを検索するための機能を備えたクラス。

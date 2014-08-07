@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../node.d.ts" />
 
 export = HttpConflictException;
 
 import HttpException = require('./HttpException');
+
+'use strict';
 
 /**
  * 要求された操作を行えません。現在の対象の状態では、この操作を受け付けできません。

@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Model_Ipv6Net;
@@ -7,6 +5,8 @@ export = Model_Ipv6Net;
 import Util = require('../../Util');
 import Model = require('./Model');
 import Ipv6Net = require('../resource/Ipv6Net');
+
+'use strict';
 
 /**
  * IPv6ネットワークを検索するための機能を備えたクラス。

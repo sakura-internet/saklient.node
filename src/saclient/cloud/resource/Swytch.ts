@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Swytch;
@@ -11,6 +9,8 @@ import Icon = require('./Icon');
 import Router = require('./Router');
 import Ipv4Net = require('./Ipv4Net');
 import Ipv6Net = require('./Ipv6Net');
+
+'use strict';
 
 /**
  * スイッチのリソース情報へのアクセス機能や操作機能を備えたクラス。

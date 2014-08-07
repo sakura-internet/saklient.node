@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = ResourcePathNotFoundException;
 
 import HttpNotFoundException = require('../../errors/HttpNotFoundException');
+
+'use strict';
 
 /**
  * 対象が見つかりません。パスに誤りがあります。

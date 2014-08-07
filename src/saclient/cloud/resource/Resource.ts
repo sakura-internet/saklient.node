@@ -1,11 +1,11 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Resource;
 
 import Util = require('../../Util');
 import Client = require('../Client');
+
+'use strict';
 
 /**
  * @ignore

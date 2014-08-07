@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = AccessApiKeyDisabledException;
 
 import HttpForbiddenException = require('../../errors/HttpForbiddenException');
+
+'use strict';
 
 /**
  * 要求された操作は許可されていません。APIキーによるアクセスはできません。

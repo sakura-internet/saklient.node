@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = EAvailability;
@@ -26,6 +24,8 @@ var _map_EAvailability = {
 	"uploading": 80,
 	"available": 100
 };
+
+'use strict';
 
 /**
  * @class EAvailability

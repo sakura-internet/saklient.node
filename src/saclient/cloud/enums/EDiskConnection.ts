@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = EDiskConnection;
@@ -10,6 +8,8 @@ var _map_EDiskConnection = {
 	"ide": 100,
 	"virtio": 300
 };
+
+'use strict';
 
 /**
  * @class EDiskConnection

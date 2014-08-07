@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = InvalidUriArgumentException;
 
 import HttpNotFoundException = require('../../errors/HttpNotFoundException');
+
+'use strict';
 
 /**
  * 対象が見つかりません。パスに使用できない文字が含まれています。

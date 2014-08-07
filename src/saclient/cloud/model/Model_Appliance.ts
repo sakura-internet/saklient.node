@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Model_Appliance;
@@ -7,6 +5,8 @@ export = Model_Appliance;
 import Util = require('../../Util');
 import Model = require('./Model');
 import Appliance = require('../resource/Appliance');
+
+'use strict';
 
 /**
  * アプライアンスを検索するための機能を備えたクラス。

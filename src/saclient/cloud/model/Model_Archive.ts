@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Model_Archive;
@@ -8,6 +6,8 @@ import Util = require('../../Util');
 import Model = require('./Model');
 import Archive = require('../resource/Archive');
 import EScope = require('../enums/EScope');
+
+'use strict';
 
 /**
  * アーカイブを検索するための機能を備えたクラス。

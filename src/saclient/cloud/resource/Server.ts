@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Server;
@@ -14,6 +12,8 @@ import ServerPlan = require('./ServerPlan');
 import ServerInstance = require('./ServerInstance');
 import IsoImage = require('./IsoImage');
 import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
+
+'use strict';
 
 /**
  * サーバのリソース情報へのアクセス機能や操作機能を備えたクラス。

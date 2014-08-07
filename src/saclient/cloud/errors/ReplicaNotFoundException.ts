@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = ReplicaNotFoundException;
 
 import HttpNotFoundException = require('../../errors/HttpNotFoundException');
+
+'use strict';
 
 /**
  * 対象が見つかりません。このストレージには指定リソースの複製が存在しません。

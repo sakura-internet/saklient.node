@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Model_IsoImage;
@@ -8,6 +6,8 @@ import Util = require('../../Util');
 import Model = require('./Model');
 import IsoImage = require('../resource/IsoImage');
 import EScope = require('../enums/EScope');
+
+'use strict';
 
 /**
  * ISOイメージを検索するための機能を備えたクラス。

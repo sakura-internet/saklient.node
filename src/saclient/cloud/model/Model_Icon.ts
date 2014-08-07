@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Model_Icon;
@@ -8,6 +6,8 @@ import Util = require('../../Util');
 import Model = require('./Model');
 import Icon = require('../resource/Icon');
 import EScope = require('../enums/EScope');
+
+'use strict';
 
 /**
  * アイコンを検索するための機能を備えたクラス。

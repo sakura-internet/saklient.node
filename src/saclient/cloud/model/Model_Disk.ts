@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Model_Disk;
@@ -7,6 +5,8 @@ export = Model_Disk;
 import Util = require('../../Util');
 import Model = require('./Model');
 import Disk = require('../resource/Disk');
+
+'use strict';
 
 /**
  * ディスクを検索するための機能を備えたクラス。

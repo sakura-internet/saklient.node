@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = ServerInstance;
@@ -9,6 +7,8 @@ import Client = require('../Client');
 import Resource = require('./Resource');
 import IsoImage = require('./IsoImage');
 import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
+
+'use strict';
 
 /**
  * サーバインスタンスのリソース情報へのアクセス機能や操作機能を備えたクラス。

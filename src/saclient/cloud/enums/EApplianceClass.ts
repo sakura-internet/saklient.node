@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = EApplianceClass;
@@ -10,6 +8,8 @@ var _map_EApplianceClass = {
 	"loadbalancer": 10,
 	"vpcrouter": 20
 };
+
+'use strict';
 
 /**
  * @class EApplianceClass

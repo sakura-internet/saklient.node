@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Model_Iface;
@@ -7,6 +5,8 @@ export = Model_Iface;
 import Util = require('../../Util');
 import Model = require('./Model');
 import Iface = require('../resource/Iface');
+
+'use strict';
 
 /**
  * インタフェースを検索するための機能を備えたクラス。

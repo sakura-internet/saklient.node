@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = AccessSakuraException;
 
 import HttpForbiddenException = require('../../errors/HttpForbiddenException');
+
+'use strict';
 
 /**
  * 要求された操作は許可されていません。さくらインターネットの会員メニューより認証後に実行してください。

@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Model_RouterPlan;
@@ -7,6 +5,8 @@ export = Model_RouterPlan;
 import Util = require('../../Util');
 import Model = require('./Model');
 import RouterPlan = require('../resource/RouterPlan');
+
+'use strict';
 
 /**
  * ルータのプランを検索するための機能を備えたクラス。

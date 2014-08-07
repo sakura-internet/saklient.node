@@ -1,10 +1,10 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = AmbiguousIdentifierException;
 
 import HttpNotFoundException = require('../../errors/HttpNotFoundException');
+
+'use strict';
 
 /**
  * 対象が見つかりません。識別名から一意にリソースを特定できません。

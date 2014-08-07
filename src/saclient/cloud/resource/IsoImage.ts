@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = IsoImage;
@@ -9,6 +7,8 @@ import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');
 import EScope = require('../enums/EScope');
+
+'use strict';
 
 /**
  * ISOイメージのリソース情報へのアクセス機能や操作機能を備えたクラス。

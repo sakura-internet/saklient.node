@@ -1,5 +1,3 @@
-'use strict';
-
 /// <reference path="../../../node.d.ts" />
 
 export = Model_Script;
@@ -8,6 +6,8 @@ import Util = require('../../Util');
 import Model = require('./Model');
 import Script = require('../resource/Script');
 import EScope = require('../enums/EScope');
+
+'use strict';
 
 /**
  * スクリプトを検索するための機能を備えたクラス。
