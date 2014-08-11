@@ -3,6 +3,7 @@
 export = Router;
 
 import Util = require('../../Util');
+import SaclientException = require('../../errors/SaclientException');
 import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');
@@ -443,6 +444,9 @@ class Router extends Resource {
 	private set_networkMaskLen(v:number) : number {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(v, "number");
+		if (!this.isNew) {
+			throw new SaclientException("immutable_field", "Immutable fields cannot be modified after the resource creation: " + "saclient.cloud.resource.Router#networkMaskLen");
+		};
 		this.m_networkMaskLen = v;
 		this.n_networkMaskLen = true;
 		return this.m_networkMaskLen;
@@ -488,6 +492,9 @@ class Router extends Resource {
 	private set_bandWidthMbps(v:number) : number {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(v, "number");
+		if (!this.isNew) {
+			throw new SaclientException("immutable_field", "Immutable fields cannot be modified after the resource creation: " + "saclient.cloud.resource.Router#bandWidthMbps");
+		};
 		this.m_bandWidthMbps = v;
 		this.n_bandWidthMbps = true;
 		return this.m_bandWidthMbps;

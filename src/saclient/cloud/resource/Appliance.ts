@@ -3,6 +3,7 @@
 export = Appliance;
 
 import Util = require('../../Util');
+import SaclientException = require('../../errors/SaclientException');
 import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');
@@ -280,6 +281,9 @@ class Appliance extends Resource {
 	private set_clazz(v:string) : string {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(v, "string");
+		if (!this.isNew) {
+			throw new SaclientException("immutable_field", "Immutable fields cannot be modified after the resource creation: " + "saclient.cloud.resource.Appliance#clazz");
+		};
 		this.m_clazz = v;
 		this.n_clazz = true;
 		return this.m_clazz;

@@ -135,6 +135,19 @@ describe('Server', function(){
 			disk.save();
 			//console.log(disk.dump());
 			
+			// check an immutable field
+			trace('updating the disk...');
+			var ex = null;
+			try {
+				disk.sizeMib = 20480;
+				disk.save();
+			}
+			catch (ex_) {
+				// 'should.*' does not work correctly in a 'catch' block in a Fiber
+				ex = ex_;
+			}
+			ex.should.be.an.instanceof(saclient.errors.SaclientException);
+			
 			// create a server
 			trace('creating a server...');
 			var server = api.server.create();
@@ -182,7 +195,7 @@ describe('Server', function(){
 			diskconf.hostName = hostName;
 			diskconf.password = Math.random().toString(36).slice(2);
 			diskconf.sshKey = sshPublicKey;
-			diskconf.scripts.push(script
+			diskconf.scripts.push(script);
 			diskconf.write();
 			
 			// boot
@@ -193,7 +206,7 @@ describe('Server', function(){
 			// boot conflict
 			trace('checking the server power conflicts...');
 			// 'should.throw' does not work correctly in a Fiber
-			var ex = null;
+			ex = null;
 			try {
 				server.boot();
 			}

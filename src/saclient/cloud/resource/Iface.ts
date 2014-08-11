@@ -3,6 +3,7 @@
 export = Iface;
 
 import Util = require('../../Util');
+import SaclientException = require('../../errors/SaclientException');
 import Client = require('../Client');
 import Resource = require('./Resource');
 
@@ -298,6 +299,9 @@ class Iface extends Resource {
 	private set_serverId(v:string) : string {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(v, "string");
+		if (!this.isNew) {
+			throw new SaclientException("immutable_field", "Immutable fields cannot be modified after the resource creation: " + "saclient.cloud.resource.Iface#serverId");
+		};
 		this.m_serverId = v;
 		this.n_serverId = true;
 		return this.m_serverId;

@@ -3,6 +3,7 @@
 export = Disk;
 
 import Util = require('../../Util');
+import SaclientException = require('../../errors/SaclientException');
 import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');
@@ -672,6 +673,9 @@ class Disk extends Resource {
 	private set_sizeMib(v:number) : number {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(v, "number");
+		if (!this.isNew) {
+			throw new SaclientException("immutable_field", "Immutable fields cannot be modified after the resource creation: " + "saclient.cloud.resource.Disk#sizeMib");
+		};
 		this.m_sizeMib = v;
 		this.n_sizeMib = true;
 		return this.m_sizeMib;

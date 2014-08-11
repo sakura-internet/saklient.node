@@ -3,6 +3,7 @@
 export = Server;
 
 import Util = require('../../Util');
+import SaclientException = require('../../errors/SaclientException');
 import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');
@@ -654,6 +655,9 @@ class Server extends Resource {
 	private set_plan(v:ServerPlan) : ServerPlan {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(v, "saclient.cloud.resource.ServerPlan");
+		if (!this.isNew) {
+			throw new SaclientException("immutable_field", "Immutable fields cannot be modified after the resource creation: " + "saclient.cloud.resource.Server#plan");
+		};
 		this.m_plan = v;
 		this.n_plan = true;
 		return this.m_plan;
