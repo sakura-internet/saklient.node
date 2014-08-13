@@ -13,7 +13,7 @@ var dateformat = require('dateformat');
 var exec = require('child_process').exec;
 var Fiber = require('fibers');
 
-describe('IsoImage', function(){
+describe('Archive', function(){
 	
 	var config, api;
 	
@@ -70,21 +70,21 @@ describe('IsoImage', function(){
 			var description = 'This instance was created by saclient.node mocha';
 			var tag = 'saclient-test';
 		
-			var iso = api.isoImage.create();
-			iso.should.be.an.instanceof(saclient.cloud.resource.IsoImage);
-			iso.name = name;
-			iso.description = description;
-			iso.tags = [tag];
-			iso.sizeMib = 5120;
-			iso.save();
+			var archive = api.archive.create();
+			archive.should.be.an.instanceof(saclient.cloud.resource.Archive);
+			archive.name = name;
+			archive.description = description;
+			archive.tags = [tag];
+			archive.sizeGib = 20;
+			archive.save();
 			
 			//
-			var ftp = iso.ftpInfo;
+			var ftp = archive.ftpInfo;
 			ftp.should.be.an.instanceof(saclient.cloud.resource.FtpInfo);
 			(ftp.hostName != null).should.be.true;
 			(ftp.user != null).should.be.true;
 			(ftp.password != null).should.be.true;
-			var ftp2 = iso.openFtp(true).ftpInfo;
+			var ftp2 = archive.openFtp(true).ftpInfo;
 			ftp2.should.be.an.instanceof(saclient.cloud.resource.FtpInfo);
 			(ftp2.hostName != null).should.be.true;
 			(ftp2.user != null).should.be.true;
@@ -109,10 +109,10 @@ describe('IsoImage', function(){
 			trace(cmd);
 			trace(execSync('( ' + cmd + ' ) 2>&1'));
 			
-			iso.closeFtp();
+			archive.closeFtp();
 			
 			//
-			iso.destroy();
+			archive.destroy();
 			
 			done();
 			
@@ -121,69 +121,41 @@ describe('IsoImage', function(){
 	
 	
 	
-	it('should be inserted and ejected', function(done){
+	it('should be copied', function(done){
 		Fiber(function(){
 			
 			var name = '!js_mocha-' + dateformat('yyyyMMdd_hhmmss') + '-' + Math.random().toString(36).slice(2);
 			var description = 'This instance was created by saclient.node mocha';
 			var tag = 'saclient-test';
+		
+			var disk = api.disk.create();
+			disk.name = name;
+			disk.description = description;
+			disk.tags = [tag];
+			disk.sizeGib = 20;
+			disk.save();
 			
-			// search isos
-			trace('searching iso images...');
-			var isos = api.isoImage
-				.withNameLike('CentOS 6.5 64bit')
-				.withSharedScope()
-				.limit(1)
-				.find();
-			isos.length.should.be.above(0);
-			var iso = isos[0];
+			var archive = api.archive.create();
+			archive.name = name;
+			archive.description = description;
+			archive.tags = [tag];
+			archive.source = disk;
+			archive.save();
 			
-			// create a server
-			trace('creating a server...');
-			var server = api.server.create();
-			server.should.be.an.instanceof(saclient.cloud.resource.Server);
-			server.name = name;
-			server.description = description;
-			server.tags = [tag];
-			server.plan = api.product.server.getBySpec(1, 1);
-			server.save();
+			if (!archive.sleepWhileCopying()) {
+				should.fail('ディスクからアーカイブへのコピーがタイムアウトまたは失敗しました');
+			}
 			
-			// insert iso image while the server is down
-			trace('inserting an ISO image to the server...');
-			server.insertIsoImage(iso);
-			server.instance.isoImage.should.be.an.instanceof(saclient.cloud.resource.IsoImage);
-			server.instance.isoImage.id.should.equal(iso.id);
+			disk.destroy();
 			
-			// eject iso image while the server is down
-			trace('ejecting the ISO image from the server...');
-			server.ejectIsoImage();
-			(server.instance.isoImage == null).should.be.true;
+			var ftp = archive.openFtp().ftpInfo;
+			ftp.should.be.an.instanceof(saclient.cloud.resource.FtpInfo);
+			(ftp.hostName != null).should.be.true;
+			(ftp.user != null).should.be.true;
+			(ftp.password != null).should.be.true;
 			
-			// boot
-			trace('booting the server...');
-			server.boot();
-			api.sleep(3);
-			
-			// insert iso image while the server is up
-			trace('inserting an ISO image to the server...');
-			server.insertIsoImage(iso);
-			server.instance.isoImage.should.be.an.instanceof(saclient.cloud.resource.IsoImage);
-			server.instance.isoImage.id.should.equal(iso.id);
-			
-			// eject iso image while the server is up
-			trace('ejecting the ISO image from the server...');
-			server.ejectIsoImage();
-			(server.instance.isoImage == null).should.be.true;
-			
-			// stop the server
-			api.sleep(1);
-			trace('stopping the server...');
-			server.stop();
-			server.sleepUntilDown().should.be.ok;
-			
-			// delete the server
-			trace('deleting the server...');
-			server.destroy();
+			archive.closeFtp();
+			archive.destroy();
 			
 			done();
 			

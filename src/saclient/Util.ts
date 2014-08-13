@@ -215,17 +215,19 @@ class Util {
 	 * @param {string} typeName
 	 * @return {void}
 	 */
-	static validateType(value:any, typeName:string) : void {
-		if (typeName=="any" || typeName=="void" || value==null) return;
+	static validateType(value:any, typeName:string, force:boolean=false) : void {
 		var isOk:boolean = false;
-		if (typeName.match(/^[a-z]+$/)) {
-			isOk = typeof value == typeName;
-		}
-		else if (typeName.match(/^saclient\./)) {
-			isOk = value instanceof require("../"+typeName.replace(/\./g, "/"));
-		}
-		else {
-			isOk = value instanceof Util.getByPath(global, typeName);
+		if (!force) {
+			if (typeName=="any" || typeName=="void" || value==null) return;
+			if (typeName.match(/^[a-z]+$/)) {
+				isOk = typeof value == typeName;
+			}
+			else if (typeName.match(/^saclient\./)) {
+				isOk = value instanceof require("../"+typeName.replace(/\./g, "/"));
+			}
+			else {
+				isOk = value instanceof Util.getByPath(global, typeName);
+			}
 		}
 		if (!isOk) throw new SaclientException("argument_type_mismatch", "Argument type mismatch (expected "+typeName+")");
 	}

@@ -9,7 +9,9 @@ import Icon = require('./Icon');
 import FtpInfo = require('./FtpInfo');
 import DiskPlan = require('./DiskPlan');
 import Server = require('./Server');
+import Disk = require('./Disk');
 import EScope = require('../enums/EScope');
+import EAvailability = require('../enums/EAvailability');
 import SaclientException = require('../../errors/SaclientException');
 
 'use strict';
@@ -105,6 +107,15 @@ class Archive extends Resource {
 	m_plan : DiskPlan;
 	
 	/**
+	 * 有効状態
+	 * 
+	 * @member saclient.cloud.resource.Archive#m_availability
+	 * @type string
+	 * @protected
+	 */
+	m_availability : string;
+	
+	/**
 	 * @private
 	 * @method _apiPath
 	 * @protected
@@ -185,25 +196,24 @@ class Archive extends Resource {
 	}
 	
 	/**
-	 * @private
-	 * @method _onAfterApiDeserialize
+	 * @method get_isAvailable
 	 * @protected
-	 * @param {any} root
-	 * @param {any} r
-	 * @return {void}
+	 * @return {boolean}
 	 */
-	_onAfterApiDeserialize(r:any, root:any) : void {
-		Util.validateArgCount(arguments.length, 2);
-		if (root == null) {
-			return;
-		};
-		if (("FTPServer" in root)) {
-			var ftp:any = root["FTPServer"];
-			if (ftp != null) {
-				this._ftpInfo = new FtpInfo(ftp);
-			};
-		};
+	get_isAvailable() : boolean {
+		return this.get_availability() == EAvailability.available;
 	}
+	
+	/**
+	 * ディスクが利用可能なときtrueを返します。
+	 * 
+	 * @property isAvailable
+	 * @type boolean
+	 * @readOnly
+	 * @public
+	 */
+	get isAvailable() : boolean { return this.get_isAvailable(); }
+	
 	
 	/**
 	 * @method get_sizeGib
@@ -215,14 +225,66 @@ class Archive extends Resource {
 	}
 	
 	/**
+	 * @method set_sizeGib
+	 * @protected
+	 * @param {number} sizeGib
+	 * @return {number}
+	 */
+	set_sizeGib(sizeGib:number) : number {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(sizeGib, "number");
+		this.set_sizeMib(sizeGib * 1024);
+		return sizeGib;
+	}
+	
+	/**
 	 * サイズ[GiB]
 	 * 
 	 * @property sizeGib
 	 * @type number
-	 * @readOnly
 	 * @public
 	 */
 	get sizeGib() : number { return this.get_sizeGib(); }
+	set sizeGib(v:number) { this.set_sizeGib(v); }
+	
+	
+	/**
+	 * @private
+	 * @member saclient.cloud.resource.Archive#_source
+	 * @type any
+	 */
+	private _source : any;
+	
+	/**
+	 * @method get_source
+	 * @public
+	 * @return {any}
+	 */
+	get_source() : any {
+		return this._source;
+	}
+	
+	/**
+	 * @method set_source
+	 * @public
+	 * @param {any} source
+	 * @return {any}
+	 */
+	set_source(source:any) : any {
+		Util.validateArgCount(arguments.length, 1);
+		this._source = source;
+		return source;
+	}
+	
+	/**
+	 * アーカイブのコピー元
+	 * 
+	 * @property source
+	 * @type any
+	 * @public
+	 */
+	get source() : any { return this.get_source(); }
+	set source(v:any) { this.set_source(v); }
 	
 	
 	/**
@@ -254,6 +316,80 @@ class Archive extends Resource {
 	
 	
 	/**
+	 * @private
+	 * @method _onAfterApiDeserialize
+	 * @protected
+	 * @param {any} root
+	 * @param {any} r
+	 * @return {void}
+	 */
+	_onAfterApiDeserialize(r:any, root:any) : void {
+		Util.validateArgCount(arguments.length, 2);
+		if (root != null) {
+			if (("FTPServer" in root)) {
+				var ftp:any = root["FTPServer"];
+				if (ftp != null) {
+					this._ftpInfo = new FtpInfo(ftp);
+				};
+			};
+		};
+		if (r != null) {
+			if (("SourceArchive" in r)) {
+				var s:any = r["SourceArchive"];
+				if (s != null) {
+					var id:any = s["ID"];
+					if (id != null) {
+						this._source = new Archive(this._client, s);
+					};
+				};
+			};
+			if (("SourceDisk" in r)) {
+				var s:any = r["SourceDisk"];
+				if (s != null) {
+					var id:any = s["ID"];
+					if (id != null) {
+						this._source = new Disk(this._client, s);
+					};
+				};
+			};
+		};
+	}
+	
+	/**
+	 * @private
+	 * @method _onAfterApiSerialize
+	 * @protected
+	 * @param {boolean} withClean
+	 * @param {any} r
+	 * @return {void}
+	 */
+	_onAfterApiSerialize(r:any, withClean:boolean) : void {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(withClean, "boolean");
+		if (r == null) {
+			return;
+		};
+		if (this._source != null) {
+			if (this._source instanceof Archive) {
+				var archive:Archive = (<Archive><any>(this._source));
+				var s:any = withClean ? archive.apiSerialize(true) : { ID: archive._id() };
+				r["SourceArchive"] = s;
+			}
+			else {
+				if (this._source instanceof Disk) {
+					var disk:Disk = (<Disk><any>(this._source));
+					var s:any = withClean ? disk.apiSerialize(true) : { ID: disk._id() };
+					r["SourceDisk"] = s;
+				}
+				else {
+					this._source = null;
+					Util.validateType(this._source, "Disk or Archive", true);
+				};
+			};
+		};
+	}
+	
+	/**
 	 * @method openFtp
 	 * @chainable
 	 * @public
@@ -283,6 +419,51 @@ class Archive extends Resource {
 		var result:any = this._client.request("DELETE", path);
 		this._ftpInfo = null;
 		return this;
+	}
+	
+	/**
+	 * コピー中のアーカイブが利用可能になるまで待機します。
+	 * 
+	 * @method afterCopy
+	 * @public
+	 * @param {number} timeoutSec
+	 * @param {(Archive, boolean) => void} callback
+	 * @return {void}
+	 */
+	afterCopy(timeoutSec:number, callback:(Archive, boolean) => void) : void {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(timeoutSec, "number");
+		Util.validateType(callback, "function");
+		var ret = this.sleepWhileCopying(timeoutSec);
+		callback(this, ret);
+	}
+	
+	/**
+	 * コピー中のアーカイブが利用可能になるまで待機します。
+	 * 
+	 * @method sleepWhileCopying
+	 * @public
+	 * @param {number} timeoutSec=3600
+	 * @return {boolean}
+	 */
+	sleepWhileCopying(timeoutSec:number=3600) : boolean {
+		Util.validateType(timeoutSec, "number");
+		var step:number = 3;
+		while (0 < timeoutSec) {
+			this.reload();
+			var a:string = this.get_availability();
+			if (a == EAvailability.available) {
+				return true;
+			};
+			if (a != EAvailability.migrating) {
+				timeoutSec = 0;
+			};
+			timeoutSec -= step;
+			if (0 < timeoutSec) {
+				Util.sleep(step);
+			};
+		};
+		return false;
 	}
 	
 	/**
@@ -630,6 +811,35 @@ class Archive extends Resource {
 	
 	
 	/**
+	 * @member saclient.cloud.resource.Archive#n_availability
+	 * @type boolean
+	 * @private
+	 */
+	private n_availability : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_availability
+	 * @private
+	 * @return {string}
+	 */
+	private get_availability() : string {
+		return this.m_availability;
+	}
+	
+	/**
+	 * 有効状態
+	 * 
+	 * @property availability
+	 * @type string
+	 * @readOnly
+	 * @public
+	 */
+	get availability() : string { return this.get_availability(); }
+	
+	
+	/**
 	 * (This method is generated in Translator_default#buildImpl)
 	 * 
 	 * @method apiDeserializeImpl
@@ -726,6 +936,14 @@ class Archive extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_plan = false;
+		if (Util.existsPath(r, "Availability")) {
+			this.m_availability = Util.getByPath(r, "Availability") == null ? null : "" + Util.getByPath(r, "Availability");
+		}
+		else {
+			this.m_availability = null;
+			this.isIncomplete = true;
+		};
+		this.n_availability = false;
 	}
 	
 	/**
@@ -771,6 +989,9 @@ class Archive extends Resource {
 		};
 		if (withClean || this.n_plan) {
 			Util.setByPath(ret, "Plan", withClean ? (this.m_plan == null ? null : this.m_plan.apiSerialize(withClean)) : (this.m_plan == null ? { ID: "0" } : this.m_plan.apiSerializeID()));
+		};
+		if (withClean || this.n_availability) {
+			Util.setByPath(ret, "Availability", this.m_availability);
 		};
 		return ret;
 	}

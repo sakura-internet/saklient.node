@@ -297,24 +297,23 @@ class Disk extends Resource {
 	 */
 	_onAfterApiDeserialize(r:any, root:any) : void {
 		Util.validateArgCount(arguments.length, 2);
-		if (r == null) {
-			return;
-		};
-		if (("SourceArchive" in r)) {
-			var s:any = r["SourceArchive"];
-			if (s != null) {
-				var id:any = s["ID"];
-				if (id != null) {
-					this._source = new Archive(this._client, s);
+		if (r != null) {
+			if (("SourceArchive" in r)) {
+				var s:any = r["SourceArchive"];
+				if (s != null) {
+					var id:any = s["ID"];
+					if (id != null) {
+						this._source = new Archive(this._client, s);
+					};
 				};
 			};
-		};
-		if (("SourceDisk" in r)) {
-			var s:any = r["SourceDisk"];
-			if (s != null) {
-				var id:any = s["ID"];
-				if (id != null) {
-					this._source = new Disk(this._client, s);
+			if (("SourceDisk" in r)) {
+				var s:any = r["SourceDisk"];
+				if (s != null) {
+					var id:any = s["ID"];
+					if (id != null) {
+						this._source = new Disk(this._client, s);
+					};
 				};
 			};
 		};
@@ -347,7 +346,8 @@ class Disk extends Resource {
 					r["SourceDisk"] = s;
 				}
 				else {
-					r["SourceArchive"] = { ID: 1 };
+					this._source = null;
+					Util.validateType(this._source, "Disk or Archive", true);
 				};
 			};
 		};

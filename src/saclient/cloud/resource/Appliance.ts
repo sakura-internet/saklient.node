@@ -7,7 +7,6 @@ import SaclientException = require('../../errors/SaclientException');
 import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');
-import FtpInfo = require('./FtpInfo');
 import Iface = require('./Iface');
 import EApplianceClass = require('../enums/EApplianceClass');
 
