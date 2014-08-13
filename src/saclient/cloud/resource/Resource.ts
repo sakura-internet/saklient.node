@@ -153,11 +153,12 @@ class Resource {
 	 * @private
 	 * @method _onAfterApiDeserialize
 	 * @protected
+	 * @param {any} root
 	 * @param {any} r
 	 * @return {void}
 	 */
-	_onAfterApiDeserialize(r:any) : void {
-		Util.validateArgCount(arguments.length, 1);
+	_onAfterApiDeserialize(r:any, root:any) : void {
+		Util.validateArgCount(arguments.length, 2);
 	}
 	
 	/**
@@ -186,13 +187,31 @@ class Resource {
 	/**
 	 * @method apiDeserialize
 	 * @public
-	 * @param {any} r
+	 * @param {any} obj
+	 * @param {boolean} wrapped=false
 	 * @return {void}
 	 */
-	apiDeserialize(r:any) : void {
+	apiDeserialize(obj:any, wrapped:boolean=false) : void {
 		Util.validateArgCount(arguments.length, 1);
-		this.apiDeserializeImpl(r);
-		this._onAfterApiDeserialize(r);
+		Util.validateType(wrapped, "boolean");
+		var root:any = null;
+		var record:any = null;
+		var rkey:string = this._rootKey();
+		if (obj != null) {
+			if (!wrapped) {
+				if (rkey != null) {
+					root = {};
+					root[rkey] = obj;
+				};
+				record = obj;
+			}
+			else {
+				root = obj;
+				record = obj[rkey];
+			};
+		};
+		this.apiDeserializeImpl(record);
+		this._onAfterApiDeserialize(record, root);
 	}
 	
 	/**
@@ -289,7 +308,7 @@ class Resource {
 		var q:any = {};
 		q[this._rootKey()] = r;
 		var result:any = this._client.request(method, path, q);
-		this.apiDeserialize(result[this._rootKey()]);
+		this.apiDeserialize(result, true);
 		return this;
 	}
 	
@@ -319,7 +338,7 @@ class Resource {
 	 */
 	_reload() : Resource {
 		var result:any = this._client.request("GET", this._apiPath() + "/" + Util.urlEncode(this._id()));
-		this.apiDeserialize(result[this._rootKey()]);
+		this.apiDeserialize(result, true);
 		return this;
 	}
 	

@@ -183,14 +183,16 @@ class Disk extends Resource {
 	 * @private
 	 * @constructor
 	 * @public
+	 * @param {any} obj
 	 * @param {Client} client
-	 * @param {any} r
+	 * @param {boolean} wrapped=false
 	 */
-	constructor(client:Client, r:any) {
+	constructor(client:Client, obj:any, wrapped:boolean=false) {
 		super(client);
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(client, "saclient.cloud.Client");
-		this.apiDeserialize(r);
+		Util.validateType(wrapped, "boolean");
+		this.apiDeserialize(obj, wrapped);
 	}
 	
 	/**
@@ -289,11 +291,12 @@ class Disk extends Resource {
 	 * @private
 	 * @method _onAfterApiDeserialize
 	 * @protected
+	 * @param {any} root
 	 * @param {any} r
 	 * @return {void}
 	 */
-	_onAfterApiDeserialize(r:any) : void {
-		Util.validateArgCount(arguments.length, 1);
+	_onAfterApiDeserialize(r:any, root:any) : void {
+		Util.validateArgCount(arguments.length, 2);
 		if (r == null) {
 			return;
 		};

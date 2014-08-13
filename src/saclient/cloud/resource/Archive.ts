@@ -6,9 +6,11 @@ import Util = require('../../Util');
 import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');
+import FtpInfo = require('./FtpInfo');
 import DiskPlan = require('./DiskPlan');
 import Server = require('./Server');
 import EScope = require('../enums/EScope');
+import SaclientException = require('../../errors/SaclientException');
 
 'use strict';
 
@@ -170,14 +172,37 @@ class Archive extends Resource {
 	 * @private
 	 * @constructor
 	 * @public
+	 * @param {any} obj
 	 * @param {Client} client
-	 * @param {any} r
+	 * @param {boolean} wrapped=false
 	 */
-	constructor(client:Client, r:any) {
+	constructor(client:Client, obj:any, wrapped:boolean=false) {
 		super(client);
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(client, "saclient.cloud.Client");
-		this.apiDeserialize(r);
+		Util.validateType(wrapped, "boolean");
+		this.apiDeserialize(obj, wrapped);
+	}
+	
+	/**
+	 * @private
+	 * @method _onAfterApiDeserialize
+	 * @protected
+	 * @param {any} root
+	 * @param {any} r
+	 * @return {void}
+	 */
+	_onAfterApiDeserialize(r:any, root:any) : void {
+		Util.validateArgCount(arguments.length, 2);
+		if (root == null) {
+			return;
+		};
+		if (("FTPServer" in root)) {
+			var ftp:any = root["FTPServer"];
+			if (ftp != null) {
+				this._ftpInfo = new FtpInfo(ftp);
+			};
+		};
 	}
 	
 	/**
@@ -199,6 +224,66 @@ class Archive extends Resource {
 	 */
 	get sizeGib() : number { return this.get_sizeGib(); }
 	
+	
+	/**
+	 * @private
+	 * @member saclient.cloud.resource.Archive#_ftpInfo
+	 * @type FtpInfo
+	 * @protected
+	 */
+	_ftpInfo : FtpInfo;
+	
+	/**
+	 * @method get_ftpInfo
+	 * @public
+	 * @return {FtpInfo}
+	 */
+	get_ftpInfo() : FtpInfo {
+		return this._ftpInfo;
+	}
+	
+	/**
+	 * FTP情報
+	 * 
+	 * @property ftpInfo
+	 * @type FtpInfo
+	 * @readOnly
+	 * @public
+	 */
+	get ftpInfo() : FtpInfo { return this.get_ftpInfo(); }
+	
+	
+	/**
+	 * @method openFtp
+	 * @chainable
+	 * @public
+	 * @param {boolean} reset=false
+	 * @return {Archive}
+	 */
+	openFtp(reset:boolean=false) : Archive {
+		Util.validateType(reset, "boolean");
+		var path:string = this._apiPath() + "/" + Util.urlEncode(this._id()) + "/ftp";
+		var q:any = {};
+		Util.setByPath(q, "ChangePassword", reset);
+		var result:any = this._client.request("PUT", path, q);
+		this._onAfterApiDeserialize(null, result);
+		return this;
+	}
+	
+	/**
+	 * @method closeFtp
+	 * @chainable
+	 * @public
+	 * @param {boolean} reset=false
+	 * @return {Archive}
+	 */
+	closeFtp(reset:boolean=false) : Archive {
+		Util.validateType(reset, "boolean");
+		var path:string = this._apiPath() + "/" + Util.urlEncode(this._id()) + "/ftp";
+		var result:any = this._client.request("DELETE", path);
+		this._ftpInfo = null;
+		return this;
+	}
 	
 	/**
 	 * @member saclient.cloud.resource.Archive#n_id
@@ -457,14 +542,33 @@ class Archive extends Resource {
 	}
 	
 	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method set_sizeMib
+	 * @private
+	 * @param {number} v
+	 * @return {number}
+	 */
+	private set_sizeMib(v:number) : number {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "number");
+		if (!this.isNew) {
+			throw new SaclientException("immutable_field", "Immutable fields cannot be modified after the resource creation: " + "saclient.cloud.resource.Archive#sizeMib");
+		};
+		this.m_sizeMib = v;
+		this.n_sizeMib = true;
+		return this.m_sizeMib;
+	}
+	
+	/**
 	 * サイズ[MiB]
 	 * 
 	 * @property sizeMib
 	 * @type number
-	 * @readOnly
 	 * @public
 	 */
 	get sizeMib() : number { return this.get_sizeMib(); }
+	set sizeMib(v:number) { this.set_sizeMib(v); }
 	
 	
 	/**

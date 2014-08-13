@@ -174,14 +174,16 @@ class Server extends Resource {
 	 * @private
 	 * @constructor
 	 * @public
+	 * @param {any} obj
 	 * @param {Client} client
-	 * @param {any} r
+	 * @param {boolean} wrapped=false
 	 */
-	constructor(client:Client, r:any) {
+	constructor(client:Client, obj:any, wrapped:boolean=false) {
 		super(client);
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(client, "saclient.cloud.Client");
-		this.apiDeserialize(r);
+		Util.validateType(wrapped, "boolean");
+		this.apiDeserialize(obj, wrapped);
 	}
 	
 	/**
@@ -353,7 +355,7 @@ class Server extends Resource {
 		Util.validateType(planTo, "saclient.cloud.resource.ServerPlan");
 		var path:string = this._apiPath() + "/" + Util.urlEncode(this._id()) + "/to/plan/" + Util.urlEncode(planTo._id());
 		var result:any = this._client.request("PUT", path);
-		this.apiDeserialize(result[this._rootKey()]);
+		this.apiDeserialize(result, true);
 		return this;
 	}
 	

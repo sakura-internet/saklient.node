@@ -7,6 +7,7 @@ import SaclientException = require('../../errors/SaclientException');
 import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');
+import FtpInfo = require('./FtpInfo');
 import Iface = require('./Iface');
 import EApplianceClass = require('../enums/EApplianceClass');
 
@@ -161,14 +162,16 @@ class Appliance extends Resource {
 	 * @private
 	 * @constructor
 	 * @public
+	 * @param {any} obj
 	 * @param {Client} client
-	 * @param {any} r
+	 * @param {boolean} wrapped=false
 	 */
-	constructor(client:Client, r:any) {
+	constructor(client:Client, obj:any, wrapped:boolean=false) {
 		super(client);
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(client, "saclient.cloud.Client");
-		this.apiDeserialize(r);
+		Util.validateType(wrapped, "boolean");
+		this.apiDeserialize(obj, wrapped);
 	}
 	
 	/**

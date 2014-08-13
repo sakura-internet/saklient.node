@@ -6,7 +6,7 @@ var assert = require('assert');
 var path = require('path');
 var root = path.dirname(__dirname);
 module.paths.unshift(root + '/lib');
-var saclient = require('saclient');
+var saclient = require('../lib/saclient');
 
 var fs = require('fs');
 var dateformat = require('dateformat');
@@ -59,6 +59,64 @@ describe('Server', function(){
 		if (config.SACLOUD_ZONE) api = api.inZone(config.SACLOUD_ZONE);
 		api.should.be.an.instanceof(saclient.cloud.API);
 		
+	});
+	
+	
+	
+	it('should be CRUDed', function(done){
+		Fiber(function(){
+			
+			var name = '!js_mocha-' + dateformat('yyyyMMdd_hhmmss') + '-' + Math.random().toString(36).slice(2);
+			var description = 'This instance was created by saclient.node mocha';
+			var tag = 'saclient-test';
+		
+			var iso = api.isoImage.create();
+			iso.should.be.an.instanceof(saclient.cloud.resource.IsoImage);
+			iso.name = name;
+			iso.description = description;
+			iso.tags = [tag];
+			iso.sizeMib = 5120;
+			iso.save();
+			
+			//
+			var ftp = iso.ftpInfo;
+			ftp.should.be.an.instanceof(saclient.cloud.resource.FtpInfo);
+			(ftp.hostName != null).should.be.true;
+			(ftp.user != null).should.be.true;
+			(ftp.password != null).should.be.true;
+			var ftp2 = iso.openFtp(true).ftpInfo;
+			ftp2.should.be.an.instanceof(saclient.cloud.resource.FtpInfo);
+			(ftp2.hostName != null).should.be.true;
+			(ftp2.user != null).should.be.true;
+			(ftp2.password != null).should.be.true;
+			ftp2.password.should.not.equal(ftp.password);
+			
+			//
+			var temp = execSync("mktemp -t saclient").replace(/\s+$/, '');
+			var cmd = 'dd if=/dev/urandom bs=4096 count=64 > ' + temp + '; ls -l ' + temp;
+			trace(cmd);
+			trace(execSync('( ' + cmd + ' ) 2>&1'));
+			cmd  = 'set ftp:ssl-allow true;';
+			cmd += 'set ftp:ssl-force true;';
+			cmd += 'set ftp:ssl-protect-data true;';
+			cmd += 'set ftp:ssl-protect-list true;';
+			cmd += 'put ' + temp + ';';
+			cmd += 'exit';
+			cmd = 'lftp -u ' + ftp2.user + ',' + ftp2.password + " -p 21 -e '" + cmd + "' " + ftp2.hostName;
+			trace(cmd);
+			trace(execSync('( ' + cmd + ' ) 2>&1'));
+			cmd = 'rm -f ' + temp;
+			trace(cmd);
+			trace(execSync('( ' + cmd + ' ) 2>&1'));
+			
+			iso.closeFtp();
+			
+			//
+			iso.destroy();
+			
+			done();
+			
+		}).run();
 	});
 	
 	

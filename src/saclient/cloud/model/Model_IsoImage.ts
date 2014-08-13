@@ -119,6 +119,17 @@ class Model_IsoImage extends Model {
 	}
 	
 	/**
+	 * *
+	 * 
+	 * @method create
+	 * @public
+	 * @return {IsoImage}
+	 */
+	create() : IsoImage {
+		return (<IsoImage><any>(this._create()));
+	}
+	
+	/**
 	 * 指定したIDを持つ唯一のリソースを取得します。
 	 * 
 	 * @method getById

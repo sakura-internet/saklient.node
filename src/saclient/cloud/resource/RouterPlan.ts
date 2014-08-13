@@ -47,6 +47,36 @@ class RouterPlan extends Resource {
 	
 	/**
 	 * @private
+	 * @method _apiPath
+	 * @protected
+	 * @return {string}
+	 */
+	_apiPath() : string {
+		return "/product/internet";
+	}
+	
+	/**
+	 * @private
+	 * @method _rootKey
+	 * @protected
+	 * @return {string}
+	 */
+	_rootKey() : string {
+		return "InternetPlan";
+	}
+	
+	/**
+	 * @private
+	 * @method _rootKeyM
+	 * @protected
+	 * @return {string}
+	 */
+	_rootKeyM() : string {
+		return "InternetPlans";
+	}
+	
+	/**
+	 * @private
 	 * @method _id
 	 * @public
 	 * @return {string}
@@ -59,14 +89,16 @@ class RouterPlan extends Resource {
 	 * @private
 	 * @constructor
 	 * @public
+	 * @param {any} obj
 	 * @param {Client} client
-	 * @param {any} r
+	 * @param {boolean} wrapped=false
 	 */
-	constructor(client:Client, r:any) {
+	constructor(client:Client, obj:any, wrapped:boolean=false) {
 		super(client);
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(client, "saclient.cloud.Client");
-		this.apiDeserialize(r);
+		Util.validateType(wrapped, "boolean");
+		this.apiDeserialize(obj, wrapped);
 	}
 	
 	/**

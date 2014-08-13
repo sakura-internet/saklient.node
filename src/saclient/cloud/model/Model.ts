@@ -286,8 +286,7 @@ class Model {
 		var result:any = this._client.request("GET", this._apiPath() + "/" + Util.urlEncode(id), params);
 		this._total = 1;
 		this._count = 1;
-		var record:any = result[this._rootKey()];
-		return (<Resource><any>(Util.createClassInstance("saclient.cloud.resource." + this._className(), [this._client, record])));
+		return (<Resource><any>(Util.createClassInstance("saclient.cloud.resource." + this._className(), [this._client, result, true])));
 	}
 	
 	/**

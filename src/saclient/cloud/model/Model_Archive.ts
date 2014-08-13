@@ -119,6 +119,17 @@ class Model_Archive extends Model {
 	}
 	
 	/**
+	 * *
+	 * 
+	 * @method create
+	 * @public
+	 * @return {Archive}
+	 */
+	create() : Archive {
+		return (<Archive><any>(this._create()));
+	}
+	
+	/**
 	 * 指定したIDを持つ唯一のリソースを取得します。
 	 * 
 	 * @method getById
