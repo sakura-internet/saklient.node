@@ -423,7 +423,6 @@ class API {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(name, "string");
 		var ret = new API(this._client.cloneInstance());
-		ret._client.setApiRoot("https://secure.sakura.ad.jp/cloud/");
 		ret._client.setApiRootSuffix("zone/" + name);
 		return ret;
 	}
