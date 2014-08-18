@@ -190,5 +190,20 @@ class Model_Appliance extends Model {
 		return this;
 	}
 	
+	/**
+	 * 名前でソートします。
+	 * 
+	 * @method sortByName
+	 * @chainable
+	 * @public
+	 * @param {boolean} reverse=false
+	 * @return {Model_Appliance}
+	 */
+	sortByName(reverse:boolean=false) : Model_Appliance {
+		Util.validateType(reverse, "boolean");
+		this._sort("Name", reverse);
+		return this;
+	}
+	
 }
 

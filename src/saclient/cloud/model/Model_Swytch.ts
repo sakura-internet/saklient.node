@@ -169,5 +169,20 @@ class Model_Swytch extends Model {
 		return this;
 	}
 	
+	/**
+	 * 名前でソートします。
+	 * 
+	 * @method sortByName
+	 * @chainable
+	 * @public
+	 * @param {boolean} reverse=false
+	 * @return {Model_Swytch}
+	 */
+	sortByName(reverse:boolean=false) : Model_Swytch {
+		Util.validateType(reverse, "boolean");
+		this._sort("Name", reverse);
+		return this;
+	}
+	
 }
 

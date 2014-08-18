@@ -188,7 +188,7 @@ class Model {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(offset, "number");
 		this._params["Begin"] = offset;
-		return (<Model><any>(this));
+		return this;
 	}
 	
 	/**
@@ -205,7 +205,31 @@ class Model {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(count, "number");
 		this._params["Count"] = count;
-		return (<Model><any>(this));
+		return this;
+	}
+	
+	/**
+	 * 次に取得するリストのソートカラムを指定します。
+	 * 
+	 * @private
+	 * @method _sort
+	 * @chainable
+	 * @protected
+	 * @param {string} column カラム名
+	 * @param {boolean} reverse=false
+	 * @return {Model} this
+	 */
+	_sort(column:string, reverse:boolean=false) : Model {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(column, "string");
+		Util.validateType(reverse, "boolean");
+		if (!("Sort" in this._params)) {
+			this._params["Sort"] = [];
+		};
+		var sort:string[] = this._params["Sort"];
+		var op:string = reverse ? "-" : "";
+		sort.push(op + column);
+		return this;
 	}
 	
 	/**
@@ -238,7 +262,7 @@ class Model {
 		else {
 			filter[key] = value;
 		};
-		return (<Model><any>(this));
+		return this;
 	}
 	
 	/**
@@ -254,7 +278,7 @@ class Model {
 		this._params = {};
 		this._total = 0;
 		this._count = 0;
-		return (<Model><any>(this));
+		return this;
 	}
 	
 	/**

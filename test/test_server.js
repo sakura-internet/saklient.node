@@ -63,13 +63,14 @@ describe('Server', function(){
 	
 	
 	
-	it('should be found', function(){
+	it('should be found', function(done){
 		Fiber(function(){
 			trace('finding servers...');
-			var servers = api.server.find();
+			var servers = api.server.sortByMemory().find();
 			servers.should.be.an.instanceof(Array);
 			servers.length.should.be.above(0);
 			
+			var mem = 0;
 			trace('checking each server...');
 			servers.forEach(function(server){
 				server.should.be.an.instanceof(saclient.cloud.resource.Server);
@@ -82,11 +83,14 @@ describe('Server', function(){
 				server.tags.forEach(function(tag){
 					tag.should.be.an.instanceof(String);
 				});
+				server.plan.memoryGib.should.not.be.below(mem);
+				mem = server.plan.memoryGib;
 			});
 			
 			servers = api.server.limit(1).find();
 			servers.length.should.equal(1);
 			
+			done();
 		}).run();
 	});
 	

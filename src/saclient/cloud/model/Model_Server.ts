@@ -276,5 +276,65 @@ class Model_Server extends Model {
 		return this;
 	}
 	
+	/**
+	 * 名前でソートします。
+	 * 
+	 * @method sortByName
+	 * @chainable
+	 * @public
+	 * @param {boolean} reverse=false
+	 * @return {Model_Server}
+	 */
+	sortByName(reverse:boolean=false) : Model_Server {
+		Util.validateType(reverse, "boolean");
+		this._sort("Name", reverse);
+		return this;
+	}
+	
+	/**
+	 * プランでソートします。
+	 * 
+	 * @method sortByPlan
+	 * @chainable
+	 * @public
+	 * @param {boolean} reverse=false
+	 * @return {Model_Server}
+	 */
+	sortByPlan(reverse:boolean=false) : Model_Server {
+		Util.validateType(reverse, "boolean");
+		this._sort("ServerPlan.ID", reverse);
+		return this;
+	}
+	
+	/**
+	 * 仮想コア数でソートします。
+	 * 
+	 * @method sortByCpu
+	 * @chainable
+	 * @public
+	 * @param {boolean} reverse=false
+	 * @return {Model_Server}
+	 */
+	sortByCpu(reverse:boolean=false) : Model_Server {
+		Util.validateType(reverse, "boolean");
+		this._sort("ServerPlan.CPU", reverse);
+		return this;
+	}
+	
+	/**
+	 * メモリ容量でソートします。
+	 * 
+	 * @method sortByMemory
+	 * @chainable
+	 * @public
+	 * @param {boolean} reverse=false
+	 * @return {Model_Server}
+	 */
+	sortByMemory(reverse:boolean=false) : Model_Server {
+		Util.validateType(reverse, "boolean");
+		this._sort("ServerPlan.MemoryMB", reverse);
+		return this;
+	}
+	
 }
 

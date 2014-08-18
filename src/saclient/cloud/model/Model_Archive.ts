@@ -244,5 +244,35 @@ class Model_Archive extends Model {
 		return this;
 	}
 	
+	/**
+	 * 名前でソートします。
+	 * 
+	 * @method sortByName
+	 * @chainable
+	 * @public
+	 * @param {boolean} reverse=false
+	 * @return {Model_Archive}
+	 */
+	sortByName(reverse:boolean=false) : Model_Archive {
+		Util.validateType(reverse, "boolean");
+		this._sort("Name", reverse);
+		return this;
+	}
+	
+	/**
+	 * サイズでソートします。
+	 * 
+	 * @method sortBySize
+	 * @chainable
+	 * @public
+	 * @param {boolean} reverse=false
+	 * @return {Model_Archive}
+	 */
+	sortBySize(reverse:boolean=false) : Model_Archive {
+		Util.validateType(reverse, "boolean");
+		this._sort("SizeMB", reverse);
+		return this;
+	}
+	
 }
 

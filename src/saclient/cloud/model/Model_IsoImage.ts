@@ -228,5 +228,35 @@ class Model_IsoImage extends Model {
 		return this;
 	}
 	
+	/**
+	 * 名前でソートします。
+	 * 
+	 * @method sortByName
+	 * @chainable
+	 * @public
+	 * @param {boolean} reverse=false
+	 * @return {Model_IsoImage}
+	 */
+	sortByName(reverse:boolean=false) : Model_IsoImage {
+		Util.validateType(reverse, "boolean");
+		this._sort("Name", reverse);
+		return this;
+	}
+	
+	/**
+	 * サイズでソートします。
+	 * 
+	 * @method sortBySize
+	 * @chainable
+	 * @public
+	 * @param {boolean} reverse=false
+	 * @return {Model_IsoImage}
+	 */
+	sortBySize(reverse:boolean=false) : Model_IsoImage {
+		Util.validateType(reverse, "boolean");
+		this._sort("SizeMB", reverse);
+		return this;
+	}
+	
 }
 

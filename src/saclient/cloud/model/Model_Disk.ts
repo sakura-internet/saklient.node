@@ -233,5 +233,35 @@ class Model_Disk extends Model {
 		return this;
 	}
 	
+	/**
+	 * 名前でソートします。
+	 * 
+	 * @method sortByName
+	 * @chainable
+	 * @public
+	 * @param {boolean} reverse=false
+	 * @return {Model_Disk}
+	 */
+	sortByName(reverse:boolean=false) : Model_Disk {
+		Util.validateType(reverse, "boolean");
+		this._sort("Name", reverse);
+		return this;
+	}
+	
+	/**
+	 * サイズでソートします。
+	 * 
+	 * @method sortBySize
+	 * @chainable
+	 * @public
+	 * @param {boolean} reverse=false
+	 * @return {Model_Disk}
+	 */
+	sortBySize(reverse:boolean=false) : Model_Disk {
+		Util.validateType(reverse, "boolean");
+		this._sort("SizeMB", reverse);
+		return this;
+	}
+	
 }
 
