@@ -3,6 +3,7 @@
 export = Icon;
 
 import Util = require('../../Util');
+import SaclientException = require('../../errors/SaclientException');
 import Client = require('../Client');
 import Resource = require('./Resource');
 
@@ -81,6 +82,15 @@ class Icon extends Resource {
 	 */
 	_rootKeyM() : string {
 		return "Icons";
+	}
+	
+	/**
+	 * @method className
+	 * @protected
+	 * @return {string}
+	 */
+	className() : string {
+		return "Icon";
 	}
 	
 	/**
@@ -210,14 +220,30 @@ class Icon extends Resource {
 	}
 	
 	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method set_name
+	 * @private
+	 * @param {string} v
+	 * @return {string}
+	 */
+	private set_name(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
+		this.m_name = v;
+		this.n_name = true;
+		return this.m_name;
+	}
+	
+	/**
 	 * 名前
 	 * 
 	 * @property name
 	 * @type string
-	 * @readOnly
 	 * @public
 	 */
 	get name() : string { return this.get_name(); }
+	set name(v:string) { this.set_name(v); }
 	
 	
 	/**
@@ -307,6 +333,7 @@ class Icon extends Resource {
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
 		Util.validateType(withClean, "boolean");
+		var missing:string[] = [];
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);
@@ -316,9 +343,17 @@ class Icon extends Resource {
 		};
 		if (withClean || this.n_name) {
 			Util.setByPath(ret, "Name", this.m_name);
+		}
+		else {
+			if (this.isNew) {
+				missing.push("name");
+			};
 		};
 		if (withClean || this.n_url) {
 			Util.setByPath(ret, "URL", this.m_url);
+		};
+		if (missing.length > 0) {
+			throw new SaclientException("required_field", "Required fields must be set before the Icon creation: " + missing.join(", "));
 		};
 		return ret;
 	}

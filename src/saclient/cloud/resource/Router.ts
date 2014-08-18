@@ -107,6 +107,15 @@ class Router extends Resource {
 	}
 	
 	/**
+	 * @method className
+	 * @protected
+	 * @return {string}
+	 */
+	className() : string {
+		return "Router";
+	}
+	
+	/**
 	 * @private
 	 * @method _id
 	 * @public
@@ -616,24 +625,43 @@ class Router extends Resource {
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
 		Util.validateType(withClean, "boolean");
+		var missing:string[] = [];
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);
 		};
 		if (withClean || this.n_name) {
 			Util.setByPath(ret, "Name", this.m_name);
+		}
+		else {
+			if (this.isNew) {
+				missing.push("name");
+			};
 		};
 		if (withClean || this.n_description) {
 			Util.setByPath(ret, "Description", this.m_description);
 		};
 		if (withClean || this.n_networkMaskLen) {
 			Util.setByPath(ret, "NetworkMaskLen", this.m_networkMaskLen);
+		}
+		else {
+			if (this.isNew) {
+				missing.push("networkMaskLen");
+			};
 		};
 		if (withClean || this.n_bandWidthMbps) {
 			Util.setByPath(ret, "BandWidthMbps", this.m_bandWidthMbps);
+		}
+		else {
+			if (this.isNew) {
+				missing.push("bandWidthMbps");
+			};
 		};
 		if (withClean || this.n_swytchId) {
 			Util.setByPath(ret, "Switch.ID", this.m_swytchId);
+		};
+		if (missing.length > 0) {
+			throw new SaclientException("required_field", "Required fields must be set before the Router creation: " + missing.join(", "));
 		};
 		return ret;
 	}

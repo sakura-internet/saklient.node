@@ -124,6 +124,15 @@ class IsoImage extends Resource {
 	}
 	
 	/**
+	 * @method className
+	 * @protected
+	 * @return {string}
+	 */
+	className() : string {
+		return "IsoImage";
+	}
+	
+	/**
 	 * @private
 	 * @method _id
 	 * @public
@@ -706,6 +715,7 @@ class IsoImage extends Resource {
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
 		Util.validateType(withClean, "boolean");
+		var missing:string[] = [];
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);
@@ -715,6 +725,11 @@ class IsoImage extends Resource {
 		};
 		if (withClean || this.n_name) {
 			Util.setByPath(ret, "Name", this.m_name);
+		}
+		else {
+			if (this.isNew) {
+				missing.push("name");
+			};
 		};
 		if (withClean || this.n_description) {
 			Util.setByPath(ret, "Description", this.m_description);
@@ -733,9 +748,17 @@ class IsoImage extends Resource {
 		};
 		if (withClean || this.n_sizeMib) {
 			Util.setByPath(ret, "SizeMB", this.m_sizeMib);
+		}
+		else {
+			if (this.isNew) {
+				missing.push("sizeMib");
+			};
 		};
 		if (withClean || this.n_serviceClass) {
 			Util.setByPath(ret, "ServiceClass", this.m_serviceClass);
+		};
+		if (missing.length > 0) {
+			throw new SaclientException("required_field", "Required fields must be set before the IsoImage creation: " + missing.join(", "));
 		};
 		return ret;
 	}

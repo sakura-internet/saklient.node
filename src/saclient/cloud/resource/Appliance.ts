@@ -124,6 +124,15 @@ class Appliance extends Resource {
 	}
 	
 	/**
+	 * @method className
+	 * @protected
+	 * @return {string}
+	 */
+	className() : string {
+		return "Appliance";
+	}
+	
+	/**
 	 * @private
 	 * @method _id
 	 * @public
@@ -652,15 +661,26 @@ class Appliance extends Resource {
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
 		Util.validateType(withClean, "boolean");
+		var missing:string[] = [];
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);
 		};
 		if (withClean || this.n_clazz) {
 			Util.setByPath(ret, "Class", this.m_clazz);
+		}
+		else {
+			if (this.isNew) {
+				missing.push("clazz");
+			};
 		};
 		if (withClean || this.n_name) {
 			Util.setByPath(ret, "Name", this.m_name);
+		}
+		else {
+			if (this.isNew) {
+				missing.push("name");
+			};
 		};
 		if (withClean || this.n_description) {
 			Util.setByPath(ret, "Description", this.m_description);
@@ -688,6 +708,9 @@ class Appliance extends Resource {
 		};
 		if (withClean || this.n_serviceClass) {
 			Util.setByPath(ret, "ServiceClass", this.m_serviceClass);
+		};
+		if (missing.length > 0) {
+			throw new SaclientException("required_field", "Required fields must be set before the Appliance creation: " + missing.join(", "));
 		};
 		return ret;
 	}

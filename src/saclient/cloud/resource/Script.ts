@@ -3,6 +3,7 @@
 export = Script;
 
 import Util = require('../../Util');
+import SaclientException = require('../../errors/SaclientException');
 import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');
@@ -127,6 +128,15 @@ class Script extends Resource {
 	 */
 	_rootKeyM() : string {
 		return "Notes";
+	}
+	
+	/**
+	 * @method className
+	 * @protected
+	 * @return {string}
+	 */
+	className() : string {
+		return "Script";
 	}
 	
 	/**
@@ -644,6 +654,7 @@ class Script extends Resource {
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
 		Util.validateType(withClean, "boolean");
+		var missing:string[] = [];
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);
@@ -656,6 +667,11 @@ class Script extends Resource {
 		};
 		if (withClean || this.n_name) {
 			Util.setByPath(ret, "Name", this.m_name);
+		}
+		else {
+			if (this.isNew) {
+				missing.push("name");
+			};
 		};
 		if (withClean || this.n_description) {
 			Util.setByPath(ret, "Description", this.m_description);
@@ -674,9 +690,17 @@ class Script extends Resource {
 		};
 		if (withClean || this.n_content) {
 			Util.setByPath(ret, "Content", this.m_content);
+		}
+		else {
+			if (this.isNew) {
+				missing.push("content");
+			};
 		};
 		if (withClean || this.n_annotation) {
 			Util.setByPath(ret, "Remark", this.m_annotation);
+		};
+		if (missing.length > 0) {
+			throw new SaclientException("required_field", "Required fields must be set before the Script creation: " + missing.join(", "));
 		};
 		return ret;
 	}

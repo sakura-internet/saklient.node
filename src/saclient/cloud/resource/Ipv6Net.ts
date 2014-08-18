@@ -77,6 +77,15 @@ class Ipv6Net extends Resource {
 	}
 	
 	/**
+	 * @method className
+	 * @protected
+	 * @return {string}
+	 */
+	className() : string {
+		return "Ipv6Net";
+	}
+	
+	/**
 	 * @private
 	 * @method _id
 	 * @public

@@ -92,12 +92,11 @@ class Resource {
 	}
 	
 	/**
-	 * @private
-	 * @method _className
-	 * @protected
+	 * @method className
+	 * @public
 	 * @return {string}
 	 */
-	_className() : string {
+	className() : string {
 		return null;
 	}
 	

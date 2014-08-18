@@ -83,6 +83,15 @@ class ServerPlan extends Resource {
 	}
 	
 	/**
+	 * @method className
+	 * @protected
+	 * @return {string}
+	 */
+	className() : string {
+		return "ServerPlan";
+	}
+	
+	/**
 	 * @private
 	 * @method _id
 	 * @public

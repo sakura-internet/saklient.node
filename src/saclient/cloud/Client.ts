@@ -59,9 +59,6 @@ class Client {
 		if (!path.match(/^http/)) {
 			var urlRoot = this.config.apiRoot;
 			if (this.config.apiRootSuffix != null) {
-				if (this.config.apiRootSuffix.match(/is1[v-z]/)) {
-					urlRoot = urlRoot.replace(/\/cloud\/$/, '/cloud-test/');
-				}
 				urlRoot += this.config.apiRootSuffix;
 				urlRoot = urlRoot.replace(/\/?$/, '/');
 			}

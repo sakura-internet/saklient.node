@@ -86,6 +86,15 @@ class Iface extends Resource {
 	}
 	
 	/**
+	 * @method className
+	 * @protected
+	 * @return {string}
+	 */
+	className() : string {
+		return "Iface";
+	}
+	
+	/**
 	 * @private
 	 * @method _id
 	 * @public
@@ -386,6 +395,7 @@ class Iface extends Resource {
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
 		Util.validateType(withClean, "boolean");
+		var missing:string[] = [];
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);
@@ -401,6 +411,14 @@ class Iface extends Resource {
 		};
 		if (withClean || this.n_serverId) {
 			Util.setByPath(ret, "Server.ID", this.m_serverId);
+		}
+		else {
+			if (this.isNew) {
+				missing.push("serverId");
+			};
+		};
+		if (missing.length > 0) {
+			throw new SaclientException("required_field", "Required fields must be set before the Iface creation: " + missing.join(", "));
 		};
 		return ret;
 	}

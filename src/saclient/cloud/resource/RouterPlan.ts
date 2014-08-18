@@ -76,6 +76,15 @@ class RouterPlan extends Resource {
 	}
 	
 	/**
+	 * @method className
+	 * @protected
+	 * @return {string}
+	 */
+	className() : string {
+		return "RouterPlan";
+	}
+	
+	/**
 	 * @private
 	 * @method _id
 	 * @public

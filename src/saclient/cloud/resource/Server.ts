@@ -137,6 +137,15 @@ class Server extends Resource {
 	}
 	
 	/**
+	 * @method className
+	 * @protected
+	 * @return {string}
+	 */
+	className() : string {
+		return "Server";
+	}
+	
+	/**
 	 * @private
 	 * @method _id
 	 * @public
@@ -883,12 +892,18 @@ class Server extends Resource {
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
 		Util.validateType(withClean, "boolean");
+		var missing:string[] = [];
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);
 		};
 		if (withClean || this.n_name) {
 			Util.setByPath(ret, "Name", this.m_name);
+		}
+		else {
+			if (this.isNew) {
+				missing.push("name");
+			};
 		};
 		if (withClean || this.n_description) {
 			Util.setByPath(ret, "Description", this.m_description);
@@ -907,6 +922,11 @@ class Server extends Resource {
 		};
 		if (withClean || this.n_plan) {
 			Util.setByPath(ret, "ServerPlan", withClean ? (this.m_plan == null ? null : this.m_plan.apiSerialize(withClean)) : (this.m_plan == null ? { ID: "0" } : this.m_plan.apiSerializeID()));
+		}
+		else {
+			if (this.isNew) {
+				missing.push("plan");
+			};
 		};
 		if (withClean || this.n_ifaces) {
 			Util.setByPath(ret, "Interfaces", []);
@@ -922,6 +942,9 @@ class Server extends Resource {
 		};
 		if (withClean || this.n_availability) {
 			Util.setByPath(ret, "Availability", this.m_availability);
+		};
+		if (missing.length > 0) {
+			throw new SaclientException("required_field", "Required fields must be set before the Server creation: " + missing.join(", "));
 		};
 		return ret;
 	}

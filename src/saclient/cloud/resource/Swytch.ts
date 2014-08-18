@@ -3,6 +3,7 @@
 export = Swytch;
 
 import Util = require('../../Util');
+import SaclientException = require('../../errors/SaclientException');
 import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');
@@ -121,6 +122,15 @@ class Swytch extends Resource {
 	 */
 	_rootKeyM() : string {
 		return "Switches";
+	}
+	
+	/**
+	 * @method className
+	 * @protected
+	 * @return {string}
+	 */
+	className() : string {
+		return "Swytch";
 	}
 	
 	/**
@@ -629,12 +639,18 @@ class Swytch extends Resource {
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
 		Util.validateType(withClean, "boolean");
+		var missing:string[] = [];
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);
 		};
 		if (withClean || this.n_name) {
 			Util.setByPath(ret, "Name", this.m_name);
+		}
+		else {
+			if (this.isNew) {
+				missing.push("name");
+			};
 		};
 		if (withClean || this.n_description) {
 			Util.setByPath(ret, "Description", this.m_description);
@@ -665,6 +681,9 @@ class Swytch extends Resource {
 				v = withClean ? (r2 == null ? null : r2.apiSerialize(withClean)) : (r2 == null ? { ID: "0" } : r2.apiSerializeID());
 				ret["IPv6Nets"].push(v);
 			};
+		};
+		if (missing.length > 0) {
+			throw new SaclientException("required_field", "Required fields must be set before the Swytch creation: " + missing.join(", "));
 		};
 		return ret;
 	}

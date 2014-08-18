@@ -128,6 +128,15 @@ describe('Server', function(){
 			// create a disk
 			trace('creating a disk...');
 			var disk = api.disk.create();
+			var ex = null;
+			try {
+				disk.save();
+			}
+			catch (ex_) {
+				// 'should.*' does not work correctly in a 'catch' block in a Fiber
+				ex = ex_;
+			}
+			ex.should.be.an.instanceof(saclient.errors.SaclientException);
 			disk.name = name;
 			disk.description = description;
 			disk.tags = [tag];
@@ -137,7 +146,7 @@ describe('Server', function(){
 			
 			// check an immutable field
 			trace('updating the disk...');
-			var ex = null;
+			ex = null;
 			try {
 				disk.sizeMib = 20480;
 				disk.save();

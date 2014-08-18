@@ -9,7 +9,6 @@ import Resource = require('./Resource');
 import Icon = require('./Icon');
 import DiskPlan = require('./DiskPlan');
 import Server = require('./Server');
-import Archive = require('./Archive');
 import DiskConfig = require('./DiskConfig');
 import EAvailability = require('../enums/EAvailability');
 import EDiskConnection = require('../enums/EDiskConnection');
@@ -146,6 +145,15 @@ class Disk extends Resource {
 	}
 	
 	/**
+	 * @method className
+	 * @protected
+	 * @return {string}
+	 */
+	className() : string {
+		return "Disk";
+	}
+	
+	/**
 	 * @private
 	 * @method _id
 	 * @public
@@ -251,27 +259,28 @@ class Disk extends Resource {
 	/**
 	 * @private
 	 * @member saclient.cloud.resource.Disk#_source
-	 * @type any
+	 * @type Resource
 	 */
-	private _source : any;
+	private _source : Resource;
 	
 	/**
 	 * @method get_source
 	 * @public
-	 * @return {any}
+	 * @return {Resource}
 	 */
-	get_source() : any {
+	get_source() : Resource {
 		return this._source;
 	}
 	
 	/**
 	 * @method set_source
 	 * @public
-	 * @param {any} source
-	 * @return {any}
+	 * @param {Resource} source
+	 * @return {Resource}
 	 */
-	set_source(source:any) : any {
+	set_source(source:Resource) : Resource {
 		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(source, "saclient.cloud.resource.Resource");
 		this._source = source;
 		return source;
 	}
@@ -280,11 +289,11 @@ class Disk extends Resource {
 	 * ディスクのコピー元
 	 * 
 	 * @property source
-	 * @type any
+	 * @type Resource
 	 * @public
 	 */
-	get source() : any { return this.get_source(); }
-	set source(v:any) { this.set_source(v); }
+	get source() : Resource { return this.get_source(); }
+	set source(v:Resource) { this.set_source(v); }
 	
 	
 	/**
@@ -298,21 +307,22 @@ class Disk extends Resource {
 	_onAfterApiDeserialize(r:any, root:any) : void {
 		Util.validateArgCount(arguments.length, 2);
 		if (r != null) {
-			if (("SourceArchive" in r)) {
-				var s:any = r["SourceArchive"];
-				if (s != null) {
-					var id:any = s["ID"];
-					if (id != null) {
-						this._source = new Archive(this._client, s);
-					};
-				};
-			};
 			if (("SourceDisk" in r)) {
 				var s:any = r["SourceDisk"];
 				if (s != null) {
 					var id:any = s["ID"];
 					if (id != null) {
 						this._source = new Disk(this._client, s);
+					};
+				};
+			};
+			if (("SourceArchive" in r)) {
+				var s:any = r["SourceArchive"];
+				if (s != null) {
+					var id:any = s["ID"];
+					if (id != null) {
+						var obj:any = Util.createClassInstance("saclient.cloud.resource.Archive", [this._client, s]);
+						this._source = (<Resource><any>(obj));
 					};
 				};
 			};
@@ -334,16 +344,14 @@ class Disk extends Resource {
 			return;
 		};
 		if (this._source != null) {
-			if (this._source instanceof Archive) {
-				var archive:Archive = (<Archive><any>(this._source));
-				var s:any = withClean ? archive.apiSerialize(true) : { ID: archive._id() };
-				r["SourceArchive"] = s;
+			if (this._source.className() == "Disk") {
+				var s:any = withClean ? this._source.apiSerialize(true) : { ID: this._source._id() };
+				r["SourceDisk"] = s;
 			}
 			else {
-				if (this._source instanceof Disk) {
-					var disk:Disk = (<Disk><any>(this._source));
-					var s:any = withClean ? disk.apiSerialize(true) : { ID: disk._id() };
-					r["SourceDisk"] = s;
+				if (this._source.className() == "Archive") {
+					var s:any = withClean ? this._source.apiSerialize(true) : { ID: this._source._id() };
+					r["SourceArchive"] = s;
 				}
 				else {
 					this._source = null;
@@ -928,12 +936,18 @@ class Disk extends Resource {
 	 */
 	apiSerializeImpl(withClean:boolean=false) : any {
 		Util.validateType(withClean, "boolean");
+		var missing:string[] = [];
 		var ret:any = {  };
 		if (withClean || this.n_id) {
 			Util.setByPath(ret, "ID", this.m_id);
 		};
 		if (withClean || this.n_name) {
 			Util.setByPath(ret, "Name", this.m_name);
+		}
+		else {
+			if (this.isNew) {
+				missing.push("name");
+			};
 		};
 		if (withClean || this.n_description) {
 			Util.setByPath(ret, "Description", this.m_description);
@@ -964,6 +978,9 @@ class Disk extends Resource {
 		};
 		if (withClean || this.n_availability) {
 			Util.setByPath(ret, "Availability", this.m_availability);
+		};
+		if (missing.length > 0) {
+			throw new SaclientException("required_field", "Required fields must be set before the Disk creation: " + missing.join(", "));
 		};
 		return ret;
 	}
