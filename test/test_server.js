@@ -6,7 +6,7 @@ var assert = require('assert');
 var path = require('path');
 var root = path.dirname(__dirname);
 module.paths.unshift(root + '/lib');
-var saclient = require('saclient');
+var saklient = require('saklient');
 
 var fs = require('fs');
 var dateformat = require('dateformat');
@@ -55,9 +55,9 @@ describe('Server', function(){
 		
 		// authorize
 		trace('creating an API instance');
-		api = saclient.cloud.API.authorize(config.SACLOUD_TOKEN, config.SACLOUD_SECRET);
+		api = saklient.cloud.API.authorize(config.SACLOUD_TOKEN, config.SACLOUD_SECRET);
 		if (config.SACLOUD_ZONE) api = api.inZone(config.SACLOUD_ZONE);
-		api.should.be.an.instanceof(saclient.cloud.API);
+		api.should.be.an.instanceof(saklient.cloud.API);
 		
 	});
 	
@@ -73,8 +73,8 @@ describe('Server', function(){
 			var mem = 0;
 			trace('checking each server...');
 			servers.forEach(function(server){
-				server.should.be.an.instanceof(saclient.cloud.resource.Server);
-				server.plan.should.be.an.instanceof(saclient.cloud.resource.ServerPlan);
+				server.should.be.an.instanceof(saklient.cloud.resource.Server);
+				server.plan.should.be.an.instanceof(saklient.cloud.resource.ServerPlan);
 				server.plan.cpu.should.be.above(0);
 				server.plan.memoryMib.should.be.above(0);
 				server.plan.memoryGib.should.be.above(0);
@@ -100,12 +100,12 @@ describe('Server', function(){
 		Fiber(function(){
 			
 			var name = '!js_mocha-' + dateformat('yyyyMMdd_hhmmss') + '-' + Math.random().toString(36).slice(2);
-			var description = 'This instance was created by saclient.node mocha';
-			var tag = 'saclient-test';
+			var description = 'This instance was created by saklient.node mocha';
+			var tag = 'saklient-test';
 			var cpu = 1;
 			var mem = 2;
-			var hostName = 'saclient-test';
-			var sshPublicKey = 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3sSg8Vfxrs3eFTx3G//wMRlgqmFGxh5Ia8DZSSf2YrkZGqKbL1t2AsiUtIMwxGiEVVBc0K89lORzra7qoHQj5v5Xlcdqodgcs9nwuSeS38XWO6tXNF4a8LvKnfGS55+uzmBmVUwAztr3TIJR5TTWxZXpcxSsSEHx7nIcr31zcvosjgdxqvSokAsIgJyPQyxCxsPK8SFIsUV+aATqBCWNyp+R1jECPkd74ipEBoccnA0pYZnRhIsKNWR9phBRXIVd5jx/gK5jHqouhFWvCucUs0gwilEGwpng3b/YxrinNskpfOpMhOD9zjNU58OCoMS8MA17yqoZv59l3u16CrnrD saclient-test@local';
+			var hostName = 'saklient-test';
+			var sshPublicKey = 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3sSg8Vfxrs3eFTx3G//wMRlgqmFGxh5Ia8DZSSf2YrkZGqKbL1t2AsiUtIMwxGiEVVBc0K89lORzra7qoHQj5v5Xlcdqodgcs9nwuSeS38XWO6tXNF4a8LvKnfGS55+uzmBmVUwAztr3TIJR5TTWxZXpcxSsSEHx7nIcr31zcvosjgdxqvSokAsIgJyPQyxCxsPK8SFIsUV+aATqBCWNyp+R1jECPkd74ipEBoccnA0pYZnRhIsKNWR9phBRXIVd5jx/gK5jHqouhFWvCucUs0gwilEGwpng3b/YxrinNskpfOpMhOD9zjNU58OCoMS8MA17yqoZv59l3u16CrnrD saklient-test@local';
 			var sshPrivateKeyFile = root + '/test-sshkey.txt';
 			
 			// search archives
@@ -140,7 +140,7 @@ describe('Server', function(){
 				// 'should.*' does not work correctly in a 'catch' block in a Fiber
 				ex = ex_;
 			}
-			ex.should.be.an.instanceof(saclient.errors.SaclientException);
+			ex.should.be.an.instanceof(saklient.errors.SaklientException);
 			disk.name = name;
 			disk.description = description;
 			disk.tags = [tag];
@@ -159,12 +159,12 @@ describe('Server', function(){
 				// 'should.*' does not work correctly in a 'catch' block in a Fiber
 				ex = ex_;
 			}
-			ex.should.be.an.instanceof(saclient.errors.SaclientException);
+			ex.should.be.an.instanceof(saklient.errors.SaklientException);
 			
 			// create a server
 			trace('creating a server...');
 			var server = api.server.create();
-			server.should.be.an.instanceof(saclient.cloud.resource.Server);
+			server.should.be.an.instanceof(saklient.cloud.resource.Server);
 			server.name = name;
 			server.description = description;
 			server.tags = [tag];
@@ -184,7 +184,7 @@ describe('Server', function(){
 			// connect to shared segment
 			trace('connecting the server to shared segment...');
 			var iface = server.addIface();
-			iface.should.be.an.instanceof(saclient.cloud.resource.Iface);
+			iface.should.be.an.instanceof(saklient.cloud.resource.Iface);
 			iface.id.should.be.above(0);
 			iface.connectToSharedSegment();
 			
@@ -193,7 +193,7 @@ describe('Server', function(){
 			if (!disk.sleepWhileCopying()) should.fail('アーカイブからディスクへのコピーがタイムアウトしました');
 			disk.source = null;
 			disk.reload();
-			disk.source.should.be.an.instanceof(saclient.cloud.resource.Archive);
+			disk.source.should.be.an.instanceof(saklient.cloud.resource.Archive);
 			disk.source.id.should.equal(archive.id);
 			disk.sizeGib.should.equal(archive.sizeGib);
 			//console.log(disk.dump());
@@ -227,7 +227,7 @@ describe('Server', function(){
 				// 'should.*' does not work correctly in a 'catch' block in a Fiber
 				ex = ex_;
 			}
-			ex.should.be.an.instanceof(saclient.errors.HttpConflictException);
+			ex.should.be.an.instanceof(saklient.errors.HttpConflictException);
 			// 'サーバ起動中の起動試行時は HttpConflictException がスローされなければなりません'
 			
 			// ssh
@@ -273,7 +273,7 @@ describe('Server', function(){
 			if (!disk2.sleepWhileCopying()) should.fail('ディスクの複製がタイムアウトしました');
 			disk2.source = null;
 			disk2.reload();
-			disk2.source.should.be.an.instanceof(saclient.cloud.resource.Disk);
+			disk2.source.should.be.an.instanceof(saklient.cloud.resource.Disk);
 			disk2.source.id.should.equal(disk.id);
 			disk2.sizeGib.should.equal(40);
 			
@@ -284,13 +284,13 @@ describe('Server', function(){
 			disk2.destroy();
 			ex = null;
 			try { api.disk.getById(id); } catch (ex_) { ex = ex_; }
-			ex.should.be.an.instanceof(saclient.errors.HttpNotFoundException);
+			ex.should.be.an.instanceof(saklient.errors.HttpNotFoundException);
 			
 			id = disk.id;
 			disk.destroy();
 			ex = null;
 			try { api.disk.getById(id); } catch (ex_) { ex = ex_; }
-			ex.should.be.an.instanceof(saclient.errors.HttpNotFoundException);
+			ex.should.be.an.instanceof(saklient.errors.HttpNotFoundException);
 			
 			done();
 			

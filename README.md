@@ -14,15 +14,15 @@ This library gives you an easy interface to control your resources on
 ## Installation
 
 ```bash
-npm install git+ssh://git@github.com:sakura-internet/saclient.node.git
+npm install git+ssh://git@github.com:sakura-internet/saklient.node.git
 ```
 
 
 ## How to use this library in your project
 
 ```javascript
-var saclient = require('saclient');
-var api = saclient.cloud.API.authorize(YOUR_API_TOKEN, YOUR_API_SECRET)
+var saklient = require('saklient');
+var api = saklient.cloud.API.authorize(YOUR_API_TOKEN, YOUR_API_SECRET)
 
 // To access resources in the specified zone
 var api_is1b = api.inZone("is1b");

@@ -1,22 +1,22 @@
 module.paths.push('./lib');
 var Fiber = require('fibers');
-var saclient = require('saclient');
+var saklient = require('saklient');
 
-var api = saclient.cloud.API.authorize(process.argv[2], process.argv[3]);
+var api = saklient.cloud.API.authorize(process.argv[2], process.argv[3]);
 
 if (1) {
 		
 	Fiber(function(){
 		console.log('creating temporary instance');
 		var server = api.server.create();
-		server.name = 'saclient.node';
-		server.description = 'This instance was created by saclient.node example';
-		server.tags = ['saclient-test'];
+		server.name = 'saklient.node';
+		server.description = 'This instance was created by saklient.node example';
+		server.tags = ['saklient-test'];
 		server.plan = api.product.server.getBySpec(1, 1);
 		console.log('parameter is set');
 		server.save();
 		console.log('saved');
-		var servers = api.server.withNameLike('saclient.node').find();
+		var servers = api.server.withNameLike('saklient.node').find();
 		console.log(servers[0].name);
 		console.log(servers[0].description);
 		console.log(servers[0].tags.join(', '));
@@ -106,7 +106,7 @@ if (0) {
 }
 
 if (0) {
-	var enums = saclient.cloud.enums;
+	var enums = saklient.cloud.enums;
 	console.log(enums.EServerInstanceStatus.up);
 	console.log(enums.EServerInstanceStatus.compare("up", "down"));
 	console.log(enums.EServerInstanceStatus.compare("up", "up"));

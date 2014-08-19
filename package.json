@@ -1,10 +1,10 @@
 {
-  "name": "saclient",
+  "name": "saklient",
   "version": "0.0.1",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/sakura-internet/saclient.node.git"
+    "url": "git://github.com/sakura-internet/saklient.node.git"
   },
   "description": "An easy interface to control your resources on SAKURA Cloud.",
   "main": "index.js",

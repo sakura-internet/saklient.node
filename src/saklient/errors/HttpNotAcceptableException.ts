@@ -1,0 +1,27 @@
+/// <reference path="../../node.d.ts" />
+
+export = HttpNotAcceptableException;
+
+import HttpException = require('./HttpException');
+
+'use strict';
+
+/**
+ * 要求を受け付けできません。サポートサイトやメンテナンス情報をご確認ください。
+ * 
+ * @class HttpNotAcceptableException
+ * @constructor
+ * @extends HttpException
+ */
+class HttpNotAcceptableException extends HttpException {
+	
+	/**
+	 * @static
+	 * @member saklient.errors.HttpNotAcceptableException#defaultMessage
+	 * @type string
+	 * @public
+	 */
+	static defaultMessage : string = "要求を受け付けできません。サポートサイトやメンテナンス情報をご確認ください。";
+	
+}
+

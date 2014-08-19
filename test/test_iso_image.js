@@ -6,7 +6,7 @@ var assert = require('assert');
 var path = require('path');
 var root = path.dirname(__dirname);
 module.paths.unshift(root + '/lib');
-var saclient = require('../lib/saclient');
+var saklient = require('../lib/saklient');
 
 var fs = require('fs');
 var dateformat = require('dateformat');
@@ -55,9 +55,9 @@ describe('IsoImage', function(){
 		
 		// authorize
 		trace('creating an API instance');
-		api = saclient.cloud.API.authorize(config.SACLOUD_TOKEN, config.SACLOUD_SECRET);
+		api = saklient.cloud.API.authorize(config.SACLOUD_TOKEN, config.SACLOUD_SECRET);
 		if (config.SACLOUD_ZONE) api = api.inZone(config.SACLOUD_ZONE);
-		api.should.be.an.instanceof(saclient.cloud.API);
+		api.should.be.an.instanceof(saklient.cloud.API);
 		
 	});
 	
@@ -67,11 +67,11 @@ describe('IsoImage', function(){
 		Fiber(function(){
 			
 			var name = '!js_mocha-' + dateformat('yyyyMMdd_hhmmss') + '-' + Math.random().toString(36).slice(2);
-			var description = 'This instance was created by saclient.node mocha';
-			var tag = 'saclient-test';
+			var description = 'This instance was created by saklient.node mocha';
+			var tag = 'saklient-test';
 		
 			var iso = api.isoImage.create();
-			iso.should.be.an.instanceof(saclient.cloud.resource.IsoImage);
+			iso.should.be.an.instanceof(saklient.cloud.resource.IsoImage);
 			iso.name = name;
 			iso.description = description;
 			iso.tags = [tag];
@@ -80,19 +80,19 @@ describe('IsoImage', function(){
 			
 			//
 			var ftp = iso.ftpInfo;
-			ftp.should.be.an.instanceof(saclient.cloud.resource.FtpInfo);
+			ftp.should.be.an.instanceof(saklient.cloud.resource.FtpInfo);
 			(ftp.hostName != null).should.be.true;
 			(ftp.user != null).should.be.true;
 			(ftp.password != null).should.be.true;
 			var ftp2 = iso.openFtp(true).ftpInfo;
-			ftp2.should.be.an.instanceof(saclient.cloud.resource.FtpInfo);
+			ftp2.should.be.an.instanceof(saklient.cloud.resource.FtpInfo);
 			(ftp2.hostName != null).should.be.true;
 			(ftp2.user != null).should.be.true;
 			(ftp2.password != null).should.be.true;
 			ftp2.password.should.not.equal(ftp.password);
 			
 			//
-			var temp = execSync("mktemp -t saclient").replace(/\s+$/, '');
+			var temp = execSync("mktemp -t saklient").replace(/\s+$/, '');
 			var cmd = 'dd if=/dev/urandom bs=4096 count=64 > ' + temp + '; ls -l ' + temp;
 			trace(cmd);
 			trace(execSync('( ' + cmd + ' ) 2>&1'));
@@ -125,8 +125,8 @@ describe('IsoImage', function(){
 		Fiber(function(){
 			
 			var name = '!js_mocha-' + dateformat('yyyyMMdd_hhmmss') + '-' + Math.random().toString(36).slice(2);
-			var description = 'This instance was created by saclient.node mocha';
-			var tag = 'saclient-test';
+			var description = 'This instance was created by saklient.node mocha';
+			var tag = 'saklient-test';
 			
 			// search isos
 			trace('searching iso images...');
@@ -141,7 +141,7 @@ describe('IsoImage', function(){
 			// create a server
 			trace('creating a server...');
 			var server = api.server.create();
-			server.should.be.an.instanceof(saclient.cloud.resource.Server);
+			server.should.be.an.instanceof(saklient.cloud.resource.Server);
 			server.name = name;
 			server.description = description;
 			server.tags = [tag];
@@ -151,7 +151,7 @@ describe('IsoImage', function(){
 			// insert iso image while the server is down
 			trace('inserting an ISO image to the server...');
 			server.insertIsoImage(iso);
-			server.instance.isoImage.should.be.an.instanceof(saclient.cloud.resource.IsoImage);
+			server.instance.isoImage.should.be.an.instanceof(saklient.cloud.resource.IsoImage);
 			server.instance.isoImage.id.should.equal(iso.id);
 			
 			// eject iso image while the server is down
@@ -167,7 +167,7 @@ describe('IsoImage', function(){
 			// insert iso image while the server is up
 			trace('inserting an ISO image to the server...');
 			server.insertIsoImage(iso);
-			server.instance.isoImage.should.be.an.instanceof(saclient.cloud.resource.IsoImage);
+			server.instance.isoImage.should.be.an.instanceof(saklient.cloud.resource.IsoImage);
 			server.instance.isoImage.id.should.equal(iso.id);
 			
 			// eject iso image while the server is up

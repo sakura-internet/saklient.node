@@ -6,7 +6,7 @@ var assert = require('assert');
 var path = require('path');
 var root = path.dirname(__dirname);
 module.paths.unshift(root + '/lib');
-var saclient = require('saclient');
+var saklient = require('saklient');
 
 var fs = require('fs');
 var dateformat = require('dateformat');
@@ -62,9 +62,9 @@ describe('Router', function(){
 		
 		// authorize
 		trace('creating an API instance');
-		api = saclient.cloud.API.authorize(config.SACLOUD_TOKEN, config.SACLOUD_SECRET);
+		api = saklient.cloud.API.authorize(config.SACLOUD_TOKEN, config.SACLOUD_SECRET);
 		if (config.SACLOUD_ZONE) api = api.inZone(config.SACLOUD_ZONE);
-		api.should.be.an.instanceof(saclient.cloud.API);
+		api.should.be.an.instanceof(saklient.cloud.API);
 		
 	});
 	
@@ -74,7 +74,7 @@ describe('Router', function(){
 		Fiber(function(){
 			
 			var name = '!js_mocha-' + dateformat('yyyyMMdd_hhmmss') + '-' + Math.random().toString(36).slice(2);
-			var description = 'This instance was created by saclient.node mocha';
+			var description = 'This instance was created by saklient.node mocha';
 			var maskLen = 28;
 			//
 			var swytch = null;
@@ -83,7 +83,7 @@ describe('Router', function(){
 				var plans = api.product.router.find();
 				var minMbps = 0x7FFFFFFF;
 				plans.forEach(function(plan){
-					plan.should.be.an.instanceof(saclient.cloud.resource.RouterPlan);
+					plan.should.be.an.instanceof(saklient.cloud.resource.RouterPlan);
 					plan.bandWidthMbps.should.be.above(0);
 					minMbps = Math.min(plan.bandWidthMbps, minMbps);
 				});
@@ -102,13 +102,13 @@ describe('Router', function(){
 			}
 			else {
 				trace('既存のルータ＋スイッチを取得しています...');
-				var swytches = api.swytch.withNameLike('saclient-static-1').limit(1).find();
+				var swytches = api.swytch.withNameLike('saklient-static-1').limit(1).find();
 				swytches.length.should.equal(1);
 				swytch = swytches[0];
 			}
-			swytch.should.be.an.instanceof(saclient.cloud.resource.Swytch);
+			swytch.should.be.an.instanceof(saklient.cloud.resource.Swytch);
 			swytch.ipv4Nets.length.should.be.above(0);
-			swytch.ipv4Nets[0].should.be.an.instanceof(saclient.cloud.resource.Ipv4Net);
+			swytch.ipv4Nets[0].should.be.an.instanceof(saklient.cloud.resource.Ipv4Net);
 			
 			//
 			trace('ルータ＋スイッチの帯域プランを変更しています...');
@@ -123,7 +123,7 @@ describe('Router', function(){
 			}
 			trace('ルータ＋スイッチにIPv6ネットワークを割り当てています...');
 			var v6net = swytch.addIpv6Net();
-			v6net.should.be.an.instanceof(saclient.cloud.resource.Ipv6Net);
+			v6net.should.be.an.instanceof(saklient.cloud.resource.Ipv6Net);
 			swytch.ipv6Nets.length.should.equal(1);
 			
 			//
@@ -137,7 +137,7 @@ describe('Router', function(){
 			var net0 = swytch.ipv4Nets[0];
 			var nextHop = long2ip(ip2long(net0.address) + 4);
 			var sroute = swytch.addStaticRoute(28, nextHop);
-			sroute.should.be.an.instanceof(saclient.cloud.resource.Ipv4Net);
+			sroute.should.be.an.instanceof(saklient.cloud.resource.Ipv4Net);
 			swytch.ipv4Nets.length.should.equal(2);
 			
 			done();

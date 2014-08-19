@@ -6,11 +6,11 @@ var assert = require('assert');
 var path = require('path');
 var root = path.dirname(__dirname);
 module.paths.unshift(root + '/lib');
-var saclient = require('saclient');
+var saklient = require('saklient');
 
-var Util = saclient.Util;
-var API = saclient.cloud.API;
-var SaclientException = saclient.errors.SaclientException;
+var Util = saklient.Util;
+var API = saklient.cloud.API;
+var SaklientException = saklient.errors.SaklientException;
 
 describe('Util', function () {
 	

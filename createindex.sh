@@ -23,4 +23,4 @@ function _list () {
 	done
 }
 
-_list "lib/saclient"
+_list "lib/saklient"
