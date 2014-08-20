@@ -27,6 +27,7 @@ class DiskConfig {
 	/**
 	 * @method get_client
 	 * @protected
+	 * @private
 	 * @return {Client}
 	 */
 	get_client() : Client {
@@ -34,11 +35,10 @@ class DiskConfig {
 	}
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @property client
 	 * @type Client
 	 * @readOnly
-	 * @public
 	 */
 	get client() : Client { return this.get_client(); }
 	
@@ -54,6 +54,7 @@ class DiskConfig {
 	/**
 	 * @method get_diskId
 	 * @protected
+	 * @private
 	 * @return {string}
 	 */
 	get_diskId() : string {
@@ -61,11 +62,10 @@ class DiskConfig {
 	}
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @property diskId
 	 * @type string
 	 * @readOnly
-	 * @public
 	 */
 	get diskId() : string { return this.get_diskId(); }
 	
@@ -81,6 +81,7 @@ class DiskConfig {
 	/**
 	 * @method get_hostName
 	 * @protected
+	 * @private
 	 * @return {string}
 	 */
 	get_hostName() : string {
@@ -90,6 +91,7 @@ class DiskConfig {
 	/**
 	 * @method set_hostName
 	 * @protected
+	 * @private
 	 * @param {string} v
 	 * @return {string}
 	 */
@@ -122,6 +124,7 @@ class DiskConfig {
 	/**
 	 * @method get_password
 	 * @protected
+	 * @private
 	 * @return {string}
 	 */
 	get_password() : string {
@@ -131,6 +134,7 @@ class DiskConfig {
 	/**
 	 * @method set_password
 	 * @protected
+	 * @private
 	 * @param {string} v
 	 * @return {string}
 	 */
@@ -163,6 +167,7 @@ class DiskConfig {
 	/**
 	 * @method get_sshKey
 	 * @protected
+	 * @private
 	 * @return {string}
 	 */
 	get_sshKey() : string {
@@ -172,6 +177,7 @@ class DiskConfig {
 	/**
 	 * @method set_sshKey
 	 * @protected
+	 * @private
 	 * @param {string} v
 	 * @return {string}
 	 */
@@ -204,6 +210,7 @@ class DiskConfig {
 	/**
 	 * @method get_ipAddress
 	 * @protected
+	 * @private
 	 * @return {string}
 	 */
 	get_ipAddress() : string {
@@ -213,6 +220,7 @@ class DiskConfig {
 	/**
 	 * @method set_ipAddress
 	 * @protected
+	 * @private
 	 * @param {string} v
 	 * @return {string}
 	 */
@@ -245,6 +253,7 @@ class DiskConfig {
 	/**
 	 * @method get_defaultRoute
 	 * @protected
+	 * @private
 	 * @return {string}
 	 */
 	get_defaultRoute() : string {
@@ -254,6 +263,7 @@ class DiskConfig {
 	/**
 	 * @method set_defaultRoute
 	 * @protected
+	 * @private
 	 * @param {string} v
 	 * @return {string}
 	 */
@@ -286,6 +296,7 @@ class DiskConfig {
 	/**
 	 * @method get_networkMaskLen
 	 * @protected
+	 * @private
 	 * @return {number}
 	 */
 	get_networkMaskLen() : number {
@@ -295,6 +306,7 @@ class DiskConfig {
 	/**
 	 * @method set_networkMaskLen
 	 * @protected
+	 * @private
 	 * @param {number} v
 	 * @return {number}
 	 */
@@ -327,6 +339,7 @@ class DiskConfig {
 	/**
 	 * @method get_scripts
 	 * @protected
+	 * @private
 	 * @return {Script[]}
 	 */
 	get_scripts() : Script[] {
@@ -345,11 +358,10 @@ class DiskConfig {
 	
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @constructor
-	 * @public
-	 * @param {string} diskId
 	 * @param {Client} client
+	 * @param {string} diskId
 	 */
 	constructor(client:Client, diskId:string) {
 		Util.validateArgCount(arguments.length, 2);

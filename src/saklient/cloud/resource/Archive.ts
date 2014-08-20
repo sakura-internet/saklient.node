@@ -34,7 +34,7 @@ class Archive extends Resource {
 	m_id : string;
 	
 	/**
-	 * スコープ {@link EScope}
+	 * スコープ {{#crossLink "EScope"}}{{/crossLink}}
 	 * 
 	 * @member saklient.cloud.resource.Archive#m_scope
 	 * @type string
@@ -106,7 +106,7 @@ class Archive extends Resource {
 	m_plan : DiskPlan;
 	
 	/**
-	 * 有効状態 {@link EAvailability}
+	 * 有効状態 {{#crossLink "EAvailability"}}{{/crossLink}}
 	 * 
 	 * @member saklient.cloud.resource.Archive#m_availability
 	 * @type string
@@ -147,7 +147,6 @@ class Archive extends Resource {
 	/**
 	 * @private
 	 * @method _className
-	 * @public
 	 * @return {string}
 	 */
 	_className() : string {
@@ -157,7 +156,6 @@ class Archive extends Resource {
 	/**
 	 * @private
 	 * @method _id
-	 * @public
 	 * @return {string}
 	 */
 	_id() : string {
@@ -189,11 +187,10 @@ class Archive extends Resource {
 	}
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @constructor
-	 * @public
-	 * @param {any} obj
 	 * @param {Client} client
+	 * @param {any} obj
 	 * @param {boolean} wrapped=false
 	 */
 	constructor(client:Client, obj:any, wrapped:boolean=false) {
@@ -207,6 +204,7 @@ class Archive extends Resource {
 	/**
 	 * @method get_isAvailable
 	 * @protected
+	 * @private
 	 * @return {boolean}
 	 */
 	get_isAvailable() : boolean {
@@ -227,6 +225,7 @@ class Archive extends Resource {
 	/**
 	 * @method get_sizeGib
 	 * @protected
+	 * @private
 	 * @return {number}
 	 */
 	get_sizeGib() : number {
@@ -236,6 +235,7 @@ class Archive extends Resource {
 	/**
 	 * @method set_sizeGib
 	 * @protected
+	 * @private
 	 * @param {number} sizeGib
 	 * @return {number}
 	 */
@@ -266,7 +266,7 @@ class Archive extends Resource {
 	
 	/**
 	 * @method get_source
-	 * @public
+	 * @private
 	 * @return {Resource}
 	 */
 	get_source() : Resource {
@@ -275,7 +275,7 @@ class Archive extends Resource {
 	
 	/**
 	 * @method set_source
-	 * @public
+	 * @private
 	 * @param {Resource} source
 	 * @return {Resource}
 	 */
@@ -307,7 +307,7 @@ class Archive extends Resource {
 	
 	/**
 	 * @method get_ftpInfo
-	 * @public
+	 * @private
 	 * @return {FtpInfo}
 	 */
 	get_ftpInfo() : FtpInfo {
@@ -329,8 +329,8 @@ class Archive extends Resource {
 	 * @private
 	 * @method _onAfterApiDeserialize
 	 * @protected
-	 * @param {any} root
 	 * @param {any} r
+	 * @param {any} root
 	 * @return {void}
 	 */
 	_onAfterApiDeserialize(r:any, root:any) : void {
@@ -370,8 +370,8 @@ class Archive extends Resource {
 	 * @private
 	 * @method _onAfterApiSerialize
 	 * @protected
-	 * @param {boolean} withClean
 	 * @param {any} r
+	 * @param {boolean} withClean
 	 * @return {void}
 	 */
 	_onAfterApiSerialize(r:any, withClean:boolean) : void {
@@ -406,8 +406,7 @@ class Archive extends Resource {
 	 * @method openFtp
 	 * @chainable
 	 * @public
-	 * @param reset 既にFTPSが開始されているとき、trueを指定してこのメソッドを呼ぶことでパスワードを再設定します。
-	 * @param {boolean} reset=false
+	 * @param {boolean} reset=false 既にFTPSが開始されているとき、trueを指定してこのメソッドを呼ぶことでパスワードを再設定します。
 	 * @return {Archive} this
 	 */
 	openFtp(reset:boolean=false) : Archive {
@@ -438,9 +437,8 @@ class Archive extends Resource {
 	/**
 	 * コピー中のアーカイブが利用可能になるまで待機します。
 	 * 
-	 * @ignore
+	 * @private
 	 * @method afterCopy
-	 * @public
 	 * @param {number} timeoutSec
 	 * @param {(Archive, boolean) => void} callback
 	 * @return {void}
@@ -529,7 +527,7 @@ class Archive extends Resource {
 	}
 	
 	/**
-	 * スコープ {@link EScope}
+	 * スコープ {{#crossLink "EScope"}}{{/crossLink}}
 	 * 
 	 * @property scope
 	 * @type string
@@ -844,7 +842,7 @@ class Archive extends Resource {
 	}
 	
 	/**
-	 * 有効状態 {@link EAvailability}
+	 * 有効状態 {{#crossLink "EAvailability"}}{{/crossLink}}
 	 * 
 	 * @property availability
 	 * @type string
@@ -962,8 +960,7 @@ class Archive extends Resource {
 	}
 	
 	/**
-	 * (This method is generated in Translator_default#buildImpl)
-	 * 
+	 * @private
 	 * @method apiSerializeImpl
 	 * @protected
 	 * @param {boolean} withClean=false

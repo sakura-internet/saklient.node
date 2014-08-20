@@ -99,7 +99,7 @@ class Server extends Resource {
 	m_instance : ServerInstance;
 	
 	/**
-	 * 有効状態 {@link EAvailability}
+	 * 有効状態 {{#crossLink "EAvailability"}}{{/crossLink}}
 	 * 
 	 * @member saklient.cloud.resource.Server#m_availability
 	 * @type string
@@ -140,7 +140,6 @@ class Server extends Resource {
 	/**
 	 * @private
 	 * @method _className
-	 * @public
 	 * @return {string}
 	 */
 	_className() : string {
@@ -150,7 +149,6 @@ class Server extends Resource {
 	/**
 	 * @private
 	 * @method _id
-	 * @public
 	 * @return {string}
 	 */
 	_id() : string {
@@ -182,11 +180,10 @@ class Server extends Resource {
 	}
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @constructor
-	 * @public
-	 * @param {any} obj
 	 * @param {Client} client
+	 * @param {any} obj
 	 * @param {boolean} wrapped=false
 	 */
 	constructor(client:Client, obj:any, wrapped:boolean=false) {
@@ -290,11 +287,10 @@ class Server extends Resource {
 	/**
 	 * サーバが指定のステータスに遷移するまで待機します。
 	 * 
-	 * @ignore
-	 * @method afterStatus
 	 * @private
-	 * @param {number} timeoutSec
+	 * @method afterStatus
 	 * @param {string} status
+	 * @param {number} timeoutSec
 	 * @param {(Server, boolean) => void} callback
 	 * @return {void}
 	 */
@@ -323,9 +319,8 @@ class Server extends Resource {
 	/**
 	 * サーバが指定のステータスに遷移するまで待機します。
 	 * 
-	 * @ignore
-	 * @method sleepUntil
 	 * @private
+	 * @method sleepUntil
 	 * @param {string} status
 	 * @param {number} timeoutSec=180
 	 * @return {boolean}
@@ -766,7 +761,7 @@ class Server extends Resource {
 	}
 	
 	/**
-	 * 有効状態 {@link EAvailability}
+	 * 有効状態 {{#crossLink "EAvailability"}}{{/crossLink}}
 	 * 
 	 * @property availability
 	 * @type string
@@ -887,8 +882,7 @@ class Server extends Resource {
 	}
 	
 	/**
-	 * (This method is generated in Translator_default#buildImpl)
-	 * 
+	 * @private
 	 * @method apiSerializeImpl
 	 * @protected
 	 * @param {boolean} withClean=false

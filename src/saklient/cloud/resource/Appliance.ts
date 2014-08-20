@@ -31,7 +31,7 @@ class Appliance extends Resource {
 	m_id : string;
 	
 	/**
-	 * クラス {@link EApplianceClass}
+	 * クラス {{#crossLink "EApplianceClass"}}{{/crossLink}}
 	 * 
 	 * @member saklient.cloud.resource.Appliance#m_clazz
 	 * @type string
@@ -126,7 +126,6 @@ class Appliance extends Resource {
 	/**
 	 * @private
 	 * @method _className
-	 * @public
 	 * @return {string}
 	 */
 	_className() : string {
@@ -136,7 +135,6 @@ class Appliance extends Resource {
 	/**
 	 * @private
 	 * @method _id
-	 * @public
 	 * @return {string}
 	 */
 	_id() : string {
@@ -168,11 +166,10 @@ class Appliance extends Resource {
 	}
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @constructor
-	 * @public
-	 * @param {any} obj
 	 * @param {Client} client
+	 * @param {any} obj
 	 * @param {boolean} wrapped=false
 	 */
 	constructor(client:Client, obj:any, wrapped:boolean=false) {
@@ -302,7 +299,7 @@ class Appliance extends Resource {
 	}
 	
 	/**
-	 * クラス {@link EApplianceClass}
+	 * クラス {{#crossLink "EApplianceClass"}}{{/crossLink}}
 	 * 
 	 * @property clazz
 	 * @type string
@@ -653,8 +650,7 @@ class Appliance extends Resource {
 	}
 	
 	/**
-	 * (This method is generated in Translator_default#buildImpl)
-	 * 
+	 * @private
 	 * @method apiSerializeImpl
 	 * @protected
 	 * @param {boolean} withClean=false

@@ -31,7 +31,7 @@ class IsoImage extends Resource {
 	m_id : string;
 	
 	/**
-	 * スコープ {@link EScope}
+	 * スコープ {{#crossLink "EScope"}}{{/crossLink}}
 	 * 
 	 * @member saklient.cloud.resource.IsoImage#m_scope
 	 * @type string
@@ -126,7 +126,6 @@ class IsoImage extends Resource {
 	/**
 	 * @private
 	 * @method _className
-	 * @public
 	 * @return {string}
 	 */
 	_className() : string {
@@ -136,7 +135,6 @@ class IsoImage extends Resource {
 	/**
 	 * @private
 	 * @method _id
-	 * @public
 	 * @return {string}
 	 */
 	_id() : string {
@@ -168,11 +166,10 @@ class IsoImage extends Resource {
 	}
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @constructor
-	 * @public
-	 * @param {any} obj
 	 * @param {Client} client
+	 * @param {any} obj
 	 * @param {boolean} wrapped=false
 	 */
 	constructor(client:Client, obj:any, wrapped:boolean=false) {
@@ -187,8 +184,8 @@ class IsoImage extends Resource {
 	 * @private
 	 * @method _onAfterApiDeserialize
 	 * @protected
-	 * @param {any} root
 	 * @param {any} r
+	 * @param {any} root
 	 * @return {void}
 	 */
 	_onAfterApiDeserialize(r:any, root:any) : void {
@@ -207,6 +204,7 @@ class IsoImage extends Resource {
 	/**
 	 * @method get_sizeGib
 	 * @protected
+	 * @private
 	 * @return {number}
 	 */
 	get_sizeGib() : number {
@@ -234,7 +232,7 @@ class IsoImage extends Resource {
 	
 	/**
 	 * @method get_ftpInfo
-	 * @public
+	 * @private
 	 * @return {FtpInfo}
 	 */
 	get_ftpInfo() : FtpInfo {
@@ -260,8 +258,7 @@ class IsoImage extends Resource {
 	 * @method openFtp
 	 * @chainable
 	 * @public
-	 * @param reset 既にFTPSが開始されているとき、trueを指定してこのメソッドを呼ぶことでパスワードを再設定します。
-	 * @param {boolean} reset=false
+	 * @param {boolean} reset=false 既にFTPSが開始されているとき、trueを指定してこのメソッドを呼ぶことでパスワードを再設定します。
 	 * @return {IsoImage} this
 	 */
 	openFtp(reset:boolean=false) : IsoImage {
@@ -353,7 +350,7 @@ class IsoImage extends Resource {
 	}
 	
 	/**
-	 * スコープ {@link EScope}
+	 * スコープ {{#crossLink "EScope"}}{{/crossLink}}
 	 * 
 	 * @property scope
 	 * @type string
@@ -712,8 +709,7 @@ class IsoImage extends Resource {
 	}
 	
 	/**
-	 * (This method is generated in Translator_default#buildImpl)
-	 * 
+	 * @private
 	 * @method apiSerializeImpl
 	 * @protected
 	 * @param {boolean} withClean=false

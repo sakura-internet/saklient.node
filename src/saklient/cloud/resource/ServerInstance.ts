@@ -20,7 +20,7 @@ import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
 class ServerInstance extends Resource {
 	
 	/**
-	 * 起動状態 {@link EServerInstanceStatus}
+	 * 起動状態 {{#crossLink "EServerInstanceStatus"}}{{/crossLink}}
 	 * 
 	 * @member saklient.cloud.resource.ServerInstance#m_status
 	 * @type string
@@ -29,7 +29,7 @@ class ServerInstance extends Resource {
 	m_status : string;
 	
 	/**
-	 * 前回の起動状態 {@link EServerInstanceStatus}
+	 * 前回の起動状態 {{#crossLink "EServerInstanceStatus"}}{{/crossLink}}
 	 * 
 	 * @member saklient.cloud.resource.ServerInstance#m_beforeStatus
 	 * @type string
@@ -56,11 +56,10 @@ class ServerInstance extends Resource {
 	m_isoImage : IsoImage;
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @constructor
-	 * @public
-	 * @param {any} obj
 	 * @param {Client} client
+	 * @param {any} obj
 	 * @param {boolean} wrapped=false
 	 */
 	constructor(client:Client, obj:any, wrapped:boolean=false) {
@@ -112,7 +111,7 @@ class ServerInstance extends Resource {
 	}
 	
 	/**
-	 * 起動状態 {@link EServerInstanceStatus}
+	 * 起動状態 {{#crossLink "EServerInstanceStatus"}}{{/crossLink}}
 	 * 
 	 * @property status
 	 * @type string
@@ -141,7 +140,7 @@ class ServerInstance extends Resource {
 	}
 	
 	/**
-	 * 前回の起動状態 {@link EServerInstanceStatus}
+	 * 前回の起動状態 {{#crossLink "EServerInstanceStatus"}}{{/crossLink}}
 	 * 
 	 * @property beforeStatus
 	 * @type string
@@ -258,8 +257,7 @@ class ServerInstance extends Resource {
 	}
 	
 	/**
-	 * (This method is generated in Translator_default#buildImpl)
-	 * 
+	 * @private
 	 * @method apiSerializeImpl
 	 * @protected
 	 * @param {boolean} withClean=false

@@ -96,7 +96,6 @@ class Ipv4Net extends Resource {
 	/**
 	 * @private
 	 * @method _className
-	 * @public
 	 * @return {string}
 	 */
 	_className() : string {
@@ -106,7 +105,6 @@ class Ipv4Net extends Resource {
 	/**
 	 * @private
 	 * @method _id
-	 * @public
 	 * @return {string}
 	 */
 	_id() : string {
@@ -125,11 +123,10 @@ class Ipv4Net extends Resource {
 	}
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @constructor
-	 * @public
-	 * @param {any} obj
 	 * @param {Client} client
+	 * @param {any} obj
 	 * @param {boolean} wrapped=false
 	 */
 	constructor(client:Client, obj:any, wrapped:boolean=false) {
@@ -342,8 +339,7 @@ class Ipv4Net extends Resource {
 	}
 	
 	/**
-	 * (This method is generated in Translator_default#buildImpl)
-	 * 
+	 * @private
 	 * @method apiSerializeImpl
 	 * @protected
 	 * @param {boolean} withClean=false

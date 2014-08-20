@@ -109,7 +109,6 @@ class Router extends Resource {
 	/**
 	 * @private
 	 * @method _className
-	 * @public
 	 * @return {string}
 	 */
 	_className() : string {
@@ -119,7 +118,6 @@ class Router extends Resource {
 	/**
 	 * @private
 	 * @method _id
-	 * @public
 	 * @return {string}
 	 */
 	_id() : string {
@@ -151,11 +149,10 @@ class Router extends Resource {
 	}
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @constructor
-	 * @public
-	 * @param {any} obj
 	 * @param {Client} client
+	 * @param {any} obj
 	 * @param {boolean} wrapped=false
 	 */
 	constructor(client:Client, obj:any, wrapped:boolean=false) {
@@ -169,9 +166,8 @@ class Router extends Resource {
 	/**
 	 * 作成中のルータが利用可能になるまで待機します。
 	 * 
-	 * @ignore
+	 * @private
 	 * @method afterCreate
-	 * @public
 	 * @param {number} timeoutSec
 	 * @param {(Router, boolean) => void} callback
 	 * @return {void}
@@ -620,8 +616,7 @@ class Router extends Resource {
 	}
 	
 	/**
-	 * (This method is generated in Translator_default#buildImpl)
-	 * 
+	 * @private
 	 * @method apiSerializeImpl
 	 * @protected
 	 * @param {boolean} withClean=false

@@ -8,7 +8,7 @@ import Client = require('../Client');
 'use strict';
 
 /**
- * @ignore
+ * @private
  * @class Resource
  * @constructor
  */
@@ -25,6 +25,7 @@ class Resource {
 	/**
 	 * @method get_client
 	 * @protected
+	 * @private
 	 * @return {Client}
 	 */
 	get_client() : Client {
@@ -32,10 +33,10 @@ class Resource {
 	}
 	
 	/**
+	 * @private
 	 * @property client
 	 * @type Client
 	 * @readOnly
-	 * @public
 	 */
 	get client() : Client { return this.get_client(); }
 	
@@ -49,10 +50,10 @@ class Resource {
 	_params : any;
 	
 	/**
+	 * @private
 	 * @method setParam
-	 * @public
-	 * @param {any} value
 	 * @param {string} key
+	 * @param {any} value
 	 * @return {void}
 	 */
 	setParam(key:string, value:any) : void {
@@ -94,7 +95,6 @@ class Resource {
 	/**
 	 * @private
 	 * @method _className
-	 * @public
 	 * @return {string}
 	 */
 	_className() : string {
@@ -104,7 +104,6 @@ class Resource {
 	/**
 	 * @private
 	 * @method _id
-	 * @public
 	 * @return {string}
 	 */
 	_id() : string {
@@ -112,9 +111,8 @@ class Resource {
 	}
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @constructor
-	 * @public
 	 * @param {Client} client
 	 */
 	constructor(client:Client) {
@@ -125,6 +123,7 @@ class Resource {
 	}
 	
 	/**
+	 * @private
 	 * @member saklient.cloud.resource.Resource#isNew
 	 * @type boolean
 	 * @protected
@@ -132,6 +131,7 @@ class Resource {
 	isNew : boolean;
 	
 	/**
+	 * @private
 	 * @member saklient.cloud.resource.Resource#isIncomplete
 	 * @type boolean
 	 * @protected
@@ -153,8 +153,8 @@ class Resource {
 	 * @private
 	 * @method _onAfterApiDeserialize
 	 * @protected
-	 * @param {any} root
 	 * @param {any} r
+	 * @param {any} root
 	 * @return {void}
 	 */
 	_onAfterApiDeserialize(r:any, root:any) : void {
@@ -165,8 +165,8 @@ class Resource {
 	 * @private
 	 * @method _onAfterApiSerialize
 	 * @protected
-	 * @param {boolean} withClean
 	 * @param {any} r
+	 * @param {boolean} withClean
 	 * @return {void}
 	 */
 	_onAfterApiSerialize(r:any, withClean:boolean) : void {
@@ -175,6 +175,7 @@ class Resource {
 	}
 	
 	/**
+	 * @private
 	 * @method apiDeserializeImpl
 	 * @protected
 	 * @param {any} r
@@ -185,8 +186,8 @@ class Resource {
 	}
 	
 	/**
+	 * @private
 	 * @method apiDeserialize
-	 * @public
 	 * @param {any} obj
 	 * @param {boolean} wrapped=false
 	 * @return {void}
@@ -215,6 +216,7 @@ class Resource {
 	}
 	
 	/**
+	 * @private
 	 * @method apiSerializeImpl
 	 * @protected
 	 * @param {boolean} withClean=false
@@ -226,8 +228,8 @@ class Resource {
 	}
 	
 	/**
+	 * @private
 	 * @method apiSerialize
-	 * @public
 	 * @param {boolean} withClean=false
 	 * @return {any}
 	 */
@@ -239,6 +241,7 @@ class Resource {
 	}
 	
 	/**
+	 * @private
 	 * @method apiSerializeID
 	 * @protected
 	 * @return {any}
@@ -254,6 +257,7 @@ class Resource {
 	}
 	
 	/**
+	 * @private
 	 * @method normalizeFieldName
 	 * @protected
 	 * @param {string} name
@@ -266,8 +270,8 @@ class Resource {
 	}
 	
 	/**
+	 * @private
 	 * @method setProperty
-	 * @public
 	 * @param {string} name
 	 * @param {any} value
 	 * @return {void}
@@ -358,8 +362,8 @@ class Resource {
 	}
 	
 	/**
+	 * @private
 	 * @method dump
-	 * @public
 	 * @return {any}
 	 */
 	dump() : any {

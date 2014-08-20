@@ -31,7 +31,7 @@ class Script extends Resource {
 	m_id : string;
 	
 	/**
-	 * スコープ {@link EScope}
+	 * スコープ {{#crossLink "EScope"}}{{/crossLink}}
 	 * 
 	 * @member saklient.cloud.resource.Script#m_scope
 	 * @type string
@@ -40,7 +40,7 @@ class Script extends Resource {
 	m_scope : string;
 	
 	/**
-	 * クラス {@link EScriptClass}
+	 * クラス {{#crossLink "EScriptClass"}}{{/crossLink}}
 	 * 
 	 * @member saklient.cloud.resource.Script#m_clazz
 	 * @type string
@@ -135,7 +135,6 @@ class Script extends Resource {
 	/**
 	 * @private
 	 * @method _className
-	 * @public
 	 * @return {string}
 	 */
 	_className() : string {
@@ -145,7 +144,6 @@ class Script extends Resource {
 	/**
 	 * @private
 	 * @method _id
-	 * @public
 	 * @return {string}
 	 */
 	_id() : string {
@@ -177,11 +175,10 @@ class Script extends Resource {
 	}
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @constructor
-	 * @public
-	 * @param {any} obj
 	 * @param {Client} client
+	 * @param {any} obj
 	 * @param {boolean} wrapped=false
 	 */
 	constructor(client:Client, obj:any, wrapped:boolean=false) {
@@ -240,7 +237,7 @@ class Script extends Resource {
 	}
 	
 	/**
-	 * スコープ {@link EScope}
+	 * スコープ {{#crossLink "EScope"}}{{/crossLink}}
 	 * 
 	 * @property scope
 	 * @type string
@@ -285,7 +282,7 @@ class Script extends Resource {
 	}
 	
 	/**
-	 * クラス {@link EScriptClass}
+	 * クラス {{#crossLink "EScriptClass"}}{{/crossLink}}
 	 * 
 	 * @property clazz
 	 * @type string
@@ -648,8 +645,7 @@ class Script extends Resource {
 	}
 	
 	/**
-	 * (This method is generated in Translator_default#buildImpl)
-	 * 
+	 * @private
 	 * @method apiSerializeImpl
 	 * @protected
 	 * @param {boolean} withClean=false

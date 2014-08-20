@@ -10,7 +10,7 @@ import TQueryParams = require('./TQueryParams');
 'use strict';
 
 /**
- * @ignore
+ * @private
  * @class Model
  * @constructor
  */
@@ -27,6 +27,7 @@ class Model {
 	/**
 	 * @method get_client
 	 * @protected
+	 * @private
 	 * @return {Client}
 	 */
 	get_client() : Client {
@@ -53,6 +54,7 @@ class Model {
 	/**
 	 * @method get_params
 	 * @protected
+	 * @private
 	 * @return {TQueryParams}
 	 */
 	get_params() : TQueryParams {
@@ -79,6 +81,7 @@ class Model {
 	/**
 	 * @method get_total
 	 * @protected
+	 * @private
 	 * @return {number}
 	 */
 	get_total() : number {
@@ -105,6 +108,7 @@ class Model {
 	/**
 	 * @method get_count
 	 * @protected
+	 * @private
 	 * @return {number}
 	 */
 	get_count() : number {
@@ -233,15 +237,15 @@ class Model {
 	}
 	
 	/**
-	 * APIのフィルタリング設定を直接指定します。
+	 * Web APIのフィルタリング設定を直接指定します。
 	 * 
 	 * @private
 	 * @method _filterBy
 	 * @chainable
 	 * @protected
-	 * @param {any} value
-	 * @param {string} key
-	 * @param {boolean} multiple=false
+	 * @param {string} key キー
+	 * @param {any} value 値
+	 * @param {boolean} multiple=false valueに配列を与え、OR条件で完全一致検索する場合にtrueを指定します。通常、valueはスカラ値であいまい検索されます。
 	 * @return {Model}
 	 */
 	_filterBy(key:string, value:any, multiple:boolean=false) : Model {
@@ -362,6 +366,7 @@ class Model {
 	
 	/**
 	 * 指定した文字列を名前に含むリソースに絞り込みます。
+	 * 
 	 * 大文字・小文字は区別されません。
 	 * 半角スペースで区切られた複数の文字列は、それらをすべて含むことが条件とみなされます。
 	 * 
@@ -380,6 +385,7 @@ class Model {
 	
 	/**
 	 * 指定したタグを持つリソースに絞り込みます。
+	 * 
 	 * 複数のタグを指定する場合は withTags() を利用してください。
 	 * 
 	 * @private

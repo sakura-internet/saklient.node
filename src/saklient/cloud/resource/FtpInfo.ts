@@ -24,7 +24,7 @@ class FtpInfo {
 	
 	/**
 	 * @method get_hostName
-	 * @public
+	 * @private
 	 * @return {string}
 	 */
 	get_hostName() : string {
@@ -52,7 +52,7 @@ class FtpInfo {
 	
 	/**
 	 * @method get_user
-	 * @public
+	 * @private
 	 * @return {string}
 	 */
 	get_user() : string {
@@ -80,7 +80,7 @@ class FtpInfo {
 	
 	/**
 	 * @method get_password
-	 * @public
+	 * @private
 	 * @return {string}
 	 */
 	get_password() : string {
@@ -99,9 +99,8 @@ class FtpInfo {
 	
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @constructor
-	 * @public
 	 * @param {any} obj
 	 */
 	constructor(obj:any) {

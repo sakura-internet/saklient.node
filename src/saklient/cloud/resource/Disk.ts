@@ -107,7 +107,7 @@ class Disk extends Resource {
 	m_server : Server;
 	
 	/**
-	 * 有効状態 {@link EAvailability}
+	 * 有効状態 {{#crossLink "EAvailability"}}{{/crossLink}}
 	 * 
 	 * @member saklient.cloud.resource.Disk#m_availability
 	 * @type string
@@ -148,7 +148,6 @@ class Disk extends Resource {
 	/**
 	 * @private
 	 * @method _className
-	 * @public
 	 * @return {string}
 	 */
 	_className() : string {
@@ -158,7 +157,6 @@ class Disk extends Resource {
 	/**
 	 * @private
 	 * @method _id
-	 * @public
 	 * @return {string}
 	 */
 	_id() : string {
@@ -190,11 +188,10 @@ class Disk extends Resource {
 	}
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @constructor
-	 * @public
-	 * @param {any} obj
 	 * @param {Client} client
+	 * @param {any} obj
 	 * @param {boolean} wrapped=false
 	 */
 	constructor(client:Client, obj:any, wrapped:boolean=false) {
@@ -208,6 +205,7 @@ class Disk extends Resource {
 	/**
 	 * @method get_isAvailable
 	 * @protected
+	 * @private
 	 * @return {boolean}
 	 */
 	get_isAvailable() : boolean {
@@ -228,6 +226,7 @@ class Disk extends Resource {
 	/**
 	 * @method get_sizeGib
 	 * @protected
+	 * @private
 	 * @return {number}
 	 */
 	get_sizeGib() : number {
@@ -237,6 +236,7 @@ class Disk extends Resource {
 	/**
 	 * @method set_sizeGib
 	 * @protected
+	 * @private
 	 * @param {number} sizeGib
 	 * @return {number}
 	 */
@@ -267,7 +267,7 @@ class Disk extends Resource {
 	
 	/**
 	 * @method get_source
-	 * @public
+	 * @private
 	 * @return {Resource}
 	 */
 	get_source() : Resource {
@@ -276,7 +276,7 @@ class Disk extends Resource {
 	
 	/**
 	 * @method set_source
-	 * @public
+	 * @private
 	 * @param {Resource} source
 	 * @return {Resource}
 	 */
@@ -302,8 +302,8 @@ class Disk extends Resource {
 	 * @private
 	 * @method _onAfterApiDeserialize
 	 * @protected
-	 * @param {any} root
 	 * @param {any} r
+	 * @param {any} root
 	 * @return {void}
 	 */
 	_onAfterApiDeserialize(r:any, root:any) : void {
@@ -335,8 +335,8 @@ class Disk extends Resource {
 	 * @private
 	 * @method _onAfterApiSerialize
 	 * @protected
-	 * @param {boolean} withClean
 	 * @param {any} r
+	 * @param {boolean} withClean
 	 * @return {void}
 	 */
 	_onAfterApiSerialize(r:any, withClean:boolean) : void {
@@ -408,9 +408,8 @@ class Disk extends Resource {
 	/**
 	 * コピー中のディスクが利用可能になるまで待機します。
 	 * 
-	 * @ignore
+	 * @private
 	 * @method afterCopy
-	 * @public
 	 * @param {number} timeoutSec
 	 * @param {(Disk, boolean) => void} callback
 	 * @return {void}
@@ -814,7 +813,7 @@ class Disk extends Resource {
 	}
 	
 	/**
-	 * 有効状態 {@link EAvailability}
+	 * 有効状態 {{#crossLink "EAvailability"}}{{/crossLink}}
 	 * 
 	 * @property availability
 	 * @type string
@@ -932,8 +931,7 @@ class Disk extends Resource {
 	}
 	
 	/**
-	 * (This method is generated in Translator_default#buildImpl)
-	 * 
+	 * @private
 	 * @method apiSerializeImpl
 	 * @protected
 	 * @param {boolean} withClean=false

@@ -165,8 +165,8 @@ class ExceptionFactory {
 	 * @method create
 	 * @public
 	 * @param {number} status
-	 * @param {string} message=""
 	 * @param {string} code=null
+	 * @param {string} message=""
 	 * @return {HttpException}
 	 */
 	static create(status:number, code:string=null, message:string="") : HttpException {

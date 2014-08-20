@@ -29,6 +29,7 @@ class Product {
 	/**
 	 * @method get_server
 	 * @protected
+	 * @private
 	 * @return {Model_ServerPlan}
 	 */
 	get_server() : Model_ServerPlan {
@@ -57,6 +58,7 @@ class Product {
 	/**
 	 * @method get_disk
 	 * @protected
+	 * @private
 	 * @return {Model_DiskPlan}
 	 */
 	get_disk() : Model_DiskPlan {
@@ -85,6 +87,7 @@ class Product {
 	/**
 	 * @method get_router
 	 * @protected
+	 * @private
 	 * @return {Model_RouterPlan}
 	 */
 	get_router() : Model_RouterPlan {
@@ -103,9 +106,8 @@ class Product {
 	
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @constructor
-	 * @public
 	 * @param {Client} client
 	 */
 	constructor(client:Client) {

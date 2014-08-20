@@ -39,6 +39,7 @@ class API {
 	/**
 	 * @method get_client
 	 * @protected
+	 * @private
 	 * @return {Client}
 	 */
 	get_client() : Client {
@@ -46,11 +47,10 @@ class API {
 	}
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @property client
 	 * @type Client
 	 * @readOnly
-	 * @public
 	 */
 	get client() : Client { return this.get_client(); }
 	
@@ -66,6 +66,7 @@ class API {
 	/**
 	 * @method get_product
 	 * @protected
+	 * @private
 	 * @return {Product}
 	 */
 	get_product() : Product {
@@ -94,6 +95,7 @@ class API {
 	/**
 	 * @method get_icon
 	 * @protected
+	 * @private
 	 * @return {Model_Icon}
 	 */
 	get_icon() : Model_Icon {
@@ -122,6 +124,7 @@ class API {
 	/**
 	 * @method get_server
 	 * @protected
+	 * @private
 	 * @return {Model_Server}
 	 */
 	get_server() : Model_Server {
@@ -150,6 +153,7 @@ class API {
 	/**
 	 * @method get_disk
 	 * @protected
+	 * @private
 	 * @return {Model_Disk}
 	 */
 	get_disk() : Model_Disk {
@@ -178,6 +182,7 @@ class API {
 	/**
 	 * @method get_appliance
 	 * @protected
+	 * @private
 	 * @return {Model_Appliance}
 	 */
 	get_appliance() : Model_Appliance {
@@ -206,6 +211,7 @@ class API {
 	/**
 	 * @method get_archive
 	 * @protected
+	 * @private
 	 * @return {Model_Archive}
 	 */
 	get_archive() : Model_Archive {
@@ -234,6 +240,7 @@ class API {
 	/**
 	 * @method get_isoImage
 	 * @protected
+	 * @private
 	 * @return {Model_IsoImage}
 	 */
 	get_isoImage() : Model_IsoImage {
@@ -262,6 +269,7 @@ class API {
 	/**
 	 * @method get_iface
 	 * @protected
+	 * @private
 	 * @return {Model_Iface}
 	 */
 	get_iface() : Model_Iface {
@@ -290,6 +298,7 @@ class API {
 	/**
 	 * @method get_swytch
 	 * @protected
+	 * @private
 	 * @return {Model_Swytch}
 	 */
 	get_swytch() : Model_Swytch {
@@ -318,6 +327,7 @@ class API {
 	/**
 	 * @method get_router
 	 * @protected
+	 * @private
 	 * @return {Model_Router}
 	 */
 	get_router() : Model_Router {
@@ -346,6 +356,7 @@ class API {
 	/**
 	 * @method get_ipv6Net
 	 * @protected
+	 * @private
 	 * @return {Model_Ipv6Net}
 	 */
 	get_ipv6Net() : Model_Ipv6Net {
@@ -374,6 +385,7 @@ class API {
 	/**
 	 * @method get_script
 	 * @protected
+	 * @private
 	 * @return {Model_Script}
 	 */
 	get_script() : Model_Script {
@@ -392,7 +404,7 @@ class API {
 	
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @constructor
 	 * @protected
 	 * @param {Client} client

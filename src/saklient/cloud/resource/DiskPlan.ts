@@ -37,7 +37,7 @@ class DiskPlan extends Resource {
 	m_name : string;
 	
 	/**
-	 * ストレージクラス {@link EStorageClass}
+	 * ストレージクラス {{#crossLink "EStorageClass"}}{{/crossLink}}
 	 * 
 	 * @member saklient.cloud.resource.DiskPlan#m_storageClass
 	 * @type string
@@ -78,7 +78,6 @@ class DiskPlan extends Resource {
 	/**
 	 * @private
 	 * @method _className
-	 * @public
 	 * @return {string}
 	 */
 	_className() : string {
@@ -88,7 +87,6 @@ class DiskPlan extends Resource {
 	/**
 	 * @private
 	 * @method _id
-	 * @public
 	 * @return {string}
 	 */
 	_id() : string {
@@ -96,11 +94,10 @@ class DiskPlan extends Resource {
 	}
 	
 	/**
-	 * @ignore
+	 * @private
 	 * @constructor
-	 * @public
-	 * @param {any} obj
 	 * @param {Client} client
+	 * @param {any} obj
 	 * @param {boolean} wrapped=false
 	 */
 	constructor(client:Client, obj:any, wrapped:boolean=false) {
@@ -188,7 +185,7 @@ class DiskPlan extends Resource {
 	}
 	
 	/**
-	 * ストレージクラス {@link EStorageClass}
+	 * ストレージクラス {{#crossLink "EStorageClass"}}{{/crossLink}}
 	 * 
 	 * @property storageClass
 	 * @type string
@@ -239,8 +236,7 @@ class DiskPlan extends Resource {
 	}
 	
 	/**
-	 * (This method is generated in Translator_default#buildImpl)
-	 * 
+	 * @private
 	 * @method apiSerializeImpl
 	 * @protected
 	 * @param {boolean} withClean=false

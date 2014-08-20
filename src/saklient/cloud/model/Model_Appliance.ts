@@ -88,14 +88,14 @@ class Model_Appliance extends Model {
 	}
 	
 	/**
-	 * APIのフィルタリング設定を直接指定します。
+	 * Web APIのフィルタリング設定を直接指定します。
 	 * 
 	 * @method filterBy
 	 * @chainable
 	 * @public
-	 * @param {any} value
-	 * @param {string} key
-	 * @param {boolean} multiple=false
+	 * @param {string} key キー
+	 * @param {any} value 値
+	 * @param {boolean} multiple=false valueに配列を与え、OR条件で完全一致検索する場合にtrueを指定します。通常、valueはスカラ値であいまい検索されます。
 	 * @return {Model_Appliance}
 	 */
 	filterBy(key:string, value:any, multiple:boolean=false) : Model_Appliance {
@@ -144,6 +144,7 @@ class Model_Appliance extends Model {
 	
 	/**
 	 * 指定した文字列を名前に含むリソースに絞り込みます。
+	 * 
 	 * 大文字・小文字は区別されません。
 	 * 半角スペースで区切られた複数の文字列は、それらをすべて含むことが条件とみなされます。
 	 * 
@@ -161,6 +162,7 @@ class Model_Appliance extends Model {
 	
 	/**
 	 * 指定したタグを持つリソースに絞り込みます。
+	 * 
 	 * 複数のタグを指定する場合は withTags() を利用してください。
 	 * 
 	 * @method withTag

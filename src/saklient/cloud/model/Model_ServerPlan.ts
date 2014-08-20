@@ -88,14 +88,14 @@ class Model_ServerPlan extends Model {
 	}
 	
 	/**
-	 * APIのフィルタリング設定を直接指定します。
+	 * Web APIのフィルタリング設定を直接指定します。
 	 * 
 	 * @method filterBy
 	 * @chainable
 	 * @public
-	 * @param {any} value
-	 * @param {string} key
-	 * @param {boolean} multiple=false
+	 * @param {string} key キー
+	 * @param {any} value 値
+	 * @param {boolean} multiple=false valueに配列を与え、OR条件で完全一致検索する場合にtrueを指定します。通常、valueはスカラ値であいまい検索されます。
 	 * @return {Model_ServerPlan}
 	 */
 	filterBy(key:string, value:any, multiple:boolean=false) : Model_ServerPlan {
