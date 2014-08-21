@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Request Entity Too Large.
- * 
- * @class HttpRequestEntityTooLargeException
- * @constructor
- * @extends HttpException
  */
 class HttpRequestEntityTooLargeException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpRequestEntityTooLargeException#defaultMessage
+	 * @default "HTTPエラー。Request Entity Too Large."
 	 * @type string
 	 * @public
 	 */

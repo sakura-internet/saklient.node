@@ -8,16 +8,13 @@ import HttpForbiddenException = require('../../errors/HttpForbiddenException');
 
 /**
  * 要求された操作は許可されていません。権限エラー。
- * 
- * @class AccessStaffException
- * @constructor
- * @extends HttpForbiddenException
  */
 class AccessStaffException extends HttpForbiddenException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.AccessStaffException#defaultMessage
+	 * @default "要求された操作は許可されていません。権限エラー。"
 	 * @type string
 	 * @public
 	 */

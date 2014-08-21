@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Insufficient Storage.
- * 
- * @class HttpInsufficientStorageException
- * @constructor
- * @extends HttpException
  */
 class HttpInsufficientStorageException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpInsufficientStorageException#defaultMessage
+	 * @default "HTTPエラー。Insufficient Storage."
 	 * @type string
 	 * @public
 	 */

@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。ライセンスの問題により、組み合わせて使用できないディスクが接続されています。
- * 
- * @class DiskLicenseMismatchException
- * @constructor
- * @extends HttpConflictException
  */
 class DiskLicenseMismatchException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.DiskLicenseMismatchException#defaultMessage
+	 * @default "要求された操作を行えません。ライセンスの問題により、組み合わせて使用できないディスクが接続されています。"
 	 * @type string
 	 * @public
 	 */

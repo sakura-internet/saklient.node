@@ -8,16 +8,13 @@ import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavai
 
 /**
  * サービスが利用できません。この機能は一時的に利用できない状態にあります。メンテナンス情報、サポートサイトをご確認ください。
- * 
- * @class ServiceTemporarilyUnavailableException
- * @constructor
- * @extends HttpServiceUnavailableException
  */
 class ServiceTemporarilyUnavailableException extends HttpServiceUnavailableException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.ServiceTemporarilyUnavailableException#defaultMessage
+	 * @default "サービスが利用できません。この機能は一時的に利用できない状態にあります。メンテナンス情報、サポートサイトをご確認ください。"
 	 * @type string
 	 * @public
 	 */

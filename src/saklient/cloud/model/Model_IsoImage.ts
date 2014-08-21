@@ -12,6 +12,7 @@ import EScope = require('../enums/EScope');
 /**
  * ISOイメージを検索・作成するための機能を備えたクラス。
  * 
+ * @module saklient.cloud.model.Model_IsoImage
  * @class Model_IsoImage
  * @constructor
  * @extends Model

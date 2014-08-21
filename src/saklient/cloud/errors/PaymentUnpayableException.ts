@@ -8,16 +8,13 @@ import HttpPaymentRequiredException = require('../../errors/HttpPaymentRequiredE
 
 /**
  * お客様のご都合により操作を受け付けることができません。
- * 
- * @class PaymentUnpayableException
- * @constructor
- * @extends HttpPaymentRequiredException
  */
 class PaymentUnpayableException extends HttpPaymentRequiredException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.PaymentUnpayableException#defaultMessage
+	 * @default "お客様のご都合により操作を受け付けることができません。"
 	 * @type string
 	 * @public
 	 */

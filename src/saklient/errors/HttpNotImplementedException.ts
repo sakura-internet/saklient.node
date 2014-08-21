@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Not Implemented.
- * 
- * @class HttpNotImplementedException
- * @constructor
- * @extends HttpException
  */
 class HttpNotImplementedException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpNotImplementedException#defaultMessage
+	 * @default "HTTPエラー。Not Implemented."
 	 * @type string
 	 * @public
 	 */

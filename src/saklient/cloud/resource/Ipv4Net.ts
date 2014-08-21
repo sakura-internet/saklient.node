@@ -12,6 +12,7 @@ import Swytch = require('./Swytch');
 /**
  * IPv4ネットワークの実体1つに対応し、属性の取得や操作を行うためのクラス。
  * 
+ * @module saklient.cloud.resource.Ipv4Net
  * @class Ipv4Net
  * @constructor
  * @extends Resource
@@ -139,6 +140,7 @@ class Ipv4Net extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Ipv4Net#n_id
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -168,6 +170,7 @@ class Ipv4Net extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Ipv4Net#n_address
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -197,6 +200,7 @@ class Ipv4Net extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Ipv4Net#n_maskLen
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -226,6 +230,7 @@ class Ipv4Net extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Ipv4Net#n_defaultRoute
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -255,6 +260,7 @@ class Ipv4Net extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Ipv4Net#n_nextHop
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */

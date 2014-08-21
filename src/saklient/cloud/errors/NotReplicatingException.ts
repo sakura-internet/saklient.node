@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。このストレージ上への指定リソースの複製は実行されていません。
- * 
- * @class NotReplicatingException
- * @constructor
- * @extends HttpConflictException
  */
 class NotReplicatingException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.NotReplicatingException#defaultMessage
+	 * @default "要求された操作を行えません。このストレージ上への指定リソースの複製は実行されていません。"
 	 * @type string
 	 * @public
 	 */

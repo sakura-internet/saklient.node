@@ -8,16 +8,13 @@ import HttpNotFoundException = require('../../errors/HttpNotFoundException');
 
 /**
  * 対象が見つかりません。このストレージには指定リソースの複製が存在しません。
- * 
- * @class ReplicaNotFoundException
- * @constructor
- * @extends HttpNotFoundException
  */
 class ReplicaNotFoundException extends HttpNotFoundException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.ReplicaNotFoundException#defaultMessage
+	 * @default "対象が見つかりません。このストレージには指定リソースの複製が存在しません。"
 	 * @type string
 	 * @public
 	 */

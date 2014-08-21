@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求を受け付けできません。アカウントあたりのリソース数上限により、リソースの割り当てに失敗しました。
- * 
- * @class LimitCountInAccountException
- * @constructor
- * @extends HttpConflictException
  */
 class LimitCountInAccountException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.LimitCountInAccountException#defaultMessage
+	 * @default "要求を受け付けできません。アカウントあたりのリソース数上限により、リソースの割り当てに失敗しました。"
 	 * @type string
 	 * @public
 	 */

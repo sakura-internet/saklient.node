@@ -11,6 +11,7 @@ import Resource = require('./Resource');
 /**
  * サーバプラン情報の1レコードに対応するクラス。
  * 
+ * @module saklient.cloud.resource.ServerPlan
  * @class ServerPlan
  * @constructor
  * @extends Resource
@@ -146,6 +147,7 @@ class ServerPlan extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.ServerPlan#n_id
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -175,6 +177,7 @@ class ServerPlan extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.ServerPlan#n_name
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -204,6 +207,7 @@ class ServerPlan extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.ServerPlan#n_cpu
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -233,6 +237,7 @@ class ServerPlan extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.ServerPlan#n_memoryMib
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -262,6 +267,7 @@ class ServerPlan extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.ServerPlan#n_serviceClass
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */

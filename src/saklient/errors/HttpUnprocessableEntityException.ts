@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Unprocessable Entity.
- * 
- * @class HttpUnprocessableEntityException
- * @constructor
- * @extends HttpException
  */
 class HttpUnprocessableEntityException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpUnprocessableEntityException#defaultMessage
+	 * @default "HTTPエラー。Unprocessable Entity."
 	 * @type string
 	 * @public
 	 */

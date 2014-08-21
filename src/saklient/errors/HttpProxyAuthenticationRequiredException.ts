@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Proxy Authentication Required.
- * 
- * @class HttpProxyAuthenticationRequiredException
- * @constructor
- * @extends HttpException
  */
 class HttpProxyAuthenticationRequiredException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpProxyAuthenticationRequiredException#defaultMessage
+	 * @default "HTTPエラー。Proxy Authentication Required."
 	 * @type string
 	 * @public
 	 */

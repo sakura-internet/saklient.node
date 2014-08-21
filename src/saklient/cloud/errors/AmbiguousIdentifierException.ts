@@ -8,16 +8,13 @@ import HttpNotFoundException = require('../../errors/HttpNotFoundException');
 
 /**
  * 対象が見つかりません。識別名から一意にリソースを特定できません。
- * 
- * @class AmbiguousIdentifierException
- * @constructor
- * @extends HttpNotFoundException
  */
 class AmbiguousIdentifierException extends HttpNotFoundException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.AmbiguousIdentifierException#defaultMessage
+	 * @default "対象が見つかりません。識別名から一意にリソースを特定できません。"
 	 * @type string
 	 * @public
 	 */

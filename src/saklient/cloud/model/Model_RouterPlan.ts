@@ -11,6 +11,7 @@ import RouterPlan = require('../resource/RouterPlan');
 /**
  * ルータ帯域プランを検索するための機能を備えたクラス。
  * 
+ * @module saklient.cloud.model.Model_RouterPlan
  * @class Model_RouterPlan
  * @constructor
  * @extends Model

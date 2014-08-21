@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * 要求されたHTTPメソッドは対応していません。
- * 
- * @class HttpMethodNotAllowedException
- * @constructor
- * @extends HttpException
  */
 class HttpMethodNotAllowedException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpMethodNotAllowedException#defaultMessage
+	 * @default "要求されたHTTPメソッドは対応していません。"
 	 * @type string
 	 * @public
 	 */

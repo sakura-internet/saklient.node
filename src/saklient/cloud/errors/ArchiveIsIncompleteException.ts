@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。このアーカイブは不完全です。複製処理等の完了後に再度お試しください。
- * 
- * @class ArchiveIsIncompleteException
- * @constructor
- * @extends HttpConflictException
  */
 class ArchiveIsIncompleteException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.ArchiveIsIncompleteException#defaultMessage
+	 * @default "要求された操作を行えません。このアーカイブは不完全です。複製処理等の完了後に再度お試しください。"
 	 * @type string
 	 * @public
 	 */

@@ -23,6 +23,7 @@ import Model_Script = require('./model/Model_Script');
  * さくらのクラウドAPIクライアントを利用する際、最初にアクセスすべきルートとなるクラス。
  * 
  * @see API.authorize
+ * @module saklient.cloud.API
  * @class API
  * @constructor
  */

@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Bad Gateway.
- * 
- * @class HttpBadGatewayException
- * @constructor
- * @extends HttpException
  */
 class HttpBadGatewayException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpBadGatewayException#defaultMessage
+	 * @default "HTTPエラー。Bad Gateway."
 	 * @type string
 	 * @public
 	 */

@@ -8,16 +8,13 @@ import HttpBadRequestException = require('../../errors/HttpBadRequestException')
 
 /**
  * 不適切な要求です。リクエストパラメータに指定されたゾーンをパスに含むURLへアクセスしてください。
- * 
- * @class AmbiguousZoneException
- * @constructor
- * @extends HttpBadRequestException
  */
 class AmbiguousZoneException extends HttpBadRequestException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.AmbiguousZoneException#defaultMessage
+	 * @default "不適切な要求です。リクエストパラメータに指定されたゾーンをパスに含むURLへアクセスしてください。"
 	 * @type string
 	 * @public
 	 */

@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求を受け付けできません。ルータあたりのリソース数上限により、リソースの割り当てに失敗しました。
- * 
- * @class LimitCountInRouterException
- * @constructor
- * @extends HttpConflictException
  */
 class LimitCountInRouterException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.LimitCountInRouterException#defaultMessage
+	 * @default "要求を受け付けできません。ルータあたりのリソース数上限により、リソースの割り当てに失敗しました。"
 	 * @type string
 	 * @public
 	 */

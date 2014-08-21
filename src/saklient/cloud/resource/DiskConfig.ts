@@ -11,6 +11,7 @@ import Script = require('./Script');
 /**
  * ディスク修正のパラメータ。
  * 
+ * @module saklient.cloud.resource.DiskConfig
  * @class DiskConfig
  * @constructor
  */

@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。このIDのリソースは既に存在します。
- * 
- * @class ResAlreadyExistsException
- * @constructor
- * @extends HttpConflictException
  */
 class ResAlreadyExistsException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.ResAlreadyExistsException#defaultMessage
+	 * @default "要求された操作を行えません。このIDのリソースは既に存在します。"
 	 * @type string
 	 * @public
 	 */

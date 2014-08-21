@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Gone.
- * 
- * @class HttpGoneException
- * @constructor
- * @extends HttpException
  */
 class HttpGoneException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpGoneException#defaultMessage
+	 * @default "HTTPエラー。Gone."
 	 * @type string
 	 * @public
 	 */

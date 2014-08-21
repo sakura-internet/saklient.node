@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。ハイブリッド接続と併用する場合はお問い合わせください。
- * 
- * @class NotWithHybridconnException
- * @constructor
- * @extends HttpConflictException
  */
 class NotWithHybridconnException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.NotWithHybridconnException#defaultMessage
+	 * @default "要求された操作を行えません。ハイブリッド接続と併用する場合はお問い合わせください。"
 	 * @type string
 	 * @public
 	 */

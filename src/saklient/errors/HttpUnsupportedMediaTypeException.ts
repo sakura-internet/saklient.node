@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Unsupported Media Type.
- * 
- * @class HttpUnsupportedMediaTypeException
- * @constructor
- * @extends HttpException
  */
 class HttpUnsupportedMediaTypeException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpUnsupportedMediaTypeException#defaultMessage
+	 * @default "HTTPエラー。Unsupported Media Type."
 	 * @type string
 	 * @public
 	 */

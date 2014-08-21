@@ -15,6 +15,7 @@ import SaklientException = require('../../errors/SaklientException');
 /**
  * ISOイメージの実体1つに対応し、属性の取得や操作を行うためのクラス。
  * 
+ * @module saklient.cloud.resource.IsoImage
  * @class IsoImage
  * @constructor
  * @extends Resource
@@ -288,6 +289,7 @@ class IsoImage extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.IsoImage#n_id
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -317,6 +319,7 @@ class IsoImage extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.IsoImage#n_scope
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -362,6 +365,7 @@ class IsoImage extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.IsoImage#n_name
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -407,6 +411,7 @@ class IsoImage extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.IsoImage#n_description
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -452,6 +457,7 @@ class IsoImage extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.IsoImage#n_tags
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -497,6 +503,7 @@ class IsoImage extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.IsoImage#n_icon
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -542,6 +549,7 @@ class IsoImage extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.IsoImage#n_sizeMib
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -590,6 +598,7 @@ class IsoImage extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.IsoImage#n_serviceClass
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */

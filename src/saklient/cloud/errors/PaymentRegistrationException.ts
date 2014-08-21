@@ -8,16 +8,13 @@ import HttpPaymentRequiredException = require('../../errors/HttpPaymentRequiredE
 
 /**
  * 要求を受け付けできません。支払情報が未登録です。会員メニューから支払、クレジットカードの情報を登録してください
- * 
- * @class PaymentRegistrationException
- * @constructor
- * @extends HttpPaymentRequiredException
  */
 class PaymentRegistrationException extends HttpPaymentRequiredException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.PaymentRegistrationException#defaultMessage
+	 * @default "要求を受け付けできません。支払情報が未登録です。会員メニューから支払、クレジットカードの情報を登録してください"
 	 * @type string
 	 * @public
 	 */

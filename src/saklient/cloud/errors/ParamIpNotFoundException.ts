@@ -8,16 +8,13 @@ import HttpBadRequestException = require('../../errors/HttpBadRequestException')
 
 /**
  * 不適切な要求です。パラメータで指定されたIPアドレスを含むネットワークが存在しません。
- * 
- * @class ParamIpNotFoundException
- * @constructor
- * @extends HttpBadRequestException
  */
 class ParamIpNotFoundException extends HttpBadRequestException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.ParamIpNotFoundException#defaultMessage
+	 * @default "不適切な要求です。パラメータで指定されたIPアドレスを含むネットワークが存在しません。"
 	 * @type string
 	 * @public
 	 */

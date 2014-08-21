@@ -40,6 +40,9 @@ module.exports = function (grunt) {
 		shell: {
 			createIndex: {
 				command: "./createindex.sh"
+			},
+			insertEnumDoc: {
+				command: "./insertenumdoc.sh"
 			}
 		}
 		
@@ -51,6 +54,7 @@ module.exports = function (grunt) {
 	
 	grunt.registerTask('default', ['typescript','shell','yuidoc']);
 //	grunt.registerTask('default', ['typescript','shell']);
+//	grunt.registerTask('default', ['yuidoc']);
 
 };
 

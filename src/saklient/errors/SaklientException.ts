@@ -6,9 +6,10 @@ export = SaklientException;
 import Error = require('./Error');
 
 /**
+ * @module saklient.errors.SaklientException
  * @class SaklientException
  * @constructor
- * @extends NativeException
+ * @extends Error
  */
 class SaklientException extends Error {
 	

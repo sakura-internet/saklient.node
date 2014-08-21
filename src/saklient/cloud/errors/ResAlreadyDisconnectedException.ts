@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。このリソースは既に切断されています。
- * 
- * @class ResAlreadyDisconnectedException
- * @constructor
- * @extends HttpConflictException
  */
 class ResAlreadyDisconnectedException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.ResAlreadyDisconnectedException#defaultMessage
+	 * @default "要求された操作を行えません。このリソースは既に切断されています。"
 	 * @type string
 	 * @public
 	 */

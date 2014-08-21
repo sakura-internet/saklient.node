@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。リソースのFTP共有を終了した後に実行してください。
- * 
- * @class FtpMustBeClosedException
- * @constructor
- * @extends HttpConflictException
  */
 class FtpMustBeClosedException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.FtpMustBeClosedException#defaultMessage
+	 * @default "要求された操作を行えません。リソースのFTP共有を終了した後に実行してください。"
 	 * @type string
 	 * @public
 	 */

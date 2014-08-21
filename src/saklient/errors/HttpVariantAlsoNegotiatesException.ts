@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Variant Also Negotiates.
- * 
- * @class HttpVariantAlsoNegotiatesException
- * @constructor
- * @extends HttpException
  */
 class HttpVariantAlsoNegotiatesException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpVariantAlsoNegotiatesException#defaultMessage
+	 * @default "HTTPエラー。Variant Also Negotiates."
 	 * @type string
 	 * @public
 	 */

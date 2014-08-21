@@ -16,6 +16,7 @@ import Ipv6Net = require('./Ipv6Net');
 /**
  * スイッチの実体1つに対応し、属性の取得や操作を行うためのクラス。
  * 
+ * @module saklient.cloud.resource.Swytch
  * @class Swytch
  * @constructor
  * @extends Resource
@@ -263,6 +264,7 @@ class Swytch extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Swytch#n_id
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -292,6 +294,7 @@ class Swytch extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Swytch#n_name
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -337,6 +340,7 @@ class Swytch extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Swytch#n_description
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -382,6 +386,7 @@ class Swytch extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Swytch#n_userDefaultRoute
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -411,6 +416,7 @@ class Swytch extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Swytch#n_userMaskLen
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -440,6 +446,7 @@ class Swytch extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Swytch#n_router
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -469,6 +476,7 @@ class Swytch extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Swytch#n_ipv4Nets
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -498,6 +506,7 @@ class Swytch extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Swytch#n_ipv6Nets
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */

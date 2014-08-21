@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * 要求を受け付けできません。サポートサイトやメンテナンス情報をご確認ください。
- * 
- * @class HttpNotAcceptableException
- * @constructor
- * @extends HttpException
  */
 class HttpNotAcceptableException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpNotAcceptableException#defaultMessage
+	 * @default "要求を受け付けできません。サポートサイトやメンテナンス情報をご確認ください。"
 	 * @type string
 	 * @public
 	 */

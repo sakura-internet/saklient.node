@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Request Uri Too Long.
- * 
- * @class HttpRequestUriTooLongException
- * @constructor
- * @extends HttpException
  */
 class HttpRequestUriTooLongException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpRequestUriTooLongException#defaultMessage
+	 * @default "HTTPエラー。Request Uri Too Long."
 	 * @type string
 	 * @public
 	 */

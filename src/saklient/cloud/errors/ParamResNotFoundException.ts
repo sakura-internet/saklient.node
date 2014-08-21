@@ -8,16 +8,13 @@ import HttpBadRequestException = require('../../errors/HttpBadRequestException')
 
 /**
  * 不適切な要求です。パラメータで指定されたリソースが存在しません。IDをご確認ください。
- * 
- * @class ParamResNotFoundException
- * @constructor
- * @extends HttpBadRequestException
  */
 class ParamResNotFoundException extends HttpBadRequestException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.ParamResNotFoundException#defaultMessage
+	 * @default "不適切な要求です。パラメータで指定されたリソースが存在しません。IDをご確認ください。"
 	 * @type string
 	 * @public
 	 */

@@ -8,16 +8,13 @@ import HttpBadRequestException = require('../../errors/HttpBadRequestException')
 
 /**
  * 不適切な要求です。アカウントが存在しません。IDをご確認ください。
- * 
- * @class AccountNotFoundException
- * @constructor
- * @extends HttpBadRequestException
  */
 class AccountNotFoundException extends HttpBadRequestException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.AccountNotFoundException#defaultMessage
+	 * @default "不適切な要求です。アカウントが存在しません。IDをご確認ください。"
 	 * @type string
 	 * @public
 	 */

@@ -14,6 +14,7 @@ import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
 /**
  * サーバを検索・作成するための機能を備えたクラス。
  * 
+ * @module saklient.cloud.model.Model_Server
  * @class Model_Server
  * @constructor
  * @extends Model

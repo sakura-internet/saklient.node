@@ -8,16 +8,13 @@ import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavai
 
 /**
  * サービスが利用できません。PTRレコードを設定できません。
- * 
- * @class DnsPtrUpdateFailureException
- * @constructor
- * @extends HttpServiceUnavailableException
  */
 class DnsPtrUpdateFailureException extends HttpServiceUnavailableException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.DnsPtrUpdateFailureException#defaultMessage
+	 * @default "サービスが利用できません。PTRレコードを設定できません。"
 	 * @type string
 	 * @public
 	 */

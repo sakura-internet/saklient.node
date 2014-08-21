@@ -13,6 +13,7 @@ import Client = require('./Client');
 /**
  * 商品情報にアクセスするためのモデルを集めたクラス。
  * 
+ * @module saklient.cloud.Product
  * @class Product
  * @constructor
  */

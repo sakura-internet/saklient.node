@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。ハイブリッド接続されているスイッチに対して、この操作はできません。
- * 
- * @class SwitchHybridConnectedException
- * @constructor
- * @extends HttpConflictException
  */
 class SwitchHybridConnectedException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.SwitchHybridConnectedException#defaultMessage
+	 * @default "要求された操作を行えません。ハイブリッド接続されているスイッチに対して、この操作はできません。"
 	 * @type string
 	 * @public
 	 */

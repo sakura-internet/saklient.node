@@ -8,16 +8,13 @@ import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavai
 
 /**
  * サービスが利用できません。VNCプロクシの要求に失敗しました。
- * 
- * @class VncProxyRequestFailureException
- * @constructor
- * @extends HttpServiceUnavailableException
  */
 class VncProxyRequestFailureException extends HttpServiceUnavailableException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.VncProxyRequestFailureException#defaultMessage
+	 * @default "サービスが利用できません。VNCプロクシの要求に失敗しました。"
 	 * @type string
 	 * @public
 	 */

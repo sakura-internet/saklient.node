@@ -14,12 +14,27 @@ var _map_EScope = {
 /**
  * リソースの公開範囲を表す列挙子。
  * 
+ * @module saklient.cloud.enums.EScope
  * @class EScope
  */
 class EScope {
 	
+	/**
+	 * @static
+	 * @property user
+	 * @default "user"
+	 * @type string
+	 * @public
+	 */
 	static user : string = "user";
 	
+	/**
+	 * @static
+	 * @property shared
+	 * @default "shared"
+	 * @type string
+	 * @public
+	 */
 	static shared : string = "shared";
 	
 	static compare(lhs:string, rhs:string) : number {

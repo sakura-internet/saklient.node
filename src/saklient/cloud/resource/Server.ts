@@ -20,6 +20,7 @@ import EAvailability = require('../enums/EAvailability');
 /**
  * サーバの実体1つに対応し、属性の取得や操作を行うためのクラス。
  * 
+ * @module saklient.cloud.resource.Server
  * @class Server
  * @constructor
  * @extends Resource
@@ -429,6 +430,7 @@ class Server extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Server#n_id
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -458,6 +460,7 @@ class Server extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Server#n_name
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -503,6 +506,7 @@ class Server extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Server#n_description
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -548,6 +552,7 @@ class Server extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Server#n_tags
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -593,6 +598,7 @@ class Server extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Server#n_icon
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -638,6 +644,7 @@ class Server extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Server#n_plan
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -686,6 +693,7 @@ class Server extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Server#n_ifaces
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -715,6 +723,7 @@ class Server extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Server#n_instance
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -744,6 +753,7 @@ class Server extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Server#n_availability
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */

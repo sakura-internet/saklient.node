@@ -14,12 +14,27 @@ var _map_EScriptClass = {
 /**
  * スクリプトのクラスを表す列挙子。
  * 
+ * @module saklient.cloud.enums.EScriptClass
  * @class EScriptClass
  */
 class EScriptClass {
 	
+	/**
+	 * @static
+	 * @property shell
+	 * @default "shell"
+	 * @type string
+	 * @public
+	 */
 	static shell : string = "shell";
 	
+	/**
+	 * @static
+	 * @property ansible
+	 * @default "ansible"
+	 * @type string
+	 * @public
+	 */
 	static ansible : string = "ansible";
 	
 	static compare(lhs:string, rhs:string) : number {

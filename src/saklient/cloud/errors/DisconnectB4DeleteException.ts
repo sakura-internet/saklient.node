@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。サーバとの接続を切り離した後に実行してください。
- * 
- * @class DisconnectB4DeleteException
- * @constructor
- * @extends HttpConflictException
  */
 class DisconnectB4DeleteException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.DisconnectB4DeleteException#defaultMessage
+	 * @default "要求された操作を行えません。サーバとの接続を切り離した後に実行してください。"
 	 * @type string
 	 * @public
 	 */

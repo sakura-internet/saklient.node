@@ -8,16 +8,13 @@ import HttpBadRequestException = require('../../errors/HttpBadRequestException')
 
 /**
  * 不適切な要求です。対応するAAAAレコードが見つかりません。
- * 
- * @class DnsAaaaRecordNotFoundException
- * @constructor
- * @extends HttpBadRequestException
  */
 class DnsAaaaRecordNotFoundException extends HttpBadRequestException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.DnsAaaaRecordNotFoundException#defaultMessage
+	 * @default "不適切な要求です。対応するAAAAレコードが見つかりません。"
 	 * @type string
 	 * @public
 	 */

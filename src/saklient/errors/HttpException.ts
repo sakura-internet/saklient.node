@@ -6,9 +6,10 @@ export = HttpException;
 import Error = require('./Error');
 
 /**
+ * @module saklient.errors.HttpException
  * @class HttpException
  * @constructor
- * @extends NativeException
+ * @extends Error
  */
 class HttpException extends Error {
 	

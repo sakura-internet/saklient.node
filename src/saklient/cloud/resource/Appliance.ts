@@ -15,6 +15,7 @@ import EApplianceClass = require('../enums/EApplianceClass');
 /**
  * アプライアンスの実体1つに対応し、属性の取得や操作を行うためのクラス。
  * 
+ * @module saklient.cloud.resource.Appliance
  * @class Appliance
  * @constructor
  * @extends Resource
@@ -234,6 +235,7 @@ class Appliance extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Appliance#n_id
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -263,6 +265,7 @@ class Appliance extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Appliance#n_clazz
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -311,6 +314,7 @@ class Appliance extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Appliance#n_name
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -356,6 +360,7 @@ class Appliance extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Appliance#n_description
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -401,6 +406,7 @@ class Appliance extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Appliance#n_tags
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -446,6 +452,7 @@ class Appliance extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Appliance#n_icon
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -491,6 +498,7 @@ class Appliance extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Appliance#n_ifaces
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -520,6 +528,7 @@ class Appliance extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Appliance#n_serviceClass
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */

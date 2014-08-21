@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。このISOイメージは不完全です。複製処理等の完了後に再度お試しください。
- * 
- * @class CdromIsIncompleteException
- * @constructor
- * @extends HttpConflictException
  */
 class CdromIsIncompleteException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.CdromIsIncompleteException#defaultMessage
+	 * @default "要求された操作を行えません。このISOイメージは不完全です。複製処理等の完了後に再度お試しください。"
 	 * @type string
 	 * @public
 	 */

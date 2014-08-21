@@ -8,16 +8,13 @@ import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavai
 
 /**
  * サービスが利用できません。サーバの画面が応答していません。
- * 
- * @class NoDisplayResponseException
- * @constructor
- * @extends HttpServiceUnavailableException
  */
 class NoDisplayResponseException extends HttpServiceUnavailableException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.NoDisplayResponseException#defaultMessage
+	 * @default "サービスが利用できません。サーバの画面が応答していません。"
 	 * @type string
 	 * @public
 	 */

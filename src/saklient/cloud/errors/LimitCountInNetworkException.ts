@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求を受け付けできません。ネットワーク内リソース数上限により、リソースの割り当てに失敗しました。
- * 
- * @class LimitCountInNetworkException
- * @constructor
- * @extends HttpConflictException
  */
 class LimitCountInNetworkException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.LimitCountInNetworkException#defaultMessage
+	 * @default "要求を受け付けできません。ネットワーク内リソース数上限により、リソースの割り当てに失敗しました。"
 	 * @type string
 	 * @public
 	 */

@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。ルータを削除することでスイッチは同時に削除されます。
- * 
- * @class DeleteRouterB4SwitchException
- * @constructor
- * @extends HttpConflictException
  */
 class DeleteRouterB4SwitchException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.DeleteRouterB4SwitchException#defaultMessage
+	 * @default "要求された操作を行えません。ルータを削除することでスイッチは同時に削除されます。"
 	 * @type string
 	 * @public
 	 */

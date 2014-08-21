@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Locked.
- * 
- * @class HttpLockedException
- * @constructor
- * @extends HttpException
  */
 class HttpLockedException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpLockedException#defaultMessage
+	 * @default "HTTPエラー。Locked."
 	 * @type string
 	 * @public
 	 */

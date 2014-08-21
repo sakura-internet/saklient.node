@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。リソースが既に存在するか、リソース同士が既に関連付けられています。
- * 
- * @class DuplicateEntryException
- * @constructor
- * @extends HttpConflictException
  */
 class DuplicateEntryException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.DuplicateEntryException#defaultMessage
+	 * @default "要求された操作を行えません。リソースが既に存在するか、リソース同士が既に関連付けられています。"
 	 * @type string
 	 * @public
 	 */

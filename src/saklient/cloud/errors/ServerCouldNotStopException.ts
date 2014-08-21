@@ -8,16 +8,13 @@ import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavai
 
 /**
  * サービスが利用できません。サーバを停止できません。再度お試しください。
- * 
- * @class ServerCouldNotStopException
- * @constructor
- * @extends HttpServiceUnavailableException
  */
 class ServerCouldNotStopException extends HttpServiceUnavailableException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.ServerCouldNotStopException#defaultMessage
+	 * @default "サービスが利用できません。サーバを停止できません。再度お試しください。"
 	 * @type string
 	 * @public
 	 */

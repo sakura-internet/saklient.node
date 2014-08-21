@@ -8,16 +8,13 @@ import HttpBadRequestException = require('../../errors/HttpBadRequestException')
 
 /**
  * 不適切な要求です。パラメータに含まれている値のフォーマットが一部不正です。
- * 
- * @class InvalidFormatException
- * @constructor
- * @extends HttpBadRequestException
  */
 class InvalidFormatException extends HttpBadRequestException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.InvalidFormatException#defaultMessage
+	 * @default "不適切な要求です。パラメータに含まれている値のフォーマットが一部不正です。"
 	 * @type string
 	 * @public
 	 */

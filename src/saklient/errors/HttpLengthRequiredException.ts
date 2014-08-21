@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Length Required.
- * 
- * @class HttpLengthRequiredException
- * @constructor
- * @extends HttpException
  */
 class HttpLengthRequiredException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpLengthRequiredException#defaultMessage
+	 * @default "HTTPエラー。Length Required."
 	 * @type string
 	 * @public
 	 */

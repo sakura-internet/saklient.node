@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Precondition Failed.
- * 
- * @class HttpPreconditionFailedException
- * @constructor
- * @extends HttpException
  */
 class HttpPreconditionFailedException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpPreconditionFailedException#defaultMessage
+	 * @default "HTTPエラー。Precondition Failed."
 	 * @type string
 	 * @public
 	 */

@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。ファイルをアップロード後に実行してください。
- * 
- * @class FileNotUploadedException
- * @constructor
- * @extends HttpConflictException
  */
 class FileNotUploadedException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.FileNotUploadedException#defaultMessage
+	 * @default "要求された操作を行えません。ファイルをアップロード後に実行してください。"
 	 * @type string
 	 * @public
 	 */

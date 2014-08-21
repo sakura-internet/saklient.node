@@ -16,6 +16,7 @@ import Ipv6Net = require('./Ipv6Net');
 /**
  * ルータの実体1つに対応し、属性の取得や操作を行うためのクラス。
  * 
+ * @module saklient.cloud.resource.Router
  * @class Router
  * @constructor
  * @extends Resource
@@ -309,6 +310,7 @@ class Router extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Router#n_id
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -338,6 +340,7 @@ class Router extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Router#n_name
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -383,6 +386,7 @@ class Router extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Router#n_description
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -428,6 +432,7 @@ class Router extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Router#n_networkMaskLen
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -476,6 +481,7 @@ class Router extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Router#n_bandWidthMbps
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -524,6 +530,7 @@ class Router extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Router#n_swytchId
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */

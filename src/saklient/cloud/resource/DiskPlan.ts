@@ -12,6 +12,7 @@ import EStorageClass = require('../enums/EStorageClass');
 /**
  * ディスクプラン情報の1レコードに対応するクラス。
  * 
+ * @module saklient.cloud.resource.DiskPlan
  * @class DiskPlan
  * @constructor
  * @extends Resource
@@ -110,6 +111,7 @@ class DiskPlan extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.DiskPlan#n_id
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -139,6 +141,7 @@ class DiskPlan extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.DiskPlan#n_name
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -168,6 +171,7 @@ class DiskPlan extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.DiskPlan#n_storageClass
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */

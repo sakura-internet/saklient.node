@@ -14,12 +14,27 @@ var _map_EDiskConnection = {
 /**
  * ディスクの接続方式を表す列挙子。
  * 
+ * @module saklient.cloud.enums.EDiskConnection
  * @class EDiskConnection
  */
 class EDiskConnection {
 	
+	/**
+	 * @static
+	 * @property ide
+	 * @default "ide"
+	 * @type string
+	 * @public
+	 */
 	static ide : string = "ide";
 	
+	/**
+	 * @static
+	 * @property virtio
+	 * @default "virtio"
+	 * @type string
+	 * @public
+	 */
 	static virtio : string = "virtio";
 	
 	static compare(lhs:string, rhs:string) : number {

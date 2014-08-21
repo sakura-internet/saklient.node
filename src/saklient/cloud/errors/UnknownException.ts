@@ -8,16 +8,13 @@ import HttpInternalServerErrorException = require('../../errors/HttpInternalServ
 
 /**
  * 予期しないエラーが発生しました。このエラーが繰り返し発生する場合は、サポートサイトやメンテナンス情報をご確認ください。
- * 
- * @class UnknownException
- * @constructor
- * @extends HttpInternalServerErrorException
  */
 class UnknownException extends HttpInternalServerErrorException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.UnknownException#defaultMessage
+	 * @default "予期しないエラーが発生しました。このエラーが繰り返し発生する場合は、サポートサイトやメンテナンス情報をご確認ください。"
 	 * @type string
 	 * @public
 	 */

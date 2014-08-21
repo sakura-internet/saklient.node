@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Payment Required.
- * 
- * @class HttpPaymentRequiredException
- * @constructor
- * @extends HttpException
  */
 class HttpPaymentRequiredException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpPaymentRequiredException#defaultMessage
+	 * @default "HTTPエラー。Payment Required."
 	 * @type string
 	 * @public
 	 */

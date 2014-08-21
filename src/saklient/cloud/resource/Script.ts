@@ -15,6 +15,7 @@ import EScriptClass = require('../enums/EScriptClass');
 /**
  * スクリプトの実体1つに対応し、属性の取得や操作を行うためのクラス。
  * 
+ * @module saklient.cloud.resource.Script
  * @class Script
  * @constructor
  * @extends Resource
@@ -191,6 +192,7 @@ class Script extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Script#n_id
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -220,6 +222,7 @@ class Script extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Script#n_scope
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -249,6 +252,7 @@ class Script extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Script#n_clazz
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -294,6 +298,7 @@ class Script extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Script#n_name
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -323,6 +328,7 @@ class Script extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Script#n_description
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -368,6 +374,7 @@ class Script extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Script#n_tags
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -413,6 +420,7 @@ class Script extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Script#n_icon
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -458,6 +466,7 @@ class Script extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Script#n_content
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -503,6 +512,7 @@ class Script extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Script#n_annotation
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */

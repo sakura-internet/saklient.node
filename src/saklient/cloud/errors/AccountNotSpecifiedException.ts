@@ -8,16 +8,13 @@ import HttpForbiddenException = require('../../errors/HttpForbiddenException');
 
 /**
  * 要求された操作は許可されていません。このAPIはアカウントを特定できる認証方法でアクセスする必要があります。
- * 
- * @class AccountNotSpecifiedException
- * @constructor
- * @extends HttpForbiddenException
  */
 class AccountNotSpecifiedException extends HttpForbiddenException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.AccountNotSpecifiedException#defaultMessage
+	 * @default "要求された操作は許可されていません。このAPIはアカウントを特定できる認証方法でアクセスする必要があります。"
 	 * @type string
 	 * @public
 	 */

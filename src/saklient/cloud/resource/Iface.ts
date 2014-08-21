@@ -12,6 +12,7 @@ import Resource = require('./Resource');
 /**
  * インタフェースの実体1つに対応し、属性の取得や操作を行うためのクラス。
  * 
+ * @module saklient.cloud.resource.Iface
  * @class Iface
  * @constructor
  * @extends Resource
@@ -165,6 +166,7 @@ class Iface extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Iface#n_id
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -194,6 +196,7 @@ class Iface extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Iface#n_macAddress
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -223,6 +226,7 @@ class Iface extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Iface#n_ipAddress
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -252,6 +256,7 @@ class Iface extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Iface#n_userIpAddress
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -297,6 +302,7 @@ class Iface extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Iface#n_serverId
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */

@@ -8,8 +8,7 @@ import Fiber = require('fibers');
 var saklient = require('../saklient');
 
 /**
- * @class Util
- * @constructor
+ * @ignore
  */
 class Util {
 	

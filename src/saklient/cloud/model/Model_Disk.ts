@@ -11,6 +11,7 @@ import Disk = require('../resource/Disk');
 /**
  * ディスクを検索・作成するための機能を備えたクラス。
  * 
+ * @module saklient.cloud.model.Model_Disk
  * @class Model_Disk
  * @constructor
  * @extends Model

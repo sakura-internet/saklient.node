@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * 対象が見つかりません。対象は利用できない状態か、IDまたはパスに誤りがあります。
- * 
- * @class HttpNotFoundException
- * @constructor
- * @extends HttpException
  */
 class HttpNotFoundException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpNotFoundException#defaultMessage
+	 * @default "対象が見つかりません。対象は利用できない状態か、IDまたはパスに誤りがあります。"
 	 * @type string
 	 * @public
 	 */

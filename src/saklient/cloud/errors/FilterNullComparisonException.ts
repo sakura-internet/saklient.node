@@ -8,16 +8,13 @@ import HttpBadRequestException = require('../../errors/HttpBadRequestException')
 
 /**
  * 不適切な要求です。nullとは比較できない演算子がフィルタ中に含まれています。
- * 
- * @class FilterNullComparisonException
- * @constructor
- * @extends HttpBadRequestException
  */
 class FilterNullComparisonException extends HttpBadRequestException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.FilterNullComparisonException#defaultMessage
+	 * @default "不適切な要求です。nullとは比較できない演算子がフィルタ中に含まれています。"
 	 * @type string
 	 * @public
 	 */

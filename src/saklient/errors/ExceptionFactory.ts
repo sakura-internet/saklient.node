@@ -155,6 +155,7 @@ import VncProxyRequestFailureException = require('../cloud/errors/VncProxyReques
 'use strict';
 
 /**
+ * @module saklient.errors.ExceptionFactory
  * @class ExceptionFactory
  * @constructor
  */

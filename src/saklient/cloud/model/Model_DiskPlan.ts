@@ -11,6 +11,7 @@ import DiskPlan = require('../resource/DiskPlan');
 /**
  * ディスクプランを検索するための機能を備えたクラス。
  * 
+ * @module saklient.cloud.model.Model_DiskPlan
  * @class Model_DiskPlan
  * @constructor
  * @extends Model

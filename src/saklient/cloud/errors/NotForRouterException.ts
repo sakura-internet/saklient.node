@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。ルータには適用できません。
- * 
- * @class NotForRouterException
- * @constructor
- * @extends HttpConflictException
  */
 class NotForRouterException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.NotForRouterException#defaultMessage
+	 * @default "要求された操作を行えません。ルータには適用できません。"
 	 * @type string
 	 * @public
 	 */

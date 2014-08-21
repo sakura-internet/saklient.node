@@ -8,16 +8,13 @@ import HttpPaymentRequiredException = require('../../errors/HttpPaymentRequiredE
 
 /**
  * 要求を受け付けできません。クレジットカードの使用期限、利用限度額をご確認ください。
- * 
- * @class PaymentCreditCardException
- * @constructor
- * @extends HttpPaymentRequiredException
  */
 class PaymentCreditCardException extends HttpPaymentRequiredException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.PaymentCreditCardException#defaultMessage
+	 * @default "要求を受け付けできません。クレジットカードの使用期限、利用限度額をご確認ください。"
 	 * @type string
 	 * @public
 	 */

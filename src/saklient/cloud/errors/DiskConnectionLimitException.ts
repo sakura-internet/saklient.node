@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。この接続インタフェースにこれ以上のディスクを接続することができません。
- * 
- * @class DiskConnectionLimitException
- * @constructor
- * @extends HttpConflictException
  */
 class DiskConnectionLimitException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.DiskConnectionLimitException#defaultMessage
+	 * @default "要求された操作を行えません。この接続インタフェースにこれ以上のディスクを接続することができません。"
 	 * @type string
 	 * @public
 	 */

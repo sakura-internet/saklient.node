@@ -13,6 +13,7 @@ import EScope = require('../enums/EScope');
 /**
  * アイコンの実体1つに対応し、属性の取得や操作を行うためのクラス。
  * 
+ * @module saklient.cloud.resource.Icon
  * @class Icon
  * @constructor
  * @extends Resource
@@ -144,6 +145,7 @@ class Icon extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Icon#n_id
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -173,6 +175,7 @@ class Icon extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Icon#n_scope
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -202,6 +205,7 @@ class Icon extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Icon#n_name
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -247,6 +251,7 @@ class Icon extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Icon#n_url
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */

@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。このテンプレートから作成したすべてのディスクを削除した後に実行してください。
- * 
- * @class DeleteDiskB4TemplateException
- * @constructor
- * @extends HttpConflictException
  */
 class DeleteDiskB4TemplateException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.DeleteDiskB4TemplateException#defaultMessage
+	 * @default "要求された操作を行えません。このテンプレートから作成したすべてのディスクを削除した後に実行してください。"
 	 * @type string
 	 * @public
 	 */

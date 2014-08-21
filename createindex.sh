@@ -6,7 +6,11 @@ function _list () {
 	target="$1"
 	index="$target/index.js"
 	
-	echo 'module.exports = {' > "$index"
+	module=`echo $target | sed 's|^lib/||' | sed 's|/|.|g'`
+	echo '/**' > "$index"
+	echo " * @module $module" >> "$index"
+	echo ' */' >> "$index"
+	echo 'module.exports = {' >> "$index"
 	ls -1 "$target" | while read f; do
 		if [ "$f" != "index.js" ]; then
 			echo "    ${f%.js}: require('./${f%.js}')," >> "$index"

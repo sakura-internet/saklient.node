@@ -9,6 +9,7 @@ import Util = require('../../Util');
 /**
  * FTPサーバのアカウント情報。
  * 
+ * @module saklient.cloud.resource.FtpInfo
  * @class FtpInfo
  * @constructor
  */

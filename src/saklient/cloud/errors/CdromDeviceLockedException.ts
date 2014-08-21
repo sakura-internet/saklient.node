@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。CD-ROMドライブがロックされています。
- * 
- * @class CdromDeviceLockedException
- * @constructor
- * @extends HttpConflictException
  */
 class CdromDeviceLockedException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.CdromDeviceLockedException#defaultMessage
+	 * @default "要求された操作を行えません。CD-ROMドライブがロックされています。"
 	 * @type string
 	 * @public
 	 */

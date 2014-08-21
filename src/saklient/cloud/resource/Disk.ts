@@ -19,6 +19,7 @@ import EStorageClass = require('../enums/EStorageClass');
 /**
  * ディスクの実体1つに対応し、属性の取得や操作を行うためのクラス。
  * 
+ * @module saklient.cloud.resource.Disk
  * @class Disk
  * @constructor
  * @extends Resource
@@ -452,6 +453,7 @@ class Disk extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Disk#n_id
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -481,6 +483,7 @@ class Disk extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Disk#n_name
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -526,6 +529,7 @@ class Disk extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Disk#n_description
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -571,6 +575,7 @@ class Disk extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Disk#n_tags
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -616,6 +621,7 @@ class Disk extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Disk#n_icon
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -661,6 +667,7 @@ class Disk extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Disk#n_sizeMib
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -709,6 +716,7 @@ class Disk extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Disk#n_serviceClass
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -738,6 +746,7 @@ class Disk extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Disk#n_plan
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -767,6 +776,7 @@ class Disk extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Disk#n_server
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -796,6 +806,7 @@ class Disk extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Disk#n_availability
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */

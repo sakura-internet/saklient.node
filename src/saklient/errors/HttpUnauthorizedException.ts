@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * この操作は認証が必要です。IDまたはパスワードが誤っている可能性があります。
- * 
- * @class HttpUnauthorizedException
- * @constructor
- * @extends HttpException
  */
 class HttpUnauthorizedException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpUnauthorizedException#defaultMessage
+	 * @default "この操作は認証が必要です。IDまたはパスワードが誤っている可能性があります。"
 	 * @type string
 	 * @public
 	 */

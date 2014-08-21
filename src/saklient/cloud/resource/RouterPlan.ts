@@ -11,6 +11,7 @@ import Resource = require('./Resource');
 /**
  * ルータ帯域プラン情報の1レコードに対応するクラス。
  * 
+ * @module saklient.cloud.resource.RouterPlan
  * @class RouterPlan
  * @constructor
  * @extends Resource
@@ -118,6 +119,7 @@ class RouterPlan extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.RouterPlan#n_id
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -147,6 +149,7 @@ class RouterPlan extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.RouterPlan#n_name
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -176,6 +179,7 @@ class RouterPlan extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.RouterPlan#n_bandWidthMbps
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -205,6 +209,7 @@ class RouterPlan extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.RouterPlan#n_serviceClass
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */

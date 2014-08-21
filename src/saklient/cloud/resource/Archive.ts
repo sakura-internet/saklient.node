@@ -18,6 +18,7 @@ import SaklientException = require('../../errors/SaklientException');
 /**
  * アーカイブの実体1つに対応し、属性の取得や操作を行うためのクラス。
  * 
+ * @module saklient.cloud.resource.Archive
  * @class Archive
  * @constructor
  * @extends Resource
@@ -481,6 +482,7 @@ class Archive extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Archive#n_id
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -510,6 +512,7 @@ class Archive extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Archive#n_scope
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -539,6 +542,7 @@ class Archive extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Archive#n_name
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -584,6 +588,7 @@ class Archive extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Archive#n_description
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -629,6 +634,7 @@ class Archive extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Archive#n_tags
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -674,6 +680,7 @@ class Archive extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Archive#n_icon
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -719,6 +726,7 @@ class Archive extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Archive#n_sizeMib
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -767,6 +775,7 @@ class Archive extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Archive#n_serviceClass
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -796,6 +805,7 @@ class Archive extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Archive#n_plan
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -825,6 +835,7 @@ class Archive extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.Archive#n_availability
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */

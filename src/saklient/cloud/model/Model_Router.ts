@@ -11,6 +11,7 @@ import Router = require('../resource/Router');
 /**
  * ルータを検索するための機能を備えたクラス。
  * 
+ * @module saklient.cloud.model.Model_Router
  * @class Model_Router
  * @constructor
  * @extends Model

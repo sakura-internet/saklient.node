@@ -13,10 +13,18 @@ var _map_EStorageClass = {
 /**
  * ストレージのクラスを表す列挙子。
  * 
+ * @module saklient.cloud.enums.EStorageClass
  * @class EStorageClass
  */
 class EStorageClass {
 	
+	/**
+	 * @static
+	 * @property iscsi1204
+	 * @default "iscsi1204"
+	 * @type string
+	 * @public
+	 */
 	static iscsi1204 : string = "iscsi1204";
 	
 	static compare(lhs:string, rhs:string) : number {

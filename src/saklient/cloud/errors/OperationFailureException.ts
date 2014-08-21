@@ -8,16 +8,13 @@ import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavai
 
 /**
  * サービスが利用できません。操作に失敗しました。サーバが混雑している可能性があります。
- * 
- * @class OperationFailureException
- * @constructor
- * @extends HttpServiceUnavailableException
  */
 class OperationFailureException extends HttpServiceUnavailableException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.OperationFailureException#defaultMessage
+	 * @default "サービスが利用できません。操作に失敗しました。サーバが混雑している可能性があります。"
 	 * @type string
 	 * @public
 	 */

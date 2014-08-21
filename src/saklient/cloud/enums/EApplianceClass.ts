@@ -14,12 +14,27 @@ var _map_EApplianceClass = {
 /**
  * アプライアンスのクラスを表す列挙子。
  * 
+ * @module saklient.cloud.enums.EApplianceClass
  * @class EApplianceClass
  */
 class EApplianceClass {
 	
+	/**
+	 * @static
+	 * @property loadbalancer
+	 * @default "loadbalancer"
+	 * @type string
+	 * @public
+	 */
 	static loadbalancer : string = "loadbalancer";
 	
+	/**
+	 * @static
+	 * @property vpcrouter
+	 * @default "vpcrouter"
+	 * @type string
+	 * @public
+	 */
 	static vpcrouter : string = "vpcrouter";
 	
 	static compare(lhs:string, rhs:string) : number {

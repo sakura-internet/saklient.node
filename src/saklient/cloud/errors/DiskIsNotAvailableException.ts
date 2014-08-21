@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。ディスクが利用可能な状態ではありません。コピー処理等の完了後に再度お試しください。
- * 
- * @class DiskIsNotAvailableException
- * @constructor
- * @extends HttpConflictException
  */
 class DiskIsNotAvailableException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.DiskIsNotAvailableException#defaultMessage
+	 * @default "要求された操作を行えません。ディスクが利用可能な状態ではありません。コピー処理等の完了後に再度お試しください。"
 	 * @type string
 	 * @public
 	 */

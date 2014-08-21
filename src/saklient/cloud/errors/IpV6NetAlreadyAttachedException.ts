@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。ConnectedなIPv6ネットワークが既に割り当て済みです。
- * 
- * @class IpV6NetAlreadyAttachedException
- * @constructor
- * @extends HttpConflictException
  */
 class IpV6NetAlreadyAttachedException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.IpV6NetAlreadyAttachedException#defaultMessage
+	 * @default "要求された操作を行えません。ConnectedなIPv6ネットワークが既に割り当て済みです。"
 	 * @type string
 	 * @public
 	 */

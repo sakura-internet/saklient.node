@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。ISOイメージが見つかりません。イメージを正しくアップロードし、FTP共有を終了した後に再度お試しください。
- * 
- * @class MissingIsoImageException
- * @constructor
- * @extends HttpConflictException
  */
 class MissingIsoImageException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.MissingIsoImageException#defaultMessage
+	 * @default "要求された操作を行えません。ISOイメージが見つかりません。イメージを正しくアップロードし、FTP共有を終了した後に再度お試しください。"
 	 * @type string
 	 * @public
 	 */

@@ -8,16 +8,13 @@ import HttpBadRequestException = require('../../errors/HttpBadRequestException')
 
 /**
  * 不適切な要求です。同時に指定できないパラメータが含まれています。
- * 
- * @class InvalidParamCombException
- * @constructor
- * @extends HttpBadRequestException
  */
 class InvalidParamCombException extends HttpBadRequestException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.InvalidParamCombException#defaultMessage
+	 * @default "不適切な要求です。同時に指定できないパラメータが含まれています。"
 	 * @type string
 	 * @public
 	 */

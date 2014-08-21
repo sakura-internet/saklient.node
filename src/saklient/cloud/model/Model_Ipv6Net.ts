@@ -11,6 +11,7 @@ import Ipv6Net = require('../resource/Ipv6Net');
 /**
  * IPv6ネットワークを検索するための機能を備えたクラス。
  * 
+ * @module saklient.cloud.model.Model_Ipv6Net
  * @class Model_Ipv6Net
  * @constructor
  * @extends Model

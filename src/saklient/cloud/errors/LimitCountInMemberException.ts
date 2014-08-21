@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求を受け付けできません。アカウント数上限により作成失敗しました。
- * 
- * @class LimitCountInMemberException
- * @constructor
- * @extends HttpConflictException
  */
 class LimitCountInMemberException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.LimitCountInMemberException#defaultMessage
+	 * @default "要求を受け付けできません。アカウント数上限により作成失敗しました。"
 	 * @type string
 	 * @public
 	 */

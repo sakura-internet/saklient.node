@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Not Extended.
- * 
- * @class HttpNotExtendedException
- * @constructor
- * @extends HttpException
  */
 class HttpNotExtendedException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpNotExtendedException#defaultMessage
+	 * @default "HTTPエラー。Not Extended."
 	 * @type string
 	 * @public
 	 */

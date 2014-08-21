@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。このディスクへのコピー処理が進行中です。完了後に再度お試しください。
- * 
- * @class DiskIsCopyingException
- * @constructor
- * @extends HttpConflictException
  */
 class DiskIsCopyingException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.DiskIsCopyingException#defaultMessage
+	 * @default "要求された操作を行えません。このディスクへのコピー処理が進行中です。完了後に再度お試しください。"
 	 * @type string
 	 * @public
 	 */

@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Failed Dependency.
- * 
- * @class HttpFailedDependencyException
- * @constructor
- * @extends HttpException
  */
 class HttpFailedDependencyException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpFailedDependencyException#defaultMessage
+	 * @default "HTTPエラー。Failed Dependency."
 	 * @type string
 	 * @public
 	 */

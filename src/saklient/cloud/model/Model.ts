@@ -11,6 +11,7 @@ import TQueryParams = require('./TQueryParams');
 
 /**
  * @private
+ * @module saklient.cloud.model.Model
  * @class Model
  * @constructor
  */
@@ -173,9 +174,7 @@ class Model {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(client, "saklient.cloud.Client");
 		this._client = client;
-		this._params = {};
-		this._total = null;
-		this._count = null;
+		this._reset();
 	}
 	
 	/**
@@ -279,7 +278,7 @@ class Model {
 	 * @return {Model} this
 	 */
 	_reset() : Model {
-		this._params = {};
+		this._params = { Count: 0 };
 		this._total = 0;
 		this._count = 0;
 		return this;

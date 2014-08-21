@@ -13,6 +13,7 @@ import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
 /**
  * サーバインスタンスの実体1つに対応し、属性の取得や操作を行うためのクラス。
  * 
+ * @module saklient.cloud.resource.ServerInstance
  * @class ServerInstance
  * @constructor
  * @extends Resource
@@ -94,6 +95,7 @@ class ServerInstance extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.ServerInstance#n_status
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -123,6 +125,7 @@ class ServerInstance extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.ServerInstance#n_beforeStatus
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -152,6 +155,7 @@ class ServerInstance extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.ServerInstance#n_statusChangedAt
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */
@@ -181,6 +185,7 @@ class ServerInstance extends Resource {
 	
 	/**
 	 * @member saklient.cloud.resource.ServerInstance#n_isoImage
+	 * @default false
 	 * @type boolean
 	 * @private
 	 */

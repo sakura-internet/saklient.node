@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。このリソースから他のリソースへのコピー処理が進行中です。完了後に再度お試しください。
- * 
- * @class InMigrationException
- * @constructor
- * @extends HttpConflictException
  */
 class InMigrationException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.InMigrationException#defaultMessage
+	 * @default "要求された操作を行えません。このリソースから他のリソースへのコピー処理が進行中です。完了後に再度お試しください。"
 	 * @type string
 	 * @public
 	 */

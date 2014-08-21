@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Request Timeout.
- * 
- * @class HttpRequestTimeoutException
- * @constructor
- * @extends HttpException
  */
 class HttpRequestTimeoutException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpRequestTimeoutException#defaultMessage
+	 * @default "HTTPエラー。Request Timeout."
 	 * @type string
 	 * @public
 	 */

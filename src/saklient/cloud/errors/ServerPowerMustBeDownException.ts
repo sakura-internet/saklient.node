@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。サーバが起動中にはこの操作を行えません。
- * 
- * @class ServerPowerMustBeDownException
- * @constructor
- * @extends HttpConflictException
  */
 class ServerPowerMustBeDownException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.ServerPowerMustBeDownException#defaultMessage
+	 * @default "要求された操作を行えません。サーバが起動中にはこの操作を行えません。"
 	 * @type string
 	 * @public
 	 */

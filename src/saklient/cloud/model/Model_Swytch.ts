@@ -11,6 +11,7 @@ import Swytch = require('../resource/Swytch');
 /**
  * スイッチを検索・作成するための機能を備えたクラス。
  * 
+ * @module saklient.cloud.model.Model_Swytch
  * @class Model_Swytch
  * @constructor
  * @extends Model

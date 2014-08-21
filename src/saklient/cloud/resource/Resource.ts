@@ -9,6 +9,7 @@ import Client = require('../Client');
 
 /**
  * @private
+ * @module saklient.cloud.resource.Resource
  * @class Resource
  * @constructor
  */

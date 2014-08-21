@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Http Version Not Supported.
- * 
- * @class HttpHttpVersionNotSupportedException
- * @constructor
- * @extends HttpException
  */
 class HttpHttpVersionNotSupportedException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpHttpVersionNotSupportedException#defaultMessage
+	 * @default "HTTPエラー。Http Version Not Supported."
 	 * @type string
 	 * @public
 	 */

@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Upgrade Required.
- * 
- * @class HttpUpgradeRequiredException
- * @constructor
- * @extends HttpException
  */
 class HttpUpgradeRequiredException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpUpgradeRequiredException#defaultMessage
+	 * @default "HTTPエラー。Upgrade Required."
 	 * @type string
 	 * @public
 	 */

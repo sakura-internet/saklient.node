@@ -11,6 +11,7 @@ import ServerPlan = require('../resource/ServerPlan');
 /**
  * サーバプランを検索するための機能を備えたクラス。
  * 
+ * @module saklient.cloud.model.Model_ServerPlan
  * @class Model_ServerPlan
  * @constructor
  * @extends Model

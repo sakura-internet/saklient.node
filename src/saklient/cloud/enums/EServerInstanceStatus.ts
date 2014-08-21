@@ -15,14 +15,36 @@ var _map_EServerInstanceStatus = {
 /**
  * サーバの起動状態を表す列挙子。
  * 
+ * @module saklient.cloud.enums.EServerInstanceStatus
  * @class EServerInstanceStatus
  */
 class EServerInstanceStatus {
 	
+	/**
+	 * @static
+	 * @property down
+	 * @default "down"
+	 * @type string
+	 * @public
+	 */
 	static down : string = "down";
 	
+	/**
+	 * @static
+	 * @property cleaning
+	 * @default "cleaning"
+	 * @type string
+	 * @public
+	 */
 	static cleaning : string = "cleaning";
 	
+	/**
+	 * @static
+	 * @property up
+	 * @default "up"
+	 * @type string
+	 * @public
+	 */
 	static up : string = "up";
 	
 	static compare(lhs:string, rhs:string) : number {

@@ -12,6 +12,7 @@ import EScope = require('../enums/EScope');
 /**
  * アーカイブを検索・作成するための機能を備えたクラス。
  * 
+ * @module saklient.cloud.model.Model_Archive
  * @class Model_Archive
  * @constructor
  * @extends Model

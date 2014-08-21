@@ -8,16 +8,13 @@ import HttpBadRequestException = require('../../errors/HttpBadRequestException')
 
 /**
  * 不適切な要求です。この種類のリソースは要求された操作に対応しません。
- * 
- * @class UnsupportedResClassException
- * @constructor
- * @extends HttpBadRequestException
  */
 class UnsupportedResClassException extends HttpBadRequestException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.UnsupportedResClassException#defaultMessage
+	 * @default "不適切な要求です。この種類のリソースは要求された操作に対応しません。"
 	 * @type string
 	 * @public
 	 */

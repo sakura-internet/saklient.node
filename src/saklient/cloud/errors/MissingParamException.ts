@@ -8,16 +8,13 @@ import HttpBadRequestException = require('../../errors/HttpBadRequestException')
 
 /**
  * 不適切な要求です。必要なパラメータが指定されていません。
- * 
- * @class MissingParamException
- * @constructor
- * @extends HttpBadRequestException
  */
 class MissingParamException extends HttpBadRequestException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.MissingParamException#defaultMessage
+	 * @default "不適切な要求です。必要なパラメータが指定されていません。"
 	 * @type string
 	 * @public
 	 */

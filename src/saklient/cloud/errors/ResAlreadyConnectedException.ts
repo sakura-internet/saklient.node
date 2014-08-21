@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。このリソースは他のリソースと既に接続されています。
- * 
- * @class ResAlreadyConnectedException
- * @constructor
- * @extends HttpConflictException
  */
 class ResAlreadyConnectedException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.ResAlreadyConnectedException#defaultMessage
+	 * @default "要求された操作を行えません。このリソースは他のリソースと既に接続されています。"
 	 * @type string
 	 * @public
 	 */

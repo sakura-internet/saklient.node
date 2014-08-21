@@ -22,28 +22,99 @@ var _map_EAvailability = {
 /**
  * リソースの有効性を表す列挙子。
  * 
+ * @module saklient.cloud.enums.EAvailability
  * @class EAvailability
  */
 class EAvailability {
 	
+	/**
+	 * @static
+	 * @property selectable
+	 * @default "selectable"
+	 * @type string
+	 * @public
+	 */
 	static selectable : string = "selectable";
 	
+	/**
+	 * @static
+	 * @property migrating
+	 * @default "migrating"
+	 * @type string
+	 * @public
+	 */
 	static migrating : string = "migrating";
 	
+	/**
+	 * @static
+	 * @property precreate
+	 * @default "precreate"
+	 * @type string
+	 * @public
+	 */
 	static precreate : string = "precreate";
 	
+	/**
+	 * @static
+	 * @property replicating
+	 * @default "replicating"
+	 * @type string
+	 * @public
+	 */
 	static replicating : string = "replicating";
 	
+	/**
+	 * @static
+	 * @property transfering
+	 * @default "transfering"
+	 * @type string
+	 * @public
+	 */
 	static transfering : string = "transfering";
 	
+	/**
+	 * @static
+	 * @property stopped
+	 * @default "stopped"
+	 * @type string
+	 * @public
+	 */
 	static stopped : string = "stopped";
 	
+	/**
+	 * @static
+	 * @property failed
+	 * @default "failed"
+	 * @type string
+	 * @public
+	 */
 	static failed : string = "failed";
 	
+	/**
+	 * @static
+	 * @property charged
+	 * @default "charged"
+	 * @type string
+	 * @public
+	 */
 	static charged : string = "charged";
 	
+	/**
+	 * @static
+	 * @property uploading
+	 * @default "uploading"
+	 * @type string
+	 * @public
+	 */
 	static uploading : string = "uploading";
 	
+	/**
+	 * @static
+	 * @property available
+	 * @default "available"
+	 * @type string
+	 * @public
+	 */
 	static available : string = "available";
 	
 	static compare(lhs:string, rhs:string) : number {

@@ -8,16 +8,13 @@ import HttpForbiddenException = require('../../errors/HttpForbiddenException');
 
 /**
  * 要求された操作は許可されていません。さくらインターネットの会員メニューより認証後に実行してください。
- * 
- * @class AccessSakuraException
- * @constructor
- * @extends HttpForbiddenException
  */
 class AccessSakuraException extends HttpForbiddenException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.AccessSakuraException#defaultMessage
+	 * @default "要求された操作は許可されていません。さくらインターネットの会員メニューより認証後に実行してください。"
 	 * @type string
 	 * @public
 	 */

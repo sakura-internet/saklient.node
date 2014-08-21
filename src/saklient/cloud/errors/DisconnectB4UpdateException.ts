@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。サーバと接続された状態では変更できない値が含まれています。
- * 
- * @class DisconnectB4UpdateException
- * @constructor
- * @extends HttpConflictException
  */
 class DisconnectB4UpdateException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.DisconnectB4UpdateException#defaultMessage
+	 * @default "要求された操作を行えません。サーバと接続された状態では変更できない値が含まれています。"
 	 * @type string
 	 * @public
 	 */

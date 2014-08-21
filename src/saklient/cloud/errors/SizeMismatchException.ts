@@ -8,16 +8,13 @@ import HttpBadRequestException = require('../../errors/HttpBadRequestException')
 
 /**
  * 不適切な要求です。参照するリソースのサイズが合致しません。
- * 
- * @class SizeMismatchException
- * @constructor
- * @extends HttpBadRequestException
  */
 class SizeMismatchException extends HttpBadRequestException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.SizeMismatchException#defaultMessage
+	 * @default "不適切な要求です。参照するリソースのサイズが合致しません。"
 	 * @type string
 	 * @public
 	 */

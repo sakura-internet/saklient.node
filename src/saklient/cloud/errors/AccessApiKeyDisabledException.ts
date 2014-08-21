@@ -8,16 +8,13 @@ import HttpForbiddenException = require('../../errors/HttpForbiddenException');
 
 /**
  * 要求された操作は許可されていません。APIキーによるアクセスはできません。
- * 
- * @class AccessApiKeyDisabledException
- * @constructor
- * @extends HttpForbiddenException
  */
 class AccessApiKeyDisabledException extends HttpForbiddenException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.AccessApiKeyDisabledException#defaultMessage
+	 * @default "要求された操作は許可されていません。APIキーによるアクセスはできません。"
 	 * @type string
 	 * @public
 	 */

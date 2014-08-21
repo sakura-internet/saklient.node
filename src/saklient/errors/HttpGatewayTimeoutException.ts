@@ -8,16 +8,13 @@ import HttpException = require('./HttpException');
 
 /**
  * HTTPエラー。Gateway Timeout.
- * 
- * @class HttpGatewayTimeoutException
- * @constructor
- * @extends HttpException
  */
 class HttpGatewayTimeoutException extends HttpException {
 	
 	/**
 	 * @static
 	 * @member saklient.errors.HttpGatewayTimeoutException#defaultMessage
+	 * @default "HTTPエラー。Gateway Timeout."
 	 * @type string
 	 * @public
 	 */

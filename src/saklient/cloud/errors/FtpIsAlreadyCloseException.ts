@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。FTP共有は既に終了されています。
- * 
- * @class FtpIsAlreadyCloseException
- * @constructor
- * @extends HttpConflictException
  */
 class FtpIsAlreadyCloseException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.FtpIsAlreadyCloseException#defaultMessage
+	 * @default "要求された操作を行えません。FTP共有は既に終了されています。"
 	 * @type string
 	 * @public
 	 */

@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。複数のインタフェースから同一のスイッチに接続することはできません。
- * 
- * @class ConnectToSameSwitchException
- * @constructor
- * @extends HttpConflictException
  */
 class ConnectToSameSwitchException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.ConnectToSameSwitchException#defaultMessage
+	 * @default "要求された操作を行えません。複数のインタフェースから同一のスイッチに接続することはできません。"
 	 * @type string
 	 * @public
 	 */

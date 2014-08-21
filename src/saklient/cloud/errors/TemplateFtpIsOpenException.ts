@@ -8,16 +8,13 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 
 /**
  * 要求された操作を行えません。テンプレートのFTP共有を終了後に実行してください。
- * 
- * @class TemplateFtpIsOpenException
- * @constructor
- * @extends HttpConflictException
  */
 class TemplateFtpIsOpenException extends HttpConflictException {
 	
 	/**
 	 * @static
 	 * @member saklient.cloud.errors.TemplateFtpIsOpenException#defaultMessage
+	 * @default "要求された操作を行えません。テンプレートのFTP共有を終了後に実行してください。"
 	 * @type string
 	 * @public
 	 */
