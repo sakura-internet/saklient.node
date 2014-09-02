@@ -80,6 +80,15 @@ class Archive extends Resource {
 	m_icon : Icon;
 	
 	/**
+	 * 表示順序
+	 * 
+	 * @member saklient.cloud.resource.Archive#m_displayOrder
+	 * @type number
+	 * @protected
+	 */
+	m_displayOrder : number;
+	
+	/**
 	 * サイズ[MiB]
 	 * 
 	 * @member saklient.cloud.resource.Archive#m_sizeMib
@@ -725,6 +734,52 @@ class Archive extends Resource {
 	
 	
 	/**
+	 * @member saklient.cloud.resource.Archive#n_displayOrder
+	 * @default false
+	 * @type boolean
+	 * @private
+	 */
+	private n_displayOrder : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_displayOrder
+	 * @private
+	 * @return {number}
+	 */
+	private get_displayOrder() : number {
+		return this.m_displayOrder;
+	}
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method set_displayOrder
+	 * @private
+	 * @param {number} v
+	 * @return {number}
+	 */
+	private set_displayOrder(v:number) : number {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "number");
+		this.m_displayOrder = v;
+		this.n_displayOrder = true;
+		return this.m_displayOrder;
+	}
+	
+	/**
+	 * 表示順序
+	 * 
+	 * @property displayOrder
+	 * @type number
+	 * @public
+	 */
+	get displayOrder() : number { return this.get_displayOrder(); }
+	set displayOrder(v:number) { this.set_displayOrder(v); }
+	
+	
+	/**
 	 * @member saklient.cloud.resource.Archive#n_sizeMib
 	 * @default false
 	 * @type boolean
@@ -936,6 +991,14 @@ class Archive extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_icon = false;
+		if (Util.existsPath(r, "DisplayOrder")) {
+			this.m_displayOrder = Util.getByPath(r, "DisplayOrder") == null ? null : parseInt("" + Util.getByPath(r, "DisplayOrder"), 10);
+		}
+		else {
+			this.m_displayOrder = null;
+			this.isIncomplete = true;
+		};
+		this.n_displayOrder = false;
 		if (Util.existsPath(r, "SizeMB")) {
 			this.m_sizeMib = Util.getByPath(r, "SizeMB") == null ? null : parseInt("" + Util.getByPath(r, "SizeMB"), 10);
 		}
@@ -1009,6 +1072,9 @@ class Archive extends Resource {
 		};
 		if (withClean || this.n_icon) {
 			Util.setByPath(ret, "Icon", withClean ? (this.m_icon == null ? null : this.m_icon.apiSerialize(withClean)) : (this.m_icon == null ? { ID: "0" } : this.m_icon.apiSerializeID()));
+		};
+		if (withClean || this.n_displayOrder) {
+			Util.setByPath(ret, "DisplayOrder", this.m_displayOrder);
 		};
 		if (withClean || this.n_sizeMib) {
 			Util.setByPath(ret, "SizeMB", this.m_sizeMib);

@@ -127,7 +127,7 @@ describe('Router', function(){
 			swytch.ipv6Nets.length.should.equal(1);
 			
 			//
-			for (i=swytch.ipv4Nets.length-1; 1<=i; i--) {
+			for (var i=swytch.ipv4Nets.length-1; 1<=i; i--) {
 				trace('ルータ＋スイッチからスタティックルートの割当を解除しています...');
 				var net = swytch.ipv4Nets[i];
 				swytch.removeStaticRoute(net);
