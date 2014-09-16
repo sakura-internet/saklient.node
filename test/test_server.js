@@ -144,6 +144,7 @@ describe('Server', function(){
 			disk.name = name;
 			disk.description = description;
 			disk.tags = [tag];
+			disk.plan = api.product.disk.ssd;
 			disk.source = archive;
 			disk.save();
 			//console.log(disk.dump());
@@ -264,6 +265,7 @@ describe('Server', function(){
 			disk2.name = name + '-copy';
 			disk2.description = description;
 			disk2.tags = [tag];
+			disk2.plan = api.product.disk.hdd;
 			disk2.source = disk;
 			disk2.sizeGib = 40;
 			disk2.save();

@@ -5,7 +5,7 @@ export = Model;
 import Util = require('../../Util');
 import Client = require('../Client');
 import Resource = require('../resource/Resource');
-import TQueryParams = require('./TQueryParams');
+import QueryParams = require('./QueryParams');
 import SaklientException = require('../../errors/SaklientException');
 
 'use strict';
@@ -48,28 +48,28 @@ class Model {
 	/**
 	 * @private
 	 * @member saklient.cloud.model.Model#_query
-	 * @type TQueryParams
+	 * @type QueryParams
 	 * @protected
 	 */
-	_query : TQueryParams;
+	_query : QueryParams;
 	
 	/**
 	 * @method get_query
 	 * @protected
 	 * @private
-	 * @return {TQueryParams}
+	 * @return {QueryParams}
 	 */
-	get_query() : TQueryParams {
+	get_query() : QueryParams {
 		return this._query;
 	}
 	
 	/**
 	 * @property query
-	 * @type TQueryParams
+	 * @type QueryParams
 	 * @readOnly
 	 * @public
 	 */
-	get query() : TQueryParams { return this.get_query(); }
+	get query() : QueryParams { return this.get_query(); }
 	
 	
 	/**
@@ -191,7 +191,7 @@ class Model {
 	_offset(offset:number) : Model {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(offset, "number");
-		this._query["Begin"] = offset;
+		this._query.begin = offset;
 		return this;
 	}
 	
@@ -208,7 +208,7 @@ class Model {
 	_limit(count:number) : Model {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(count, "number");
-		this._query["Count"] = count;
+		this._query.count = count;
 		return this;
 	}
 	
@@ -227,12 +227,8 @@ class Model {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(column, "string");
 		Util.validateType(reverse, "boolean");
-		if (!("Sort" in this._query)) {
-			this._query["Sort"] = [];
-		};
-		var sort:string[] = this._query["Sort"];
 		var op:string = reverse ? "-" : "";
-		sort.push(op + column);
+		this._query.sort.push(op + column);
 		return this;
 	}
 	
@@ -252,10 +248,7 @@ class Model {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(key, "string");
 		Util.validateType(multiple, "boolean");
-		if (!("Filter" in this._query)) {
-			this._query["Filter"] = {};
-		};
-		var filter:any = this._query["Filter"];
+		var filter:any = this._query.filter;
 		if (multiple) {
 			if (!(key in filter)) {
 				filter[key] = [];
@@ -282,7 +275,7 @@ class Model {
 	 * @return {Model} this
 	 */
 	_reset() : Model {
-		this._query = { Count: 0 };
+		this._query = new QueryParams();
 		this._total = 0;
 		this._count = 0;
 		return this;
@@ -314,7 +307,7 @@ class Model {
 	_getById(id:string) : Resource {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(id, "string");
-		var query = this._query;
+		var query:any = this._query.build();
 		this._reset();
 		var result:any = this._client.request("GET", this._apiPath() + "/" + Util.urlEncode(id), query);
 		this._total = 1;
@@ -331,7 +324,7 @@ class Model {
 	 * @return {Resource[]} リソースオブジェクトの配列
 	 */
 	_find() : Resource[] {
-		var query = this._query;
+		var query:any = this._query.build();
 		this._reset();
 		var result:any = this._client.request("GET", this._apiPath(), query);
 		this._total = (<number><any>(result["Total"]));
@@ -355,7 +348,7 @@ class Model {
 	 * @return {Resource} リソースオブジェクト
 	 */
 	_findOne() : Resource {
-		var query = this._query;
+		var query:any = this._query.build();
 		this._reset();
 		var result:any = this._client.request("GET", this._apiPath(), query);
 		this._total = (<number><any>(result["Total"]));
@@ -384,7 +377,7 @@ class Model {
 	_withNameLike(name:string) : Model {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(name, "string");
-		return this._filterBy("Name", [name]);
+		return this._filterBy("Name", name);
 	}
 	
 	/**
