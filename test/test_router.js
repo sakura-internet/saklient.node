@@ -83,7 +83,7 @@ describe('Router', function(){
 				var plans = api.product.router.find();
 				var minMbps = 0x7FFFFFFF;
 				plans.forEach(function(plan){
-					plan.should.be.an.instanceof(saklient.cloud.resource.RouterPlan);
+					plan.should.be.an.instanceof(saklient.cloud.resources.RouterPlan);
 					plan.bandWidthMbps.should.be.above(0);
 					minMbps = Math.min(plan.bandWidthMbps, minMbps);
 				});
@@ -106,9 +106,9 @@ describe('Router', function(){
 				swytches.length.should.equal(1);
 				swytch = swytches[0];
 			}
-			swytch.should.be.an.instanceof(saklient.cloud.resource.Swytch);
+			swytch.should.be.an.instanceof(saklient.cloud.resources.Swytch);
 			swytch.ipv4Nets.length.should.be.above(0);
-			swytch.ipv4Nets[0].should.be.an.instanceof(saklient.cloud.resource.Ipv4Net);
+			swytch.ipv4Nets[0].should.be.an.instanceof(saklient.cloud.resources.Ipv4Net);
 			
 			//
 			trace('ルータ＋スイッチの帯域プランを変更しています...');
@@ -123,7 +123,7 @@ describe('Router', function(){
 			}
 			trace('ルータ＋スイッチにIPv6ネットワークを割り当てています...');
 			var v6net = swytch.addIpv6Net();
-			v6net.should.be.an.instanceof(saklient.cloud.resource.Ipv6Net);
+			v6net.should.be.an.instanceof(saklient.cloud.resources.Ipv6Net);
 			swytch.ipv6Nets.length.should.equal(1);
 			
 			//
@@ -137,7 +137,7 @@ describe('Router', function(){
 			var net0 = swytch.ipv4Nets[0];
 			var nextHop = long2ip(ip2long(net0.address) + 4);
 			var sroute = swytch.addStaticRoute(28, nextHop);
-			sroute.should.be.an.instanceof(saklient.cloud.resource.Ipv4Net);
+			sroute.should.be.an.instanceof(saklient.cloud.resources.Ipv4Net);
 			swytch.ipv4Nets.length.should.equal(2);
 			
 			done();

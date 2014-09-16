@@ -5,17 +5,17 @@ export = API;
 import Util = require('../Util');
 import Client = require('./Client');
 import Product = require('./Product');
-import Model_Icon = require('./model/Model_Icon');
-import Model_Server = require('./model/Model_Server');
-import Model_Disk = require('./model/Model_Disk');
-import Model_Appliance = require('./model/Model_Appliance');
-import Model_Archive = require('./model/Model_Archive');
-import Model_IsoImage = require('./model/Model_IsoImage');
-import Model_Iface = require('./model/Model_Iface');
-import Model_Swytch = require('./model/Model_Swytch');
-import Model_Router = require('./model/Model_Router');
-import Model_Ipv6Net = require('./model/Model_Ipv6Net');
-import Model_Script = require('./model/Model_Script');
+import Model_Icon = require('./models/Model_Icon');
+import Model_Server = require('./models/Model_Server');
+import Model_Disk = require('./models/Model_Disk');
+import Model_Appliance = require('./models/Model_Appliance');
+import Model_Archive = require('./models/Model_Archive');
+import Model_IsoImage = require('./models/Model_IsoImage');
+import Model_Iface = require('./models/Model_Iface');
+import Model_Swytch = require('./models/Model_Swytch');
+import Model_Router = require('./models/Model_Router');
+import Model_Ipv6Net = require('./models/Model_Ipv6Net');
+import Model_Script = require('./models/Model_Script');
 
 'use strict';
 

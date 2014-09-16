@@ -73,8 +73,8 @@ describe('Server', function(){
 			var mem = 0;
 			trace('checking each server...');
 			servers.forEach(function(server){
-				server.should.be.an.instanceof(saklient.cloud.resource.Server);
-				server.plan.should.be.an.instanceof(saklient.cloud.resource.ServerPlan);
+				server.should.be.an.instanceof(saklient.cloud.resources.Server);
+				server.plan.should.be.an.instanceof(saklient.cloud.resources.ServerPlan);
 				server.plan.cpu.should.be.above(0);
 				server.plan.memoryMib.should.be.above(0);
 				server.plan.memoryGib.should.be.above(0);
@@ -165,7 +165,7 @@ describe('Server', function(){
 			// create a server
 			trace('creating a server...');
 			var server = api.server.create();
-			server.should.be.an.instanceof(saklient.cloud.resource.Server);
+			server.should.be.an.instanceof(saklient.cloud.resources.Server);
 			server.name = name;
 			server.description = description;
 			server.tags = [tag];
@@ -185,7 +185,7 @@ describe('Server', function(){
 			// connect to shared segment
 			trace('connecting the server to shared segment...');
 			var iface = server.addIface();
-			iface.should.be.an.instanceof(saklient.cloud.resource.Iface);
+			iface.should.be.an.instanceof(saklient.cloud.resources.Iface);
 			iface.id.should.be.above(0);
 			iface.connectToSharedSegment();
 			
@@ -194,7 +194,7 @@ describe('Server', function(){
 			if (!disk.sleepWhileCopying()) should.fail('アーカイブからディスクへのコピーがタイムアウトしました');
 			disk.source = null;
 			disk.reload();
-			disk.source.should.be.an.instanceof(saklient.cloud.resource.Archive);
+			disk.source.should.be.an.instanceof(saklient.cloud.resources.Archive);
 			disk.source.id.should.equal(archive.id);
 			disk.sizeGib.should.equal(archive.sizeGib);
 			//console.log(disk.dump());
@@ -275,7 +275,7 @@ describe('Server', function(){
 			if (!disk2.sleepWhileCopying()) should.fail('ディスクの複製がタイムアウトしました');
 			disk2.source = null;
 			disk2.reload();
-			disk2.source.should.be.an.instanceof(saklient.cloud.resource.Disk);
+			disk2.source.should.be.an.instanceof(saklient.cloud.resources.Disk);
 			disk2.source.id.should.equal(disk.id);
 			disk2.sizeGib.should.equal(40);
 			

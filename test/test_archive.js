@@ -71,7 +71,7 @@ describe('Archive', function(){
 			var tag = 'saklient-test';
 		
 			var archive = api.archive.create();
-			archive.should.be.an.instanceof(saklient.cloud.resource.Archive);
+			archive.should.be.an.instanceof(saklient.cloud.resources.Archive);
 			archive.name = name;
 			archive.description = description;
 			archive.tags = [tag];
@@ -80,12 +80,12 @@ describe('Archive', function(){
 			
 			//
 			var ftp = archive.ftpInfo;
-			ftp.should.be.an.instanceof(saklient.cloud.resource.FtpInfo);
+			ftp.should.be.an.instanceof(saklient.cloud.resources.FtpInfo);
 			(ftp.hostName != null).should.be.true;
 			(ftp.user != null).should.be.true;
 			(ftp.password != null).should.be.true;
 			var ftp2 = archive.openFtp(true).ftpInfo;
-			ftp2.should.be.an.instanceof(saklient.cloud.resource.FtpInfo);
+			ftp2.should.be.an.instanceof(saklient.cloud.resources.FtpInfo);
 			(ftp2.hostName != null).should.be.true;
 			(ftp2.user != null).should.be.true;
 			(ftp2.password != null).should.be.true;
@@ -149,7 +149,7 @@ describe('Archive', function(){
 			disk.destroy();
 			
 			var ftp = archive.openFtp().ftpInfo;
-			ftp.should.be.an.instanceof(saklient.cloud.resource.FtpInfo);
+			ftp.should.be.an.instanceof(saklient.cloud.resources.FtpInfo);
 			(ftp.hostName != null).should.be.true;
 			(ftp.user != null).should.be.true;
 			(ftp.password != null).should.be.true;

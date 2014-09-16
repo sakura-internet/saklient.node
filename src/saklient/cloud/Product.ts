@@ -3,9 +3,9 @@
 export = Product;
 
 import Util = require('../Util');
-import Model_ServerPlan = require('./model/Model_ServerPlan');
-import Model_DiskPlan = require('./model/Model_DiskPlan');
-import Model_RouterPlan = require('./model/Model_RouterPlan');
+import Model_ServerPlan = require('./models/Model_ServerPlan');
+import Model_DiskPlan = require('./models/Model_DiskPlan');
+import Model_RouterPlan = require('./models/Model_RouterPlan');
 import Client = require('./Client');
 
 'use strict';

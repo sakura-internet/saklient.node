@@ -71,7 +71,7 @@ describe('IsoImage', function(){
 			var tag = 'saklient-test';
 		
 			var iso = api.isoImage.create();
-			iso.should.be.an.instanceof(saklient.cloud.resource.IsoImage);
+			iso.should.be.an.instanceof(saklient.cloud.resources.IsoImage);
 			iso.name = name;
 			iso.description = description;
 			iso.tags = [tag];
@@ -80,12 +80,12 @@ describe('IsoImage', function(){
 			
 			//
 			var ftp = iso.ftpInfo;
-			ftp.should.be.an.instanceof(saklient.cloud.resource.FtpInfo);
+			ftp.should.be.an.instanceof(saklient.cloud.resources.FtpInfo);
 			(ftp.hostName != null).should.be.true;
 			(ftp.user != null).should.be.true;
 			(ftp.password != null).should.be.true;
 			var ftp2 = iso.openFtp(true).ftpInfo;
-			ftp2.should.be.an.instanceof(saklient.cloud.resource.FtpInfo);
+			ftp2.should.be.an.instanceof(saklient.cloud.resources.FtpInfo);
 			(ftp2.hostName != null).should.be.true;
 			(ftp2.user != null).should.be.true;
 			(ftp2.password != null).should.be.true;
@@ -141,7 +141,7 @@ describe('IsoImage', function(){
 			// create a server
 			trace('creating a server...');
 			var server = api.server.create();
-			server.should.be.an.instanceof(saklient.cloud.resource.Server);
+			server.should.be.an.instanceof(saklient.cloud.resources.Server);
 			server.name = name;
 			server.description = description;
 			server.tags = [tag];
@@ -151,7 +151,7 @@ describe('IsoImage', function(){
 			// insert iso image while the server is down
 			trace('inserting an ISO image to the server...');
 			server.insertIsoImage(iso);
-			server.instance.isoImage.should.be.an.instanceof(saklient.cloud.resource.IsoImage);
+			server.instance.isoImage.should.be.an.instanceof(saklient.cloud.resources.IsoImage);
 			server.instance.isoImage.id.should.equal(iso.id);
 			
 			// eject iso image while the server is down
@@ -167,7 +167,7 @@ describe('IsoImage', function(){
 			// insert iso image while the server is up
 			trace('inserting an ISO image to the server...');
 			server.insertIsoImage(iso);
-			server.instance.isoImage.should.be.an.instanceof(saklient.cloud.resource.IsoImage);
+			server.instance.isoImage.should.be.an.instanceof(saklient.cloud.resources.IsoImage);
 			server.instance.isoImage.id.should.equal(iso.id);
 			
 			// eject iso image while the server is up
