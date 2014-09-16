@@ -44,11 +44,11 @@ class Resource {
 	
 	/**
 	 * @private
-	 * @member saklient.cloud.resource.Resource#_params
+	 * @member saklient.cloud.resource.Resource#_query
 	 * @type any
 	 * @protected
 	 */
-	_params : any;
+	_query : any;
 	
 	/**
 	 * @private
@@ -60,7 +60,7 @@ class Resource {
 	setParam(key:string, value:any) : void {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(key, "string");
-		this._params[key] = value;
+		this._query[key] = value;
 	}
 	
 	/**
@@ -120,7 +120,7 @@ class Resource {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(client, "saklient.cloud.Client");
 		this._client = client;
-		this._params = {};
+		this._query = {};
 	}
 	
 	/**
@@ -296,12 +296,12 @@ class Resource {
 	 */
 	_save() : Resource {
 		var r:any = this.apiSerialize();
-		var params:any = this._params;
-		this._params = {};
-		var keys:string[] = Object.keys(params);
+		var query:any = this._query;
+		this._query = {};
+		var keys:string[] = Object.keys(query);
 		for (var __it1:number=0; __it1<keys.length; __it1++) {
 			var k = keys[__it1];
-			var v:any = params[k];
+			var v:any = query[k];
 			r[k] = v;
 		};
 		this._onBeforeSave(r);
@@ -355,10 +355,10 @@ class Resource {
 	 * @return {boolean}
 	 */
 	exists() : boolean {
-		var params:any = {};
-		Util.setByPath(params, "Filter.ID", [this._id()]);
-		Util.setByPath(params, "Include", ["ID"]);
-		var result:any = this._client.request("GET", this._apiPath(), params);
+		var query:any = {};
+		Util.setByPath(query, "Filter.ID", [this._id()]);
+		Util.setByPath(query, "Include", ["ID"]);
+		var result:any = this._client.request("GET", this._apiPath(), query);
 		return result["Count"] == 1;
 	}
 	

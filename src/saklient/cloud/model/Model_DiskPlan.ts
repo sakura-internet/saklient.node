@@ -3,6 +3,7 @@
 export = Model_DiskPlan;
 
 import Util = require('../../Util');
+import Client = require('../Client');
 import Model = require('./Model');
 import DiskPlan = require('../resource/DiskPlan');
 
@@ -142,6 +143,83 @@ class Model_DiskPlan extends Model {
 	find() : DiskPlan[] {
 		return Util.castArray(this._find(), (<DiskPlan><any>(null)));
 	}
+	
+	/**
+	 * @private
+	 * @constructor
+	 * @param {Client} client
+	 */
+	constructor(client:Client) {
+		super(client);
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(client, "saklient.cloud.Client");
+		this._hdd = null;
+		this._ssd = null;
+	}
+	
+	/**
+	 * @private
+	 * @member saklient.cloud.model.Model_DiskPlan#_hdd
+	 * @type DiskPlan
+	 * @protected
+	 */
+	_hdd : DiskPlan;
+	
+	/**
+	 * @method get_hdd
+	 * @protected
+	 * @private
+	 * @return {DiskPlan}
+	 */
+	get_hdd() : DiskPlan {
+		if (this._hdd == null) {
+			this._hdd = this.getById("2");
+		};
+		return this._hdd;
+	}
+	
+	/**
+	 * 標準プラン
+	 * 
+	 * @property hdd
+	 * @type DiskPlan
+	 * @readOnly
+	 * @public
+	 */
+	get hdd() : DiskPlan { return this.get_hdd(); }
+	
+	
+	/**
+	 * @private
+	 * @member saklient.cloud.model.Model_DiskPlan#_ssd
+	 * @type DiskPlan
+	 * @protected
+	 */
+	_ssd : DiskPlan;
+	
+	/**
+	 * @method get_ssd
+	 * @protected
+	 * @private
+	 * @return {DiskPlan}
+	 */
+	get_ssd() : DiskPlan {
+		if (this._ssd == null) {
+			this._ssd = this.getById("4");
+		};
+		return this._ssd;
+	}
+	
+	/**
+	 * SSDプラン
+	 * 
+	 * @property ssd
+	 * @type DiskPlan
+	 * @readOnly
+	 * @public
+	 */
+	get ssd() : DiskPlan { return this.get_ssd(); }
+	
 	
 }
 

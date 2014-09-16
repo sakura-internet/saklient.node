@@ -162,6 +162,7 @@ class Model_Swytch extends Model {
 	 * 大文字・小文字は区別されません。
 	 * 半角スペースで区切られた複数の文字列は、それらをすべて含むことが条件とみなされます。
 	 * 
+	 * @todo Implement test case
 	 * @method withNameLike
 	 * @chainable
 	 * @public
@@ -177,6 +178,7 @@ class Model_Swytch extends Model {
 	/**
 	 * 名前でソートします。
 	 * 
+	 * @todo Implement test case
 	 * @method sortByName
 	 * @chainable
 	 * @public

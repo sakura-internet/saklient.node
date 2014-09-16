@@ -156,8 +156,8 @@ class Model_ServerPlan extends Model {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(cores, "number");
 		Util.validateType(memoryGib, "number");
-		this._filterBy("CPU", cores, true);
-		this._filterBy("MemoryMB", memoryGib * 1024, true);
+		this._filterBy("CPU", [cores]);
+		this._filterBy("MemoryMB", [memoryGib * 1024]);
 		return (<ServerPlan><any>(this._findOne()));
 	}
 	

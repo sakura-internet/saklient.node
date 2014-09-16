@@ -440,14 +440,20 @@ class API {
 	 * @public
 	 * @param {string} token ACCESS TOKEN
 	 * @param {string} secret ACCESS TOKEN SECRET
+	 * @param {string} zone=null
 	 * @return {API} APIクライアント
 	 */
-	static authorize(token:string, secret:string) : API {
+	static authorize(token:string, secret:string, zone:string=null) : API {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(token, "string");
 		Util.validateType(secret, "string");
+		Util.validateType(zone, "string");
 		var c:Client = new Client(token, secret);
-		return new API(c);
+		var ret:API = new API(c);
+		if (zone != null) {
+			ret = ret.inZone(zone);
+		};
+		return ret;
 	}
 	
 	/**
@@ -463,6 +469,11 @@ class API {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(name, "string");
 		var ret = new API(this._client.cloneInstance());
+		var suffix = "";
+		if (name == "is1x" || name == "is1y") {
+			suffix = "-test";
+		};
+		ret._client.setApiRoot("https://secure.sakura.ad.jp/cloud" + suffix + "/");
 		ret._client.setApiRootSuffix("zone/" + name);
 		return ret;
 	}

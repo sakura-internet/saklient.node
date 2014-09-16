@@ -764,14 +764,33 @@ class Disk extends Resource {
 	}
 	
 	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method set_plan
+	 * @private
+	 * @param {DiskPlan} v
+	 * @return {DiskPlan}
+	 */
+	private set_plan(v:DiskPlan) : DiskPlan {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "saklient.cloud.resource.DiskPlan");
+		if (!this.isNew) {
+			throw new SaklientException("immutable_field", "Immutable fields cannot be modified after the resource creation: " + "saklient.cloud.resource.Disk#plan");
+		};
+		this.m_plan = v;
+		this.n_plan = true;
+		return this.m_plan;
+	}
+	
+	/**
 	 * プラン
 	 * 
 	 * @property plan
 	 * @type DiskPlan
-	 * @readOnly
 	 * @public
 	 */
 	get plan() : DiskPlan { return this.get_plan(); }
+	set plan(v:DiskPlan) { this.set_plan(v); }
 	
 	
 	/**

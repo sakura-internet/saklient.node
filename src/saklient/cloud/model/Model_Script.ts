@@ -150,6 +150,7 @@ class Model_Script extends Model {
 	 * 大文字・小文字は区別されません。
 	 * 半角スペースで区切られた複数の文字列は、それらをすべて含むことが条件とみなされます。
 	 * 
+	 * @todo Implement test case
 	 * @method withNameLike
 	 * @chainable
 	 * @public
@@ -167,6 +168,7 @@ class Model_Script extends Model {
 	 * 
 	 * 複数のタグを指定する場合は withTags() を利用してください。
 	 * 
+	 * @todo Implement test case
 	 * @method withTag
 	 * @chainable
 	 * @public
@@ -182,6 +184,7 @@ class Model_Script extends Model {
 	/**
 	 * 指定したすべてのタグを持つリソースに絞り込みます。
 	 * 
+	 * @todo Implement test case
 	 * @method withTags
 	 * @chainable
 	 * @public
@@ -195,8 +198,25 @@ class Model_Script extends Model {
 	}
 	
 	/**
+	 * 指定したDNFに合致するタグを持つリソースに絞り込みます。
+	 * 
+	 * @todo Implement test case
+	 * @method withTagDnf
+	 * @chainable
+	 * @public
+	 * @param {string[][]} dnf
+	 * @return {Model_Script}
+	 */
+	withTagDnf(dnf:string[][]) : Model_Script {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(dnf, "Array");
+		return (<Model_Script><any>(this._withTagDnf(dnf)));
+	}
+	
+	/**
 	 * 名前でソートします。
 	 * 
+	 * @todo Implement test case
 	 * @method sortByName
 	 * @chainable
 	 * @public
@@ -217,7 +237,7 @@ class Model_Script extends Model {
 	 * @return {Model_Script}
 	 */
 	withSharedScope() : Model_Script {
-		this._filterBy("Scope", EScope.shared);
+		this._filterBy("Scope", [EScope.shared]);
 		return this;
 	}
 	
@@ -230,7 +250,7 @@ class Model_Script extends Model {
 	 * @return {Model_Script}
 	 */
 	withUserScope() : Model_Script {
-		this._filterBy("Scope", EScope.user);
+		this._filterBy("Scope", [EScope.user]);
 		return this;
 	}
 	

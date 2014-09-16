@@ -165,6 +165,7 @@ class Model_Server extends Model {
 	 * 大文字・小文字は区別されません。
 	 * 半角スペースで区切られた複数の文字列は、それらをすべて含むことが条件とみなされます。
 	 * 
+	 * @todo Implement test case
 	 * @method withNameLike
 	 * @chainable
 	 * @public
@@ -182,6 +183,7 @@ class Model_Server extends Model {
 	 * 
 	 * 複数のタグを指定する場合は withTags() を利用してください。
 	 * 
+	 * @todo Implement test case
 	 * @method withTag
 	 * @chainable
 	 * @public
@@ -197,6 +199,7 @@ class Model_Server extends Model {
 	/**
 	 * 指定したすべてのタグを持つリソースに絞り込みます。
 	 * 
+	 * @todo Implement test case
 	 * @method withTags
 	 * @chainable
 	 * @public
@@ -210,8 +213,25 @@ class Model_Server extends Model {
 	}
 	
 	/**
+	 * 指定したDNFに合致するタグを持つリソースに絞り込みます。
+	 * 
+	 * @todo Implement test case
+	 * @method withTagDnf
+	 * @chainable
+	 * @public
+	 * @param {string[][]} dnf
+	 * @return {Model_Server}
+	 */
+	withTagDnf(dnf:string[][]) : Model_Server {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(dnf, "Array");
+		return (<Model_Server><any>(this._withTagDnf(dnf)));
+	}
+	
+	/**
 	 * 名前でソートします。
 	 * 
+	 * @todo Implement test case
 	 * @method sortByName
 	 * @chainable
 	 * @public
@@ -235,7 +255,7 @@ class Model_Server extends Model {
 	withPlan(plan:ServerPlan) : Model_Server {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(plan, "saklient.cloud.resource.ServerPlan");
-		this._filterBy("ServerPlan.ID", plan._id(), true);
+		this._filterBy("ServerPlan.ID", [plan._id()]);
 		return this;
 	}
 	
@@ -251,7 +271,7 @@ class Model_Server extends Model {
 	withStatus(status:string) : Model_Server {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(status, "string");
-		this._filterBy("Instance.Status", status, true);
+		this._filterBy("Instance.Status", [status]);
 		return this;
 	}
 	
@@ -291,7 +311,7 @@ class Model_Server extends Model {
 	withIsoImage(iso:IsoImage) : Model_Server {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(iso, "saklient.cloud.resource.IsoImage");
-		this._filterBy("Instance.CDROM.ID", iso._id(), true);
+		this._filterBy("Instance.CDROM.ID", [iso._id()]);
 		return this;
 	}
 	

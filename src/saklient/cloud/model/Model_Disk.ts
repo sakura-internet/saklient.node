@@ -162,6 +162,7 @@ class Model_Disk extends Model {
 	 * 大文字・小文字は区別されません。
 	 * 半角スペースで区切られた複数の文字列は、それらをすべて含むことが条件とみなされます。
 	 * 
+	 * @todo Implement test case
 	 * @method withNameLike
 	 * @chainable
 	 * @public
@@ -179,6 +180,7 @@ class Model_Disk extends Model {
 	 * 
 	 * 複数のタグを指定する場合は withTags() を利用してください。
 	 * 
+	 * @todo Implement test case
 	 * @method withTag
 	 * @chainable
 	 * @public
@@ -194,6 +196,7 @@ class Model_Disk extends Model {
 	/**
 	 * 指定したすべてのタグを持つリソースに絞り込みます。
 	 * 
+	 * @todo Implement test case
 	 * @method withTags
 	 * @chainable
 	 * @public
@@ -207,8 +210,25 @@ class Model_Disk extends Model {
 	}
 	
 	/**
+	 * 指定したDNFに合致するタグを持つリソースに絞り込みます。
+	 * 
+	 * @todo Implement test case
+	 * @method withTagDnf
+	 * @chainable
+	 * @public
+	 * @param {string[][]} dnf
+	 * @return {Model_Disk}
+	 */
+	withTagDnf(dnf:string[][]) : Model_Disk {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(dnf, "Array");
+		return (<Model_Disk><any>(this._withTagDnf(dnf)));
+	}
+	
+	/**
 	 * 名前でソートします。
 	 * 
+	 * @todo Implement test case
 	 * @method sortByName
 	 * @chainable
 	 * @public
@@ -232,7 +252,7 @@ class Model_Disk extends Model {
 	withSizeGib(sizeGib:number) : Model_Disk {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(sizeGib, "number");
-		this._filterBy("SizeMB", sizeGib * 1024);
+		this._filterBy("SizeMB", [sizeGib * 1024]);
 		return this;
 	}
 	
@@ -248,7 +268,7 @@ class Model_Disk extends Model {
 	withServerId(id:string) : Model_Disk {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(id, "string");
-		this._filterBy("Server.ID", id);
+		this._filterBy("Server.ID", [id]);
 		return this;
 	}
 	

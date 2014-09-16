@@ -6,6 +6,7 @@ import Util = require('../../Util');
 import Client = require('../Client');
 import Resource = require('../resource/Resource');
 import TQueryParams = require('./TQueryParams');
+import SaklientException = require('../../errors/SaklientException');
 
 'use strict';
 
@@ -46,29 +47,29 @@ class Model {
 	
 	/**
 	 * @private
-	 * @member saklient.cloud.model.Model#_params
+	 * @member saklient.cloud.model.Model#_query
 	 * @type TQueryParams
 	 * @protected
 	 */
-	_params : TQueryParams;
+	_query : TQueryParams;
 	
 	/**
-	 * @method get_params
+	 * @method get_query
 	 * @protected
 	 * @private
 	 * @return {TQueryParams}
 	 */
-	get_params() : TQueryParams {
-		return this._params;
+	get_query() : TQueryParams {
+		return this._query;
 	}
 	
 	/**
-	 * @property params
+	 * @property query
 	 * @type TQueryParams
 	 * @readOnly
 	 * @public
 	 */
-	get params() : TQueryParams { return this.get_params(); }
+	get query() : TQueryParams { return this.get_query(); }
 	
 	
 	/**
@@ -190,7 +191,7 @@ class Model {
 	_offset(offset:number) : Model {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(offset, "number");
-		this._params["Begin"] = offset;
+		this._query["Begin"] = offset;
 		return this;
 	}
 	
@@ -207,7 +208,7 @@ class Model {
 	_limit(count:number) : Model {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(count, "number");
-		this._params["Count"] = count;
+		this._query["Count"] = count;
 		return this;
 	}
 	
@@ -226,10 +227,10 @@ class Model {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(column, "string");
 		Util.validateType(reverse, "boolean");
-		if (!("Sort" in this._params)) {
-			this._params["Sort"] = [];
+		if (!("Sort" in this._query)) {
+			this._query["Sort"] = [];
 		};
-		var sort:string[] = this._params["Sort"];
+		var sort:string[] = this._query["Sort"];
 		var op:string = reverse ? "-" : "";
 		sort.push(op + column);
 		return this;
@@ -251,10 +252,10 @@ class Model {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(key, "string");
 		Util.validateType(multiple, "boolean");
-		if (!("Filter" in this._params)) {
-			this._params["Filter"] = {};
+		if (!("Filter" in this._query)) {
+			this._query["Filter"] = {};
 		};
-		var filter:any = this._params["Filter"];
+		var filter:any = this._query["Filter"];
 		if (multiple) {
 			if (!(key in filter)) {
 				filter[key] = [];
@@ -263,6 +264,9 @@ class Model {
 			values.push(value);
 		}
 		else {
+			if ((key in filter)) {
+				throw new SaklientException("filter_duplicated", "The same filter key can be specified only once (by calling the same method 'withFooBar')");
+			};
 			filter[key] = value;
 		};
 		return this;
@@ -278,7 +282,7 @@ class Model {
 	 * @return {Model} this
 	 */
 	_reset() : Model {
-		this._params = { Count: 0 };
+		this._query = { Count: 0 };
 		this._total = 0;
 		this._count = 0;
 		return this;
@@ -310,9 +314,9 @@ class Model {
 	_getById(id:string) : Resource {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(id, "string");
-		var params = this._params;
+		var query = this._query;
 		this._reset();
-		var result:any = this._client.request("GET", this._apiPath() + "/" + Util.urlEncode(id), params);
+		var result:any = this._client.request("GET", this._apiPath() + "/" + Util.urlEncode(id), query);
 		this._total = 1;
 		this._count = 1;
 		return (<Resource><any>(Util.createClassInstance("saklient.cloud.resource." + this._className(), [this._client, result, true])));
@@ -327,9 +331,9 @@ class Model {
 	 * @return {Resource[]} リソースオブジェクトの配列
 	 */
 	_find() : Resource[] {
-		var params = this._params;
+		var query = this._query;
 		this._reset();
-		var result:any = this._client.request("GET", this._apiPath(), params);
+		var result:any = this._client.request("GET", this._apiPath(), query);
 		this._total = (<number><any>(result["Total"]));
 		this._count = (<number><any>(result["Count"]));
 		var records:any[] = (<any[]><any>(result[this._rootKeyM()]));
@@ -351,9 +355,9 @@ class Model {
 	 * @return {Resource} リソースオブジェクト
 	 */
 	_findOne() : Resource {
-		var params = this._params;
+		var query = this._query;
 		this._reset();
-		var result:any = this._client.request("GET", this._apiPath(), params);
+		var result:any = this._client.request("GET", this._apiPath(), query);
 		this._total = (<number><any>(result["Total"]));
 		this._count = (<number><any>(result["Count"]));
 		if (this._total == 0) {
@@ -370,6 +374,7 @@ class Model {
 	 * 半角スペースで区切られた複数の文字列は、それらをすべて含むことが条件とみなされます。
 	 * 
 	 * @private
+	 * @todo Implement test case
 	 * @method _withNameLike
 	 * @chainable
 	 * @protected
@@ -379,7 +384,7 @@ class Model {
 	_withNameLike(name:string) : Model {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(name, "string");
-		return this._filterBy("Name", name);
+		return this._filterBy("Name", [name]);
 	}
 	
 	/**
@@ -388,6 +393,7 @@ class Model {
 	 * 複数のタグを指定する場合は withTags() を利用してください。
 	 * 
 	 * @private
+	 * @todo Implement test case
 	 * @method _withTag
 	 * @chainable
 	 * @protected
@@ -397,13 +403,14 @@ class Model {
 	_withTag(tag:string) : Model {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(tag, "string");
-		return this._filterBy("Tags.Name", tag, true);
+		return this._filterBy("Tags.Name", [tag]);
 	}
 	
 	/**
 	 * 指定したすべてのタグを持つリソースに絞り込みます。
 	 * 
 	 * @private
+	 * @todo Implement test case
 	 * @method _withTags
 	 * @chainable
 	 * @protected
@@ -413,13 +420,31 @@ class Model {
 	_withTags(tags:string[]) : Model {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(tags, "Array");
-		return this._filterBy("Tags.Name", tags, true);
+		return this._filterBy("Tags.Name", [tags]);
+	}
+	
+	/**
+	 * 指定したDNFに合致するタグを持つリソースに絞り込みます。
+	 * 
+	 * @private
+	 * @todo Implement test case
+	 * @method _withTagDnf
+	 * @chainable
+	 * @protected
+	 * @param {string[][]} dnf
+	 * @return {Model}
+	 */
+	_withTagDnf(dnf:string[][]) : Model {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(dnf, "Array");
+		return this._filterBy("Tags.Name", dnf);
 	}
 	
 	/**
 	 * 名前でソートします。
 	 * 
 	 * @private
+	 * @todo Implement test case
 	 * @method _sortByName
 	 * @chainable
 	 * @protected

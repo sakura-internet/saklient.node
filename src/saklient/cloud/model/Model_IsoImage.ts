@@ -163,6 +163,7 @@ class Model_IsoImage extends Model {
 	 * 大文字・小文字は区別されません。
 	 * 半角スペースで区切られた複数の文字列は、それらをすべて含むことが条件とみなされます。
 	 * 
+	 * @todo Implement test case
 	 * @method withNameLike
 	 * @chainable
 	 * @public
@@ -180,6 +181,7 @@ class Model_IsoImage extends Model {
 	 * 
 	 * 複数のタグを指定する場合は withTags() を利用してください。
 	 * 
+	 * @todo Implement test case
 	 * @method withTag
 	 * @chainable
 	 * @public
@@ -195,6 +197,7 @@ class Model_IsoImage extends Model {
 	/**
 	 * 指定したすべてのタグを持つリソースに絞り込みます。
 	 * 
+	 * @todo Implement test case
 	 * @method withTags
 	 * @chainable
 	 * @public
@@ -208,8 +211,25 @@ class Model_IsoImage extends Model {
 	}
 	
 	/**
+	 * 指定したDNFに合致するタグを持つリソースに絞り込みます。
+	 * 
+	 * @todo Implement test case
+	 * @method withTagDnf
+	 * @chainable
+	 * @public
+	 * @param {string[][]} dnf
+	 * @return {Model_IsoImage}
+	 */
+	withTagDnf(dnf:string[][]) : Model_IsoImage {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(dnf, "Array");
+		return (<Model_IsoImage><any>(this._withTagDnf(dnf)));
+	}
+	
+	/**
 	 * 名前でソートします。
 	 * 
+	 * @todo Implement test case
 	 * @method sortByName
 	 * @chainable
 	 * @public
@@ -233,7 +253,7 @@ class Model_IsoImage extends Model {
 	withSizeGib(sizeGib:number) : Model_IsoImage {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(sizeGib, "number");
-		this._filterBy("SizeMB", sizeGib * 1024);
+		this._filterBy("SizeMB", [sizeGib * 1024]);
 		return this;
 	}
 	
@@ -246,7 +266,7 @@ class Model_IsoImage extends Model {
 	 * @return {Model_IsoImage}
 	 */
 	withSharedScope() : Model_IsoImage {
-		this._filterBy("Scope", EScope.shared);
+		this._filterBy("Scope", [EScope.shared]);
 		return this;
 	}
 	
@@ -259,7 +279,7 @@ class Model_IsoImage extends Model {
 	 * @return {Model_IsoImage}
 	 */
 	withUserScope() : Model_IsoImage {
-		this._filterBy("Scope", EScope.user);
+		this._filterBy("Scope", [EScope.user]);
 		return this;
 	}
 	

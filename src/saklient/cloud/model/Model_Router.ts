@@ -162,6 +162,7 @@ class Model_Router extends Model {
 	 * 大文字・小文字は区別されません。
 	 * 半角スペースで区切られた複数の文字列は、それらをすべて含むことが条件とみなされます。
 	 * 
+	 * @todo Implement test case
 	 * @method withNameLike
 	 * @chainable
 	 * @public
@@ -177,6 +178,7 @@ class Model_Router extends Model {
 	/**
 	 * 名前でソートします。
 	 * 
+	 * @todo Implement test case
 	 * @method sortByName
 	 * @chainable
 	 * @public
@@ -200,7 +202,7 @@ class Model_Router extends Model {
 	withBandWidthMbps(mbps:number) : Model_Router {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(mbps, "number");
-		this._filterBy("BandWidthMbps", mbps);
+		this._filterBy("BandWidthMbps", [mbps]);
 		return this;
 	}
 	

@@ -149,6 +149,7 @@ class Model_Appliance extends Model {
 	 * 大文字・小文字は区別されません。
 	 * 半角スペースで区切られた複数の文字列は、それらをすべて含むことが条件とみなされます。
 	 * 
+	 * @todo Implement test case
 	 * @method withNameLike
 	 * @chainable
 	 * @public
@@ -166,6 +167,7 @@ class Model_Appliance extends Model {
 	 * 
 	 * 複数のタグを指定する場合は withTags() を利用してください。
 	 * 
+	 * @todo Implement test case
 	 * @method withTag
 	 * @chainable
 	 * @public
@@ -181,6 +183,7 @@ class Model_Appliance extends Model {
 	/**
 	 * 指定したすべてのタグを持つリソースに絞り込みます。
 	 * 
+	 * @todo Implement test case
 	 * @method withTags
 	 * @chainable
 	 * @public
@@ -194,8 +197,25 @@ class Model_Appliance extends Model {
 	}
 	
 	/**
+	 * 指定したDNFに合致するタグを持つリソースに絞り込みます。
+	 * 
+	 * @todo Implement test case
+	 * @method withTagDnf
+	 * @chainable
+	 * @public
+	 * @param {string[][]} dnf
+	 * @return {Model_Appliance}
+	 */
+	withTagDnf(dnf:string[][]) : Model_Appliance {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(dnf, "Array");
+		return (<Model_Appliance><any>(this._withTagDnf(dnf)));
+	}
+	
+	/**
 	 * 名前でソートします。
 	 * 
+	 * @todo Implement test case
 	 * @method sortByName
 	 * @chainable
 	 * @public
