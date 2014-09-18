@@ -14,6 +14,8 @@ import ServerInstance = require('./ServerInstance');
 import IsoImage = require('./IsoImage');
 import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
 import EAvailability = require('../enums/EAvailability');
+import Model_Disk = require('../models/Model_Disk');
+import Model_Iface = require('../models/Model_Iface');
 
 'use strict';
 
@@ -300,7 +302,7 @@ class Server extends Resource {
 		Util.validateType(status, "string");
 		Util.validateType(timeoutSec, "number");
 		Util.validateType(callback, "function");
-		var ret = this.sleepUntil(status, timeoutSec);
+		var ret:boolean = this.sleepUntil(status, timeoutSec);
 		callback(this, ret);
 	}
 	
@@ -330,7 +332,7 @@ class Server extends Resource {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(status, "string");
 		Util.validateType(timeoutSec, "number");
-		var step = 3;
+		var step:number = 3;
 		while (0 < timeoutSec) {
 			this.reload();
 			var s:string = this.get_instance().status;
@@ -408,7 +410,7 @@ class Server extends Resource {
 		Util.validateType(iso, "saklient.cloud.resources.IsoImage");
 		var path:string = this._apiPath() + "/" + Util.urlEncode(this._id()) + "/cdrom";
 		var q:any = { CDROM: { ID: iso._id() } };
-		var result:any = this._client.request("PUT", path, q);
+		this._client.request("PUT", path, q);
 		this.reload();
 		return this;
 	}
@@ -423,7 +425,7 @@ class Server extends Resource {
 	 */
 	ejectIsoImage() : Server {
 		var path:string = this._apiPath() + "/" + Util.urlEncode(this._id()) + "/cdrom";
-		var result:any = this._client.request("DELETE", path);
+		this._client.request("DELETE", path);
 		this.reload();
 		return this;
 	}

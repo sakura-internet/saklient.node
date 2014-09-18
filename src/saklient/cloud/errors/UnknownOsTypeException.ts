@@ -12,15 +12,6 @@ import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavai
 class UnknownOsTypeException extends HttpServiceUnavailableException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.UnknownOsTypeException#defaultMessage
-	 * @default "サービスが利用できません。ディスクにインストールされたOSが特定できないため、正しく修正できません。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "サービスが利用できません。ディスクにインストールされたOSが特定できないため、正しく修正できません。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class UnknownOsTypeException extends HttpServiceUnavailableException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "サービスが利用できません。ディスクにインストールされたOSが特定できないため、正しく修正できません。" : message);
 	}
 	
 }

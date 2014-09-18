@@ -12,15 +12,6 @@ import HttpException = require('./HttpException');
 class HttpInternalServerErrorException extends HttpException {
 	
 	/**
-	 * @static
-	 * @member saklient.errors.HttpInternalServerErrorException#defaultMessage
-	 * @default "サーバ内部エラーが発生しました。このエラーが繰り返し発生する場合は、メンテナンス情報、サポートサイトをご確認ください。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "サーバ内部エラーが発生しました。このエラーが繰り返し発生する場合は、メンテナンス情報、サポートサイトをご確認ください。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class HttpInternalServerErrorException extends HttpException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "サーバ内部エラーが発生しました。このエラーが繰り返し発生する場合は、メンテナンス情報、サポートサイトをご確認ください。" : message);
 	}
 	
 }

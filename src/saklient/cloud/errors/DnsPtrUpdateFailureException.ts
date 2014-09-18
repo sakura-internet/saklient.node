@@ -12,15 +12,6 @@ import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavai
 class DnsPtrUpdateFailureException extends HttpServiceUnavailableException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.DnsPtrUpdateFailureException#defaultMessage
-	 * @default "サービスが利用できません。PTRレコードを設定できません。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "サービスが利用できません。PTRレコードを設定できません。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class DnsPtrUpdateFailureException extends HttpServiceUnavailableException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "サービスが利用できません。PTRレコードを設定できません。" : message);
 	}
 	
 }

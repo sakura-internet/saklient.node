@@ -12,15 +12,6 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 class DeleteStaticRouteFirstException extends HttpConflictException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.DeleteStaticRouteFirstException#defaultMessage
-	 * @default "要求された操作を行えません。ルータを削除する前に、スタティックルートを削除してください。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求された操作を行えません。ルータを削除する前に、スタティックルートを削除してください。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class DeleteStaticRouteFirstException extends HttpConflictException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求された操作を行えません。ルータを削除する前に、スタティックルートを削除してください。" : message);
 	}
 	
 }

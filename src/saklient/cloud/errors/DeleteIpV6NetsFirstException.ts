@@ -12,15 +12,6 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 class DeleteIpV6NetsFirstException extends HttpConflictException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.DeleteIpV6NetsFirstException#defaultMessage
-	 * @default "要求された操作を行えません。ルータを削除する前に、IPv6ネットワークの割当を解除してください。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求された操作を行えません。ルータを削除する前に、IPv6ネットワークの割当を解除してください。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class DeleteIpV6NetsFirstException extends HttpConflictException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求された操作を行えません。ルータを削除する前に、IPv6ネットワークの割当を解除してください。" : message);
 	}
 	
 }

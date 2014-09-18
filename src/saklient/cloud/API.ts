@@ -450,10 +450,7 @@ class API {
 		Util.validateType(zone, "string");
 		var c:Client = new Client(token, secret);
 		var ret:API = new API(c);
-		if (zone != null) {
-			ret = ret.inZone(zone);
-		};
-		return ret;
+		return zone != null ? ret.inZone(zone) : ret;
 	}
 	
 	/**
@@ -468,8 +465,8 @@ class API {
 	inZone(name:string) : API {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(name, "string");
-		var ret = new API(this._client.cloneInstance());
-		var suffix = "";
+		var ret:API = new API(this._client.cloneInstance());
+		var suffix:string = "";
 		if (name == "is1x" || name == "is1y") {
 			suffix = "-test";
 		};

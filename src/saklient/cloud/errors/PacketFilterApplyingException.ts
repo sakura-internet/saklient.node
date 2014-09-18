@@ -12,15 +12,6 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 class PacketFilterApplyingException extends HttpConflictException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.PacketFilterApplyingException#defaultMessage
-	 * @default "要求された操作を行えません。起動中のサーバに対して変更されたパケットフィルタを反映するタスクが既に実行中です。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求された操作を行えません。起動中のサーバに対して変更されたパケットフィルタを反映するタスクが既に実行中です。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class PacketFilterApplyingException extends HttpConflictException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求された操作を行えません。起動中のサーバに対して変更されたパケットフィルタを反映するタスクが既に実行中です。" : message);
 	}
 	
 }

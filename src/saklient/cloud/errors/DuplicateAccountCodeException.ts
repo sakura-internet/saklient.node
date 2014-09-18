@@ -12,15 +12,6 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 class DuplicateAccountCodeException extends HttpConflictException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.DuplicateAccountCodeException#defaultMessage
-	 * @default "要求された操作を行えません。同一アカウント名で複数のアカウントを作成することはできません。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求された操作を行えません。同一アカウント名で複数のアカウントを作成することはできません。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class DuplicateAccountCodeException extends HttpConflictException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求された操作を行えません。同一アカウント名で複数のアカウントを作成することはできません。" : message);
 	}
 	
 }

@@ -12,15 +12,6 @@ import HttpBadRequestException = require('../../errors/HttpBadRequestException')
 class FilterNullComparisonException extends HttpBadRequestException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.FilterNullComparisonException#defaultMessage
-	 * @default "不適切な要求です。nullとは比較できない演算子がフィルタ中に含まれています。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "不適切な要求です。nullとは比較できない演算子がフィルタ中に含まれています。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class FilterNullComparisonException extends HttpBadRequestException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "不適切な要求です。nullとは比較できない演算子がフィルタ中に含まれています。" : message);
 	}
 	
 }

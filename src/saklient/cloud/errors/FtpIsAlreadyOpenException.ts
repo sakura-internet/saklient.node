@@ -12,15 +12,6 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 class FtpIsAlreadyOpenException extends HttpConflictException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.FtpIsAlreadyOpenException#defaultMessage
-	 * @default "要求された操作を行えません。FTP共有は既に開始されています。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求された操作を行えません。FTP共有は既に開始されています。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class FtpIsAlreadyOpenException extends HttpConflictException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求された操作を行えません。FTP共有は既に開始されています。" : message);
 	}
 	
 }

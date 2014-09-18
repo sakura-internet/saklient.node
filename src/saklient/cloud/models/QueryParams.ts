@@ -37,10 +37,10 @@ class QueryParams {
 	
 	/**
 	 * @member saklient.cloud.models.QueryParams#sort
-	 * @type any[]
+	 * @type string[]
 	 * @public
 	 */
-	sort : any[];
+	sort : string[];
 	
 	/**
 	 * @constructor

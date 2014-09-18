@@ -12,15 +12,6 @@ import HttpException = require('./HttpException');
 class HttpRequestedRangeNotSatisfiableException extends HttpException {
 	
 	/**
-	 * @static
-	 * @member saklient.errors.HttpRequestedRangeNotSatisfiableException#defaultMessage
-	 * @default "HTTPエラー。Requested Range Not Satisfiable."
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "HTTPエラー。Requested Range Not Satisfiable.";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class HttpRequestedRangeNotSatisfiableException extends HttpException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "HTTPエラー。Requested Range Not Satisfiable." : message);
 	}
 	
 }

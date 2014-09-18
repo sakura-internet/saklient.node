@@ -12,15 +12,6 @@ import HttpForbiddenException = require('../../errors/HttpForbiddenException');
 class DontCreateInSandboxException extends HttpForbiddenException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.DontCreateInSandboxException#defaultMessage
-	 * @default "要求された操作は許可されていません。ゾーンをまたぐ一部のリソースは課金対象です。料金をご確認の上、他のゾーンで作成してください。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求された操作は許可されていません。ゾーンをまたぐ一部のリソースは課金対象です。料金をご確認の上、他のゾーンで作成してください。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class DontCreateInSandboxException extends HttpForbiddenException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求された操作は許可されていません。ゾーンをまたぐ一部のリソースは課金対象です。料金をご確認の上、他のゾーンで作成してください。" : message);
 	}
 	
 }

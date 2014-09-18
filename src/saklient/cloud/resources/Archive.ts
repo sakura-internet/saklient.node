@@ -369,7 +369,7 @@ class Archive extends Resource {
 				if (s != null) {
 					var id:any = s["ID"];
 					if (id != null) {
-						var obj:any = Util.createClassInstance("saklient.cloud.resources.Disk", [this._client, s]);
+						var obj:any = Util.createClassInstance("saklient.cloud.resources.Disk", [this._client, s, false]);
 						this._source = (<Resource><any>(obj));
 					};
 				};
@@ -440,7 +440,7 @@ class Archive extends Resource {
 	 */
 	closeFtp() : Archive {
 		var path:string = this._apiPath() + "/" + Util.urlEncode(this._id()) + "/ftp";
-		var result:any = this._client.request("DELETE", path);
+		this._client.request("DELETE", path);
 		this._ftpInfo = null;
 		return this;
 	}
@@ -458,7 +458,7 @@ class Archive extends Resource {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(timeoutSec, "number");
 		Util.validateType(callback, "function");
-		var ret = this.sleepWhileCopying(timeoutSec);
+		var ret:boolean = this.sleepWhileCopying(timeoutSec);
 		callback(this, ret);
 	}
 	

@@ -12,15 +12,6 @@ import HttpException = require('./HttpException');
 class HttpRequestUriTooLongException extends HttpException {
 	
 	/**
-	 * @static
-	 * @member saklient.errors.HttpRequestUriTooLongException#defaultMessage
-	 * @default "HTTPエラー。Request Uri Too Long."
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "HTTPエラー。Request Uri Too Long.";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class HttpRequestUriTooLongException extends HttpException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "HTTPエラー。Request Uri Too Long." : message);
 	}
 	
 }

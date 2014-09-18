@@ -10,6 +10,7 @@ import Icon = require('./Icon');
 import Swytch = require('./Swytch');
 import Ipv4Net = require('./Ipv4Net');
 import Ipv6Net = require('./Ipv6Net');
+import Model_Swytch = require('../models/Model_Swytch');
 
 'use strict';
 
@@ -177,7 +178,7 @@ class Router extends Resource {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(timeoutSec, "number");
 		Util.validateType(callback, "function");
-		var ret = this.sleepWhileCreating(timeoutSec);
+		var ret:boolean = this.sleepWhileCreating(timeoutSec);
 		callback(this, ret);
 	}
 	

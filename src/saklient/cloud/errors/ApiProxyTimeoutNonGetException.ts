@@ -12,15 +12,6 @@ import HttpGatewayTimeoutException = require('../../errors/HttpGatewayTimeoutExc
 class ApiProxyTimeoutNonGetException extends HttpGatewayTimeoutException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.ApiProxyTimeoutNonGetException#defaultMessage
-	 * @default "APIプロクシが応答しません。要求は実行された可能性があります。しばらく時間をおいてからご確認ください。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "APIプロクシが応答しません。要求は実行された可能性があります。しばらく時間をおいてからご確認ください。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class ApiProxyTimeoutNonGetException extends HttpGatewayTimeoutException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "APIプロクシが応答しません。要求は実行された可能性があります。しばらく時間をおいてからご確認ください。" : message);
 	}
 	
 }

@@ -12,15 +12,6 @@ import HttpException = require('./HttpException');
 class HttpNotAcceptableException extends HttpException {
 	
 	/**
-	 * @static
-	 * @member saklient.errors.HttpNotAcceptableException#defaultMessage
-	 * @default "要求を受け付けできません。サポートサイトやメンテナンス情報をご確認ください。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求を受け付けできません。サポートサイトやメンテナンス情報をご確認ください。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class HttpNotAcceptableException extends HttpException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求を受け付けできません。サポートサイトやメンテナンス情報をご確認ください。" : message);
 	}
 	
 }

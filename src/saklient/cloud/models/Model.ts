@@ -292,7 +292,7 @@ class Model {
 	 * @return {Resource} リソースオブジェクト
 	 */
 	_create() : Resource {
-		var a:any[] = [this._client, null];
+		var a:any[] = [this._client, null, false];
 		return (<Resource><any>(Util.createClassInstance("saklient.cloud.resources." + this._className(), a)));
 	}
 	
@@ -313,7 +313,8 @@ class Model {
 		var result:any = this._client.request("GET", this._apiPath() + "/" + Util.urlEncode(id), query);
 		this._total = 1;
 		this._count = 1;
-		return (<Resource><any>(Util.createClassInstance("saklient.cloud.resources." + this._className(), [this._client, result, true])));
+		var a:any[] = [this._client, result, true];
+		return (<Resource><any>(Util.createClassInstance("saklient.cloud.resources." + this._className(), a)));
 	}
 	
 	/**
@@ -330,11 +331,11 @@ class Model {
 		var result:any = this._client.request("GET", this._apiPath(), query);
 		this._total = (<number><any>(result["Total"]));
 		this._count = (<number><any>(result["Count"]));
-		var records:any[] = (<any[]><any>(result[this._rootKeyM()]));
 		var data:Resource[] = [];
+		var records:any[] = (<any[]><any>(result[this._rootKeyM()]));
 		for (var __it1:number=0; __it1<records.length; __it1++) {
 			var record = records[__it1];
-			var a:any[] = [this._client, record];
+			var a:any[] = [this._client, record, false];
 			var i:Resource = (<Resource><any>(Util.createClassInstance("saklient.cloud.resources." + this._className(), a)));
 			data.push(i);
 		};
@@ -359,7 +360,8 @@ class Model {
 			return null;
 		};
 		var records:any[] = (<any[]><any>(result[this._rootKeyM()]));
-		return (<Resource><any>(Util.createClassInstance("saklient.cloud.resources." + this._className(), [this._client, records[0]])));
+		var a:any[] = [this._client, records[0], false];
+		return (<Resource><any>(Util.createClassInstance("saklient.cloud.resources." + this._className(), a)));
 	}
 	
 	/**

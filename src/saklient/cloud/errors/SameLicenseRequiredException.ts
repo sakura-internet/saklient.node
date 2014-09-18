@@ -12,15 +12,6 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 class SameLicenseRequiredException extends HttpConflictException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.SameLicenseRequiredException#defaultMessage
-	 * @default "要求された操作を行えません。再インストール時に指定できるソースは、同一のライセンスを必要とするアーカイブに限られます。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求された操作を行えません。再インストール時に指定できるソースは、同一のライセンスを必要とするアーカイブに限られます。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class SameLicenseRequiredException extends HttpConflictException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求された操作を行えません。再インストール時に指定できるソースは、同一のライセンスを必要とするアーカイブに限られます。" : message);
 	}
 	
 }

@@ -434,7 +434,7 @@ class DiskConfig {
 			Util.setByPath(q, "Notes", notes);
 		};
 		var path:string = "/disk/" + this._diskId + "/config";
-		var result:any = this._client.request("PUT", path, q);
+		this._client.request("PUT", path, q);
 		return this;
 	}
 	

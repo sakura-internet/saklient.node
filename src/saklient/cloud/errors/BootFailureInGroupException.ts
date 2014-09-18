@@ -12,15 +12,6 @@ import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavai
 class BootFailureInGroupException extends HttpServiceUnavailableException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.BootFailureInGroupException#defaultMessage
-	 * @default "サービスが利用できません。サーバ起動グループ指定に問題がある可能性があります。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "サービスが利用できません。サーバ起動グループ指定に問題がある可能性があります。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class BootFailureInGroupException extends HttpServiceUnavailableException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "サービスが利用できません。サーバ起動グループ指定に問題がある可能性があります。" : message);
 	}
 	
 }

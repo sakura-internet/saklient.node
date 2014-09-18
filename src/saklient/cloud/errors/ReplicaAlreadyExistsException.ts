@@ -12,15 +12,6 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 class ReplicaAlreadyExistsException extends HttpConflictException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.ReplicaAlreadyExistsException#defaultMessage
-	 * @default "要求された操作を行えません。このストレージには指定リソースの複製が既に存在します。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求された操作を行えません。このストレージには指定リソースの複製が既に存在します。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class ReplicaAlreadyExistsException extends HttpConflictException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求された操作を行えません。このストレージには指定リソースの複製が既に存在します。" : message);
 	}
 	
 }

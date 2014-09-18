@@ -12,15 +12,6 @@ import HttpException = require('./HttpException');
 class HttpGoneException extends HttpException {
 	
 	/**
-	 * @static
-	 * @member saklient.errors.HttpGoneException#defaultMessage
-	 * @default "HTTPエラー。Gone."
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "HTTPエラー。Gone.";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class HttpGoneException extends HttpException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "HTTPエラー。Gone." : message);
 	}
 	
 }

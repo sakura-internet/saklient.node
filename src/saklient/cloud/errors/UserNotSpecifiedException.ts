@@ -12,15 +12,6 @@ import HttpForbiddenException = require('../../errors/HttpForbiddenException');
 class UserNotSpecifiedException extends HttpForbiddenException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.UserNotSpecifiedException#defaultMessage
-	 * @default "要求された操作は許可されていません。このAPIはユーザを特定できる認証方法でアクセスする必要があります。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求された操作は許可されていません。このAPIはユーザを特定できる認証方法でアクセスする必要があります。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class UserNotSpecifiedException extends HttpForbiddenException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求された操作は許可されていません。このAPIはユーザを特定できる認証方法でアクセスする必要があります。" : message);
 	}
 	
 }

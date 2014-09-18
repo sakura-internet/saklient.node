@@ -12,15 +12,6 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 class OriginalHashMismatchException extends HttpConflictException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.OriginalHashMismatchException#defaultMessage
-	 * @default "要求された操作を行えません。オリジナルのデータを取得してからこのリクエストを行うまでの間に、他の変更が加わった可能性があります。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求された操作を行えません。オリジナルのデータを取得してからこのリクエストを行うまでの間に、他の変更が加わった可能性があります。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class OriginalHashMismatchException extends HttpConflictException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求された操作を行えません。オリジナルのデータを取得してからこのリクエストを行うまでの間に、他の変更が加わった可能性があります。" : message);
 	}
 	
 }

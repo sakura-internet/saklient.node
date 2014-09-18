@@ -12,15 +12,6 @@ import HttpException = require('./HttpException');
 class HttpBadGatewayException extends HttpException {
 	
 	/**
-	 * @static
-	 * @member saklient.errors.HttpBadGatewayException#defaultMessage
-	 * @default "HTTPエラー。Bad Gateway."
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "HTTPエラー。Bad Gateway.";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class HttpBadGatewayException extends HttpException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "HTTPエラー。Bad Gateway." : message);
 	}
 	
 }

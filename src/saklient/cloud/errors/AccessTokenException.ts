@@ -12,15 +12,6 @@ import HttpForbiddenException = require('../../errors/HttpForbiddenException');
 class AccessTokenException extends HttpForbiddenException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.AccessTokenException#defaultMessage
-	 * @default "要求された操作は許可されていません。この操作は有効期限内のトークンが必要です。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求された操作は許可されていません。この操作は有効期限内のトークンが必要です。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class AccessTokenException extends HttpForbiddenException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求された操作は許可されていません。この操作は有効期限内のトークンが必要です。" : message);
 	}
 	
 }

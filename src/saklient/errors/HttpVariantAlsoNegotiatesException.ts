@@ -12,15 +12,6 @@ import HttpException = require('./HttpException');
 class HttpVariantAlsoNegotiatesException extends HttpException {
 	
 	/**
-	 * @static
-	 * @member saklient.errors.HttpVariantAlsoNegotiatesException#defaultMessage
-	 * @default "HTTPエラー。Variant Also Negotiates."
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "HTTPエラー。Variant Also Negotiates.";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class HttpVariantAlsoNegotiatesException extends HttpException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "HTTPエラー。Variant Also Negotiates." : message);
 	}
 	
 }

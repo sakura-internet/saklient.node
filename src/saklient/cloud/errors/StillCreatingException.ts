@@ -12,15 +12,6 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 class StillCreatingException extends HttpConflictException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.StillCreatingException#defaultMessage
-	 * @default "要求された操作を行えません。リソースの作成処理が進行中です。完了後に再度お試しください。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求された操作を行えません。リソースの作成処理が進行中です。完了後に再度お試しください。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class StillCreatingException extends HttpConflictException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求された操作を行えません。リソースの作成処理が進行中です。完了後に再度お試しください。" : message);
 	}
 	
 }

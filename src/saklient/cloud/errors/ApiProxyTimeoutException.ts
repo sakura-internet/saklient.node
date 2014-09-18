@@ -12,15 +12,6 @@ import HttpGatewayTimeoutException = require('../../errors/HttpGatewayTimeoutExc
 class ApiProxyTimeoutException extends HttpGatewayTimeoutException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.ApiProxyTimeoutException#defaultMessage
-	 * @default "APIプロクシがタイムアウトしました。サーバが混雑している可能性があります。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "APIプロクシがタイムアウトしました。サーバが混雑している可能性があります。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class ApiProxyTimeoutException extends HttpGatewayTimeoutException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "APIプロクシがタイムアウトしました。サーバが混雑している可能性があります。" : message);
 	}
 	
 }

@@ -325,7 +325,7 @@ class Disk extends Resource {
 				if (s != null) {
 					var id:any = s["ID"];
 					if (id != null) {
-						var obj:any = Util.createClassInstance("saklient.cloud.resources.Archive", [this._client, s]);
+						var obj:any = Util.createClassInstance("saklient.cloud.resources.Archive", [this._client, s, false]);
 						this._source = (<Resource><any>(obj));
 					};
 				};
@@ -420,7 +420,7 @@ class Disk extends Resource {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(timeoutSec, "number");
 		Util.validateType(callback, "function");
-		var ret = this.sleepWhileCopying(timeoutSec);
+		var ret:boolean = this.sleepWhileCopying(timeoutSec);
 		callback(this, ret);
 	}
 	

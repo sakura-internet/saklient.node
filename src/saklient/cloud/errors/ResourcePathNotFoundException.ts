@@ -12,15 +12,6 @@ import HttpNotFoundException = require('../../errors/HttpNotFoundException');
 class ResourcePathNotFoundException extends HttpNotFoundException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.ResourcePathNotFoundException#defaultMessage
-	 * @default "対象が見つかりません。パスに誤りがあります。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "対象が見つかりません。パスに誤りがあります。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class ResourcePathNotFoundException extends HttpNotFoundException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "対象が見つかりません。パスに誤りがあります。" : message);
 	}
 	
 }

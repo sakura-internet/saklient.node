@@ -12,15 +12,6 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 class ServerPowerMustBeUpException extends HttpConflictException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.ServerPowerMustBeUpException#defaultMessage
-	 * @default "要求された操作を行えません。サーバが停止中にはこの操作を行えません。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求された操作を行えません。サーバが停止中にはこの操作を行えません。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class ServerPowerMustBeUpException extends HttpConflictException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求された操作を行えません。サーバが停止中にはこの操作を行えません。" : message);
 	}
 	
 }

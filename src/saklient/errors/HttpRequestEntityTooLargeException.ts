@@ -12,15 +12,6 @@ import HttpException = require('./HttpException');
 class HttpRequestEntityTooLargeException extends HttpException {
 	
 	/**
-	 * @static
-	 * @member saklient.errors.HttpRequestEntityTooLargeException#defaultMessage
-	 * @default "HTTPエラー。Request Entity Too Large."
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "HTTPエラー。Request Entity Too Large.";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class HttpRequestEntityTooLargeException extends HttpException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "HTTPエラー。Request Entity Too Large." : message);
 	}
 	
 }

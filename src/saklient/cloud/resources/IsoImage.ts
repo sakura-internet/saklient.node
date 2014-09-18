@@ -306,7 +306,7 @@ class IsoImage extends Resource {
 	 */
 	closeFtp() : IsoImage {
 		var path:string = this._apiPath() + "/" + Util.urlEncode(this._id()) + "/ftp";
-		var result:any = this._client.request("DELETE", path);
+		this._client.request("DELETE", path);
 		this._ftpInfo = null;
 		return this;
 	}

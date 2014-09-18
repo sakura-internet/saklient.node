@@ -305,8 +305,8 @@ class Resource {
 			r[k] = v;
 		};
 		this._onBeforeSave(r);
-		var method = this.isNew ? "POST" : "PUT";
-		var path = this._apiPath();
+		var method:string = this.isNew ? "POST" : "PUT";
+		var path:string = this._apiPath();
 		if (!this.isNew) {
 			path += "/" + Util.urlEncode(this._id());
 		};
@@ -328,7 +328,7 @@ class Resource {
 		if (this.isNew) {
 			return;
 		};
-		var path = this._apiPath() + "/" + Util.urlEncode(this._id());
+		var path:string = this._apiPath() + "/" + Util.urlEncode(this._id());
 		this._client.request("DELETE", path);
 	}
 	

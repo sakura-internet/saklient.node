@@ -12,15 +12,6 @@ import HttpServiceUnavailableException = require('../../errors/HttpServiceUnavai
 class DiskStockRunOutException extends HttpServiceUnavailableException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.DiskStockRunOutException#defaultMessage
-	 * @default "サービスが利用できません。作成済みディスクを確保できませんでした。サーバが混雑している可能性があります。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "サービスが利用できません。作成済みディスクを確保できませんでした。サーバが混雑している可能性があります。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class DiskStockRunOutException extends HttpServiceUnavailableException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "サービスが利用できません。作成済みディスクを確保できませんでした。サーバが混雑している可能性があります。" : message);
 	}
 	
 }

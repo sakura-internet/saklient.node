@@ -12,15 +12,6 @@ import HttpException = require('./HttpException');
 class HttpGatewayTimeoutException extends HttpException {
 	
 	/**
-	 * @static
-	 * @member saklient.errors.HttpGatewayTimeoutException#defaultMessage
-	 * @default "HTTPエラー。Gateway Timeout."
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "HTTPエラー。Gateway Timeout.";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class HttpGatewayTimeoutException extends HttpException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "HTTPエラー。Gateway Timeout." : message);
 	}
 	
 }

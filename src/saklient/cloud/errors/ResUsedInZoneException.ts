@@ -12,15 +12,6 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 class ResUsedInZoneException extends HttpConflictException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.ResUsedInZoneException#defaultMessage
-	 * @default "要求された操作を行えません。同一ゾーン内の他のリソースが既にこのリソースを使用中です。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求された操作を行えません。同一ゾーン内の他のリソースが既にこのリソースを使用中です。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class ResUsedInZoneException extends HttpConflictException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求された操作を行えません。同一ゾーン内の他のリソースが既にこのリソースを使用中です。" : message);
 	}
 	
 }

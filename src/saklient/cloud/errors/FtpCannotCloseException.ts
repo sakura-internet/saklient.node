@@ -12,15 +12,6 @@ import HttpConflictException = require('../../errors/HttpConflictException');
 class FtpCannotCloseException extends HttpConflictException {
 	
 	/**
-	 * @static
-	 * @member saklient.cloud.errors.FtpCannotCloseException#defaultMessage
-	 * @default "要求された操作を行えません。FTP共有によりアップロードされたファイルを操作できません。ファイル名等をご確認ください。"
-	 * @type string
-	 * @public
-	 */
-	static defaultMessage : string = "要求された操作を行えません。FTP共有によりアップロードされたファイルを操作できません。ファイル名等をご確認ください。";
-	
-	/**
 	 * @constructor
 	 * @public
 	 * @param {number} status
@@ -28,7 +19,7 @@ class FtpCannotCloseException extends HttpConflictException {
 	 * @param {string} message=""
 	 */
 	constructor(status:number, code:string=null, message:string="") {
-		super(status, code, message);
+		super(status, code, message == null || message == "" ? "要求された操作を行えません。FTP共有によりアップロードされたファイルを操作できません。ファイル名等をご確認ください。" : message);
 	}
 	
 }
