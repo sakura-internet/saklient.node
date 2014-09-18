@@ -3,6 +3,7 @@
 export = Model_Appliance;
 
 import Util = require('../../Util');
+import Client = require('../Client');
 import Model = require('./Model');
 import Appliance = require('../resources/Appliance');
 
@@ -225,6 +226,17 @@ class Model_Appliance extends Model {
 	sortByName(reverse:boolean=false) : Model_Appliance {
 		Util.validateType(reverse, "boolean");
 		return (<Model_Appliance><any>(this._sortByName(reverse)));
+	}
+	
+	/**
+	 * @private
+	 * @constructor
+	 * @param {Client} client
+	 */
+	constructor(client:Client) {
+		super(client);
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(client, "saklient.cloud.Client");
 	}
 	
 }

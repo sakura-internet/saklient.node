@@ -20,5 +20,16 @@ class BusyException extends HttpServiceUnavailableException {
 	 */
 	static defaultMessage : string = "サービスが利用できません。サーバが混雑しています。しばらく時間をおいてから再度お試しください。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

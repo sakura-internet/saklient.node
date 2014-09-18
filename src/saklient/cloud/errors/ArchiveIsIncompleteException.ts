@@ -20,5 +20,16 @@ class ArchiveIsIncompleteException extends HttpConflictException {
 	 */
 	static defaultMessage : string = "要求された操作を行えません。このアーカイブは不完全です。複製処理等の完了後に再度お試しください。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

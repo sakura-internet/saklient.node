@@ -20,5 +20,16 @@ class DeleteIpV6NetsFirstException extends HttpConflictException {
 	 */
 	static defaultMessage : string = "要求された操作を行えません。ルータを削除する前に、IPv6ネットワークの割当を解除してください。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

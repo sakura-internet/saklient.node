@@ -20,5 +20,16 @@ class HttpBadGatewayException extends HttpException {
 	 */
 	static defaultMessage : string = "HTTPエラー。Bad Gateway.";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

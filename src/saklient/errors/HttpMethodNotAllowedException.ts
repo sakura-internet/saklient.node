@@ -20,5 +20,16 @@ class HttpMethodNotAllowedException extends HttpException {
 	 */
 	static defaultMessage : string = "要求されたHTTPメソッドは対応していません。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

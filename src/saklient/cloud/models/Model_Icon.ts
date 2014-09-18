@@ -3,6 +3,7 @@
 export = Model_Icon;
 
 import Util = require('../../Util');
+import Client = require('../Client');
 import Model = require('./Model');
 import Icon = require('../resources/Icon');
 import EScope = require('../enums/EScope');
@@ -226,6 +227,17 @@ class Model_Icon extends Model {
 	sortByName(reverse:boolean=false) : Model_Icon {
 		Util.validateType(reverse, "boolean");
 		return (<Model_Icon><any>(this._sortByName(reverse)));
+	}
+	
+	/**
+	 * @private
+	 * @constructor
+	 * @param {Client} client
+	 */
+	constructor(client:Client) {
+		super(client);
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(client, "saklient.cloud.Client");
 	}
 	
 	/**

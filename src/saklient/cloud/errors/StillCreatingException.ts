@@ -20,5 +20,16 @@ class StillCreatingException extends HttpConflictException {
 	 */
 	static defaultMessage : string = "要求された操作を行えません。リソースの作成処理が進行中です。完了後に再度お試しください。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

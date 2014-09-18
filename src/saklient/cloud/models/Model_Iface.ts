@@ -3,6 +3,7 @@
 export = Model_Iface;
 
 import Util = require('../../Util');
+import Client = require('../Client');
 import Model = require('./Model');
 import Iface = require('../resources/Iface');
 
@@ -154,6 +155,17 @@ class Model_Iface extends Model {
 	 */
 	find() : Iface[] {
 		return Util.castArray(this._find(), (<Iface><any>(null)));
+	}
+	
+	/**
+	 * @private
+	 * @constructor
+	 * @param {Client} client
+	 */
+	constructor(client:Client) {
+		super(client);
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(client, "saklient.cloud.Client");
 	}
 	
 }

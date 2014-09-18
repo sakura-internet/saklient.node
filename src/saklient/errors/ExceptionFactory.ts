@@ -63,6 +63,7 @@ import DeleteIpV6NetsFirstException = require('../cloud/errors/DeleteIpV6NetsFir
 import DeleteResB4AccountException = require('../cloud/errors/DeleteResB4AccountException');
 import DeleteRouterB4SwitchException = require('../cloud/errors/DeleteRouterB4SwitchException');
 import DeleteStaticRouteFirstException = require('../cloud/errors/DeleteStaticRouteFirstException');
+import DisabledInSandboxException = require('../cloud/errors/DisabledInSandboxException');
 import DisconnectB4DeleteException = require('../cloud/errors/DisconnectB4DeleteException');
 import DisconnectB4UpdateException = require('../cloud/errors/DisconnectB4UpdateException');
 import DiskConnectionLimitException = require('../cloud/errors/DiskConnectionLimitException');
@@ -74,6 +75,7 @@ import DiskStockRunOutException = require('../cloud/errors/DiskStockRunOutExcept
 import DnsARecordNotFoundException = require('../cloud/errors/DnsARecordNotFoundException');
 import DnsAaaaRecordNotFoundException = require('../cloud/errors/DnsAaaaRecordNotFoundException');
 import DnsPtrUpdateFailureException = require('../cloud/errors/DnsPtrUpdateFailureException');
+import DontCreateInSandboxException = require('../cloud/errors/DontCreateInSandboxException');
 import DuplicateAccountCodeException = require('../cloud/errors/DuplicateAccountCodeException');
 import DuplicateEntryException = require('../cloud/errors/DuplicateEntryException');
 import DuplicateUserCodeException = require('../cloud/errors/DuplicateUserCodeException');
@@ -265,6 +267,9 @@ class ExceptionFactory {
 			case "delete_static_route_first": {
 				return new DeleteStaticRouteFirstException(status, code, message);
 			}
+			case "disabled_in_sandbox": {
+				return new DisabledInSandboxException(status, code, message);
+			}
 			case "disconnect_b4_delete": {
 				return new DisconnectB4DeleteException(status, code, message);
 			}
@@ -297,6 +302,9 @@ class ExceptionFactory {
 			}
 			case "dns_ptr_update_failure": {
 				return new DnsPtrUpdateFailureException(status, code, message);
+			}
+			case "dont_create_in_sandbox": {
+				return new DontCreateInSandboxException(status, code, message);
 			}
 			case "duplicate_account_code": {
 				return new DuplicateAccountCodeException(status, code, message);

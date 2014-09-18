@@ -3,6 +3,7 @@
 export = Model_ServerPlan;
 
 import Util = require('../../Util');
+import Client = require('../Client');
 import Model = require('./Model');
 import ServerPlan = require('../resources/ServerPlan');
 
@@ -141,6 +142,17 @@ class Model_ServerPlan extends Model {
 	 */
 	find() : ServerPlan[] {
 		return Util.castArray(this._find(), (<ServerPlan><any>(null)));
+	}
+	
+	/**
+	 * @private
+	 * @constructor
+	 * @param {Client} client
+	 */
+	constructor(client:Client) {
+		super(client);
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(client, "saklient.cloud.Client");
 	}
 	
 	/**

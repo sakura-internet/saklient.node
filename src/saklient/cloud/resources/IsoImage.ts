@@ -218,7 +218,22 @@ class IsoImage extends Resource {
 	 * @return {number}
 	 */
 	get_sizeGib() : number {
-		return this.get_sizeMib() >> 10;
+		var sizeMib:number = this.get_sizeMib();
+		return sizeMib == null ? null : sizeMib >> 10;
+	}
+	
+	/**
+	 * @method set_sizeGib
+	 * @protected
+	 * @private
+	 * @param {number} sizeGib
+	 * @return {number}
+	 */
+	set_sizeGib(sizeGib:number) : number {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(sizeGib, "number");
+		this.set_sizeMib(sizeGib == null ? null : sizeGib * 1024);
+		return sizeGib;
 	}
 	
 	/**
@@ -226,10 +241,10 @@ class IsoImage extends Resource {
 	 * 
 	 * @property sizeGib
 	 * @type number
-	 * @readOnly
 	 * @public
 	 */
 	get sizeGib() : number { return this.get_sizeGib(); }
+	set sizeGib(v:number) { this.set_sizeGib(v); }
 	
 	
 	/**

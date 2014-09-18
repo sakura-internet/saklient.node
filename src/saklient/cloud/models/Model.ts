@@ -253,7 +253,7 @@ class Model {
 			if (!(key in filter)) {
 				filter[key] = [];
 			};
-			var values:any[] = filter[key];
+			var values:any[] = (<any[]><any>(filter[key]));
 			values.push(value);
 		}
 		else {
@@ -292,7 +292,8 @@ class Model {
 	 * @return {Resource} リソースオブジェクト
 	 */
 	_create() : Resource {
-		return Util.createClassInstance("saklient.cloud.resources." + this._className(), [this._client, null]);
+		var a:any[] = [this._client, null];
+		return (<Resource><any>(Util.createClassInstance("saklient.cloud.resources." + this._className(), a)));
 	}
 	
 	/**
@@ -333,7 +334,8 @@ class Model {
 		var data:Resource[] = [];
 		for (var __it1:number=0; __it1<records.length; __it1++) {
 			var record = records[__it1];
-			var i = Util.createClassInstance("saklient.cloud.resources." + this._className(), [this._client, record]);
+			var a:any[] = [this._client, record];
+			var i:Resource = (<Resource><any>(Util.createClassInstance("saklient.cloud.resources." + this._className(), a)));
 			data.push(i);
 		};
 		return (<Resource[]><any>(data));

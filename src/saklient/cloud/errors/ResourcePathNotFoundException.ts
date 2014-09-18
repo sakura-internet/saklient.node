@@ -20,5 +20,16 @@ class ResourcePathNotFoundException extends HttpNotFoundException {
 	 */
 	static defaultMessage : string = "対象が見つかりません。パスに誤りがあります。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

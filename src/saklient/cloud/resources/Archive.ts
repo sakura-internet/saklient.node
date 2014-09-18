@@ -239,7 +239,8 @@ class Archive extends Resource {
 	 * @return {number}
 	 */
 	get_sizeGib() : number {
-		return this.get_sizeMib() >> 10;
+		var sizeMib:number = this.get_sizeMib();
+		return sizeMib == null ? null : sizeMib >> 10;
 	}
 	
 	/**
@@ -252,7 +253,7 @@ class Archive extends Resource {
 	set_sizeGib(sizeGib:number) : number {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(sizeGib, "number");
-		this.set_sizeMib(sizeGib * 1024);
+		this.set_sizeMib(sizeGib == null ? null : sizeGib * 1024);
 		return sizeGib;
 	}
 	

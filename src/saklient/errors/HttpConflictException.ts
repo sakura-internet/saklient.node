@@ -20,5 +20,16 @@ class HttpConflictException extends HttpException {
 	 */
 	static defaultMessage : string = "要求された操作を行えません。現在の対象の状態では、この操作を受け付けできません。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

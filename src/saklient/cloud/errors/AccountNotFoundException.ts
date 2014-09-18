@@ -20,5 +20,16 @@ class AccountNotFoundException extends HttpBadRequestException {
 	 */
 	static defaultMessage : string = "不適切な要求です。アカウントが存在しません。IDをご確認ください。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

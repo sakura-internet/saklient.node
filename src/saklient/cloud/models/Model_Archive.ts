@@ -3,6 +3,7 @@
 export = Model_Archive;
 
 import Util = require('../../Util');
+import Client = require('../Client');
 import Model = require('./Model');
 import Archive = require('../resources/Archive');
 import EScope = require('../enums/EScope');
@@ -239,6 +240,17 @@ class Model_Archive extends Model {
 	sortByName(reverse:boolean=false) : Model_Archive {
 		Util.validateType(reverse, "boolean");
 		return (<Model_Archive><any>(this._sortByName(reverse)));
+	}
+	
+	/**
+	 * @private
+	 * @constructor
+	 * @param {Client} client
+	 */
+	constructor(client:Client) {
+		super(client);
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(client, "saklient.cloud.Client");
 	}
 	
 	/**

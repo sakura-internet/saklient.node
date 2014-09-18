@@ -333,7 +333,7 @@ class Server extends Resource {
 		var step = 3;
 		while (0 < timeoutSec) {
 			this.reload();
-			var s:string = this.get_instance()["status"];
+			var s:string = this.get_instance().status;
 			if (s == null) {
 				s = EServerInstanceStatus.down;
 			};

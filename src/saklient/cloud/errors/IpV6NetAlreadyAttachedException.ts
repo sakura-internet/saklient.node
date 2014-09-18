@@ -20,5 +20,16 @@ class IpV6NetAlreadyAttachedException extends HttpConflictException {
 	 */
 	static defaultMessage : string = "要求された操作を行えません。ConnectedなIPv6ネットワークが既に割り当て済みです。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

@@ -106,9 +106,9 @@ class FtpInfo {
 	 */
 	constructor(obj:any) {
 		Util.validateArgCount(arguments.length, 1);
-		this._hostName = obj["HostName"];
-		this._user = obj["User"];
-		this._password = obj["Password"];
+		this._hostName = (<string><any>(obj["HostName"]));
+		this._user = (<string><any>(obj["User"]));
+		this._password = (<string><any>(obj["Password"]));
 	}
 	
 }

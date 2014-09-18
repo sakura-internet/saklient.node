@@ -3,6 +3,7 @@
 export = Model_Router;
 
 import Util = require('../../Util');
+import Client = require('../Client');
 import Model = require('./Model');
 import Router = require('../resources/Router');
 
@@ -188,6 +189,17 @@ class Model_Router extends Model {
 	sortByName(reverse:boolean=false) : Model_Router {
 		Util.validateType(reverse, "boolean");
 		return (<Model_Router><any>(this._sortByName(reverse)));
+	}
+	
+	/**
+	 * @private
+	 * @constructor
+	 * @param {Client} client
+	 */
+	constructor(client:Client) {
+		super(client);
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(client, "saklient.cloud.Client");
 	}
 	
 	/**

@@ -3,6 +3,7 @@
 export = Model_Swytch;
 
 import Util = require('../../Util');
+import Client = require('../Client');
 import Model = require('./Model');
 import Swytch = require('../resources/Swytch');
 
@@ -188,6 +189,17 @@ class Model_Swytch extends Model {
 	sortByName(reverse:boolean=false) : Model_Swytch {
 		Util.validateType(reverse, "boolean");
 		return (<Model_Swytch><any>(this._sortByName(reverse)));
+	}
+	
+	/**
+	 * @private
+	 * @constructor
+	 * @param {Client} client
+	 */
+	constructor(client:Client) {
+		super(client);
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(client, "saklient.cloud.Client");
 	}
 	
 }

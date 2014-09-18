@@ -3,6 +3,7 @@
 export = Model_Ipv6Net;
 
 import Util = require('../../Util');
+import Client = require('../Client');
 import Model = require('./Model');
 import Ipv6Net = require('../resources/Ipv6Net');
 
@@ -141,6 +142,17 @@ class Model_Ipv6Net extends Model {
 	 */
 	find() : Ipv6Net[] {
 		return Util.castArray(this._find(), (<Ipv6Net><any>(null)));
+	}
+	
+	/**
+	 * @private
+	 * @constructor
+	 * @param {Client} client
+	 */
+	constructor(client:Client) {
+		super(client);
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(client, "saklient.cloud.Client");
 	}
 	
 }

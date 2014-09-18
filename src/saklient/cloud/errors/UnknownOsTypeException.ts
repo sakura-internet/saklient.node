@@ -20,5 +20,16 @@ class UnknownOsTypeException extends HttpServiceUnavailableException {
 	 */
 	static defaultMessage : string = "サービスが利用できません。ディスクにインストールされたOSが特定できないため、正しく修正できません。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

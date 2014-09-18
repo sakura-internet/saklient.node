@@ -3,6 +3,7 @@
 export = Model_RouterPlan;
 
 import Util = require('../../Util');
+import Client = require('../Client');
 import Model = require('./Model');
 import RouterPlan = require('../resources/RouterPlan');
 
@@ -141,6 +142,17 @@ class Model_RouterPlan extends Model {
 	 */
 	find() : RouterPlan[] {
 		return Util.castArray(this._find(), (<RouterPlan><any>(null)));
+	}
+	
+	/**
+	 * @private
+	 * @constructor
+	 * @param {Client} client
+	 */
+	constructor(client:Client) {
+		super(client);
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(client, "saklient.cloud.Client");
 	}
 	
 }

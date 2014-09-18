@@ -20,5 +20,16 @@ class DeleteResB4AccountException extends HttpConflictException {
 	 */
 	static defaultMessage : string = "要求された操作を行えません。現在のアカウントで使用している全てのリソースを削除した後に実行してください。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

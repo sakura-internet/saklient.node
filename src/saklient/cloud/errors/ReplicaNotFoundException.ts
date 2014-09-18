@@ -20,5 +20,16 @@ class ReplicaNotFoundException extends HttpNotFoundException {
 	 */
 	static defaultMessage : string = "対象が見つかりません。このストレージには指定リソースの複製が存在しません。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

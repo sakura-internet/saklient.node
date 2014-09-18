@@ -133,7 +133,8 @@ class ServerPlan extends Resource {
 	 * @return {number}
 	 */
 	get_memoryGib() : number {
-		return this.get_memoryMib() >> 10;
+		var memoryMib:number = this.get_memoryMib();
+		return memoryMib == null ? null : memoryMib >> 10;
 	}
 	
 	/**

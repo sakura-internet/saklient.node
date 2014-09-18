@@ -20,5 +20,16 @@ class DnsARecordNotFoundException extends HttpBadRequestException {
 	 */
 	static defaultMessage : string = "不適切な要求です。対応するAレコードが見つかりません。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

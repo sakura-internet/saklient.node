@@ -20,5 +20,16 @@ class OperationFailureException extends HttpServiceUnavailableException {
 	 */
 	static defaultMessage : string = "サービスが利用できません。操作に失敗しました。サーバが混雑している可能性があります。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

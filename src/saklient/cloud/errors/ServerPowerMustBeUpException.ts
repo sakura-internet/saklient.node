@@ -20,5 +20,16 @@ class ServerPowerMustBeUpException extends HttpConflictException {
 	 */
 	static defaultMessage : string = "要求された操作を行えません。サーバが停止中にはこの操作を行えません。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

@@ -20,5 +20,16 @@ class AccessXhrOrApiKeyException extends HttpForbiddenException {
 	 */
 	static defaultMessage : string = "要求された操作は許可されていません。XHRまたはAPIキーによるアクセスのみ許可されています。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 

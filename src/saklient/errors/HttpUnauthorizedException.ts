@@ -20,5 +20,16 @@ class HttpUnauthorizedException extends HttpException {
 	 */
 	static defaultMessage : string = "この操作は認証が必要です。IDまたはパスワードが誤っている可能性があります。";
 	
+	/**
+	 * @constructor
+	 * @public
+	 * @param {number} status
+	 * @param {string} code=null
+	 * @param {string} message=""
+	 */
+	constructor(status:number, code:string=null, message:string="") {
+		super(status, code, message);
+	}
+	
 }
 
