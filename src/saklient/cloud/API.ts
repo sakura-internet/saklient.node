@@ -440,7 +440,7 @@ class API {
 	 * @public
 	 * @param {string} token ACCESS TOKEN
 	 * @param {string} secret ACCESS TOKEN SECRET
-	 * @param {string} zone=null
+	 * @param {string} zone=null ゾーン名
 	 * @return {API} APIクライアント
 	 */
 	static authorize(token:string, secret:string, zone:string=null) : API {

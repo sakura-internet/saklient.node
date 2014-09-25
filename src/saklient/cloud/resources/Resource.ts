@@ -359,7 +359,8 @@ class Resource {
 		Util.setByPath(query, "Filter.ID", [this._id()]);
 		Util.setByPath(query, "Include", ["ID"]);
 		var result:any = this._client.request("GET", this._apiPath(), query);
-		return (<number><any>(result["Count"])) == 1;
+		var cnt:any = result["Count"];
+		return (<number><any>(cnt)) == 1;
 	}
 	
 	/**
