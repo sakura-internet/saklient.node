@@ -495,6 +495,7 @@ class IsoImage extends Resource {
 	 * @return {string[]}
 	 */
 	private get_tags() : string[] {
+		this.n_tags = true;
 		return this.m_tags;
 	}
 	

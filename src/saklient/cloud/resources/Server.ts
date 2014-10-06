@@ -335,7 +335,7 @@ class Server extends Resource {
 		var step:number = 3;
 		while (0 < timeoutSec) {
 			this.reload();
-			var s:string = this.get_instance().status;
+			var s:string = (<string><any>(this.get_instance().getProperty("status")));
 			if (s == null) {
 				s = EServerInstanceStatus.down;
 			};
@@ -568,6 +568,7 @@ class Server extends Resource {
 	 * @return {string[]}
 	 */
 	private get_tags() : string[] {
+		this.n_tags = true;
 		return this.m_tags;
 	}
 	

@@ -369,8 +369,7 @@ class Archive extends Resource {
 				if (s != null) {
 					var id:any = s["ID"];
 					if (id != null) {
-						var obj:any = Util.createClassInstance("saklient.cloud.resources.Disk", [this._client, s, false]);
-						this._source = (<Resource><any>(obj));
+						this._source = Resource.createWith("Disk", this._client, s);
 					};
 				};
 			};
@@ -658,6 +657,7 @@ class Archive extends Resource {
 	 * @return {string[]}
 	 */
 	private get_tags() : string[] {
+		this.n_tags = true;
 		return this.m_tags;
 	}
 	

@@ -6,6 +6,8 @@ import Util = require('../../Util');
 import Client = require('../Client');
 import Model = require('./Model');
 import Archive = require('../resources/Archive');
+import LoadBalancer = require('../resources/LoadBalancer');
+import VpcRouter = require('../resources/VpcRouter');
 import EScope = require('../enums/EScope');
 
 'use strict';

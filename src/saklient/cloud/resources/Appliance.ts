@@ -86,6 +86,32 @@ class Appliance extends Resource {
 	m_ifaces : Iface[];
 	
 	/**
+	 * 注釈
+	 * 
+	 * @member saklient.cloud.resources.Appliance#m_annotation
+	 * @type any
+	 * @protected
+	 */
+	m_annotation : any;
+	
+	/**
+	 * 設定の生データ
+	 * 
+	 * @member saklient.cloud.resources.Appliance#m_rawSettings
+	 * @type any
+	 * @protected
+	 */
+	m_rawSettings : any;
+	
+	/**
+	 * @private
+	 * @member saklient.cloud.resources.Appliance#m_rawSettingsHash
+	 * @type string
+	 * @protected
+	 */
+	m_rawSettingsHash : string;
+	
+	/**
 	 * サービスクラス
 	 * 
 	 * @member saklient.cloud.resources.Appliance#m_serviceClass
@@ -168,6 +194,23 @@ class Appliance extends Resource {
 	
 	/**
 	 * @private
+	 * @method trueClassName
+	 * @return {string}
+	 */
+	trueClassName() : string {
+		switch (this.get_clazz()) {
+			case "loadbalancer": {
+				return "LoadBalancer";
+			}
+			case "vpcrouter": {
+				return "VpcRouter";
+			}
+		}
+		;
+	}
+	
+	/**
+	 * @private
 	 * @constructor
 	 * @param {Client} client
 	 * @param {any} obj
@@ -179,6 +222,18 @@ class Appliance extends Resource {
 		Util.validateType(client, "saklient.cloud.Client");
 		Util.validateType(wrapped, "boolean");
 		this.apiDeserialize(obj, wrapped);
+	}
+	
+	/**
+	 * @private
+	 * @method _onBeforeSave
+	 * @protected
+	 * @param {any} query
+	 * @return {void}
+	 */
+	_onBeforeSave(query:any) : void {
+		Util.validateArgCount(arguments.length, 1);
+		Util.setByPath(query, "OriginalSettingsHash", this.get_rawSettingsHash());
 	}
 	
 	/**
@@ -420,6 +475,7 @@ class Appliance extends Resource {
 	 * @return {string[]}
 	 */
 	private get_tags() : string[] {
+		this.n_tags = true;
 		return this.m_tags;
 	}
 	
@@ -524,6 +580,110 @@ class Appliance extends Resource {
 	 * @public
 	 */
 	get ifaces() : Iface[] { return this.get_ifaces(); }
+	
+	
+	/**
+	 * @member saklient.cloud.resources.Appliance#n_annotation
+	 * @default false
+	 * @type boolean
+	 * @private
+	 */
+	private n_annotation : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_annotation
+	 * @private
+	 * @return {any}
+	 */
+	private get_annotation() : any {
+		return this.m_annotation;
+	}
+	
+	/**
+	 * 注釈
+	 * 
+	 * @property annotation
+	 * @type any
+	 * @readOnly
+	 * @public
+	 */
+	get annotation() : any { return this.get_annotation(); }
+	
+	
+	/**
+	 * @member saklient.cloud.resources.Appliance#n_rawSettings
+	 * @default false
+	 * @type boolean
+	 * @private
+	 */
+	private n_rawSettings : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_rawSettings
+	 * @private
+	 * @return {any}
+	 */
+	private get_rawSettings() : any {
+		this.n_rawSettings = true;
+		return this.m_rawSettings;
+	}
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method set_rawSettings
+	 * @private
+	 * @param {any} v
+	 * @return {any}
+	 */
+	private set_rawSettings(v:any) : any {
+		Util.validateArgCount(arguments.length, 1);
+		this.m_rawSettings = v;
+		this.n_rawSettings = true;
+		return this.m_rawSettings;
+	}
+	
+	/**
+	 * 設定の生データ
+	 * 
+	 * @property rawSettings
+	 * @type any
+	 * @public
+	 */
+	get rawSettings() : any { return this.get_rawSettings(); }
+	set rawSettings(v:any) { this.set_rawSettings(v); }
+	
+	
+	/**
+	 * @member saklient.cloud.resources.Appliance#n_rawSettingsHash
+	 * @default false
+	 * @type boolean
+	 * @private
+	 */
+	private n_rawSettingsHash : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_rawSettingsHash
+	 * @private
+	 * @return {string}
+	 */
+	private get_rawSettingsHash() : string {
+		return this.m_rawSettingsHash;
+	}
+	
+	/**
+	 * @private
+	 * @property rawSettingsHash
+	 * @type string
+	 * @readOnly
+	 */
+	get rawSettingsHash() : string { return this.get_rawSettingsHash(); }
 	
 	
 	/**
@@ -648,6 +808,30 @@ class Appliance extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_ifaces = false;
+		if (Util.existsPath(r, "Remark")) {
+			this.m_annotation = Util.getByPath(r, "Remark");
+		}
+		else {
+			this.m_annotation = null;
+			this.isIncomplete = true;
+		};
+		this.n_annotation = false;
+		if (Util.existsPath(r, "Settings")) {
+			this.m_rawSettings = Util.getByPath(r, "Settings");
+		}
+		else {
+			this.m_rawSettings = null;
+			this.isIncomplete = true;
+		};
+		this.n_rawSettings = false;
+		if (Util.existsPath(r, "SettingsHash")) {
+			this.m_rawSettingsHash = Util.getByPath(r, "SettingsHash") == null ? null : "" + Util.getByPath(r, "SettingsHash");
+		}
+		else {
+			this.m_rawSettingsHash = null;
+			this.isIncomplete = true;
+		};
+		this.n_rawSettingsHash = false;
 		if (Util.existsPath(r, "ServiceClass")) {
 			this.m_serviceClass = Util.getByPath(r, "ServiceClass") == null ? null : "" + Util.getByPath(r, "ServiceClass");
 		}
@@ -711,6 +895,15 @@ class Appliance extends Resource {
 				v = withClean ? (r2 == null ? null : r2.apiSerialize(withClean)) : (r2 == null ? { ID: "0" } : r2.apiSerializeID());
 				ret["Interfaces"].push(v);
 			};
+		};
+		if (withClean || this.n_annotation) {
+			Util.setByPath(ret, "Remark", this.m_annotation);
+		};
+		if (withClean || this.n_rawSettings) {
+			Util.setByPath(ret, "Settings", this.m_rawSettings);
+		};
+		if (withClean || this.n_rawSettingsHash) {
+			Util.setByPath(ret, "SettingsHash", this.m_rawSettingsHash);
 		};
 		if (withClean || this.n_serviceClass) {
 			Util.setByPath(ret, "ServiceClass", this.m_serviceClass);

@@ -143,10 +143,10 @@ class Resource {
 	 * @private
 	 * @method _onBeforeSave
 	 * @protected
-	 * @param {any} r
+	 * @param {any} query
 	 * @return {void}
 	 */
-	_onBeforeSave(r:any) : void {
+	_onBeforeSave(query:any) : void {
 		Util.validateArgCount(arguments.length, 1);
 	}
 	
@@ -272,6 +272,19 @@ class Resource {
 	
 	/**
 	 * @private
+	 * @method getProperty
+	 * @param {string} name
+	 * @return {any}
+	 */
+	getProperty(name:string) : any {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(name, "string");
+		name = this.normalizeFieldName(name);
+		return this["m_" + name];
+	}
+	
+	/**
+	 * @private
 	 * @method setProperty
 	 * @param {string} name
 	 * @param {any} value
@@ -304,7 +317,6 @@ class Resource {
 			var v:any = query[k];
 			r[k] = v;
 		};
-		this._onBeforeSave(r);
 		var method:string = this.isNew ? "POST" : "PUT";
 		var path:string = this._apiPath();
 		if (!this.isNew) {
@@ -312,6 +324,7 @@ class Resource {
 		};
 		var q:any = {};
 		q[this._rootKey()] = r;
+		this._onBeforeSave(q);
 		var result:any = this._client.request(method, path, q);
 		this.apiDeserialize(result, true);
 		return this;
@@ -370,6 +383,40 @@ class Resource {
 	 */
 	dump() : any {
 		return this.apiSerialize(true);
+	}
+	
+	/**
+	 * @private
+	 * @method trueClassName
+	 * @return {string}
+	 */
+	trueClassName() : string {
+		return null;
+	}
+	
+	/**
+	 * @private
+	 * @static
+	 * @method createWith
+	 * @chainable
+	 * @param {string} className
+	 * @param {Client} client
+	 * @param {any} obj
+	 * @param {boolean} wrapped=false
+	 * @return {Resource}
+	 */
+	static createWith(className:string, client:Client, obj:any, wrapped:boolean=false) : Resource {
+		Util.validateArgCount(arguments.length, 3);
+		Util.validateType(className, "string");
+		Util.validateType(client, "saklient.cloud.Client");
+		Util.validateType(wrapped, "boolean");
+		var a:any[] = [client, obj, wrapped];
+		var ret:Resource = (<Resource><any>(Util.createClassInstance("saklient.cloud.resources." + className, a)));
+		var trueClassName:string = ret.trueClassName();
+		if (trueClassName != null) {
+			ret = (<Resource><any>(Util.createClassInstance("saklient.cloud.resources." + trueClassName, a)));
+		};
+		return ret;
 	}
 	
 }

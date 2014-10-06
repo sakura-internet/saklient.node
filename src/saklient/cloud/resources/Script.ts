@@ -388,6 +388,7 @@ class Script extends Resource {
 	 * @return {string[]}
 	 */
 	private get_tags() : string[] {
+		this.n_tags = true;
 		return this.m_tags;
 	}
 	
@@ -530,29 +531,14 @@ class Script extends Resource {
 	}
 	
 	/**
-	 * (This method is generated in Translator_default#buildImpl)
-	 * 
-	 * @method set_annotation
-	 * @private
-	 * @param {any} v
-	 * @return {any}
-	 */
-	private set_annotation(v:any) : any {
-		Util.validateArgCount(arguments.length, 1);
-		this.m_annotation = v;
-		this.n_annotation = true;
-		return this.m_annotation;
-	}
-	
-	/**
 	 * 注釈
 	 * 
 	 * @property annotation
 	 * @type any
+	 * @readOnly
 	 * @public
 	 */
 	get annotation() : any { return this.get_annotation(); }
-	set annotation(v:any) { this.set_annotation(v); }
 	
 	
 	/**
