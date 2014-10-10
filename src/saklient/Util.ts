@@ -70,6 +70,16 @@ class Util {
 		return obj;
 	}
 	
+	static getByPathAny(objects:any[], pathes:string[]) {
+		for (var obj in objects) {
+			for (var path in pathes) {
+				var ret:any = Util.getByPath(obj, path);
+				if (ret != null) return ret;
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * @todo array support
 	 * @todo overwriting

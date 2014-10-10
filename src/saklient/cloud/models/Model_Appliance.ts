@@ -6,6 +6,9 @@ import Util = require('../../Util');
 import Client = require('../Client');
 import Model = require('./Model');
 import Appliance = require('../resources/Appliance');
+import LoadBalancer = require('../resources/LoadBalancer');
+import VpcRouter = require('../resources/VpcRouter');
+import Swytch = require('../resources/Swytch');
 
 'use strict';
 
@@ -117,6 +120,34 @@ class Model_Appliance extends Model {
 	 */
 	reset() : Model_Appliance {
 		return (<Model_Appliance><any>(this._reset()));
+	}
+	
+	/**
+	 * @method createLoadBalancer
+	 * @public
+	 * @param {Swytch} swytch
+	 * @param {number} vrid
+	 * @param {string[]} realIps
+	 * @param {boolean} isHighSpec=false
+	 * @return {LoadBalancer}
+	 */
+	createLoadBalancer(swytch:Swytch, vrid:number, realIps:string[], isHighSpec:boolean=false) : LoadBalancer {
+		Util.validateArgCount(arguments.length, 3);
+		Util.validateType(swytch, "saklient.cloud.resources.Swytch");
+		Util.validateType(vrid, "number");
+		Util.validateType(realIps, "Array");
+		Util.validateType(isHighSpec, "boolean");
+		var ret:LoadBalancer = (<LoadBalancer><any>(this._create("LoadBalancer")));
+		return ret.setInitialParams(swytch, vrid, realIps, isHighSpec);
+	}
+	
+	/**
+	 * @method createVpcRouter
+	 * @public
+	 * @return {VpcRouter}
+	 */
+	createVpcRouter() : VpcRouter {
+		return (<VpcRouter><any>(this._create("VpcRouter")));
 	}
 	
 	/**
