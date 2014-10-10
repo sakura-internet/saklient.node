@@ -4,6 +4,7 @@ export = Resource;
 
 import Util = require('../../Util');
 import Client = require('../Client');
+import HttpException = require('../../errors/HttpException');
 
 'use strict';
 
@@ -164,6 +165,18 @@ class Resource {
 	
 	/**
 	 * @private
+	 * @method _onBeforeApiSerialize
+	 * @protected
+	 * @param {boolean} withClean
+	 * @return {void}
+	 */
+	_onBeforeApiSerialize(withClean:boolean) : void {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(withClean, "boolean");
+	}
+	
+	/**
+	 * @private
 	 * @method _onAfterApiSerialize
 	 * @protected
 	 * @param {any} r
@@ -236,6 +249,7 @@ class Resource {
 	 */
 	apiSerialize(withClean:boolean=false) : any {
 		Util.validateType(withClean, "boolean");
+		this._onBeforeApiSerialize(withClean);
 		var ret:any = this.apiSerializeImpl(withClean);
 		this._onAfterApiSerialize(ret, withClean);
 		return ret;
@@ -268,34 +282,6 @@ class Resource {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(name, "string");
 		return name;
-	}
-	
-	/**
-	 * @private
-	 * @method getProperty
-	 * @param {string} name
-	 * @return {any}
-	 */
-	getProperty(name:string) : any {
-		Util.validateArgCount(arguments.length, 1);
-		Util.validateType(name, "string");
-		name = this.normalizeFieldName(name);
-		return this["m_" + name];
-	}
-	
-	/**
-	 * @private
-	 * @method setProperty
-	 * @param {string} name
-	 * @param {any} value
-	 * @return {void}
-	 */
-	setProperty(name:string, value:any) : void {
-		Util.validateArgCount(arguments.length, 2);
-		Util.validateType(name, "string");
-		name = this.normalizeFieldName(name);
-		this["m_" + name] = value;
-		this["n_" + name] = true;
 	}
 	
 	/**
@@ -342,7 +328,7 @@ class Resource {
 			return;
 		};
 		var path:string = this._apiPath() + "/" + Util.urlEncode(this._id());
-		this._client.request("DELETE", path);
+		this.requestRetry("DELETE", path);
 	}
 	
 	/**
@@ -355,7 +341,7 @@ class Resource {
 	 * @return {Resource} this
 	 */
 	_reload() : Resource {
-		var result:any = this._client.request("GET", this._apiPath() + "/" + Util.urlEncode(this._id()));
+		var result:any = this.requestRetry("GET", this._apiPath() + "/" + Util.urlEncode(this._id()));
 		this.apiDeserialize(result, true);
 		return this;
 	}
@@ -371,7 +357,7 @@ class Resource {
 		var query:any = {};
 		Util.setByPath(query, "Filter.ID", [this._id()]);
 		Util.setByPath(query, "Include", ["ID"]);
-		var result:any = this._client.request("GET", this._apiPath(), query);
+		var result:any = this.requestRetry("GET", this._apiPath(), query);
 		var cnt:any = result["Count"];
 		return (<number><any>(cnt)) == 1;
 	}
@@ -415,6 +401,51 @@ class Resource {
 		var trueClassName:string = ret.trueClassName();
 		if (trueClassName != null) {
 			ret = (<Resource><any>(Util.createClassInstance("saklient.cloud.resources." + trueClassName, a)));
+		};
+		return ret;
+	}
+	
+	/**
+	 * @method requestRetry
+	 * @public
+	 * @param {string} method
+	 * @param {string} path
+	 * @param {any} query=null
+	 * @param {number} retryCount=5
+	 * @param {number} retrySleep=5
+	 * @return {any}
+	 */
+	requestRetry(method:string, path:string, query:any=null, retryCount:number=5, retrySleep:number=5) : any {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(method, "string");
+		Util.validateType(path, "string");
+		Util.validateType(retryCount, "number");
+		Util.validateType(retrySleep, "number");
+		var ret:any = null;
+		while (1 < retryCount) {
+			var isOk:boolean = false;
+			try {
+				ret = this._client.request(method, path, query);
+				isOk = true;
+			}
+			catch (__ex) {
+				if (__ex instanceof HttpException) {
+					var ex = __ex;
+					{
+						isOk = false;
+					}
+				}
+			};
+			if (isOk) {
+				retryCount = -1;
+			}
+			else {
+				retryCount -= 1;
+				Util.sleep(retrySleep);
+			};
+		};
+		if (retryCount == 0) {
+			ret = this._client.request(method, path, query);
 		};
 		return ret;
 	}

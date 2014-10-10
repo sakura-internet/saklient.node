@@ -409,23 +409,6 @@ class Disk extends Resource {
 	/**
 	 * コピー中のディスクが利用可能になるまで待機します。
 	 * 
-	 * @private
-	 * @method afterCopy
-	 * @param {number} timeoutSec
-	 * @param {(Disk, boolean) => void} callback
-	 * @return {void}
-	 */
-	afterCopy(timeoutSec:number, callback:(Disk, boolean) => void) : void {
-		Util.validateArgCount(arguments.length, 2);
-		Util.validateType(timeoutSec, "number");
-		Util.validateType(callback, "function");
-		var ret:boolean = this.sleepWhileCopying(timeoutSec);
-		callback(this, ret);
-	}
-	
-	/**
-	 * コピー中のディスクが利用可能になるまで待機します。
-	 * 
 	 * @method sleepWhileCopying
 	 * @public
 	 * @param {number} timeoutSec=3600
@@ -433,7 +416,7 @@ class Disk extends Resource {
 	 */
 	sleepWhileCopying(timeoutSec:number=3600) : boolean {
 		Util.validateType(timeoutSec, "number");
-		var step:number = 3;
+		var step:number = 10;
 		while (0 < timeoutSec) {
 			this.reload();
 			var a:string = this.get_availability();

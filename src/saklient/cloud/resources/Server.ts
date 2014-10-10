@@ -272,38 +272,16 @@ class Server extends Resource {
 	}
 	
 	/**
-	 * サーバが停止するまで待機します。
+	 * サーバが起動するまで待機します。
 	 * 
-	 * @method afterDown
+	 * @method sleepUntilUp
 	 * @public
-	 * @param {number} timeoutSec
-	 * @param {(Server, boolean) => void} callback
-	 * @return {void} 成功時はtrue、タイムアウトやエラーによる失敗時はfalseを返します。
+	 * @param {number} timeoutSec=180
+	 * @return {boolean}
 	 */
-	afterDown(timeoutSec:number, callback:(Server, boolean) => void) : void {
-		Util.validateArgCount(arguments.length, 2);
+	sleepUntilUp(timeoutSec:number=180) : boolean {
 		Util.validateType(timeoutSec, "number");
-		Util.validateType(callback, "function");
-		this.afterStatus(EServerInstanceStatus.down, timeoutSec, callback);
-	}
-	
-	/**
-	 * サーバが指定のステータスに遷移するまで待機します。
-	 * 
-	 * @private
-	 * @method afterStatus
-	 * @param {string} status
-	 * @param {number} timeoutSec
-	 * @param {(Server, boolean) => void} callback
-	 * @return {void}
-	 */
-	private afterStatus(status:string, timeoutSec:number, callback:(Server, boolean) => void) : void {
-		Util.validateArgCount(arguments.length, 3);
-		Util.validateType(status, "string");
-		Util.validateType(timeoutSec, "number");
-		Util.validateType(callback, "function");
-		var ret:boolean = this.sleepUntil(status, timeoutSec);
-		callback(this, ret);
+		return this.sleepUntil(EServerInstanceStatus.up, timeoutSec);
 	}
 	
 	/**
@@ -332,10 +310,14 @@ class Server extends Resource {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(status, "string");
 		Util.validateType(timeoutSec, "number");
-		var step:number = 3;
+		var step:number = 10;
 		while (0 < timeoutSec) {
 			this.reload();
-			var s:string = (<string><any>(this.get_instance().getProperty("status")));
+			var s:string = null;
+			var inst:ServerInstance = this["instance"];
+			if (inst != null) {
+				s = inst["status"];
+			};
 			if (s == null) {
 				s = EServerInstanceStatus.down;
 			};
@@ -392,7 +374,7 @@ class Server extends Resource {
 	addIface() : Iface {
 		var model:any = Util.createClassInstance("saklient.cloud.models.Model_Iface", [this._client]);
 		var res:Iface = model.create();
-		res.setProperty("serverId", this._id());
+		res["serverId"] = this._id();
 		return res.save();
 	}
 	

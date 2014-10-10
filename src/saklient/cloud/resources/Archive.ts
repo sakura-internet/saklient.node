@@ -447,23 +447,6 @@ class Archive extends Resource {
 	/**
 	 * コピー中のアーカイブが利用可能になるまで待機します。
 	 * 
-	 * @private
-	 * @method afterCopy
-	 * @param {number} timeoutSec
-	 * @param {(Archive, boolean) => void} callback
-	 * @return {void}
-	 */
-	afterCopy(timeoutSec:number, callback:(Archive, boolean) => void) : void {
-		Util.validateArgCount(arguments.length, 2);
-		Util.validateType(timeoutSec, "number");
-		Util.validateType(callback, "function");
-		var ret:boolean = this.sleepWhileCopying(timeoutSec);
-		callback(this, ret);
-	}
-	
-	/**
-	 * コピー中のアーカイブが利用可能になるまで待機します。
-	 * 
 	 * @method sleepWhileCopying
 	 * @public
 	 * @param {number} timeoutSec=3600

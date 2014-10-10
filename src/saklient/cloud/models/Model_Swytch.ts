@@ -177,6 +177,56 @@ class Model_Swytch extends Model {
 	}
 	
 	/**
+	 * 指定したタグを持つリソースに絞り込みます。
+	 * 
+	 * 複数のタグを指定する場合は withTags() を利用してください。
+	 * 
+	 * @todo Implement test case
+	 * @method withTag
+	 * @chainable
+	 * @public
+	 * @param {string} tag
+	 * @return {Model_Swytch}
+	 */
+	withTag(tag:string) : Model_Swytch {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(tag, "string");
+		return (<Model_Swytch><any>(this._withTag(tag)));
+	}
+	
+	/**
+	 * 指定したすべてのタグを持つリソースに絞り込みます。
+	 * 
+	 * @todo Implement test case
+	 * @method withTags
+	 * @chainable
+	 * @public
+	 * @param {string[]} tags
+	 * @return {Model_Swytch}
+	 */
+	withTags(tags:string[]) : Model_Swytch {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(tags, "Array");
+		return (<Model_Swytch><any>(this._withTags(tags)));
+	}
+	
+	/**
+	 * 指定したDNFに合致するタグを持つリソースに絞り込みます。
+	 * 
+	 * @todo Implement test case
+	 * @method withTagDnf
+	 * @chainable
+	 * @public
+	 * @param {string[][]} dnf
+	 * @return {Model_Swytch}
+	 */
+	withTagDnf(dnf:string[][]) : Model_Swytch {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(dnf, "Array");
+		return (<Model_Swytch><any>(this._withTagDnf(dnf)));
+	}
+	
+	/**
 	 * 名前でソートします。
 	 * 
 	 * @todo Implement test case

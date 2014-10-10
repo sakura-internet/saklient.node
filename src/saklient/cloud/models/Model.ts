@@ -285,14 +285,19 @@ class Model {
 	 * @private
 	 * @method _createResourceWith
 	 * @protected
+	 * @param {string} className
 	 * @param {any} obj
 	 * @param {boolean} wrapped=false
 	 * @return {Resource}
 	 */
-	_createResourceWith(obj:any, wrapped:boolean=false) : Resource {
-		Util.validateArgCount(arguments.length, 1);
+	_createResourceWith(className:string, obj:any, wrapped:boolean=false) : Resource {
+		Util.validateArgCount(arguments.length, 2);
+		Util.validateType(className, "string");
 		Util.validateType(wrapped, "boolean");
-		return Resource.createWith(this._className(), this._client, obj, wrapped);
+		if (className == null) {
+			className = this._className();
+		};
+		return Resource.createWith(className, this._client, obj, wrapped);
 	}
 	
 	/**
@@ -303,10 +308,12 @@ class Model {
 	 * @private
 	 * @method _create
 	 * @protected
+	 * @param {string} className=null
 	 * @return {Resource} リソースオブジェクト
 	 */
-	_create() : Resource {
-		return this._createResourceWith(null);
+	_create(className:string=null) : Resource {
+		Util.validateType(className, "string");
+		return this._createResourceWith(className, null);
 	}
 	
 	/**
@@ -326,7 +333,7 @@ class Model {
 		var result:any = this._client.request("GET", this._apiPath() + "/" + Util.urlEncode(id), query);
 		this._total = 1;
 		this._count = 1;
-		return this._createResourceWith(result, true);
+		return this._createResourceWith(null, result, true);
 	}
 	
 	/**
@@ -347,7 +354,7 @@ class Model {
 		var records:any[] = (<any[]><any>(result[this._rootKeyM()]));
 		for (var __it1:number=0; __it1<records.length; __it1++) {
 			var record = records[__it1];
-			data.push(this._createResourceWith(record));
+			data.push(this._createResourceWith(null, record));
 		};
 		return (<Resource[]><any>(data));
 	}
@@ -370,7 +377,7 @@ class Model {
 			return null;
 		};
 		var records:any[] = (<any[]><any>(result[this._rootKeyM()]));
-		return this._createResourceWith(records[0]);
+		return this._createResourceWith(null, records[0]);
 	}
 	
 	/**
