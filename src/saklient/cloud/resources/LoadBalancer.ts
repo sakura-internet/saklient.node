@@ -52,26 +52,6 @@ class LoadBalancer extends Appliance {
 	
 	
 	/**
-	 * @method get_swytchId
-	 * @private
-	 * @return {string}
-	 */
-	get_swytchId() : string {
-		return (<string><any>(Util.getByPath(this.rawAnnotation, "Switch.ID")));
-	}
-	
-	/**
-	 * スイッチID
-	 * 
-	 * @property swytchId
-	 * @type string
-	 * @readOnly
-	 * @public
-	 */
-	get swytchId() : string { return this.get_swytchId(); }
-	
-	
-	/**
 	 * @method get_defaultRoute
 	 * @private
 	 * @return {string}
@@ -242,7 +222,9 @@ class LoadBalancer extends Appliance {
 			this.rawSettings = {};
 		};
 		this.rawSettings["LoadBalancer"] = lb;
-		this.clazz = EApplianceClass.loadbalancer;
+		if (this.isNew) {
+			this.clazz = EApplianceClass.loadbalancer;
+		};
 	}
 	
 	/**
@@ -266,12 +248,12 @@ class LoadBalancer extends Appliance {
 		Util.setByPath(annot, "Switch.ID", swytch._id());
 		if (swytch.ipv4Nets != null && 0 < swytch.ipv4Nets.length) {
 			var net:Ipv4Net = swytch.ipv4Nets[0];
-			this.defaultRoute = net["defaultRoute"];
-			this.maskLen = net["maskLen"];
+			this.defaultRoute = (<string><any>(net["defaultRoute"]));
+			this.maskLen = (<number><any>(net["maskLen"]));
 		}
 		else {
-			this.defaultRoute = swytch["userDefaultRoute"];
-			this.maskLen = swytch["userMaskLen"];
+			this.defaultRoute = (<string><any>(swytch["userDefaultRoute"]));
+			this.maskLen = (<number><any>(swytch["userMaskLen"]));
 		};
 		var servers:any[] = [];
 		for (var __it1:number=0; __it1<realIps.length; __it1++) {
@@ -284,16 +266,28 @@ class LoadBalancer extends Appliance {
 	}
 	
 	/**
-	 * @method addVirtualIp
+	 * @method clearVirtualIps
 	 * @chainable
 	 * @public
-	 * @param {any} settings
 	 * @return {LoadBalancer}
 	 */
-	addVirtualIp(settings:any) : LoadBalancer {
-		Util.validateArgCount(arguments.length, 1);
-		this._virtualIps.push(new LbVirtualIp(settings));
+	clearVirtualIps() : LoadBalancer {
+		while (0 < this._virtualIps.length) {
+			this._virtualIps.pop();
+		};
 		return this;
+	}
+	
+	/**
+	 * @method addVirtualIp
+	 * @public
+	 * @param {any} settings=null
+	 * @return {LbVirtualIp}
+	 */
+	addVirtualIp(settings:any=null) : LbVirtualIp {
+		var ret:LbVirtualIp = new LbVirtualIp(settings);
+		this._virtualIps.push(ret);
+		return ret;
 	}
 	
 	/**
@@ -307,11 +301,32 @@ class LoadBalancer extends Appliance {
 		Util.validateType(address, "string");
 		for (var __it1:number=0; __it1<this._virtualIps.length; __it1++) {
 			var vip = this._virtualIps[__it1];
-			if (vip.virtualIpAddress == address) {
+			if (vip["virtualIpAddress"] == address) {
 				return vip;
 			};
 		};
 		return null;
+	}
+	
+	/**
+	 * @method reloadStatus
+	 * @chainable
+	 * @public
+	 * @return {LoadBalancer}
+	 */
+	reloadStatus() : LoadBalancer {
+		var result:any = this.requestRetry("GET", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/status");
+		var vips:any[] = (<any[]><any>(result["LoadBalancer"]));
+		for (var __it1:number=0; __it1<vips.length; __it1++) {
+			var vipDyn = vips[__it1];
+			var vipStr:string = (<string><any>(vipDyn["VirtualIPAddress"]));
+			var vip:LbVirtualIp = this.getVirtualIpByAddress(vipStr);
+			if (vip == null) {
+				continue;
+			};
+			vip.updateStatus((<any[]><any>(vipDyn["Servers"])));
+		};
+		return this;
 	}
 	
 }

@@ -34,14 +34,27 @@ class LbVirtualIp {
 	}
 	
 	/**
+	 * @method set_virtualIpAddress
+	 * @private
+	 * @param {string} v
+	 * @return {string}
+	 */
+	set_virtualIpAddress(v:string) : string {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "string");
+		this._virtualIpAddress = v;
+		return this._virtualIpAddress;
+	}
+	
+	/**
 	 * VIPアドレス
 	 * 
 	 * @property virtualIpAddress
 	 * @type string
-	 * @readOnly
 	 * @public
 	 */
 	get virtualIpAddress() : string { return this.get_virtualIpAddress(); }
+	set virtualIpAddress(v:string) { this.set_virtualIpAddress(v); }
 	
 	
 	/**
@@ -62,14 +75,27 @@ class LbVirtualIp {
 	}
 	
 	/**
+	 * @method set_port
+	 * @private
+	 * @param {number} v
+	 * @return {number}
+	 */
+	set_port(v:number) : number {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "number");
+		this._port = v;
+		return this._port;
+	}
+	
+	/**
 	 * ポート番号
 	 * 
 	 * @property port
 	 * @type number
-	 * @readOnly
 	 * @public
 	 */
 	get port() : number { return this.get_port(); }
+	set port(v:number) { this.set_port(v); }
 	
 	
 	/**
@@ -90,14 +116,27 @@ class LbVirtualIp {
 	}
 	
 	/**
+	 * @method set_delayLoop
+	 * @private
+	 * @param {number} v
+	 * @return {number}
+	 */
+	set_delayLoop(v:number) : number {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "number");
+		this._delayLoop = v;
+		return this._delayLoop;
+	}
+	
+	/**
 	 * チェック間隔 [秒]
 	 * 
 	 * @property delayLoop
 	 * @type number
-	 * @readOnly
 	 * @public
 	 */
 	get delayLoop() : number { return this.get_delayLoop(); }
+	set delayLoop(v:number) { this.set_delayLoop(v); }
 	
 	
 	/**
@@ -131,19 +170,27 @@ class LbVirtualIp {
 	/**
 	 * @private
 	 * @constructor
-	 * @param {any} obj
+	 * @param {any} obj=null
 	 */
-	constructor(obj:any) {
-		Util.validateArgCount(arguments.length, 1);
+	constructor(obj:any=null) {
+		if (obj == null) {
+			obj = {};
+		};
 		var vip:any = Util.getByPathAny([obj], ["VirtualIPAddress", "virtualIpAddress", "virtual_ip_address", "vip"]);
 		this._virtualIpAddress = (<string><any>(vip));
 		var port:any = Util.getByPathAny([obj], ["Port", "port"]);
-		this._port = port == null ? null : parseInt((<string><any>(port)), 10);
+		this._port = null;
+		if (port != null) {
+			this._port = parseInt((<string><any>(port)), 10);
+		};
 		if (this._port == 0) {
 			this._port = null;
 		};
 		var delayLoop:any = Util.getByPathAny([obj], ["DelayLoop", "delayLoop", "delay_loop", "delay"]);
-		this._delayLoop = delayLoop == null ? null : parseInt((<string><any>(delayLoop)), 10);
+		this._delayLoop = null;
+		if (delayLoop != null) {
+			this._delayLoop = parseInt((<string><any>(delayLoop)), 10);
+		};
 		if (this._delayLoop == 0) {
 			this._delayLoop = null;
 		};
@@ -160,15 +207,14 @@ class LbVirtualIp {
 	
 	/**
 	 * @method addServer
-	 * @chainable
 	 * @public
-	 * @param {any} settings
-	 * @return {LbVirtualIp}
+	 * @param {any} settings=null
+	 * @return {LbServer}
 	 */
-	addServer(settings:any) : LbVirtualIp {
-		Util.validateArgCount(arguments.length, 1);
-		this._servers.push(new LbServer(settings));
-		return this;
+	addServer(settings:any=null) : LbServer {
+		var ret:LbServer = new LbServer(settings);
+		this._servers.push(ret);
+		return ret;
 	}
 	
 	/**
@@ -188,6 +234,46 @@ class LbVirtualIp {
 			DelayLoop: this._delayLoop,
 			Servers: servers
 		};
+	}
+	
+	/**
+	 * @method getServerByAddress
+	 * @public
+	 * @param {string} address
+	 * @return {LbServer}
+	 */
+	getServerByAddress(address:string) : LbServer {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(address, "string");
+		for (var __it1:number=0; __it1<this._servers.length; __it1++) {
+			var srv = this._servers[__it1];
+			if (srv["ipAddress"] == address) {
+				return srv;
+			};
+		};
+		return null;
+	}
+	
+	/**
+	 * @method updateStatus
+	 * @chainable
+	 * @public
+	 * @param {Array} srvs
+	 * @return {LbVirtualIp}
+	 */
+	updateStatus(srvs:any[]) : LbVirtualIp {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(srvs, "Array");
+		for (var __it1:number=0; __it1<srvs.length; __it1++) {
+			var srvDyn = srvs[__it1];
+			var ip:string = (<string><any>(srvDyn["IPAddress"]));
+			var srv:LbServer = this.getServerByAddress(ip);
+			if (srv == null) {
+				continue;
+			};
+			srv.updateStatus(srvDyn);
+		};
+		return this;
 	}
 	
 }

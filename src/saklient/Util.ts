@@ -70,9 +70,11 @@ class Util {
 		return obj;
 	}
 	
-	static getByPathAny(objects:any[], pathes:string[]) {
-		for (var obj in objects) {
-			for (var path in pathes) {
+	static getByPathAny(objects:any[], pathes:string[]) : any {
+		for (var i=0; i<objects.length; i++) {
+			var obj:any = objects[i];
+			for (var j=0; j<pathes.length; j++) {
+				var path:string = pathes[j];
 				var ret:any = Util.getByPath(obj, path);
 				if (ret != null) return ret;
 			}

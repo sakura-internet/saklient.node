@@ -8,6 +8,7 @@ import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');
 import Iface = require('./Iface');
+import Swytch = require('./Swytch');
 import EApplianceClass = require('../enums/EApplianceClass');
 import EAvailability = require('../enums/EAvailability');
 import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
@@ -150,6 +151,15 @@ class Appliance extends Resource {
 	m_availability : string;
 	
 	/**
+	 * 接続先スイッチID
+	 * 
+	 * @member saklient.cloud.resources.Appliance#m_swytchId
+	 * @type string
+	 * @protected
+	 */
+	m_swytchId : string;
+	
+	/**
 	 * @private
 	 * @method _apiPath
 	 * @protected
@@ -267,6 +277,32 @@ class Appliance extends Resource {
 	_onBeforeSave(query:any) : void {
 		Util.validateArgCount(arguments.length, 1);
 		Util.setByPath(query, "OriginalSettingsHash", this.get_rawSettingsHash());
+	}
+	
+	/**
+	 * このルータが接続されているスイッチを取得します。
+	 * 
+	 * @method getSwytch
+	 * @public
+	 * @return {Swytch}
+	 */
+	getSwytch() : Swytch {
+		var model:any = Util.createClassInstance("saklient.cloud.models.Model_Swytch", [this._client]);
+		var id:string = this.get_swytchId();
+		return model.getById(id);
+	}
+	
+	/**
+	 * アプライアンスの設定を反映します。
+	 * 
+	 * @method apply
+	 * @chainable
+	 * @public
+	 * @return {Appliance} this
+	 */
+	apply() : Appliance {
+		this._client.request("PUT", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/config");
+		return this;
 	}
 	
 	/**
@@ -962,6 +998,36 @@ class Appliance extends Resource {
 	
 	
 	/**
+	 * @member saklient.cloud.resources.Appliance#n_swytchId
+	 * @default false
+	 * @type boolean
+	 * @private
+	 */
+	private n_swytchId : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_swytchId
+	 * @private
+	 * @return {string}
+	 */
+	private get_swytchId() : string {
+		return this.m_swytchId;
+	}
+	
+	/**
+	 * 接続先スイッチID
+	 * 
+	 * @property swytchId
+	 * @type string
+	 * @readOnly
+	 * @public
+	 */
+	get swytchId() : string { return this.get_swytchId(); }
+	
+	
+	/**
 	 * (This method is generated in Translator_default#buildImpl)
 	 * 
 	 * @method apiDeserializeImpl
@@ -1109,6 +1175,14 @@ class Appliance extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_availability = false;
+		if (Util.existsPath(r, "Switch.ID")) {
+			this.m_swytchId = Util.getByPath(r, "Switch.ID") == null ? null : "" + Util.getByPath(r, "Switch.ID");
+		}
+		else {
+			this.m_swytchId = null;
+			this.isIncomplete = true;
+		};
+		this.n_swytchId = false;
 	}
 	
 	/**
@@ -1195,6 +1269,9 @@ class Appliance extends Resource {
 		};
 		if (withClean || this.n_availability) {
 			Util.setByPath(ret, "Availability", this.m_availability);
+		};
+		if (withClean || this.n_swytchId) {
+			Util.setByPath(ret, "Switch.ID", this.m_swytchId);
 		};
 		if (missing.length > 0) {
 			throw new SaklientException("required_field", "Required fields must be set before the Appliance creation: " + missing.join(", "));
