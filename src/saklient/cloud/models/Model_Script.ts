@@ -5,6 +5,7 @@ export = Model_Script;
 import Util = require('../../Util');
 import Client = require('../Client');
 import Model = require('./Model');
+import Resource = require('../resources/Resource');
 import Script = require('../resources/Script');
 import EScope = require('../enums/EScope');
 
@@ -58,6 +59,20 @@ class Model_Script extends Model {
 	 */
 	_className() : string {
 		return "Script";
+	}
+	
+	/**
+	 * @private
+	 * @method _createResourceImpl
+	 * @protected
+	 * @param {any} obj
+	 * @param {boolean} wrapped=false
+	 * @return {Resource}
+	 */
+	_createResourceImpl(obj:any, wrapped:boolean=false) : Resource {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(wrapped, "boolean");
+		return new Script(this._client, obj, wrapped);
 	}
 	
 	/**

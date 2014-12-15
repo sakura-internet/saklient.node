@@ -68,7 +68,7 @@ class Script extends Resource {
 	m_description : string;
 	
 	/**
-	 * タグ
+	 * タグ文字列の配列
 	 * 
 	 * @member saklient.cloud.resources.Script#m_tags
 	 * @type string[]
@@ -409,7 +409,7 @@ class Script extends Resource {
 	}
 	
 	/**
-	 * タグ
+	 * タグ文字列の配列
 	 * 
 	 * @property tags
 	 * @type string[]

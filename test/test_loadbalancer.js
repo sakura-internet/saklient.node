@@ -125,7 +125,7 @@ describe('LoadBalancer', function(){
 				swytch.should.be.an.instanceof(saklient.cloud.resources.Swytch);
 				net = swytch.ipv4Nets[0];
 				net.should.be.an.instanceof(saklient.cloud.resources.Ipv4Net);
-				trace(net.address + '/' + net.maskLen + ' . ' + net.defaultRoute);
+				trace(net.address + '/' + net.maskLen + ' -> ' + net.defaultRoute);
 				
 			}
 			

@@ -59,7 +59,7 @@ class IsoImage extends Resource {
 	m_description : string;
 	
 	/**
-	 * タグ
+	 * タグ文字列の配列
 	 * 
 	 * @member saklient.cloud.resources.IsoImage#m_tags
 	 * @type string[]
@@ -516,7 +516,7 @@ class IsoImage extends Resource {
 	}
 	
 	/**
-	 * タグ
+	 * タグ文字列の配列
 	 * 
 	 * @property tags
 	 * @type string[]

@@ -5,6 +5,7 @@ export = Model_Archive;
 import Util = require('../../Util');
 import Client = require('../Client');
 import Model = require('./Model');
+import Resource = require('../resources/Resource');
 import Archive = require('../resources/Archive');
 import LoadBalancer = require('../resources/LoadBalancer');
 import VpcRouter = require('../resources/VpcRouter');
@@ -60,6 +61,20 @@ class Model_Archive extends Model {
 	 */
 	_className() : string {
 		return "Archive";
+	}
+	
+	/**
+	 * @private
+	 * @method _createResourceImpl
+	 * @protected
+	 * @param {any} obj
+	 * @param {boolean} wrapped=false
+	 * @return {Resource}
+	 */
+	_createResourceImpl(obj:any, wrapped:boolean=false) : Resource {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(wrapped, "boolean");
+		return new Archive(this._client, obj, wrapped);
 	}
 	
 	/**

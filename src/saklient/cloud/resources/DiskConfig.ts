@@ -348,7 +348,7 @@ class DiskConfig {
 	}
 	
 	/**
-	 * スタートアップスクリプト（pushによりスクリプトを追加できます）
+	 * スタートアップスクリプト {{#crossLink "Script"}}{{/crossLink}} の配列（pushによりスクリプトを追加できます）
 	 * 
 	 * @property scripts
 	 * @type Script[]

@@ -157,7 +157,7 @@ class LbVirtualIp {
 	}
 	
 	/**
-	 * 実サーバ
+	 * 実サーバ {{#crossLink "LbServer"}}{{/crossLink}} の配列
 	 * 
 	 * @property servers
 	 * @type LbServer[]
@@ -181,7 +181,7 @@ class LbVirtualIp {
 		var port:any = Util.getByPathAny([obj], ["Port", "port"]);
 		this._port = null;
 		if (port != null) {
-			this._port = parseInt((<string><any>(port)), 10);
+			this._port = parseInt(port, 10);
 		};
 		if (this._port == 0) {
 			this._port = null;
@@ -189,7 +189,7 @@ class LbVirtualIp {
 		var delayLoop:any = Util.getByPathAny([obj], ["DelayLoop", "delayLoop", "delay_loop", "delay"]);
 		this._delayLoop = null;
 		if (delayLoop != null) {
-			this._delayLoop = parseInt((<string><any>(delayLoop)), 10);
+			this._delayLoop = parseInt(delayLoop, 10);
 		};
 		if (this._delayLoop == 0) {
 			this._delayLoop = null;

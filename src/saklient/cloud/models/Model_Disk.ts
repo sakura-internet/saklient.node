@@ -5,6 +5,7 @@ export = Model_Disk;
 import Util = require('../../Util');
 import Client = require('../Client');
 import Model = require('./Model');
+import Resource = require('../resources/Resource');
 import Disk = require('../resources/Disk');
 
 'use strict';
@@ -57,6 +58,20 @@ class Model_Disk extends Model {
 	 */
 	_className() : string {
 		return "Disk";
+	}
+	
+	/**
+	 * @private
+	 * @method _createResourceImpl
+	 * @protected
+	 * @param {any} obj
+	 * @param {boolean} wrapped=false
+	 * @return {Resource}
+	 */
+	_createResourceImpl(obj:any, wrapped:boolean=false) : Resource {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(wrapped, "boolean");
+		return new Disk(this._client, obj, wrapped);
 	}
 	
 	/**

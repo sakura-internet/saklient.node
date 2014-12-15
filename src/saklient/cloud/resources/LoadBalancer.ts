@@ -41,7 +41,7 @@ class LoadBalancer extends Appliance {
 	}
 	
 	/**
-	 * 仮想IPアドレス
+	 * 仮想IPアドレス {{#crossLink "LbVirtualIp"}}{{/crossLink}} の配列
 	 * 
 	 * @property virtualIps
 	 * @type LbVirtualIp[]

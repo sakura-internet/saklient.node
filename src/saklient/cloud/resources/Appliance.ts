@@ -12,6 +12,7 @@ import Swytch = require('./Swytch');
 import EApplianceClass = require('../enums/EApplianceClass');
 import EAvailability = require('../enums/EAvailability');
 import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
+import Model_Swytch = require('../models/Model_Swytch');
 
 'use strict';
 
@@ -62,7 +63,7 @@ class Appliance extends Resource {
 	m_description : string;
 	
 	/**
-	 * タグ
+	 * タグ文字列の配列
 	 * 
 	 * @member saklient.cloud.resources.Appliance#m_tags
 	 * @type string[]
@@ -89,7 +90,7 @@ class Appliance extends Resource {
 	m_planId : number;
 	
 	/**
-	 * インタフェース
+	 * インタフェース {{#crossLink "Iface"}}{{/crossLink}} の配列
 	 * 
 	 * @member saklient.cloud.resources.Appliance#m_ifaces
 	 * @type Iface[]
@@ -229,27 +230,6 @@ class Appliance extends Resource {
 	 */
 	reload() : Appliance {
 		return (<Appliance><any>(this._reload()));
-	}
-	
-	/**
-	 * @private
-	 * @method trueClassName
-	 * @return {string}
-	 */
-	trueClassName() : string {
-		if (this.clazz == null) {
-			return null;
-		};
-		switch (this.clazz) {
-			case "loadbalancer": {
-				return "LoadBalancer";
-			}
-			case "vpcrouter": {
-				return "VpcRouter";
-			}
-		}
-		;
-		return null;
 	}
 	
 	/**
@@ -650,7 +630,7 @@ class Appliance extends Resource {
 	}
 	
 	/**
-	 * タグ
+	 * タグ文字列の配列
 	 * 
 	 * @property tags
 	 * @type string[]
@@ -775,7 +755,7 @@ class Appliance extends Resource {
 	}
 	
 	/**
-	 * インタフェース
+	 * インタフェース {{#crossLink "Iface"}}{{/crossLink}} の配列
 	 * 
 	 * @property ifaces
 	 * @type Iface[]

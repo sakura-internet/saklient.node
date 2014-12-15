@@ -5,6 +5,7 @@ export = Model_IsoImage;
 import Util = require('../../Util');
 import Client = require('../Client');
 import Model = require('./Model');
+import Resource = require('../resources/Resource');
 import IsoImage = require('../resources/IsoImage');
 import EScope = require('../enums/EScope');
 
@@ -58,6 +59,20 @@ class Model_IsoImage extends Model {
 	 */
 	_className() : string {
 		return "IsoImage";
+	}
+	
+	/**
+	 * @private
+	 * @method _createResourceImpl
+	 * @protected
+	 * @param {any} obj
+	 * @param {boolean} wrapped=false
+	 * @return {Resource}
+	 */
+	_createResourceImpl(obj:any, wrapped:boolean=false) : Resource {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(wrapped, "boolean");
+		return new IsoImage(this._client, obj, wrapped);
 	}
 	
 	/**

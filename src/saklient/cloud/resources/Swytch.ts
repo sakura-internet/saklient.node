@@ -78,7 +78,7 @@ class Swytch extends Resource {
 	m_router : Router;
 	
 	/**
-	 * IPv4ネットワーク（ルータによる自動割当）
+	 * IPv4ネットワーク（ルータによる自動割当） {{#crossLink "Ipv4Net"}}{{/crossLink}} の配列
 	 * 
 	 * @member saklient.cloud.resources.Swytch#m_ipv4Nets
 	 * @type Ipv4Net[]
@@ -87,7 +87,7 @@ class Swytch extends Resource {
 	m_ipv4Nets : Ipv4Net[];
 	
 	/**
-	 * IPv6ネットワーク（ルータによる自動割当）
+	 * IPv6ネットワーク（ルータによる自動割当） {{#crossLink "Ipv6Net"}}{{/crossLink}} の配列
 	 * 
 	 * @member saklient.cloud.resources.Swytch#m_ipv6Nets
 	 * @type Ipv6Net[]
@@ -494,7 +494,7 @@ class Swytch extends Resource {
 	}
 	
 	/**
-	 * IPv4ネットワーク（ルータによる自動割当）
+	 * IPv4ネットワーク（ルータによる自動割当） {{#crossLink "Ipv4Net"}}{{/crossLink}} の配列
 	 * 
 	 * @property ipv4Nets
 	 * @type Ipv4Net[]
@@ -524,7 +524,7 @@ class Swytch extends Resource {
 	}
 	
 	/**
-	 * IPv6ネットワーク（ルータによる自動割当）
+	 * IPv6ネットワーク（ルータによる自動割当） {{#crossLink "Ipv6Net"}}{{/crossLink}} の配列
 	 * 
 	 * @property ipv6Nets
 	 * @type Ipv6Net[]

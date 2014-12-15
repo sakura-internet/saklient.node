@@ -238,7 +238,7 @@ class LbServer {
 	}
 	
 	/**
-	 * レスポンスコード
+	 * 現在の接続数
 	 * 
 	 * @property activeConnections
 	 * @type number
@@ -266,7 +266,7 @@ class LbServer {
 	}
 	
 	/**
-	 * レスポンスコード
+	 * 現在の状態
 	 * 
 	 * @property status
 	 * @type string
@@ -292,7 +292,7 @@ class LbServer {
 		var port:any = Util.getByPathAny([obj], ["Port", "port"]);
 		this._port = null;
 		if (port != null) {
-			this._port = parseInt((<string><any>(port)), 10);
+			this._port = parseInt(port, 10);
 		};
 		if (this._port == 0) {
 			this._port = null;
@@ -300,7 +300,7 @@ class LbServer {
 		var responseExpected:any = Util.getByPathAny([health, obj], ["Status", "status", "responseExpected", "response_expected"]);
 		this._responseExpected = null;
 		if (responseExpected != null) {
-			this._responseExpected = parseInt((<string><any>(responseExpected)), 10);
+			this._responseExpected = parseInt(responseExpected, 10);
 		};
 		if (this._responseExpected == 0) {
 			this._responseExpected = null;

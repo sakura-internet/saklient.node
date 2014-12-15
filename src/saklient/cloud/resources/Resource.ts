@@ -373,15 +373,6 @@ class Resource {
 	
 	/**
 	 * @private
-	 * @method trueClassName
-	 * @return {string}
-	 */
-	trueClassName() : string {
-		return null;
-	}
-	
-	/**
-	 * @private
 	 * @static
 	 * @method createWith
 	 * @chainable
@@ -397,12 +388,7 @@ class Resource {
 		Util.validateType(client, "saklient.cloud.Client");
 		Util.validateType(wrapped, "boolean");
 		var a:any[] = [client, obj, wrapped];
-		var ret:Resource = (<Resource><any>(Util.createClassInstance("saklient.cloud.resources." + className, a)));
-		var trueClassName:string = ret.trueClassName();
-		if (trueClassName != null) {
-			ret = (<Resource><any>(Util.createClassInstance("saklient.cloud.resources." + trueClassName, a)));
-		};
-		return ret;
+		return (<Resource><any>(Util.createClassInstance("saklient.cloud.resources." + className, a)));
 	}
 	
 	/**

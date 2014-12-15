@@ -57,7 +57,7 @@ class Server extends Resource {
 	m_description : string;
 	
 	/**
-	 * タグ
+	 * タグ文字列の配列
 	 * 
 	 * @member saklient.cloud.resources.Server#m_tags
 	 * @type string[]
@@ -571,7 +571,7 @@ class Server extends Resource {
 	}
 	
 	/**
-	 * タグ
+	 * タグ文字列の配列
 	 * 
 	 * @property tags
 	 * @type string[]

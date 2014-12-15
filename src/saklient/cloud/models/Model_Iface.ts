@@ -5,6 +5,7 @@ export = Model_Iface;
 import Util = require('../../Util');
 import Client = require('../Client');
 import Model = require('./Model');
+import Resource = require('../resources/Resource');
 import Iface = require('../resources/Iface');
 
 'use strict';
@@ -57,6 +58,20 @@ class Model_Iface extends Model {
 	 */
 	_className() : string {
 		return "Iface";
+	}
+	
+	/**
+	 * @private
+	 * @method _createResourceImpl
+	 * @protected
+	 * @param {any} obj
+	 * @param {boolean} wrapped=false
+	 * @return {Resource}
+	 */
+	_createResourceImpl(obj:any, wrapped:boolean=false) : Resource {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(wrapped, "boolean");
+		return new Iface(this._client, obj, wrapped);
 	}
 	
 	/**

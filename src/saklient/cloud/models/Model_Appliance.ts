@@ -5,6 +5,7 @@ export = Model_Appliance;
 import Util = require('../../Util');
 import Client = require('../Client');
 import Model = require('./Model');
+import Resource = require('../resources/Resource');
 import Appliance = require('../resources/Appliance');
 import LoadBalancer = require('../resources/LoadBalancer');
 import VpcRouter = require('../resources/VpcRouter');
@@ -60,6 +61,28 @@ class Model_Appliance extends Model {
 	 */
 	_className() : string {
 		return "Appliance";
+	}
+	
+	/**
+	 * @private
+	 * @method _createResourceImpl
+	 * @protected
+	 * @param {any} obj
+	 * @param {boolean} wrapped=false
+	 * @return {Resource}
+	 */
+	_createResourceImpl(obj:any, wrapped:boolean=false) : Resource {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(wrapped, "boolean");
+		var ret:Appliance = new Appliance(this._client, obj, wrapped);
+		var clazz:string = (<string><any>(ret["clazz"]));
+		if (clazz == "loadbalancer") {
+			return new LoadBalancer(this._client, obj, wrapped);
+		};
+		if (clazz == "vpcrouter") {
+			return new VpcRouter(this._client, obj, wrapped);
+		};
+		return ret;
 	}
 	
 	/**
@@ -137,7 +160,7 @@ class Model_Appliance extends Model {
 		Util.validateType(vrid, "number");
 		Util.validateType(realIps, "Array");
 		Util.validateType(isHighSpec, "boolean");
-		var ret:LoadBalancer = (<LoadBalancer><any>(this._create("LoadBalancer")));
+		var ret:LoadBalancer = new LoadBalancer(this._client, null);
 		return ret.setInitialParams(swytch, vrid, realIps, isHighSpec);
 	}
 	
@@ -147,7 +170,8 @@ class Model_Appliance extends Model {
 	 * @return {VpcRouter}
 	 */
 	createVpcRouter() : VpcRouter {
-		return (<VpcRouter><any>(this._create("VpcRouter")));
+		var ret:VpcRouter = new VpcRouter(this._client, null);
+		return ret;
 	}
 	
 	/**
