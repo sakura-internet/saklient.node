@@ -5,6 +5,7 @@ export = API;
 import Util = require('../Util');
 import Client = require('./Client');
 import Product = require('./Product');
+import Facility = require('./Facility');
 import Model_Icon = require('./models/Model_Icon');
 import Model_Server = require('./models/Model_Server');
 import Model_Disk = require('./models/Model_Disk');
@@ -14,8 +15,10 @@ import Model_IsoImage = require('./models/Model_IsoImage');
 import Model_Iface = require('./models/Model_Iface');
 import Model_Swytch = require('./models/Model_Swytch');
 import Model_Router = require('./models/Model_Router');
+import Model_Bridge = require('./models/Model_Bridge');
 import Model_Ipv6Net = require('./models/Model_Ipv6Net');
 import Model_Script = require('./models/Model_Script');
+import Model_License = require('./models/Model_License');
 
 'use strict';
 
@@ -83,6 +86,35 @@ class API {
 	 * @public
 	 */
 	get product() : Product { return this.get_product(); }
+	
+	
+	/**
+	 * @private
+	 * @member saklient.cloud.API#_facility
+	 * @type Facility
+	 * @protected
+	 */
+	_facility : Facility;
+	
+	/**
+	 * @method get_facility
+	 * @protected
+	 * @private
+	 * @return {Facility}
+	 */
+	get_facility() : Facility {
+		return this._facility;
+	}
+	
+	/**
+	 * 設備情報にアクセスするためのモデルを集めたオブジェクト。
+	 * 
+	 * @property facility
+	 * @type Facility
+	 * @readOnly
+	 * @public
+	 */
+	get facility() : Facility { return this.get_facility(); }
 	
 	
 	/**
@@ -348,6 +380,35 @@ class API {
 	
 	/**
 	 * @private
+	 * @member saklient.cloud.API#_bridge
+	 * @type Model_Bridge
+	 * @protected
+	 */
+	_bridge : Model_Bridge;
+	
+	/**
+	 * @method get_bridge
+	 * @protected
+	 * @private
+	 * @return {Model_Bridge}
+	 */
+	get_bridge() : Model_Bridge {
+		return this._bridge;
+	}
+	
+	/**
+	 * ブリッジにアクセスするためのモデル。
+	 * 
+	 * @property bridge
+	 * @type Model_Bridge
+	 * @readOnly
+	 * @public
+	 */
+	get bridge() : Model_Bridge { return this.get_bridge(); }
+	
+	
+	/**
+	 * @private
 	 * @member saklient.cloud.API#_ipv6Net
 	 * @type Model_Ipv6Net
 	 * @protected
@@ -406,6 +467,35 @@ class API {
 	
 	/**
 	 * @private
+	 * @member saklient.cloud.API#_license
+	 * @type Model_License
+	 * @protected
+	 */
+	_license : Model_License;
+	
+	/**
+	 * @method get_license
+	 * @protected
+	 * @private
+	 * @return {Model_License}
+	 */
+	get_license() : Model_License {
+		return this._license;
+	}
+	
+	/**
+	 * ライセンスにアクセスするためのモデル。
+	 * 
+	 * @property license
+	 * @type Model_License
+	 * @readOnly
+	 * @public
+	 */
+	get license() : Model_License { return this.get_license(); }
+	
+	
+	/**
+	 * @private
 	 * @constructor
 	 * @protected
 	 * @param {Client} client
@@ -415,6 +505,7 @@ class API {
 		Util.validateType(client, "saklient.cloud.Client");
 		this._client = client;
 		this._product = new Product(client);
+		this._facility = new Facility(client);
 		this._icon = new Model_Icon(client);
 		this._server = new Model_Server(client);
 		this._disk = new Model_Disk(client);
@@ -424,8 +515,10 @@ class API {
 		this._iface = new Model_Iface(client);
 		this._swytch = new Model_Swytch(client);
 		this._router = new Model_Router(client);
+		this._bridge = new Model_Bridge(client);
 		this._ipv6Net = new Model_Ipv6Net(client);
 		this._script = new Model_Script(client);
+		this._license = new Model_License(client);
 	}
 	
 	/**

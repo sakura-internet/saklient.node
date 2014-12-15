@@ -51,6 +51,24 @@ class Swytch extends Resource {
 	m_description : string;
 	
 	/**
+	 * タグ文字列の配列
+	 * 
+	 * @member saklient.cloud.resources.Swytch#m_tags
+	 * @type string[]
+	 * @protected
+	 */
+	m_tags : string[];
+	
+	/**
+	 * アイコン
+	 * 
+	 * @member saklient.cloud.resources.Swytch#m_icon
+	 * @type Icon
+	 * @protected
+	 */
+	m_icon : Icon;
+	
+	/**
 	 * ユーザ設定IPv4ネットワークのゲートウェイ
 	 * 
 	 * @member saklient.cloud.resources.Swytch#m_userDefaultRoute
@@ -385,6 +403,99 @@ class Swytch extends Resource {
 	
 	
 	/**
+	 * @member saklient.cloud.resources.Swytch#n_tags
+	 * @default false
+	 * @type boolean
+	 * @private
+	 */
+	private n_tags : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_tags
+	 * @private
+	 * @return {string[]}
+	 */
+	private get_tags() : string[] {
+		this.n_tags = true;
+		return this.m_tags;
+	}
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method set_tags
+	 * @private
+	 * @param {string[]} v
+	 * @return {string[]}
+	 */
+	private set_tags(v:string[]) : string[] {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "Array");
+		this.m_tags = v;
+		this.n_tags = true;
+		return this.m_tags;
+	}
+	
+	/**
+	 * タグ文字列の配列
+	 * 
+	 * @property tags
+	 * @type string[]
+	 * @public
+	 */
+	get tags() : string[] { return this.get_tags(); }
+	set tags(v:string[]) { this.set_tags(v); }
+	
+	
+	/**
+	 * @member saklient.cloud.resources.Swytch#n_icon
+	 * @default false
+	 * @type boolean
+	 * @private
+	 */
+	private n_icon : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_icon
+	 * @private
+	 * @return {Icon}
+	 */
+	private get_icon() : Icon {
+		return this.m_icon;
+	}
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method set_icon
+	 * @private
+	 * @param {Icon} v
+	 * @return {Icon}
+	 */
+	private set_icon(v:Icon) : Icon {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "saklient.cloud.resources.Icon");
+		this.m_icon = v;
+		this.n_icon = true;
+		return this.m_icon;
+	}
+	
+	/**
+	 * アイコン
+	 * 
+	 * @property icon
+	 * @type Icon
+	 * @public
+	 */
+	get icon() : Icon { return this.get_icon(); }
+	set icon(v:Icon) { this.set_icon(v); }
+	
+	
+	/**
 	 * @member saklient.cloud.resources.Swytch#n_userDefaultRoute
 	 * @default false
 	 * @type boolean
@@ -572,6 +683,33 @@ class Swytch extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_description = false;
+		if (Util.existsPath(r, "Tags")) {
+			if (Util.getByPath(r, "Tags") == null) {
+				this.m_tags = [];
+			}
+			else {
+				this.m_tags = [];
+				for (var __it1:number=0; __it1<(<any[]><any>(Util.getByPath(r, "Tags"))).length; __it1++) {
+					var t = (<any[]><any>(Util.getByPath(r, "Tags")))[__it1];
+					var v1:string = null;
+					v1 = t == null ? null : "" + t;
+					this.m_tags.push(v1);
+				};
+			};
+		}
+		else {
+			this.m_tags = null;
+			this.isIncomplete = true;
+		};
+		this.n_tags = false;
+		if (Util.existsPath(r, "Icon")) {
+			this.m_icon = Util.getByPath(r, "Icon") == null ? null : new Icon(this._client, Util.getByPath(r, "Icon"));
+		}
+		else {
+			this.m_icon = null;
+			this.isIncomplete = true;
+		};
+		this.n_icon = false;
 		if (Util.existsPath(r, "UserSubnet.DefaultRoute")) {
 			this.m_userDefaultRoute = Util.getByPath(r, "UserSubnet.DefaultRoute") == null ? null : "" + Util.getByPath(r, "UserSubnet.DefaultRoute");
 		}
@@ -602,11 +740,11 @@ class Swytch extends Resource {
 			}
 			else {
 				this.m_ipv4Nets = [];
-				for (var __it1:number=0; __it1<(<any[]><any>(Util.getByPath(r, "Subnets"))).length; __it1++) {
-					var t = (<any[]><any>(Util.getByPath(r, "Subnets")))[__it1];
-					var v1:Ipv4Net = null;
-					v1 = t == null ? null : new Ipv4Net(this._client, t);
-					this.m_ipv4Nets.push(v1);
+				for (var __it2:number=0; __it2<(<any[]><any>(Util.getByPath(r, "Subnets"))).length; __it2++) {
+					var t = (<any[]><any>(Util.getByPath(r, "Subnets")))[__it2];
+					var v2:Ipv4Net = null;
+					v2 = t == null ? null : new Ipv4Net(this._client, t);
+					this.m_ipv4Nets.push(v2);
 				};
 			};
 		}
@@ -621,11 +759,11 @@ class Swytch extends Resource {
 			}
 			else {
 				this.m_ipv6Nets = [];
-				for (var __it2:number=0; __it2<(<any[]><any>(Util.getByPath(r, "IPv6Nets"))).length; __it2++) {
-					var t = (<any[]><any>(Util.getByPath(r, "IPv6Nets")))[__it2];
-					var v2:Ipv6Net = null;
-					v2 = t == null ? null : new Ipv6Net(this._client, t);
-					this.m_ipv6Nets.push(v2);
+				for (var __it3:number=0; __it3<(<any[]><any>(Util.getByPath(r, "IPv6Nets"))).length; __it3++) {
+					var t = (<any[]><any>(Util.getByPath(r, "IPv6Nets")))[__it3];
+					var v3:Ipv6Net = null;
+					v3 = t == null ? null : new Ipv6Net(this._client, t);
+					this.m_ipv6Nets.push(v3);
 				};
 			};
 		}
@@ -661,6 +799,18 @@ class Swytch extends Resource {
 		if (withClean || this.n_description) {
 			Util.setByPath(ret, "Description", this.m_description);
 		};
+		if (withClean || this.n_tags) {
+			Util.setByPath(ret, "Tags", []);
+			for (var __it1:number=0; __it1<this.m_tags.length; __it1++) {
+				var r1 = this.m_tags[__it1];
+				var v:any = null;
+				v = r1;
+				ret["Tags"].push(v);
+			};
+		};
+		if (withClean || this.n_icon) {
+			Util.setByPath(ret, "Icon", withClean ? (this.m_icon == null ? null : this.m_icon.apiSerialize(withClean)) : (this.m_icon == null ? { ID: "0" } : this.m_icon.apiSerializeID()));
+		};
 		if (withClean || this.n_userDefaultRoute) {
 			Util.setByPath(ret, "UserSubnet.DefaultRoute", this.m_userDefaultRoute);
 		};
@@ -672,19 +822,19 @@ class Swytch extends Resource {
 		};
 		if (withClean || this.n_ipv4Nets) {
 			Util.setByPath(ret, "Subnets", []);
-			for (var __it1:number=0; __it1<this.m_ipv4Nets.length; __it1++) {
-				var r1 = this.m_ipv4Nets[__it1];
+			for (var __it2:number=0; __it2<this.m_ipv4Nets.length; __it2++) {
+				var r2 = this.m_ipv4Nets[__it2];
 				var v:any = null;
-				v = withClean ? (r1 == null ? null : r1.apiSerialize(withClean)) : (r1 == null ? { ID: "0" } : r1.apiSerializeID());
+				v = withClean ? (r2 == null ? null : r2.apiSerialize(withClean)) : (r2 == null ? { ID: "0" } : r2.apiSerializeID());
 				ret["Subnets"].push(v);
 			};
 		};
 		if (withClean || this.n_ipv6Nets) {
 			Util.setByPath(ret, "IPv6Nets", []);
-			for (var __it2:number=0; __it2<this.m_ipv6Nets.length; __it2++) {
-				var r2 = this.m_ipv6Nets[__it2];
+			for (var __it3:number=0; __it3<this.m_ipv6Nets.length; __it3++) {
+				var r3 = this.m_ipv6Nets[__it3];
 				var v:any = null;
-				v = withClean ? (r2 == null ? null : r2.apiSerialize(withClean)) : (r2 == null ? { ID: "0" } : r2.apiSerializeID());
+				v = withClean ? (r3 == null ? null : r3.apiSerialize(withClean)) : (r3 == null ? { ID: "0" } : r3.apiSerializeID());
 				ret["IPv6Nets"].push(v);
 			};
 		};

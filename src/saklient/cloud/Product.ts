@@ -6,6 +6,7 @@ import Util = require('../Util');
 import Model_ServerPlan = require('./models/Model_ServerPlan');
 import Model_DiskPlan = require('./models/Model_DiskPlan');
 import Model_RouterPlan = require('./models/Model_RouterPlan');
+import Model_LicenseInfo = require('./models/Model_LicenseInfo');
 import Client = require('./Client');
 
 'use strict';
@@ -108,6 +109,35 @@ class Product {
 	
 	/**
 	 * @private
+	 * @member saklient.cloud.Product#_license
+	 * @type Model_LicenseInfo
+	 * @protected
+	 */
+	_license : Model_LicenseInfo;
+	
+	/**
+	 * @method get_license
+	 * @protected
+	 * @private
+	 * @return {Model_LicenseInfo}
+	 */
+	get_license() : Model_LicenseInfo {
+		return this._license;
+	}
+	
+	/**
+	 * ライセンス種別情報。
+	 * 
+	 * @property license
+	 * @type Model_LicenseInfo
+	 * @readOnly
+	 * @public
+	 */
+	get license() : Model_LicenseInfo { return this.get_license(); }
+	
+	
+	/**
+	 * @private
 	 * @constructor
 	 * @param {Client} client
 	 */
@@ -117,6 +147,7 @@ class Product {
 		this._server = new Model_ServerPlan(client);
 		this._disk = new Model_DiskPlan(client);
 		this._router = new Model_RouterPlan(client);
+		this._license = new Model_LicenseInfo(client);
 	}
 	
 }
