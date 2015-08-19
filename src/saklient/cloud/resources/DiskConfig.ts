@@ -159,11 +159,21 @@ class DiskConfig {
 	
 	/**
 	 * @private
-	 * @member saklient.cloud.resources.DiskConfig#_sshKey
-	 * @type string
+	 * @member saklient.cloud.resources.DiskConfig#_sshKeys
+	 * @type string[]
 	 * @protected
 	 */
-	_sshKey : string;
+	_sshKeys : string[];
+	
+	/**
+	 * @method get_sshKeys
+	 * @protected
+	 * @private
+	 * @return {string[]}
+	 */
+	get_sshKeys() : string[] {
+		return this._sshKeys;
+	}
 	
 	/**
 	 * @method get_sshKey
@@ -172,7 +182,10 @@ class DiskConfig {
 	 * @return {string}
 	 */
 	get_sshKey() : string {
-		return this._sshKey;
+		if (this._sshKeys.length < 1) {
+			return null;
+		};
+		return this._sshKeys[0];
 	}
 	
 	/**
@@ -185,7 +198,12 @@ class DiskConfig {
 	set_sshKey(v:string) : string {
 		Util.validateArgCount(arguments.length, 1);
 		Util.validateType(v, "string");
-		this._sshKey = v;
+		if (this._sshKeys.length < 1) {
+			this._sshKeys.push(v);
+		}
+		else {
+			this._sshKeys[0] = v;
+		};
 		return v;
 	}
 	
@@ -198,6 +216,17 @@ class DiskConfig {
 	 */
 	get sshKey() : string { return this.get_sshKey(); }
 	set sshKey(v:string) { this.set_sshKey(v); }
+	
+	
+	/**
+	 * SSHキー
+	 * 
+	 * @property sshKeys
+	 * @type string[]
+	 * @readOnly
+	 * @public
+	 */
+	get sshKeys() : string[] { return this.get_sshKeys(); }
 	
 	
 	/**
@@ -372,7 +401,7 @@ class DiskConfig {
 		this._diskId = diskId;
 		this._hostName = null;
 		this._password = null;
-		this._sshKey = null;
+		this._sshKeys = [];
 		this._ipAddress = null;
 		this._defaultRoute = null;
 		this._networkMaskLen = null;
@@ -413,8 +442,8 @@ class DiskConfig {
 		if (this._password != null) {
 			Util.setByPath(q, "Password", this._password);
 		};
-		if (this._sshKey != null) {
-			Util.setByPath(q, "SSHKey.PublicKey", this._sshKey);
+		if (this._sshKeys.length > 0) {
+			Util.setByPath(q, "SSHKey.PublicKey", this._sshKeys.join("\n"));
 		};
 		if (this._ipAddress != null) {
 			Util.setByPath(q, "UserIPAddress", this._ipAddress);

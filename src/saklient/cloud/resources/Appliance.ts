@@ -3,6 +3,7 @@
 export = Appliance;
 
 import Util = require('../../Util');
+import HttpException = require('../../errors/HttpException');
 import SaklientException = require('../../errors/SaklientException');
 import Client = require('../Client');
 import Resource = require('./Resource');
@@ -349,7 +350,15 @@ class Appliance extends Resource {
 		Util.validateType(timeoutSec, "number");
 		var step:number = 10;
 		while (0 < timeoutSec) {
-			this.reload();
+			try {
+				this.reload();
+			}
+			catch (__ex) {
+				if (__ex instanceof HttpException) {
+					var ex = __ex;
+					{}
+				}
+			};
 			var a:string = this.get_availability();
 			if (a == EAvailability.available) {
 				return true;
@@ -406,7 +415,15 @@ class Appliance extends Resource {
 		Util.validateType(timeoutSec, "number");
 		var step:number = 10;
 		while (0 < timeoutSec) {
-			this.reload();
+			try {
+				this.reload();
+			}
+			catch (__ex) {
+				if (__ex instanceof HttpException) {
+					var ex = __ex;
+					{}
+				}
+			};
 			var s:string = this.get_status();
 			if (s == null) {
 				s = EServerInstanceStatus.down;

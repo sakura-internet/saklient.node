@@ -10,6 +10,7 @@ import Icon = require('./Icon');
 import Router = require('./Router');
 import Ipv4Net = require('./Ipv4Net');
 import Ipv6Net = require('./Ipv6Net');
+import Bridge = require('./Bridge');
 
 'use strict';
 
@@ -94,6 +95,15 @@ class Swytch extends Resource {
 	 * @protected
 	 */
 	m_router : Router;
+	
+	/**
+	 * 接続されているブリッジ
+	 * 
+	 * @member saklient.cloud.resources.Swytch#m_bridge
+	 * @type Bridge
+	 * @protected
+	 */
+	m_bridge : Bridge;
 	
 	/**
 	 * IPv4ネットワーク（ルータによる自動割当） {{#crossLink "Ipv4Net"}}{{/crossLink}} の配列
@@ -269,7 +279,7 @@ class Swytch extends Resource {
 	 * @method changePlan
 	 * @chainable
 	 * @public
-	 * @param {number} bandWidthMbps
+	 * @param {number} bandWidthMbps 帯域幅（api.product.router.find() から取得できる {{#crossLink "RouterPlan"}}{{/crossLink}} の bandWidthMbps を指定）。
 	 * @return {Swytch} this
 	 */
 	changePlan(bandWidthMbps:number) : Swytch {
@@ -278,6 +288,113 @@ class Swytch extends Resource {
 		this.get_router().changePlan(bandWidthMbps);
 		this.reload();
 		return this;
+	}
+	
+	/**
+	 * このルータ＋スイッチをブリッジに接続します。
+	 * 
+	 * @method connectToBridge
+	 * @chainable
+	 * @public
+	 * @param swytch 接続先のブリッジ。
+	 * @param {Bridge} bridge
+	 * @return {Swytch} this
+	 */
+	connectToBridge(bridge:Bridge) : Swytch {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(bridge, "saklient.cloud.resources.Bridge");
+		var result:any = this._client.request("PUT", this._apiPath() + "/" + this._id() + "/to/bridge/" + bridge._id());
+		this.reload();
+		return this;
+	}
+	
+	/**
+	 * このルータ＋スイッチをブリッジから切断します。
+	 * 
+	 * @method disconnectFromBridge
+	 * @chainable
+	 * @public
+	 * @return {Swytch} this
+	 */
+	disconnectFromBridge() : Swytch {
+		var result:any = this._client.request("DELETE", this._apiPath() + "/" + this._id() + "/to/bridge");
+		this.reload();
+		return this;
+	}
+	
+	/**
+	 * @private
+	 * @method _usedIpv4AddressHash
+	 * @protected
+	 * @return {any}
+	 */
+	_usedIpv4AddressHash() : any {
+		var filter:any = {};
+		filter["Switch" + ".ID"] = this._id();
+		var query:any = {};
+		Util.setByPath(query, "Count", 0);
+		Util.setByPath(query, "Filter", filter);
+		Util.setByPath(query, "Include", ["IPAddress", "UserIPAddress"]);
+		var result:any = this._client.request("GET", "/interface", query);
+		if (result == null) {
+			return null;
+		};
+		result = result["Interfaces"];
+		if (result == null) {
+			return null;
+		};
+		var ifaces:any[] = (<any[]><any>(result));
+		if (ifaces == null) {
+			return null;
+		};
+		var found:any = {};
+		for (var __it1:number=0; __it1<ifaces.length; __it1++) {
+			var iface = ifaces[__it1];
+			var ip:string = (<string><any>(iface["IPAddress"]));
+			var userIp:string = (<string><any>(iface["UserIPAddress"]));
+			if (ip == null) {
+				ip = userIp;
+			};
+			if (ip != null) {
+				found[ip] = true;
+			};
+		};
+		return found;
+	}
+	
+	/**
+	 * このルータ＋スイッチに接続中のインタフェースに割り当てられているIPアドレスを収集します。
+	 * 
+	 * @method collectUsedIpv4Addresses
+	 * @public
+	 * @return {string[]}
+	 */
+	collectUsedIpv4Addresses() : string[] {
+		var found:any = this._usedIpv4AddressHash();
+		return Util.sortArray(Object.keys(found));
+	}
+	
+	/**
+	 * このルータ＋スイッチで利用できる未使用のIPアドレスを収集します。
+	 * 
+	 * @method collectUnusedIpv4Addresses
+	 * @public
+	 * @return {string[]}
+	 */
+	collectUnusedIpv4Addresses() : string[] {
+		var nets:Ipv4Net[] = this.get_ipv4Nets();
+		if (nets.length < 1) {
+			return null;
+		};
+		var used:any = this._usedIpv4AddressHash();
+		var ret:string[] = [];
+		for (var __it1:number=0; __it1<nets[0].get_range().get_asArray().length; __it1++) {
+			var ip = nets[0].get_range().get_asArray()[__it1];
+			if (!(ip in used)) {
+				ret.push(ip);
+			};
+		};
+		return Util.sortArray(ret);
 	}
 	
 	/**
@@ -586,6 +703,36 @@ class Swytch extends Resource {
 	
 	
 	/**
+	 * @member saklient.cloud.resources.Swytch#n_bridge
+	 * @default false
+	 * @type boolean
+	 * @private
+	 */
+	private n_bridge : boolean = false;
+	
+	/**
+	 * (This method is generated in Translator_default#buildImpl)
+	 * 
+	 * @method get_bridge
+	 * @private
+	 * @return {Bridge}
+	 */
+	private get_bridge() : Bridge {
+		return this.m_bridge;
+	}
+	
+	/**
+	 * 接続されているブリッジ
+	 * 
+	 * @property bridge
+	 * @type Bridge
+	 * @readOnly
+	 * @public
+	 */
+	get bridge() : Bridge { return this.get_bridge(); }
+	
+	
+	/**
 	 * @member saklient.cloud.resources.Swytch#n_ipv4Nets
 	 * @default false
 	 * @type boolean
@@ -734,6 +881,14 @@ class Swytch extends Resource {
 			this.isIncomplete = true;
 		};
 		this.n_router = false;
+		if (Util.existsPath(r, "Bridge")) {
+			this.m_bridge = Util.getByPath(r, "Bridge") == null ? null : new Bridge(this._client, Util.getByPath(r, "Bridge"));
+		}
+		else {
+			this.m_bridge = null;
+			this.isIncomplete = true;
+		};
+		this.n_bridge = false;
 		if (Util.existsPath(r, "Subnets")) {
 			if (Util.getByPath(r, "Subnets") == null) {
 				this.m_ipv4Nets = [];
@@ -819,6 +974,9 @@ class Swytch extends Resource {
 		};
 		if (withClean || this.n_router) {
 			Util.setByPath(ret, "Internet", withClean ? (this.m_router == null ? null : this.m_router.apiSerialize(withClean)) : (this.m_router == null ? { ID: "0" } : this.m_router.apiSerializeID()));
+		};
+		if (withClean || this.n_bridge) {
+			Util.setByPath(ret, "Bridge", withClean ? (this.m_bridge == null ? null : this.m_bridge.apiSerialize(withClean)) : (this.m_bridge == null ? { ID: "0" } : this.m_bridge.apiSerializeID()));
 		};
 		if (withClean || this.n_ipv4Nets) {
 			Util.setByPath(ret, "Subnets", []);

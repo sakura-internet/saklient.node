@@ -131,7 +131,7 @@ describe('IsoImage', function(){
 			// search isos
 			trace('searching iso images...');
 			var isos = api.isoImage
-				.withNameLike('CentOS 6.5 64bit')
+				.withNameLike('CentOS 6.6 64bit')
 				.withSharedScope()
 				.limit(1)
 				.find();

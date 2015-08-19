@@ -11,6 +11,7 @@ import DiskPlan = require('./DiskPlan');
 import Server = require('./Server');
 import EScope = require('../enums/EScope');
 import EAvailability = require('../enums/EAvailability');
+import HttpException = require('../../errors/HttpException');
 import SaklientException = require('../../errors/SaklientException');
 
 'use strict';
@@ -456,7 +457,15 @@ class Archive extends Resource {
 		Util.validateType(timeoutSec, "number");
 		var step:number = 3;
 		while (0 < timeoutSec) {
-			this.reload();
+			try {
+				this.reload();
+			}
+			catch (__ex) {
+				if (__ex instanceof HttpException) {
+					var ex = __ex;
+					{}
+				}
+			};
 			var a:string = this.get_availability();
 			if (a == EAvailability.available) {
 				return true;

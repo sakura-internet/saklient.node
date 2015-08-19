@@ -3,6 +3,7 @@
 export = Server;
 
 import Util = require('../../Util');
+import HttpException = require('../../errors/HttpException');
 import SaklientException = require('../../errors/SaklientException');
 import Client = require('../Client');
 import Resource = require('./Resource');
@@ -12,6 +13,7 @@ import Iface = require('./Iface');
 import ServerPlan = require('./ServerPlan');
 import ServerInstance = require('./ServerInstance');
 import IsoImage = require('./IsoImage');
+import ServerActivity = require('./ServerActivity');
 import EServerInstanceStatus = require('../enums/EServerInstanceStatus');
 import EAvailability = require('../enums/EAvailability');
 import Model_Disk = require('../models/Model_Disk');
@@ -184,6 +186,34 @@ class Server extends Resource {
 	
 	/**
 	 * @private
+	 * @member saklient.cloud.resources.Server#_activity
+	 * @type ServerActivity
+	 * @protected
+	 */
+	_activity : ServerActivity;
+	
+	/**
+	 * @method get_activity
+	 * @private
+	 * @return {ServerActivity}
+	 */
+	get_activity() : ServerActivity {
+		return this._activity;
+	}
+	
+	/**
+	 * アクティビティ
+	 * 
+	 * @property activity
+	 * @type ServerActivity
+	 * @readOnly
+	 * @public
+	 */
+	get activity() : ServerActivity { return this.get_activity(); }
+	
+	
+	/**
+	 * @private
 	 * @constructor
 	 * @param {Client} client
 	 * @param {any} obj
@@ -194,7 +224,23 @@ class Server extends Resource {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(client, "saklient.cloud.Client");
 		Util.validateType(wrapped, "boolean");
+		this._activity = new ServerActivity(client);
 		this.apiDeserialize(obj, wrapped);
+	}
+	
+	/**
+	 * @private
+	 * @method _onAfterApiDeserialize
+	 * @protected
+	 * @param {any} r
+	 * @param {any} root
+	 * @return {void}
+	 */
+	_onAfterApiDeserialize(r:any, root:any) : void {
+		Util.validateArgCount(arguments.length, 2);
+		if (r != null) {
+			this._activity.setSourceId(this._id());
+		};
 	}
 	
 	/**
@@ -312,7 +358,15 @@ class Server extends Resource {
 		Util.validateType(timeoutSec, "number");
 		var step:number = 10;
 		while (0 < timeoutSec) {
-			this.reload();
+			try {
+				this.reload();
+			}
+			catch (__ex) {
+				if (__ex instanceof HttpException) {
+					var ex = __ex;
+					{}
+				}
+			};
 			var s:string = null;
 			var inst:ServerInstance = this["instance"];
 			if (inst != null) {

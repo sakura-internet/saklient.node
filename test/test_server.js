@@ -111,7 +111,7 @@ describe('Server', function(){
 			// search archives
 			trace('searching archives...');
 			var archives = api.archive
-				.withNameLike('CentOS 6.5 64bit')
+				.withNameLike('CentOS 6.6 64bit')
 				.withSizeGib(20)
 				.withSharedScope()
 				.limit(1)
@@ -250,6 +250,11 @@ describe('Server', function(){
 			trace('stopping the server...');
 			server.stop();
 			server.sleepUntilDown().should.be.ok;
+			
+			// activity
+			server.activity.fetch().samples.forEach(function(sample){
+				sample.at.should.be.an.instanceof(Date);
+			});
 			
 			// disconnect the disk from the server
 			trace('disconnecting the disk from the server...');

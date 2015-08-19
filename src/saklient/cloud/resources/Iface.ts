@@ -6,6 +6,8 @@ import Util = require('../../Util');
 import SaklientException = require('../../errors/SaklientException');
 import Client = require('../Client');
 import Resource = require('./Resource');
+import Swytch = require('./Swytch');
+import IfaceActivity = require('./IfaceActivity');
 
 'use strict';
 
@@ -138,6 +140,34 @@ class Iface extends Resource {
 	
 	/**
 	 * @private
+	 * @member saklient.cloud.resources.Iface#_activity
+	 * @type IfaceActivity
+	 * @protected
+	 */
+	_activity : IfaceActivity;
+	
+	/**
+	 * @method get_activity
+	 * @private
+	 * @return {IfaceActivity}
+	 */
+	get_activity() : IfaceActivity {
+		return this._activity;
+	}
+	
+	/**
+	 * アクティビティ
+	 * 
+	 * @property activity
+	 * @type IfaceActivity
+	 * @readOnly
+	 * @public
+	 */
+	get activity() : IfaceActivity { return this.get_activity(); }
+	
+	
+	/**
+	 * @private
 	 * @constructor
 	 * @param {Client} client
 	 * @param {any} obj
@@ -148,7 +178,39 @@ class Iface extends Resource {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(client, "saklient.cloud.Client");
 		Util.validateType(wrapped, "boolean");
+		this._activity = new IfaceActivity(client);
 		this.apiDeserialize(obj, wrapped);
+	}
+	
+	/**
+	 * @private
+	 * @method _onAfterApiDeserialize
+	 * @protected
+	 * @param {any} r
+	 * @param {any} root
+	 * @return {void}
+	 */
+	_onAfterApiDeserialize(r:any, root:any) : void {
+		Util.validateArgCount(arguments.length, 2);
+		if (r != null) {
+			this._activity.setSourceId(this._id());
+		};
+	}
+	
+	/**
+	 * スイッチに接続します。
+	 * 
+	 * @method connectToSwytch
+	 * @chainable
+	 * @public
+	 * @param {Swytch} swytch 接続先のスイッチ。
+	 * @return {Iface} this
+	 */
+	connectToSwytch(swytch:Swytch) : Iface {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(swytch, "saklient.cloud.resources.Swytch");
+		this._client.request("PUT", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/to/switch/" + Util.urlEncode(swytch._id()));
+		return this.reload();
 	}
 	
 	/**
@@ -161,6 +223,19 @@ class Iface extends Resource {
 	 */
 	connectToSharedSegment() : Iface {
 		this._client.request("PUT", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/to/switch/shared");
+		return this.reload();
+	}
+	
+	/**
+	 * スイッチから切断します。
+	 * 
+	 * @method disconnectFromSwytch
+	 * @chainable
+	 * @public
+	 * @return {Iface} this
+	 */
+	disconnectFromSwytch() : Iface {
+		this._client.request("DELETE", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/to/switch");
 		return this.reload();
 	}
 	

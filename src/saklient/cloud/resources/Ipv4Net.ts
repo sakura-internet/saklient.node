@@ -6,6 +6,7 @@ import Util = require('../../Util');
 import Client = require('../Client');
 import Resource = require('./Resource');
 import Swytch = require('./Swytch');
+import Ipv4Range = require('./Ipv4Range');
 
 'use strict';
 
@@ -63,6 +64,34 @@ class Ipv4Net extends Resource {
 	 * @protected
 	 */
 	m_nextHop : string;
+	
+	/**
+	 * @private
+	 * @member saklient.cloud.resources.Ipv4Net#_range
+	 * @type Ipv4Range
+	 * @protected
+	 */
+	_range : Ipv4Range;
+	
+	/**
+	 * @method get_range
+	 * @private
+	 * @return {Ipv4Range}
+	 */
+	get_range() : Ipv4Range {
+		return this._range;
+	}
+	
+	/**
+	 * 利用可能なIPアドレス範囲
+	 * 
+	 * @property range
+	 * @type Ipv4Range
+	 * @readOnly
+	 * @public
+	 */
+	get range() : Ipv4Range { return this.get_range(); }
+	
 	
 	/**
 	 * @private
@@ -136,6 +165,23 @@ class Ipv4Net extends Resource {
 		Util.validateType(client, "saklient.cloud.Client");
 		Util.validateType(wrapped, "boolean");
 		this.apiDeserialize(obj, wrapped);
+	}
+	
+	/**
+	 * @private
+	 * @method _onAfterApiDeserialize
+	 * @protected
+	 * @param {any} r
+	 * @param {any} root
+	 * @return {void}
+	 */
+	_onAfterApiDeserialize(r:any, root:any) : void {
+		Util.validateArgCount(arguments.length, 2);
+		this._range = null;
+		var addresses:any = r["IPAddresses"];
+		if (addresses != null) {
+			this._range = new Ipv4Range(addresses);
+		};
 	}
 	
 	/**

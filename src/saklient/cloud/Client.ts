@@ -77,7 +77,7 @@ class Client {
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				'Authorization': this.config.authorization,
-				'User-Agent': 'saklient.node ver-0.0.2.2 rev-12b993d3bd1fedb86be7312ac4648dc4e5693cfa',
+				'User-Agent': 'saklient.node ver-0.0.3 rev-ba6f656e7fdf2e344bc279593970d0d325ad25dd',
 				'X-Requested-With': 'XMLHttpRequest',
 				'X-Sakura-No-Authenticate-Header': '1',
 				'X-Sakura-HTTP-Method': method,

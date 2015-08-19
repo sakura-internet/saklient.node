@@ -1,7 +1,6 @@
 {
   "name": "saklient",
-  "version": "0.0.2.5",
-  "private": true,
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "git://github.com/sakura-internet/saklient.node.git"
@@ -23,9 +22,7 @@
   "author": {
     "name": "SAKURA Internet Inc."
   },
-  "license": {
-    "type": "MIT"
-  },
+  "license": "MIT",
   "dependencies": {
     "fibers": "^1.0.1"
   },

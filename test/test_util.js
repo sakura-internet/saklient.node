@@ -61,5 +61,35 @@ describe('Util', function () {
 		}).should.throw(/Cannot set property/i);
 	});
 
+	it('should convert ip to/from long', function(){
+		//
+		(Util.ip2long('0.0.0.0') === 0).should.be.true;
+		(Util.ip2long('127.255.255.255') === 0x7FFFFFFF).should.be.true;
+		(Util.ip2long('128.0.0.0') === 0x80000000).should.be.true;
+		(Util.ip2long('255.255.255.255') === 0xFFFFFFFF).should.be.true;
+		(Util.ip2long('222.173.190.239') === 0xDEADBEEF).should.be.true;
+		//
+		(Util.long2ip(0) === '0.0.0.0').should.be.true;
+		(Util.long2ip(0x7FFFFFFF) === '127.255.255.255').should.be.true;
+		(Util.long2ip(0x80000000) === '128.0.0.0').should.be.true;
+		(Util.long2ip(0xFFFFFFFF) === '255.255.255.255').should.be.true;
+		(Util.long2ip(0xDEADBEEF) === '222.173.190.239').should.be.true;
+		(Util.long2ip(Util.ip2long('127.255.255.255') + 1) === '128.0.0.0').should.be.true;
+		//
+		(Util.ip2long(null) === null).should.be.true;
+		(Util.ip2long(0) === null).should.be.true;
+		(Util.ip2long('') === null).should.be.true;
+		(Util.ip2long('x') === null).should.be.true;
+		(Util.ip2long('0.0.0') === null).should.be.true;
+		(Util.ip2long('0.0.0.x') === null).should.be.true;
+		(Util.ip2long('0.0.0.0.0') === null).should.be.true;
+		(Util.ip2long('255.255.255.256') === null).should.be.true;
+		(Util.ip2long('256.255.255.255') === null).should.be.true;
+		(Util.long2ip(null) === null).should.be.true;
+		(Util.long2ip('0') === '0.0.0.0').should.be.true;
+		(Util.long2ip(Util.ip2long('0.0.0.0') - 1) === '255.255.255.255').should.be.true;
+		(Util.long2ip(Util.ip2long('255.255.255.255') + 1) === null).should.be.true;
+	});
+
 });
 

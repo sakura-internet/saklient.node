@@ -7,13 +7,54 @@ import Util = require('../../Util');
 'use strict';
 
 /**
- * ロードバランサの監視対象サーバ。
+ * ロードバランサの監視対象サーバ設定。
  * 
  * @module saklient.cloud.resources.LbServer
  * @class LbServer
  * @constructor
  */
 class LbServer {
+	
+	/**
+	 * @private
+	 * @member saklient.cloud.resources.LbServer#_enabled
+	 * @type boolean
+	 * @protected
+	 */
+	_enabled : boolean;
+	
+	/**
+	 * @method get_enabled
+	 * @private
+	 * @return {boolean}
+	 */
+	get_enabled() : boolean {
+		return this._enabled;
+	}
+	
+	/**
+	 * @method set_enabled
+	 * @private
+	 * @param {boolean} v
+	 * @return {boolean}
+	 */
+	set_enabled(v:boolean) : boolean {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(v, "boolean");
+		this._enabled = v;
+		return this._enabled;
+	}
+	
+	/**
+	 * 有効状態
+	 * 
+	 * @property enabled
+	 * @type boolean
+	 * @public
+	 */
+	get enabled() : boolean { return this.get_enabled(); }
+	set enabled(v:boolean) { this.set_enabled(v); }
+	
 	
 	/**
 	 * @private
@@ -286,6 +327,12 @@ class LbServer {
 			obj = {};
 		};
 		var health:any = Util.getByPathAny([obj], ["HealthCheck", "healthCheck", "health_check", "health"]);
+		var enabled:any = Util.getByPathAny([obj], ["Enabled", "enabled"]);
+		this._enabled = null;
+		if (enabled != null) {
+			var enabledStr:string = (<string><any>(enabled));
+			this._enabled = enabledStr.toLowerCase() == "true";
+		};
 		this._ipAddress = (<string><any>(Util.getByPathAny([obj], ["IPAddress", "ipAddress", "ip_address", "ip"])));
 		this._protocol = (<string><any>(Util.getByPathAny([health, obj], ["Protocol", "protocol"])));
 		this._pathToCheck = (<string><any>(Util.getByPathAny([health, obj], ["Path", "path", "pathToCheck", "path_to_check"])));
@@ -305,6 +352,8 @@ class LbServer {
 		if (this._responseExpected == 0) {
 			this._responseExpected = null;
 		};
+		this._activeConnections = 0;
+		this._status = null;
 	}
 	
 	/**
@@ -314,6 +363,7 @@ class LbServer {
 	 */
 	toRawSettings() : any {
 		return {
+			Enabled: this._enabled == null ? null : ((<boolean><any>(this._enabled)) ? "True" : "False"),
 			IPAddress: this._ipAddress,
 			Port: this._port,
 			HealthCheck: {
@@ -325,9 +375,9 @@ class LbServer {
 	}
 	
 	/**
+	 * @private
 	 * @method updateStatus
 	 * @chainable
-	 * @public
 	 * @param {any} obj
 	 * @return {LbServer}
 	 */

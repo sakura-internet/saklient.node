@@ -8,7 +8,7 @@ import LbServer = require('./LbServer');
 'use strict';
 
 /**
- * ロードバランサの仮想IPアドレス。
+ * ロードバランサの仮想IPアドレス設定。
  * 
  * @module saklient.cloud.resources.LbVirtualIp
  * @class LbVirtualIp
@@ -206,9 +206,11 @@ class LbVirtualIp {
 	}
 	
 	/**
+	 * 監視対象サーバ設定を追加します。
+	 * 
 	 * @method addServer
 	 * @public
-	 * @param {any} settings=null
+	 * @param {any} settings=null 設定オブジェクト
 	 * @return {LbServer}
 	 */
 	addServer(settings:any=null) : LbServer {
@@ -237,10 +239,12 @@ class LbVirtualIp {
 	}
 	
 	/**
+	 * 指定したIPアドレスにマッチする監視対象サーバ設定のうち、最初にマッチしたものを取得します。
+	 * 
 	 * @method getServerByAddress
 	 * @public
-	 * @param {string} address
-	 * @return {LbServer}
+	 * @param {string} address 検索するIPアドレス
+	 * @return {LbServer} 監視対象サーバ設定（見つからなかった場合はnull）
 	 */
 	getServerByAddress(address:string) : LbServer {
 		Util.validateArgCount(arguments.length, 1);
@@ -255,9 +259,32 @@ class LbVirtualIp {
 	}
 	
 	/**
-	 * @method updateStatus
+	 * 指定したIPアドレスにマッチする監視対象サーバ設定をすべて削除します。
+	 * 
+	 * @method removeServerByAddress
 	 * @chainable
 	 * @public
+	 * @param {string} address
+	 * @return {LbVirtualIp}
+	 */
+	removeServerByAddress(address:string) : LbVirtualIp {
+		Util.validateArgCount(arguments.length, 1);
+		Util.validateType(address, "string");
+		var servers:LbServer[] = [];
+		for (var __it1:number=0; __it1<this._servers.length; __it1++) {
+			var srv = this._servers[__it1];
+			if (srv["ipAddress"] != address) {
+				servers.push(srv);
+			};
+		};
+		this._servers = servers;
+		return this;
+	}
+	
+	/**
+	 * @private
+	 * @method updateStatus
+	 * @chainable
 	 * @param {Array} srvs
 	 * @return {LbVirtualIp}
 	 */

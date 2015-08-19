@@ -133,6 +133,7 @@ describe('Archive', function(){
 			disk.description = description;
 			disk.tags = [tag];
 			disk.sizeGib = 20;
+			disk.plan = api.product.disk.ssd;
 			disk.save();
 			
 			var archive = api.archive.create();

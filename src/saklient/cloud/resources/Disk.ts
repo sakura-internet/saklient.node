@@ -4,12 +4,14 @@ export = Disk;
 
 import Util = require('../../Util');
 import SaklientException = require('../../errors/SaklientException');
+import HttpException = require('../../errors/HttpException');
 import Client = require('../Client');
 import Resource = require('./Resource');
 import Icon = require('./Icon');
 import DiskPlan = require('./DiskPlan');
 import Server = require('./Server');
 import DiskConfig = require('./DiskConfig');
+import DiskActivity = require('./DiskActivity');
 import EAvailability = require('../enums/EAvailability');
 import EDiskConnection = require('../enums/EDiskConnection');
 import EStorageClass = require('../enums/EStorageClass');
@@ -190,6 +192,34 @@ class Disk extends Resource {
 	
 	/**
 	 * @private
+	 * @member saklient.cloud.resources.Disk#_activity
+	 * @type DiskActivity
+	 * @protected
+	 */
+	_activity : DiskActivity;
+	
+	/**
+	 * @method get_activity
+	 * @private
+	 * @return {DiskActivity}
+	 */
+	get_activity() : DiskActivity {
+		return this._activity;
+	}
+	
+	/**
+	 * アクティビティ
+	 * 
+	 * @property activity
+	 * @type DiskActivity
+	 * @readOnly
+	 * @public
+	 */
+	get activity() : DiskActivity { return this.get_activity(); }
+	
+	
+	/**
+	 * @private
 	 * @constructor
 	 * @param {Client} client
 	 * @param {any} obj
@@ -200,6 +230,7 @@ class Disk extends Resource {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(client, "saklient.cloud.Client");
 		Util.validateType(wrapped, "boolean");
+		this._activity = new DiskActivity(client);
 		this.apiDeserialize(obj, wrapped);
 	}
 	
@@ -311,6 +342,7 @@ class Disk extends Resource {
 	_onAfterApiDeserialize(r:any, root:any) : void {
 		Util.validateArgCount(arguments.length, 2);
 		if (r != null) {
+			this._activity.setSourceId(this._id());
 			if (("SourceDisk" in r)) {
 				var s:any = r["SourceDisk"];
 				if (s != null) {
@@ -418,7 +450,15 @@ class Disk extends Resource {
 		Util.validateType(timeoutSec, "number");
 		var step:number = 10;
 		while (0 < timeoutSec) {
-			this.reload();
+			try {
+				this.reload();
+			}
+			catch (__ex) {
+				if (__ex instanceof HttpException) {
+					var ex = __ex;
+					{}
+				}
+			};
 			var a:string = this.get_availability();
 			if (a == EAvailability.available) {
 				return true;

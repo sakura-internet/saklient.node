@@ -3,6 +3,7 @@
 export = Router;
 
 import Util = require('../../Util');
+import HttpException = require('../../errors/HttpException');
 import SaklientException = require('../../errors/SaklientException');
 import Client = require('../Client');
 import Resource = require('./Resource');
@@ -10,6 +11,7 @@ import Icon = require('./Icon');
 import Swytch = require('./Swytch');
 import Ipv4Net = require('./Ipv4Net');
 import Ipv6Net = require('./Ipv6Net');
+import RouterActivity = require('./RouterActivity');
 import Model_Swytch = require('../models/Model_Swytch');
 
 'use strict';
@@ -152,6 +154,34 @@ class Router extends Resource {
 	
 	/**
 	 * @private
+	 * @member saklient.cloud.resources.Router#_activity
+	 * @type RouterActivity
+	 * @protected
+	 */
+	_activity : RouterActivity;
+	
+	/**
+	 * @method get_activity
+	 * @private
+	 * @return {RouterActivity}
+	 */
+	get_activity() : RouterActivity {
+		return this._activity;
+	}
+	
+	/**
+	 * アクティビティ
+	 * 
+	 * @property activity
+	 * @type RouterActivity
+	 * @readOnly
+	 * @public
+	 */
+	get activity() : RouterActivity { return this.get_activity(); }
+	
+	
+	/**
+	 * @private
 	 * @constructor
 	 * @param {Client} client
 	 * @param {any} obj
@@ -162,7 +192,23 @@ class Router extends Resource {
 		Util.validateArgCount(arguments.length, 2);
 		Util.validateType(client, "saklient.cloud.Client");
 		Util.validateType(wrapped, "boolean");
+		this._activity = new RouterActivity(client);
 		this.apiDeserialize(obj, wrapped);
+	}
+	
+	/**
+	 * @private
+	 * @method _onAfterApiDeserialize
+	 * @protected
+	 * @param {any} r
+	 * @param {any} root
+	 * @return {void}
+	 */
+	_onAfterApiDeserialize(r:any, root:any) : void {
+		Util.validateArgCount(arguments.length, 2);
+		if (r != null) {
+			this._activity.setSourceId(this._id());
+		};
 	}
 	
 	/**
@@ -193,17 +239,29 @@ class Router extends Resource {
 	sleepWhileCreating(timeoutSec:number=120) : boolean {
 		Util.validateType(timeoutSec, "number");
 		var step:number = 3;
+		var isOk:boolean = false;
 		while (0 < timeoutSec) {
-			if (this.exists()) {
-				this.reload();
-				return true;
+			try {
+				if (this.exists()) {
+					this.reload();
+					isOk = true;
+				};
+			}
+			catch (__ex) {
+				if (__ex instanceof HttpException) {
+					var ex = __ex;
+					{}
+				}
 			};
 			timeoutSec -= step;
+			if (isOk) {
+				timeoutSec = 0;
+			};
 			if (0 < timeoutSec) {
 				Util.sleep(step);
 			};
 		};
-		return false;
+		return isOk;
 	}
 	
 	/**

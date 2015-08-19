@@ -279,9 +279,11 @@ class LoadBalancer extends Appliance {
 	}
 	
 	/**
+	 * 仮想IPアドレス設定を追加します。
+	 * 
 	 * @method addVirtualIp
 	 * @public
-	 * @param {any} settings=null
+	 * @param {any} settings=null 設定オブジェクト
 	 * @return {LbVirtualIp}
 	 */
 	addVirtualIp(settings:any=null) : LbVirtualIp {
@@ -291,6 +293,8 @@ class LoadBalancer extends Appliance {
 	}
 	
 	/**
+	 * 指定したIPアドレスにマッチする仮想IPアドレス設定を取得します。
+	 * 
 	 * @method getVirtualIpByAddress
 	 * @public
 	 * @param {string} address
@@ -309,6 +313,8 @@ class LoadBalancer extends Appliance {
 	}
 	
 	/**
+	 * 監視対象サーバのステータスを最新の状態に更新します。
+	 * 
 	 * @method reloadStatus
 	 * @chainable
 	 * @public
@@ -316,15 +322,17 @@ class LoadBalancer extends Appliance {
 	 */
 	reloadStatus() : LoadBalancer {
 		var result:any = this.requestRetry("GET", this._apiPath() + "/" + Util.urlEncode(this._id()) + "/status");
-		var vips:any[] = (<any[]><any>(result["LoadBalancer"]));
-		for (var __it1:number=0; __it1<vips.length; __it1++) {
-			var vipDyn = vips[__it1];
-			var vipStr:string = (<string><any>(vipDyn["VirtualIPAddress"]));
-			var vip:LbVirtualIp = this.getVirtualIpByAddress(vipStr);
-			if (vip == null) {
-				continue;
+		if (result != null && ("LoadBalancer" in result)) {
+			var vips:any[] = (<any[]><any>(result["LoadBalancer"]));
+			for (var __it1:number=0; __it1<vips.length; __it1++) {
+				var vipDyn = vips[__it1];
+				var vipStr:string = (<string><any>(vipDyn["VirtualIPAddress"]));
+				var vip:LbVirtualIp = this.getVirtualIpByAddress(vipStr);
+				if (vip == null) {
+					continue;
+				};
+				vip.updateStatus((<any[]><any>(vipDyn["Servers"])));
 			};
-			vip.updateStatus((<any[]><any>(vipDyn["Servers"])));
 		};
 		return this;
 	}

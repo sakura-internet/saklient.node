@@ -157,6 +157,45 @@ class Util {
 		};
 		return ""+d;
 	}
+		
+	/**
+	 * @static
+	 * @method ip2long
+	 * @public
+	 * @param {string} str
+	 * @return {number}
+	 */
+	static ip2long(str:string) : number {
+		if (str==null || !str.match || !str.match(/^\d+\.\d+\.\d+\.\d+$/)) return null;
+		var octets:string[] = str.split(".");
+		var ret:number = 0;
+		octets.forEach(function(octet){
+			var o:number = parseInt(octet, 10);
+			if (o<0 || 255<o) ret = o = NaN;
+			ret = ret * 256 + o;
+		});
+		return isNaN(ret) ? null : ret;
+	}
+	
+	/**
+	 * @static
+	 * @method long2ip
+	 * @public
+	 * @param {number} val
+	 * @return {string}
+	 */
+	static long2ip(val:number) : string {
+		if (isNaN(val) || val < -2147483648 || 4294967296 <= val) return null;
+		if (2147483648 <= val) val -= 4294967296;
+		if (val != (val|0)) return null;
+		val |= 0;
+		var ret:string[] = [];
+		for (var i=0; i<4; i++) {
+			ret.unshift((val & 255).toString(10));
+			val >>= 8;
+		}
+		return ret.join(".");
+	}
 	
 	/**
 	 * @static
@@ -170,16 +209,31 @@ class Util {
 	}
 	
 	/**
-	 * @static
-	 * @method castArray
-	 * @public
-	 * @param {U} clazz
-	 * @param {T[]} a
-	 * @return {U[]}
-	 */
+	* @static
+	* @method castArray
+	* @public
+	* @param {U} clazz
+	* @param {T[]} a
+	* @return {U[]}
+	*/
 	static castArray<T,U>(a:T[], clazz:U) : U[] {
 		return (<U[]><any>(a));
 	}
+	
+	/**
+	 * @static
+	 * @method sortArray
+	 * @public
+	 * @param {T[]} src
+	 * @return {T[]}
+	 */
+	static sortArray<T>(src:T[]) : T[] {
+		var ret:T[] = [].concat(src);
+		ret.sort();
+		return ret;
+	}
+	
+	
 	
 	/**
 	 * @static
