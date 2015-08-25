@@ -1,6 +1,6 @@
 {
   "name": "saklient",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "git://github.com/sakura-internet/saklient.node.git"
@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "fibers": "^1.0.1"
+    "http-sync": "^0.1.2"
   },
   "devDependencies": {
     "dateformat": "~1.0.8-1.2.3",
@@ -33,6 +33,7 @@
     "grunt-shell": "~0.7.0",
     "grunt-typescript": "~0.3.8",
     "grunt-yui-compressor": "~0.3.3",
+    "mktemp": "^0.4.0",
     "mocha": "~1.20.1",
     "should": "~4.0.4"
   }

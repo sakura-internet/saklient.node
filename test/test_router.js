@@ -10,8 +10,7 @@ var saklient = require('saklient');
 
 var fs = require('fs');
 var dateformat = require('dateformat');
-var exec = require('child_process').exec;
-var Fiber = require('fibers');
+var execSync = require('child_process').execSync;
 
 describe('Router', function(){
 	
@@ -19,14 +18,6 @@ describe('Router', function(){
 	
 	function trace(msg) {
 		console.log("        "+msg);
-	}
-	
-	function execSync(cmd) {
-		var _fiber = Fiber.current;
-		exec(cmd, function(err, stdout, stderr){
-			_fiber.run(stdout);
-		});
-		return Fiber.yield();
 	}
 	
 	function ip2long(a) {
@@ -71,78 +62,74 @@ describe('Router', function(){
 	
 	
 	it('should be CRUDed', function(done){
-		Fiber(function(){
+		var name = '!js_mocha-' + dateformat('yyyyMMdd_hhmmss') + '-' + Math.random().toString(36).slice(2);
+		var description = 'This instance was created by saklient.node mocha';
+		var maskLen = 28;
+		//
+		var swytch = null;
+		if (true) {
+			trace('ルータ＋スイッチの帯域プランを検索しています...');
+			var plans = api.product.router.find();
+			var minMbps = 0x7FFFFFFF;
+			plans.forEach(function(plan){
+				plan.should.be.an.instanceof(saklient.cloud.resources.RouterPlan);
+				plan.bandWidthMbps.should.be.above(0);
+				minMbps = Math.min(plan.bandWidthMbps, minMbps);
+			});
 			
-			var name = '!js_mocha-' + dateformat('yyyyMMdd_hhmmss') + '-' + Math.random().toString(36).slice(2);
-			var description = 'This instance was created by saklient.node mocha';
-			var maskLen = 28;
-			//
-			var swytch = null;
-			if (true) {
-				trace('ルータ＋スイッチの帯域プランを検索しています...');
-				var plans = api.product.router.find();
-				var minMbps = 0x7FFFFFFF;
-				plans.forEach(function(plan){
-					plan.should.be.an.instanceof(saklient.cloud.resources.RouterPlan);
-					plan.bandWidthMbps.should.be.above(0);
-					minMbps = Math.min(plan.bandWidthMbps, minMbps);
-				});
-				
-				trace('ルータ＋スイッチを作成しています...');
-				var router = api.router.create();
-				router.name = name;
-				router.description = description;
-				router.bandWidthMbps = minMbps;
-				router.networkMaskLen = maskLen;
-				router.save();
-				
-				trace('ルータ＋スイッチの作成完了を待機しています...');
-				if (!router.sleepWhileCreating()) should.fail('ルータが正常に作成されません');
-				swytch = router.getSwytch();
-			}
-			else {
-				trace('既存のルータ＋スイッチを取得しています...');
-				var swytches = api.swytch.withNameLike('saklient-static-1').limit(1).find();
-				swytches.length.should.equal(1);
-				swytch = swytches[0];
-			}
-			swytch.should.be.an.instanceof(saklient.cloud.resources.Swytch);
-			swytch.ipv4Nets.length.should.be.above(0);
-			swytch.ipv4Nets[0].should.be.an.instanceof(saklient.cloud.resources.Ipv4Net);
+			trace('ルータ＋スイッチを作成しています...');
+			var router = api.router.create();
+			router.name = name;
+			router.description = description;
+			router.bandWidthMbps = minMbps;
+			router.networkMaskLen = maskLen;
+			router.save();
 			
-			//
-			trace('ルータ＋スイッチの帯域プランを変更しています...');
-			var routerIdBefore = swytch.router.id;
-			swytch.changePlan(swytch.router.bandWidthMbps==100 ? 500 : 100);
-			swytch.router.id.should.not.equal(routerIdBefore);
-			
-			//
-			if (0 < swytch.ipv6Nets.length) {
-				trace('ルータ＋スイッチからIPv6ネットワークの割当を解除しています...');
-				swytch.removeIpv6Net();
-			}
-			trace('ルータ＋スイッチにIPv6ネットワークを割り当てています...');
-			var v6net = swytch.addIpv6Net();
-			v6net.should.be.an.instanceof(saklient.cloud.resources.Ipv6Net);
-			swytch.ipv6Nets.length.should.equal(1);
-			
-			//
-			for (var i=swytch.ipv4Nets.length-1; 1<=i; i--) {
-				trace('ルータ＋スイッチからスタティックルートの割当を解除しています...');
-				var net = swytch.ipv4Nets[i];
-				swytch.removeStaticRoute(net);
-			}
-			
-			trace('ルータ＋スイッチにスタティックルートを割り当てています...');
-			var net0 = swytch.ipv4Nets[0];
-			var nextHop = long2ip(ip2long(net0.address) + 4);
-			var sroute = swytch.addStaticRoute(28, nextHop);
-			sroute.should.be.an.instanceof(saklient.cloud.resources.Ipv4Net);
-			swytch.ipv4Nets.length.should.equal(2);
-			
-			done();
-			
-		}).run();
+			trace('ルータ＋スイッチの作成完了を待機しています...');
+			if (!router.sleepWhileCreating()) should.fail('ルータが正常に作成されません');
+			swytch = router.getSwytch();
+		}
+		else {
+			trace('既存のルータ＋スイッチを取得しています...');
+			var swytches = api.swytch.withNameLike('saklient-static-1').limit(1).find();
+			swytches.length.should.equal(1);
+			swytch = swytches[0];
+		}
+		swytch.should.be.an.instanceof(saklient.cloud.resources.Swytch);
+		swytch.ipv4Nets.length.should.be.above(0);
+		swytch.ipv4Nets[0].should.be.an.instanceof(saklient.cloud.resources.Ipv4Net);
+		
+		//
+		trace('ルータ＋スイッチの帯域プランを変更しています...');
+		var routerIdBefore = swytch.router.id;
+		swytch.changePlan(swytch.router.bandWidthMbps==100 ? 500 : 100);
+		swytch.router.id.should.not.equal(routerIdBefore);
+		
+		//
+		if (0 < swytch.ipv6Nets.length) {
+			trace('ルータ＋スイッチからIPv6ネットワークの割当を解除しています...');
+			swytch.removeIpv6Net();
+		}
+		trace('ルータ＋スイッチにIPv6ネットワークを割り当てています...');
+		var v6net = swytch.addIpv6Net();
+		v6net.should.be.an.instanceof(saklient.cloud.resources.Ipv6Net);
+		swytch.ipv6Nets.length.should.equal(1);
+		
+		//
+		for (var i=swytch.ipv4Nets.length-1; 1<=i; i--) {
+			trace('ルータ＋スイッチからスタティックルートの割当を解除しています...');
+			var net = swytch.ipv4Nets[i];
+			swytch.removeStaticRoute(net);
+		}
+		
+		trace('ルータ＋スイッチにスタティックルートを割り当てています...');
+		var net0 = swytch.ipv4Nets[0];
+		var nextHop = long2ip(ip2long(net0.address) + 4);
+		var sroute = swytch.addStaticRoute(28, nextHop);
+		sroute.should.be.an.instanceof(saklient.cloud.resources.Ipv4Net);
+		swytch.ipv4Nets.length.should.equal(2);
+		
+		done();
 	});
 	
 	

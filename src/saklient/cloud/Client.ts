@@ -5,8 +5,7 @@ export = Client;
 
 import ExceptionFactory = require('../errors/ExceptionFactory');
 
-var Fiber:any = require('fibers');
-var https:any = require('https');
+var httpSync:any = require('http-sync');
 
 /**
  * @ignore
@@ -50,8 +49,6 @@ class Client {
 	}
 	
 	request(method:string, path:string, params?:any) : any {
-		var _fiber = Fiber.current;
-		//
 		method = method.toUpperCase();
 		path = path.replace(/^\/?/, '/');
 		var json:string = params!=null ? JSON.stringify(params) : null;
@@ -77,7 +74,7 @@ class Client {
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				'Authorization': this.config.authorization,
-				'User-Agent': 'saklient.node ver-0.0.3 rev-ba6f656e7fdf2e344bc279593970d0d325ad25dd',
+				'User-Agent': 'saklient.node ver-0.0.4 rev-b2c9840359d57e5f1010a24599e87e52800f48b0',
 				'X-Requested-With': 'XMLHttpRequest',
 				'X-Sakura-No-Authenticate-Header': '1',
 				'X-Sakura-HTTP-Method': method,
@@ -88,36 +85,17 @@ class Client {
 			protocol: pathSegs[1],
 			port: pathSegs[1]=='https:' ? 443 : 80,
 			host: pathSegs[2],
-			path: pathSegs[3]
+			path: pathSegs[3],
+			body: json
 		};
 		opts.headers['Content-Length'] = json!=null ? json.length : 0;
-		var req = https.request(opts, (res)=>{
-			var body:string = '';
-			res.setEncoding('utf8');
-			res.on('data', (chunk)=>{
-				body += chunk;
-			});
-			res.on('end', ()=>{
-				//console.log(body);
-				var ret:any = body ? JSON.parse(body) : null;
-				if (!(res && 200<=res.statusCode && res.statusCode<300)) {
-					var ex = ExceptionFactory.create(res.statusCode, ret ? ret.error_code : null, ret ? ret.error_msg : "");
-					var r = _fiber.throwInto(ex);
-					_fiber = null;
-					return r;
-				}
-				var r = _fiber.run(ret);
-				_fiber = null;
-				return r;
-			});
-		});
-		req.on('error', (ex)=>{
-			throw ExceptionFactory.create(null, null, ex.message);
-		});
-		if (json!=null) req.write(json);
-		req.end();
-		//
-		return Fiber.yield();
+		var req = httpSync.request(opts);
+		var res = req.end();
+		var ret:any = res.body ? JSON.parse(res.body.toString()) : null;
+		if (!(res && 200<=res.statusCode && res.statusCode<300)) {
+			throw ExceptionFactory.create(res.statusCode, ret ? ret.error_code : null, ret ? ret.error_msg : "");
+		}
+		return ret;
 	}
 
 }

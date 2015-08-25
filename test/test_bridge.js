@@ -10,7 +10,6 @@ var saklient = require('saklient');
 
 var fs = require('fs');
 var dateformat = require('dateformat');
-var Fiber = require('fibers');
 
 describe('Bridge', function(){
 	
@@ -55,30 +54,26 @@ describe('Bridge', function(){
 	
 	
 	it('should be CRUDed', function(done){
-		Fiber(function(){
-			
-			var name = '!js_mocha-' + dateformat('yyyyMMdd_hhmmss') + '-' + Math.random().toString(36).slice(2);
-			var description = 'This instance was created by saklient.node mocha';
-			//
-			trace('リージョンを検索しています...');
-			var regions = api.facility.region.find();
-			regions.forEach(function(region){
-				region.should.be.an.instanceof(saklient.cloud.resources.Region);
-			});
-			
-			trace('ブリッジを作成しています...');
-			var bridge = api.bridge.create();
-			bridge.name = name;
-			bridge.description = description;
-			bridge.region = regions[0];
-			bridge.save();
-			
-			trace('ブリッジを削除しています...');
-			bridge.destroy();
-			
-			done();
-			
-		}).run();
+		var name = '!js_mocha-' + dateformat('yyyyMMdd_hhmmss') + '-' + Math.random().toString(36).slice(2);
+		var description = 'This instance was created by saklient.node mocha';
+		//
+		trace('リージョンを検索しています...');
+		var regions = api.facility.region.find();
+		regions.forEach(function(region){
+			region.should.be.an.instanceof(saklient.cloud.resources.Region);
+		});
+		
+		trace('ブリッジを作成しています...');
+		var bridge = api.bridge.create();
+		bridge.name = name;
+		bridge.description = description;
+		bridge.region = regions[0];
+		bridge.save();
+		
+		trace('ブリッジを削除しています...');
+		bridge.destroy();
+		
+		done();
 	});
 	
 	

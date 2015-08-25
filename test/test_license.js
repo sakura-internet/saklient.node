@@ -10,7 +10,6 @@ var saklient = require('saklient');
 
 var fs = require('fs');
 var dateformat = require('dateformat');
-var Fiber = require('fibers');
 
 describe('License', function(){
 	
@@ -55,28 +54,24 @@ describe('License', function(){
 	
 	
 	it('should be CRUDed', function(done){
-		Fiber(function(){
-			
-			var name = '!js_mocha-' + dateformat('yyyyMMdd_hhmmss') + '-' + Math.random().toString(36).slice(2);
-			//
-			trace('ライセンス種別情報を検索しています...');
-			var infos = api.product.license.find();
-			infos.forEach(function(info){
-				info.should.be.an.instanceof(saklient.cloud.resources.LicenseInfo);
-			});
-			
-			trace('ライセンスを作成しています...');
-			var license = api.license.create();
-			license.name = name;
-			license.info = infos[0];
-			license.save();
-			
-			trace('ライセンスを削除しています...');
-			license.destroy();
-			
-			done();
-			
-		}).run();
+		var name = '!js_mocha-' + dateformat('yyyyMMdd_hhmmss') + '-' + Math.random().toString(36).slice(2);
+		//
+		trace('ライセンス種別情報を検索しています...');
+		var infos = api.product.license.find();
+		infos.forEach(function(info){
+			info.should.be.an.instanceof(saklient.cloud.resources.LicenseInfo);
+		});
+		
+		trace('ライセンスを作成しています...');
+		var license = api.license.create();
+		license.name = name;
+		license.info = infos[0];
+		license.save();
+		
+		trace('ライセンスを削除しています...');
+		license.destroy();
+		
+		done();
 	});
 	
 	

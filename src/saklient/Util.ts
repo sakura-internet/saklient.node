@@ -4,7 +4,7 @@ export = Util;
 
 import SaklientException = require('./errors/SaklientException');
 
-import Fiber = require('fibers');
+var execSync = require('child_process').execSync;
 var saklient = require('../saklient');
 
 /**
@@ -243,9 +243,13 @@ class Util {
 	 * @return {void}
 	 */
 	static sleep(sec:number) : void {
-		var _fiber = Fiber.current;
-		setTimeout(function(){ return _fiber.run(); }, sec*1000);
-		Fiber.yield();
+		var t:string = sec.toString(10);
+		if (process.platform.match(/^win/i)) {
+			execSync('TIMEOUT /T ' + t + ' /NOBREAK');
+		}
+		else {
+			execSync('sleep ' + t);
+		}
 	}
 	
 	/**
