@@ -244,12 +244,15 @@ class Util {
 	 */
 	static sleep(sec:number) : void {
 		var t:string = sec.toString(10);
+		var t0:number = (new Date).getTime();
 		if (process.platform.match(/^win/i)) {
-			execSync('TIMEOUT /T ' + t + ' /NOBREAK');
+			execSync('sleep ' + t + ' || TIMEOUT /T ' + t + ' /NOBREAK');
 		}
 		else {
 			execSync('sleep ' + t);
 		}
+		var t1:number = (new Date).getTime();
+		if (t1-t0 < sec*800) throw 'Could not sleep synchronously';
 	}
 	
 	/**

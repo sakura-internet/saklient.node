@@ -5,7 +5,13 @@ export = Client;
 
 import ExceptionFactory = require('../errors/ExceptionFactory');
 
-var httpSync:any = require('http-sync');
+var httpSync:any;
+try {
+	httpSync = require('http-sync');
+}
+catch (ex) {
+	httpSync = require('http-sync-win');
+}
 
 /**
  * @ignore
@@ -67,7 +73,7 @@ class Client {
 //			console.log("// APIリクエスト中: "+method+" "+path);
 //			console.log(params);
 		
-		var pathSegs = path.match(/^(https?:)\/\/([^\/]+)(.+)$/);
+		var pathSegs = path.match(/^(https?):\/\/([^\/]+)(.+)$/);
 		
 		var opts = {
 			method: method=='GET' ? 'GET' : 'POST',
@@ -83,7 +89,7 @@ class Client {
 				'X-Sakura-Error-Level': 'warning'
 			},
 			protocol: pathSegs[1],
-			port: pathSegs[1]=='https:' ? 443 : 80,
+			port: pathSegs[1]=='https' ? 443 : 80,
 			host: pathSegs[2],
 			path: pathSegs[3],
 			body: json
