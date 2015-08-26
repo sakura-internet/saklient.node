@@ -23,8 +23,9 @@
     "name": "SAKURA Internet Inc."
   },
   "license": "MIT",
-  "dependencies": {
-    "http-sync": "^0.1.2"
+  "optionalDependencies": {
+    "http-sync": "~0.0.7",
+    "http-sync-win": "~0.0.7"
   },
   "devDependencies": {
     "dateformat": "~1.0.8-1.2.3",
