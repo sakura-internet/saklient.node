@@ -1,4 +1,4 @@
-# SAKURA Internet API Client Library for Node.js
+# SAKURA Internet API Client Library for Node.js (EXPERIMENTAL)
 
 This library gives you an easy interface to control your resources on
 [SAKURA Cloud](https://secure.sakura.ad.jp/cloud/).
