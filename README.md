@@ -8,6 +8,7 @@ This library gives you an easy interface to control your resources on
 
 * [Installation](#installation)
 * [How to use this library in your project](#how-to-use-this-library-in-your-project)
+* [Caution](#caution)
 * [Copyright and license](#copyright-and-license)
 
 
@@ -29,6 +30,12 @@ var api_is1b = api.inZone("is1b");
 
 // ...
 ```
+
+
+## Caution
+
+All HTTP requests will be synchronous.
+Do not call this library directly inside any event loops.
 
 
 ## Copyright and license
