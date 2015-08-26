@@ -33,7 +33,7 @@ var api_is1b = api.inZone("is1b");
 
 ## Copyright and license
 
-Copyright (C) 2014 SAKURA Internet, Inc.
+Copyright (C) 2014-2015 SAKURA Internet, Inc.
 
 This library is freely redistributable under [MIT license](http://www.opensource.org/licenses/mit-license.php).
 
